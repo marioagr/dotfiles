@@ -1,5 +1,6 @@
 {
   "lazy.nvim": { "branch": "main", "commit": "96584866b9c5e998cbae300594d0ccfd0c464627" },
+  "neoscroll.nvim": { "branch": "master", "commit": "6e3546751076890304428150e53bd59198a4505d" },
   "nvim-web-devicons": { "branch": "master", "commit": "7f30f2da3c3641841ceb0e2c150281f624445e8f" },
   "onedark.nvim": { "branch": "master", "commit": "dc3bad0121298f89b50aaff8599d1946e07eb4c2" },
   "plenary.nvim": { "branch": "master", "commit": "4f71c0c4a196ceb656c824a70792f3df3ce6bb6d" },
