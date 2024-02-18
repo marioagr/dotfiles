@@ -39,3 +39,7 @@ vim.keymap.set('n', '<A-k>', ':move .-2<CR>==', { desc = 'Move line up in Normal
 vim.keymap.set('v', '<A-j>', ":move '>+1<CR>gv=gv", { desc = 'Move line down in Visual mode' })
 vim.keymap.set('v', '<A-k>', ":move '<-2<CR>gv=gv", { desc = 'Move line up in Visual mode' })
 
+-- Buffer next and buffer previous
+vim.keymap.set('n', '<C-PageDown>', ':bnext<CR>', { desc = 'next _n_ buffer ' })
+vim.keymap.set('n', '<C-PageUp>',   ':bNext<CR>', { desc = 'Previous _N_ buffer ' })
+
