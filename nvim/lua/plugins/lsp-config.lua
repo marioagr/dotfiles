@@ -14,15 +14,14 @@ return {
 
             -- Useful status updates for LSP
             -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-            { 'j-hui/fidget.nvim', opts = {} },
+            { 'j-hui/fidget.nvim',       opts = {} },
 
             -- Additional lua configuration, makes nvim stuff amazing!
             'folke/neodev.nvim',
         },
         config = function()
-
             -- Almost all of this was copied from Kickstart.Nvim
-            --  This function gets run when an LSP connects to a particular buffer.
+            -- This function gets run when an LSP connects to a particular buffer.
             local on_attach = function(_, bufnr)
                 -- NOTE: Remember that lua is a real programming language, and as such it is possible
                 -- to define small helper and utility functions so you don't have to repeat yourself
@@ -86,7 +85,7 @@ return {
                 -- pyright = {},
                 -- rust_analyzer = {},
                 -- tsserver = {},
-                -- html = { filetypes = { 'html', 'twig', 'hbs'} },
+                html = { filetypes = { 'html', 'twig', 'hbs' } },
 
                 lua_ls = {
                     Lua = {
@@ -121,7 +120,6 @@ return {
                     }
                 end,
             }
-
         end
     }
 }

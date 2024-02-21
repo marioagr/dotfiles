@@ -5,9 +5,6 @@ return {
         'kyazdani42/nvim-web-devicons',
     },
     opts = {
-        git = {
-            ignore = false,
-        },
         renderer = {
             group_empty = true,
             icons = {

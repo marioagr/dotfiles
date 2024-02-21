@@ -136,7 +136,7 @@ return {
             vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[s]earch [f]iles' })
             vim.keymap.set('n', '<leader>sF', search_all_files, { desc = '[s]earch all [F]iles' })
             vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[s]earch [h]elp' })
-            vim.keymap.set('n', '<C-k>', require('telescope.builtin').keymaps, { desc = '<Control> [k]eymaps using Telescope' })
+            vim.keymap.set('n', '<leader><C-k>', require('telescope.builtin').keymaps, { desc = '<Control> [k]eymaps using Telescope' })
             vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[s]earch current [w]ord' })
             vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[s]earch by [g]rep' })
             vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[s]earch by [G]rep on Git Root' })
