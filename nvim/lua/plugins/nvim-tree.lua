@@ -17,6 +17,13 @@ return {
                 enable = true,
             },
         },
+        filters = {
+            custom = { '^.git$' }
+        },
+        diagnostics = {
+            enable = true,
+            show_on_dirs = true,
+        }
     },
     keys = {
         { '<leader>tt', ':NvimTreeToggle<CR>',         desc = 'Toggle NvimTree' },

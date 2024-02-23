@@ -1,5 +1,10 @@
 -- Add smooth scrolling to avoid jarring jumps.
 return {
     'karb94/neoscroll.nvim',
-    opts = {},
+    opts = {
+        mappings = {
+            '<C-u>',
+            '<C-d>',
+        }
+    },
 }
