@@ -20,7 +20,7 @@ return {
                 { 'diagnostics', sources = { 'nvim_diagnostic' } },
             },
             lualine_c = {
-                'filename'
+                'filename',
             },
             lualine_x = {
                 'filetype',

@@ -3,8 +3,8 @@ return {
     'akinsho/bufferline.nvim',
     dependencies = {
         'kyazdani42/nvim-web-devicons',
+        'onedark.nvim',
     },
-    after = 'onedark.nvim',
     opts = {
         options = {
             show_close_item = false,
@@ -17,7 +17,7 @@ return {
                     text = ' Files',
                     highlight = 'StatusLine',
                     text_align = 'left',
-                }
+                },
             },
             custom_areas = {
                 left = function()
@@ -29,8 +29,8 @@ return {
             hover = {
                 enabled = true,
                 delay = 200,
-                reveal = { 'close' }
+                reveal = { 'close' },
             },
-        }
+        },
     },
 }

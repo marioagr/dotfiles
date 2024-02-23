@@ -1,6 +1,6 @@
 return {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
+    'folke/which-key.nvim',
+    event = 'VeryLazy',
     init = function()
         vim.o.timeout = true
         vim.o.timeoutlen = 300
@@ -13,5 +13,5 @@ return {
             ['<leader>'] = { name = 'VISUAL <leader>' },
             ['<leader>h'] = { 'Git [H]unk' },
         }, { mode = 'v' })
-    end
+    end,
 }

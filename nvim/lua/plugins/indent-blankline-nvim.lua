@@ -17,6 +17,6 @@ return {
                 'terminal',
                 'NvimTree',
             },
-        }
-    }
+        },
+    },
 }

@@ -7,5 +7,5 @@ return {
     end,
     config = function()
         vim.cmd('Rooter')
-    end
+    end,
 }

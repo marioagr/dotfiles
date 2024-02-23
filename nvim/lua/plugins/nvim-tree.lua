@@ -19,12 +19,12 @@ return {
         },
     },
     keys = {
-        { '<Leader>tt', ':NvimTreeToggle<CR>', desc = 'Toggle NvimTree' },
+        { '<leader>tt', ':NvimTreeToggle<CR>',         desc = 'Toggle NvimTree' },
         --[[
             Currently not being used.
-            Reason: <C-w>(<Left>|<Right>) to change between buffer windows.
-            { '<Leader>tf', ':NvimTreeFocus<CR>', desc = 'Focus NvimTree' },
+            Reason: <C-w>(h|<Left>|l|<Right>) to change between buffer windows.
+            { '<leader>tf', ':NvimTreeFocus<CR>', desc = 'Focus NvimTree' },
         --]]
-        { '<Leader>tc', ':NvimTreeFindFileToggle<CR>', desc = 'Focus current file in NvimTree' },
-    }
+        { '<leader>tc', ':NvimTreeFindFileToggle<CR>', desc = 'Focus current file in NvimTree' },
+    },
 }

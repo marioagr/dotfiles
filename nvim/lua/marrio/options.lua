@@ -40,7 +40,7 @@ vim.opt.list = true -- enable the below listchars
 vim.opt.listchars = { tab = '▸ ', trail = '·' }
 -- Remove the ~ from the end buffer
 -- May be unnecessary because OneDark theme has the option "ending_tildes"
-vim.opt.fillchars:append({ eob = ' ' }) 
+vim.opt.fillchars:append({ eob = ' ' })
 
 vim.opt.splitbelow = true
 vim.opt.splitright = true
@@ -62,7 +62,7 @@ vim.opt.signcolumn = 'yes:2'
 vim.opt.confirm = true
 
 -- Persistent undo
-vim.opt.undofile  = true
+vim.opt.undofile = true
 
 -- Automatically save a backup file
 vim.opt.backup = true
