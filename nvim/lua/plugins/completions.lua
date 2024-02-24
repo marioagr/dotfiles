@@ -18,10 +18,11 @@ return {
         'saadparwaiz1/cmp_luasnip',
 
         -- Adds LSP completion capabilities
-        'hrsh7th/cmp-nvim-lsp', -- For Neovim's built-in language server client
-        'hrsh7th/cmp-path', -- For filesystem paths
+        'hrsh7th/cmp-nvim-lsp',                -- For Neovim's built-in language server client
+        'hrsh7th/cmp-path',                    -- For filesystem paths
         'hrsh7th/cmp-nvim-lsp-signature-help', -- For displaying function signatures with the current parameter emphasized
         -- 'hrsh7th/cmp-calc', -- Math calculations, has to be enabled below on cmp.setup.sources
+        'hrsh7th/cmp-omni',                    -- Guess this helps with the omnifunc function?
 
         -- Adds a number of user-friendly snippets
         'rafamadriz/friendly-snippets',
@@ -51,6 +52,7 @@ return {
                 documentation = cmp.config.window.bordered(),
             },
             completion = {
+                -- autocomplete = false, -- Recommended to be disabled but meh
                 completeopt = 'menu,menuone,noinsert',
             },
             formatting = {
@@ -93,6 +95,12 @@ return {
                 { name = 'luasnip' },
                 { name = 'path' },
                 { name = 'nvim_lsp_signature_help' },
+                {
+                    name = 'omni',
+                    option = {
+                        disable_omnifuncs = { 'v:lua.vim.lsp.omnifunc' },
+                    },
+                },
             },
         }
         -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
@@ -102,5 +110,7 @@ return {
                 { name = 'buffer' },
             },
         })
+
+        vim.keymap.set('i', '<C-x><C-o>', require('cmp').complete(), { desc = 'Show cmp completion' })
     end,
 }
