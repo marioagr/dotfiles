@@ -52,8 +52,12 @@ return {
                 documentation = cmp.config.window.bordered(),
             },
             completion = {
-                -- autocomplete = false, -- Recommended to be disabled but meh
-                completeopt = 'menu,menuone,noinsert',
+                --[[
+                    Recommended to be disabled but meh
+                        autocomplete = false,
+                    Can be overriden instead of vim.opt.completeopt
+                        completeopt = 'menu,menuone,preview',
+                --]]
             },
             formatting = {
                 format = lspkind.cmp_format({
@@ -62,15 +66,18 @@ return {
                 }),
             },
             mapping = cmp.mapping.preset.insert {
-                ['<C-n>'] = cmp.mapping.select_next_item(),
-                ['<C-p>'] = cmp.mapping.select_prev_item(),
-                ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-                ['<C-f>'] = cmp.mapping.scroll_docs(4),
+                ['<C-Up>'] = cmp.mapping.scroll_docs(-4),
+                ['<C-Down>'] = cmp.mapping.scroll_docs(4),
+                -- Same as <C-e>
+                ['<Esc>'] = cmp.mapping(function(fallback)
+                    if cmp.visible() then
+                        cmp.abort()
+                    else
+                        fallback()
+                    end
+                end, { 'i' }, { desc = 'Close cmp completion window' }),
                 ['<C-Space>'] = cmp.mapping.complete {},
-                ['<CR>'] = cmp.mapping.confirm {
-                    behavior = cmp.ConfirmBehavior.Replace,
-                    select = true,
-                },
+                ['<CR>'] = cmp.mapping.confirm {},
                 ['<Tab>'] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.select_next_item()
@@ -103,6 +110,7 @@ return {
                 },
             },
         }
+
         -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
         cmp.setup.cmdline({ '/', '?' }, {
             mapping = cmp.mapping.preset.cmdline(),
@@ -111,6 +119,10 @@ return {
             },
         })
 
-        vim.keymap.set('i', '<C-x><C-o>', require('cmp').complete(), { desc = 'Show cmp completion' })
+        local function cmp_complete()
+            require('cmp').complete()
+        end
+
+        vim.keymap.set('i', '<C-x><C-o>', cmp_complete, { desc = 'Show cmp completion' })
     end,
 }

@@ -22,7 +22,7 @@ vim.opt.relativenumber = true
 vim.opt.wildmode = 'longest:full,full'
 
 -- A comma-separated list of options for Insert mode completion |ins-completion|.
-vim.opt.completeopt = 'menuone,longest,preview'
+vim.opt.completeopt = 'menuone,longest,noselect'
 
 vim.opt.title = true
 vim.opt.mouse = 'a' -- enable mouse for all modes
