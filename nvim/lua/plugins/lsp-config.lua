@@ -2,7 +2,7 @@ return {
     {
         'williamboman/mason-lspconfig.nvim',
         opts = {
-            ensure_installed = { 'lua_ls', 'intelephense' },
+            ensure_installed = { 'intelephense', 'jsonls', 'lua_ls' },
         },
     },
     {
@@ -18,6 +18,9 @@ return {
 
             -- Additional lua configuration, makes nvim stuff amazing!
             'folke/neodev.nvim',
+
+            -- Universal JSON schema store, where schemas for popular JSON documents can be found.
+            'b0o/schemastore.nvim',
         },
         config = function()
             -- Almost all of this was copied from Kickstart.Nvim
@@ -44,7 +47,7 @@ return {
 
                 nmap('gd', require('telescope.builtin').lsp_definitions, '[g]oto [d]efinition')
                 nmap('gr', require('telescope.builtin').lsp_references, '[g]oto [r]eferences')
-                nmap('gI', require('telescope.builtin').lsp_implementations, '[g]oto [i]mplementation')
+                nmap('gi', require('telescope.builtin').lsp_implementations, '[g]oto [i]mplementation')
                 nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
                 nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[d]ocument [s]ymbols')
                 nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[w]orkspace [s]ymbols')
@@ -73,6 +76,12 @@ return {
             require('mason').setup()
             require('mason-lspconfig').setup()
 
+            -- Sign configuration
+            vim.fn.sign_define('DiagnosticSignError', { text = '', texthl = 'DiagnosticSignError' })
+            vim.fn.sign_define('DiagnosticSignWarn', { text = '', texthl = 'DiagnosticSignWarn' })
+            vim.fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'DiagnosticSignInfo' })
+            vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticSignHint' })
+
             -- Enable the following language servers
             --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
             --
@@ -89,7 +98,13 @@ return {
                 -- tsserver = {},
                 html = { filetypes = { 'html', 'twig', 'hbs', 'php' } },
                 intelephense = {},
-
+                -- https://github.com/b0o/schemastore.nvim
+                jsonls = {
+                    json = {
+                        schemas = require('schemastore').json.schemas(),
+                        validate = { enable = true },
+                    },
+                },
                 lua_ls = {
                     Lua = {
                         workspace = { checkThirdParty = false },

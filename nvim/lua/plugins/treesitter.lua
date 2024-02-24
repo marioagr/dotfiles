@@ -21,7 +21,7 @@ return {
                     'java', 'javascript', 'json', 'jsonc',
                     'lua', 'luadoc', 'luap',
                     'markdown_inline',
-                    'php',
+                    'php', 'phpdoc',
                     'python',
                     'rust',
                     'tsx',
