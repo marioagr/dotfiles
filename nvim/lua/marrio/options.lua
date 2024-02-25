@@ -56,7 +56,7 @@ vim.opt.sidescrolloff = 5
 vim.opt.clipboard = 'unnamedplus'
 
 -- When and how to draw the signcolumn. always, with fixed space for 2 signs
-vim.opt.signcolumn = 'yes:2'
+vim.opt.signcolumn = 'yes:3'
 
 -- Ask for confirmation instead of showing errors
 vim.opt.confirm = true
