@@ -4,10 +4,12 @@ return {
     config = function()
         require('todo-comments').setup({
             highlight = {
-                pattern = [[.*<(KEYWORDS)\s*]], -- pattern or table of patterns, used for highlighting (vim regex)
+                pattern = { [[.*<(KEYWORDS)\s*:]], [[.*\@(KEYWORDS)\s*]] }, -- pattern or table of patterns, used for highlighting (vim regex)
+            },
+            search = {
+                pattern = [[\b(KEYWORDS)\b]],
             },
         })
-        -- TODO Test this comment
         vim.keymap.set('n', '<leader>lt', ':TodoTelescope<CR>', { desc = '[l]ist [t]odo comments' })
     end,
 }

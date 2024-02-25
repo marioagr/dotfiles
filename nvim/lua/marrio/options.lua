@@ -52,7 +52,6 @@ vim.opt.scrolloff = 5
 vim.opt.sidescrolloff = 5
 
 -- Sync clipboard between OS and Neovim
--- TODO Check the compatibility between WSL and Neovim clipboard
 vim.opt.clipboard = 'unnamedplus'
 
 -- When and how to draw the signcolumn. always, with fixed space for 2 signs
