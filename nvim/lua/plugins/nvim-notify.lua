@@ -1,4 +1,6 @@
 return {
+    -- An alternative can be mini-notify
+    -- https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-notify.md
     'rcarriga/nvim-notify',
     priority = 100,
     config = function()
@@ -9,13 +11,13 @@ return {
         })
 
         local function dismiss_notifications()
-            require('notify').dismiss({
+            vim.notify.dismiss({
                 silent = false,
                 pending = false,
             })
         end
 
         vim.keymap.set('n', '<leader>nl', ':Telescope notify<CR>', { desc = '[n]otifications [l]ist' })
-        vim.keymap.set('n', '<leader>nd', dismiss_notifications, {desc = '[n]otifications [d]ismiss'})
+        vim.keymap.set('n', '<leader>nd', dismiss_notifications, { desc = '[n]otifications [d]ismiss' })
     end,
 }

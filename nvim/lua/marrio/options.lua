@@ -10,9 +10,21 @@ vim.opt.tabstop = 4
 -- Number of spaces that a <Tab> counts for while performing editing operations, like inserting a <Tab> or using <BS>.
 vim.opt.softtabstop = 4
 
+-- Decrease update time
+-- vim.opt.updatetime = 250
+vim.opt.timeoutlen = 300
+
+-- Do smart autoindenting when starting a new line.
 vim.opt.smartindent = true
 
+-- This option changes how text is displayed.  It doesn't change the text in the buffer, see 'textwidth' for that.
 vim.opt.wrap = false
+
+-- Don't show the mode, since it's already in status line
+vim.opt.showmode = false
+
+-- Every wrapped line will continue visually indented (same amount of space as the beginning of that line), thus preserving horizontal blocks of text.
+vim.opt.breakindent = true
 
 -- Print the line number in front of each line.
 vim.opt.number = true
@@ -37,16 +49,24 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 vim.opt.list = true -- enable the below listchars
-vim.opt.listchars = { tab = '▸ ', trail = '·' }
+vim.opt.listchars = { tab = '▸ ', trail = '·', nbsp = '␣' }
+
+-- Preview substitutions live, as you type!
+vim.opt.inccommand = 'split'
+
+-- Show which line your cursor is on
+vim.opt.cursorline = true
+
 -- Remove the ~ from the end buffer
 -- May be unnecessary because OneDark theme has the option "ending_tildes"
 vim.opt.fillchars:append({ eob = ' ' })
 
+-- Configure how new splits should be opened
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 5
+vim.opt.scrolloff = 8
 
 -- The minimal number of screen columns to keep to the left and to the right of the cursor if 'nowrap' is set.
 vim.opt.sidescrolloff = 5
@@ -71,11 +91,9 @@ vim.opt.backupdir:remove('.')
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
+  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
   callback = function()
-    vim.highlight.on_yank({ timeout = 200 })
+    vim.highlight.on_yank({ timeout = 250 })
   end,
-  group = highlight_group,
-  pattern = '*',
 })
