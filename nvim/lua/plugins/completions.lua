@@ -75,7 +75,7 @@ return {
                 -- Move docs [f]orward
                 ['<C-f>'] = cmp.mapping.scroll_docs(4),
 
-                -- Move docs [b]ackwards
+                -- Move docs [b]ackward
                 ['<C-b>'] = cmp.mapping.scroll_docs(-4),
 
                 -- ['<C-e'>] = cmp.abort,
