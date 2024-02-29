@@ -131,7 +131,7 @@ return {
                 })
             end
 
-            vim.keymap.set('n', '<leader>so', builtin.oldfiles, { desc = '[?] Find recently opened files' })
+            vim.keymap.set('n', '<leader>so', builtin.oldfiles, { desc = '[s]earch recently [o]pened files' })
             vim.keymap.set('n', '<leader><space>', builtin.buffers, { desc = '[ ] Find existing buffers' })
             vim.keymap.set('n', '<leader>/', search_in_buffer, { desc = '[/] Fuzzily search in current buffer' })
             vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = '[s]earch [/] in Open Files' })
