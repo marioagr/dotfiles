@@ -2,7 +2,7 @@ return {
     {
         'navarasu/onedark.nvim',
         priority = 1000,
-        config = function()
+        init = function()
             local onedark = require('onedark')
             onedark.setup({
                 style = 'warmer',

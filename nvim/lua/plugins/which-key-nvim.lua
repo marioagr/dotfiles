@@ -2,7 +2,7 @@ return {
     -- An alternative can be mini-clue
     -- https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-clue.md
     'folke/which-key.nvim',
-    event = 'VeryLazy',
+    event = 'VimEnter',
     opts = {},
     config = function()
         -- register which-key VISUAL mode

@@ -5,6 +5,10 @@ return {
         -- Snippet Engine & its associated nvim-cmp source
         {
             'L3MON4D3/LuaSnip',
+            dependencies = {
+                -- Adds a number of user-friendly snippets
+                'rafamadriz/friendly-snippets',
+            },
             build = (function()
                 -- Build Step is needed for regex support in snippets
                 -- This step is not supported in many windows environments
@@ -23,9 +27,6 @@ return {
         'hrsh7th/cmp-nvim-lsp-signature-help', -- For displaying function signatures with the current parameter emphasized
         -- 'hrsh7th/cmp-calc', -- Math calculations, has to be enabled below on cmp.setup.sources
         'hrsh7th/cmp-omni', -- Guess this helps with the omnifunc function?
-
-        -- Adds a number of user-friendly snippets
-        'rafamadriz/friendly-snippets',
 
         -- Add VSCode-like pictograms to Neovim built-in lsp
         'onsails/lspkind.nvim',
@@ -83,12 +84,12 @@ return {
                 -- Accept ([y]es) the completion.
                 --  This will auto-import if your LSP supports it.
                 --  This will expand snippets if the LSP sent a snippet.
-                ['<C-y>'] = cmp.mapping.confirm({}),
+                ['<C-y>'] = cmp.mapping.confirm(),
 
                 -- Manually trigger a completion from nvim-cmp.
                 --  Generally you don't need this, because nvim-cmp will display
                 --  completions whenever it has completion options available.
-                ['<C-Space>'] = cmp.mapping.complete({}),
+                ['<C-Space>'] = cmp.mapping.complete(),
 
                 -- Think of <c-l> as moving to the right of your snippet expansion.
                 --  So if you have a snippet that's like:
