@@ -18,15 +18,20 @@ return {
             },
         },
         filters = {
-            custom = { '^.git$' }
+            custom = { '^.git$' },
         },
         diagnostics = {
             enable = true,
             show_on_dirs = true,
-        }
+        },
+        view = {
+            side = 'right',
+            preserve_window_proportions = true,
+            width = 50,
+        },
     },
     keys = {
-        { '<leader>tt', ':NvimTreeToggle<CR>',         desc = 'Toggle NvimTree' },
+        { '<leader>tt', ':NvimTreeToggle<CR>', desc = 'Toggle NvimTree' },
         --[[
             Currently not being used.
             Reason: <C-w>(h|<Left>|l|<Right>) to change between buffer windows.
