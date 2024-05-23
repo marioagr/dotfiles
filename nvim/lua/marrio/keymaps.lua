@@ -48,3 +48,26 @@ vim.keymap.set('v', '<A-Up>', ":move '<-2<CR>gv=gv", { desc = 'Move line up in V
 -- Buffer next and buffer previous
 vim.keymap.set('n', '<C-PageDown>', ':bnext<CR>', { desc = 'next _n_ buffer ' })
 vim.keymap.set('n', '<C-PageUp>', ':bNext<CR>', { desc = 'Previous _N_ buffer ' })
+
+-- These mappings control the size of splits (height/width)
+vim.keymap.set("n", "<M-,>", "<c-w>5<")
+vim.keymap.set("n", "<M-.>", "<c-w>5>")
+vim.keymap.set("n", "<M-t>", "<C-W>+")
+vim.keymap.set("n", "<M-s>", "<C-W>-")
+
+vim.keymap.set("n", "<M-j>", function()
+  if vim.opt.diff:get() then
+    vim.cmd [[normal! ]c]]
+  else
+    vim.cmd [[m .+1<CR>==]]
+  end
+end)
+
+vim.keymap.set("n", "<M-k>", function()
+  if vim.opt.diff:get() then
+    vim.cmd [[normal! [c]]
+  else
+    vim.cmd [[m .-2<CR>==]]
+  end
+end)
+
