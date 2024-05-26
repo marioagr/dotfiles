@@ -1,7 +1,6 @@
 ## Neovim
 
 ### Pending plugins
-- phpactor
 
 ### Possible plugins
 - sindrets/diffview.nvim
