@@ -3,6 +3,7 @@
 ### Possible plugins
 - [Zellij Autolock](https://github.com/fresh2dev/zellij-autolock)
 - [Zellij Vim](https://github.com/fresh2dev/zellij.vim)
+- [Zellij Workspace](https://github.com/vdbulcke/zellij-workspace)
 
 ## Neovim
 

@@ -10,10 +10,8 @@ DOTFILES=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
 # Choose between Tmux and Zellij, right now testing Zellij
 # rm -rf $HOME/.tmux.conf
 # ln -s $DOTFILES/tmux/tmux.conf $HOME/.tmux.conf
-rm -r $HOME/.config/zellij/
-mkdir -p $HOME/.config/zellij/themes
-ln -s $DOTFILES/zellij/config.kdl $HOME/.config/zellij/config.kdl
-ln -s $DOTFILES/zellij/themes/tokyo-night-dark.kdl $HOME/.config/zellij/themes/tokyo-night-dark.kdl
+rm -rf $HOME/.config/zellij/
+ln -s $DOTFILES/zellij $HOME/.config/zellij
 
 mkdir -p $HOME/.local/bin
 
