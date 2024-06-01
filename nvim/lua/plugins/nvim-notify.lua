@@ -6,6 +6,8 @@ return {
     config = function()
         vim.notify = require('notify')
         vim.notify.setup({
+            fps = 60,
+            render = 'compact',
             stages = 'slide',
             timeout = 5000,
         })
