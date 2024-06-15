@@ -60,12 +60,12 @@ return { -- Lightweight yet powerful formatter plugin for Neovim
     end,
     keys = {
         {
-            '<leader>ft',
+            '<leader>ff',
             function()
                 require('conform').format({ async = true, lsp_fallback = true })
             end,
-            mode = '',
-            desc = 'Format buffer',
+            mode = { 'n', 'v' },
+            desc = '[N]ormal: Format buffer, [V]isual: Format selection',
         },
     },
     init = function()
