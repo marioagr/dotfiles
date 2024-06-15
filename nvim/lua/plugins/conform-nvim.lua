@@ -14,7 +14,7 @@ return { -- Lightweight yet powerful formatter plugin for Neovim
             formatters_by_ft = {
                 lua = { 'stylua' },
                 php = { 'pint' },
-                blade = { 'tlint' },
+                blade = { 'blade-formatter' },
                 -- Conform can also run multiple formatters sequentially
                 -- python = { "isort", "black" },
                 --
@@ -41,6 +41,21 @@ return { -- Lightweight yet powerful formatter plugin for Neovim
             vim.g.disable_autoformat = false
         end, {
             desc = 'Re-enable autoformat-on-save',
+        })
+
+        vim.api.nvim_create_user_command('FormatStatus', function()
+            if vim.b.disable_autoformat == true then
+                vim.notify('Formatter is disabled', vim.log.levels.WARN, { title = 'Buffer' })
+            else
+                vim.notify('Formatter is enabled', vim.log.levels.INFO, { title = 'Buffer' })
+            end
+            if vim.g.disable_autoformat == true then
+                vim.notify('Formatter is disabled', vim.log.levels.WARN, { title = 'Global' })
+            else
+                vim.notify('Formatter is enabled', vim.log.levels.INFO, { title = 'Global' })
+            end
+        end, {
+            desc = 'Check status for formatter',
         })
     end,
     keys = {
