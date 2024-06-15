@@ -22,7 +22,5 @@ pane_frames false
 
 theme "tokyo-night-dark"
 
-default_mode "locked"
-
 scrollback_editor "/snap/bin/nvim"
 
