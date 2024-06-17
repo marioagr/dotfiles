@@ -8,7 +8,7 @@ layout {
             plugin location="zellij:status-bar"
         }
     }
-    tab name="cli" focus=true
     tab name="nvim"
+    tab name="cli" focus=true
     tab name="lazygit"
 }
