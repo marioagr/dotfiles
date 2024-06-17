@@ -10,18 +10,18 @@
 ### Pending plugins
 
 ### Possible plugins
-- sindrets/diffview.nvim
-- nvim-pack/nvim-spectre
-- NvChad/nvim-colorizer.lua
-- gelguy/wilder.nvim
-- Wansmer/treesj
-- kdheepak/lazygit.nvim | NeogitOrg/neogit
-- sQVe/sort.nvim
-- bennypowers/nvim-regexplainer
-- stevearc/dressing.nvim
-- kevinhwang91/nvim-ufo
-- sudormrfbin/cheatsheet.nvim
-- ecthelionvi/NeoComposer.nvim
-- VidocqH/data-viewer.nvim
-- elentok/togglr.nvim
+- kndndrj/nvim-dbee (DB client inside neovim)
+- sindrets/diffview.nvim (Easier diffview to see changed file changes)
+- nvim-pack/nvim-spectre (Ease the search/replace experience)
+- gelguy/wilder.nvim (Better? wildmenu)
+- Wansmer/treesj (Like splitjoin but better?)
+- kdheepak/lazygit.nvim (Integrate lazygit inside neovim)
+- sQVe/sort.nvim (Some improvements but relying on builtin :sort)
+- bennypowers/nvim-regexplainer (Read the name)
+- stevearc/dressing.nvim (Elegant menus?)
+- kevinhwang91/nvim-ufo (Better folding code experience)
+- sudormrfbin/cheatsheet.nvim (Again, the name)
+- ecthelionvi/NeoComposer.nvim (Macros, not the PHP Composer)
+- VidocqH/data-viewer.nvim (CSV, tsv & sqlite viewer)
+- elentok/togglr.nvim (Toggle values)
 
