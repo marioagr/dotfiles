@@ -12,15 +12,15 @@ return { -- Lightweight yet powerful formatter plugin for Neovim
                 return { timeout_ms = 500, lsp_fallback = true }
             end,
             formatters_by_ft = {
-                lua = { 'stylua' },
-                php = { 'pint' },
                 blade = { 'blade-formatter' },
-                -- Conform can also run multiple formatters sequentially
-                -- python = { "isort", "black" },
-                --
+                css = { 'prettierd', 'prettier' },
                 -- You can use a sub-list to tell conform to run *until* a formatter
                 -- is found.
-                -- javascript = { { "prettierd", "prettier" } },
+                javascript = { { 'prettierd', 'prettier' } },
+                lua = { 'stylua' },
+                php = { 'pint' },
+                -- Conform can also run multiple formatters sequentially
+                -- python = { "isort", "black" },
             },
         })
 
