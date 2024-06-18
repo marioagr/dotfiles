@@ -8,11 +8,11 @@ return {
     },
     cmd = { 'Sail', 'Artisan', 'Composer', 'Npm', 'Yarn', 'Laravel' },
     keys = {
-        { '<leader>la', ':Laravel artisan<cr>' },
-        { '<leader>lr', ':Laravel routes<cr>' },
-        { '<leader>lm', ':Laravel related<cr>' },
-        { '<leader>lsu', ':Sail up -d<cr>' },
-        { '<leader>lsd', ':Sail down<cr>' },
+        { '<leader>la', ':Laravel artisan<cr>', desc = 'Open Laravel Artisan menu' },
+        { '<leader>lr', ':Laravel routes<cr>', desc = 'Show current routes of the project' },
+        { '<leader>lm', ':Laravel related<cr>', desc = 'Show Laravel related files' },
+        { '<leader>lsu', ':Sail up -d<cr>', desc = 'Start Sail dettached' },
+        { '<leader>lsd', ':Sail down<cr>', desc = 'Stop Sail' },
     },
     event = { 'VeryLazy' },
     opts = {
