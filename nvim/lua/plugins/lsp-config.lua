@@ -199,6 +199,23 @@ return {
                 },
             },
             tailwindcss = {},
+            -- In case I need to configure it deeply
+            -- https://www.arthurkoziel.com/json-schemas-in-neovim/
+            yamlls = {
+                settings = {
+                    yaml = {
+                        format = {
+                            enable = true,
+                            singleQuote = true,
+                            bracketSpacing = true,
+                        },
+                        completion = true,
+                        schemaStore = {
+                            enable = true,
+                        },
+                    },
+                },
+            },
         }
 
         -- Ensure the servers and tools above are installed

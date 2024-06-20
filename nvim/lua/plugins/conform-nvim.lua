@@ -21,6 +21,7 @@ return { -- Lightweight yet powerful formatter plugin for Neovim
                 php = { 'pint' },
                 -- Conform can also run multiple formatters sequentially
                 -- python = { "isort", "black" },
+                yml = { 'yamlls' },
             },
         })
 

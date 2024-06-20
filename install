@@ -24,6 +24,9 @@ ln -s $DOTFILES/nvim $HOME/.config/nvim
 rm -rf $HOME/.gitconfig
 ln -s $DOTFILES/git/.gitconfig $HOME/.gitconfig
 
+rm $HOME/.config/lazygit/config.yml
+ln -s $DOTFILES/lazygit/config.yml $HOME/.config/lazygit/config.yml
+
 # rm -rf $HOME/.config/phpactor
 # ln -s $DOTFILES/phpactor $HOME/.config/phpactor
 
