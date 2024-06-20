@@ -67,7 +67,9 @@ return {
             end, { desc = 'git diff against last commit' })
 
             -- Toggles
-            map('n', '<leader>gsl', ':Gitsigns toggle_linehl<CR>', { desc = '[g]it[s]igns show [l]ine highlight' })
+            -- TODO: Toggle line and word along with colorizer
+            map('n', '<leader>gsl', ':Gitsigns toggle_linehl<CR>', { desc = '[g]it[s]igns [l]ine highlight' })
+            map('n', '<leader>gsw', ':Gitsigns toggle_word_diff<CR>', { desc = '[g]it[s]igns [w]ord diff' })
             map('n', '<leader>gsb', gs.toggle_current_line_blame, { desc = '[g]it[s]igns [b]lame line' })
             map('n', '<leader>gsd', gs.toggle_deleted, { desc = '[g]it[s]igns show [d]eleted' })
 
