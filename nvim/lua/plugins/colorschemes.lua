@@ -19,12 +19,24 @@ return {
             require('tokyonight').setup({
                 style = 'moon',
                 dim_inactive = true,
+                on_highlights = function(highlights, colors)
+                    highlights.GitSignsAdd = {
+                        fg = '#a4cf69',
+                    }
+                    highlights.GitSignsChange = {
+                        fg = '#63c1e6',
+                    }
+                    highlights.GitSignsDelete = {
+                        fg = '#d74f56',
+                    }
+                end,
             })
             -- Load the colorscheme here
             vim.cmd.colorscheme('tokyonight')
 
             -- You can configure highlights by doing something like
             -- vim.cmd.hi 'Comment gui=none'
+            -- or using tokyonight property
         end,
     },
 }
