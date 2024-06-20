@@ -21,7 +21,7 @@ return {
                 dim_inactive = true,
             })
             -- Load the colorscheme here
-            vim.cmd.colorscheme 'tokyonight'
+            vim.cmd.colorscheme('tokyonight')
 
             -- You can configure highlights by doing something like
             -- vim.cmd.hi 'Comment gui=none'
