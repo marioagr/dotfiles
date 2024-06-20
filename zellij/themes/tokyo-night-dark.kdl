@@ -1,4 +1,6 @@
 themes {
+    // From Zellij docs
+    // https://github.com/zellij-org/zellij/tree/main/zellij-utils/assets/theme
     tokyo-night-dark {
         fg 169 177 214
         bg 26 27 38
@@ -11,5 +13,20 @@ themes {
         cyan 42 195 222
         white 192 202 245
         orange 255 158 100
+    }
+    // From TokyoNight extras
+    // https://github.com/folke/tokyonight.nvim/tree/main/extras/zellij
+    tokyo-night-moon {
+        fg "#c8d3f5"
+        bg "#2f334d"
+        black "#1b1d2b"
+        red "#ff757f"
+        green "#c3e88d"
+        yellow "#ffc777"
+        blue "#82aaff"
+        magenta "#c099ff"
+        cyan "#86e1fc"
+        white "#828bb8"
+        orange "#ff966c"
     }
 }
