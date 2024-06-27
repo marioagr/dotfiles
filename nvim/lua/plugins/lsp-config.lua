@@ -16,6 +16,7 @@ return {
         { 'folke/neodev.nvim', opts = {} },
     },
     config = function()
+        require('lspconfig.ui.windows').default_options.border = 'rounded'
         -- Brief Aside: **What is LSP?**
         --
         -- LSP is an acronym you've probably heard, but might not understand what it is.
@@ -226,6 +227,7 @@ return {
         --  You can press `g?` for help in this menu
         require('mason').setup({
             ui = {
+                border = 'rounded',
                 icons = {
                     package_installed = '✓',
                     package_pending = '...',
