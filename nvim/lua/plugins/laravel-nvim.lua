@@ -17,5 +17,16 @@ return {
     event = { 'VeryLazy' },
     opts = {
         lsp_server = 'intelephense',
+        ui = {
+            nui_opts = {
+                split = {
+                    position = 'bottom',
+                    win_options = {
+                        signcolumn = 'no',
+                    },
+                },
+                -- Maybe set the same window option for the popup?
+            },
+        },
     },
 }
