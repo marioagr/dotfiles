@@ -66,7 +66,7 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 8
+vim.opt.scrolloff = 5
 
 -- The minimal number of screen columns to keep to the left and to the right of the cursor if 'nowrap' is set.
 vim.opt.sidescrolloff = 5
@@ -92,9 +92,8 @@ vim.opt.backupdir:remove('.')
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-  callback = function()
-    vim.highlight.on_yank({ timeout = 250 })
-  end,
+    group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+    callback = function()
+        vim.highlight.on_yank({ timeout = 250 })
+    end,
 })
-
