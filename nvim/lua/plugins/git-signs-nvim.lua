@@ -43,28 +43,28 @@ return {
 
             -- Actions
 
-            -- visual mode
+            -- Visual mode
             map('v', '<leader>hs', function()
                 gs.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
-            end, { desc = 'stage git hunk' })
+            end, { desc = '[s]tage git hunk' })
             map('v', '<leader>hr', function()
                 gs.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
-            end, { desc = 'reset git hunk' })
+            end, { desc = '[r]eset git hunk' })
 
-            -- normal mode
-            map('n', '<leader>hs', gs.stage_hunk, { desc = 'git stage hunk' })
-            map('n', '<leader>hr', gs.reset_hunk, { desc = 'git reset hunk' })
-            map('n', '<leader>hS', gs.stage_buffer, { desc = 'git Stage buffer' })
-            map('n', '<leader>hu', gs.undo_stage_hunk, { desc = 'undo stage hunk' })
-            map('n', '<leader>hR', gs.reset_buffer, { desc = 'git Reset buffer' })
-            map('n', '<leader>hp', gs.preview_hunk, { desc = 'preview git hunk' })
+            -- Normal mode
+            map('n', '<leader>hs', gs.stage_hunk, { desc = 'git [s]tage hunk' })
+            map('n', '<leader>hr', gs.reset_hunk, { desc = 'git [r]eset hunk' })
+            map('n', '<leader>hS', gs.stage_buffer, { desc = 'git [S]tage buffer' })
+            map('n', '<leader>hu', gs.undo_stage_hunk, { desc = '[u]ndo stage hunk' })
+            map('n', '<leader>hR', gs.reset_buffer, { desc = 'git [R]eset buffer' })
+            map('n', '<leader>hp', gs.preview_hunk, { desc = '[p]review git hunk' })
             map('n', '<leader>hb', function()
                 gs.blame_line({ full = false })
-            end, { desc = 'git blame line' })
-            map('n', '<leader>hd', gs.diffthis, { desc = 'git diff against index' })
+            end, { desc = 'git [b]lame line' })
+            map('n', '<leader>hd', gs.diffthis, { desc = 'git [d]iff against index' })
             map('n', '<leader>hD', function()
                 gs.diffthis('~')
-            end, { desc = 'git diff against last commit' })
+            end, { desc = 'git [D]iff against last commit' })
 
             -- Toggles
             -- TODO: Toggle line and word along with colorizer
@@ -74,7 +74,7 @@ return {
             map('n', '<leader>gsd', gs.toggle_deleted, { desc = '[g]it[s]igns show [d]eleted' })
 
             -- Text object
-            map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', { desc = 'select git hunk' })
+            map({ 'o', 'x' }, 'sh', ':<C-U>Gitsigns select_hunk<CR>', { desc = '[s]elect git hunk' })
         end,
     },
 }

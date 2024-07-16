@@ -9,7 +9,17 @@ return {
         -- required for visual <leader>hs (hunk stage) to work
         require('which-key').register({
             ['<leader>'] = { name = 'VISUAL <leader>' },
-            ['<leader>h'] = { 'Git [H]unk' },
+            ['<leader>h'] = { 'Git [h]unk' },
         }, { mode = 'v' })
+
+        require('which-key').register({
+            ['<leader>'] = { name = 'VISUAL <leader>' },
+            ['<leader>h'] = { 'Git [h]unk' },
+            ['<leader>l'] = { '[l]aravel' },
+            ['<leader>n'] = { '[n]otifications' },
+            ['<leader>gs'] = { '[g]it [s]igns' },
+            ['<leader>s'] = { '[s]earch' },
+            ['<leader>w'] = { '[w]orkspace' },
+        }, { mode = 'n' })
     end,
 }

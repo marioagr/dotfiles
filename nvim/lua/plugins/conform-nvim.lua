@@ -1,15 +1,27 @@
 return { -- Lightweight yet powerful formatter plugin for Neovim
     'stevearc/conform.nvim',
+    lazy = false,
     config = function()
         local conform = require('conform')
         conform.setup({
             -- notify_on_error = false,
             format_on_save = function(bufnr)
-                -- Disable with a global or buffer-local variable
+                -- [[
+                --  Disable with a global or buffer-local variable
+                --  Disable "format_on_save lsp_fallback" for languages that don't
+                --      have a well standardized coding style. You can add additional
+                --      languages here or re-enable it for the disabled ones.
+                -- ]]
+                local disable_filetypes = { c = true, cpp = true }
+
                 if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-                    return
+                    return {}
                 end
-                return { timeout_ms = 500, lsp_fallback = true }
+
+                return {
+                    timeout_ms = 500,
+                    lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
+                }
             end,
             formatters_by_ft = {
                 blade = { 'blade-formatter' },
@@ -45,16 +57,16 @@ return { -- Lightweight yet powerful formatter plugin for Neovim
         })
 
         vim.api.nvim_create_user_command('FormatStatus', function()
-            if vim.b.disable_autoformat == true then
-                vim.notify('Formatter is disabled', vim.log.levels.WARN, { title = 'Buffer' })
-            else
-                vim.notify('Formatter is enabled', vim.log.levels.INFO, { title = 'Buffer' })
+            function isDisabled(case)
+                if vim[case].disable_autoformat == true then
+                    return 'disabled'
+                else
+                    return 'enabled'
+                end
             end
-            if vim.g.disable_autoformat == true then
-                vim.notify('Formatter is disabled', vim.log.levels.WARN, { title = 'Global' })
-            else
-                vim.notify('Formatter is enabled', vim.log.levels.INFO, { title = 'Global' })
-            end
+
+            vim.notify('Formatter is ' .. isDisabled('g'), vim.log.levels.INFO, { title = 'Global' })
+            vim.notify('Formatter is ' .. isDisabled('b'), vim.log.levels.INFO, { title = 'Buffer' })
         end, {
             desc = 'Check status for formatter',
         })
