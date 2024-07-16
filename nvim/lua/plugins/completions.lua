@@ -31,6 +31,7 @@ return {
 
         -- Add VSCode-like pictograms to Neovim built-in lsp
         'onsails/lspkind.nvim',
+        { 'folke/lazydev.nvim', ft = 'lua', opts = {} },
     },
     -- Recommended config
     event = { 'InsertEnter', 'CmdlineEnter' },
@@ -113,6 +114,11 @@ return {
                 end, { 'i', 's' }),
             }),
             sources = cmp.config.sources({
+                {
+                    name = 'lazydev',
+                    -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
+                    group_index = 0,
+                },
                 { name = 'nvim_lsp' },
                 { name = 'luasnip' },
                 { name = 'nvim_lsp_signature_help' },
