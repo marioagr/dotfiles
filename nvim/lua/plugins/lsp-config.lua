@@ -16,7 +16,9 @@ return {
         { 'folke/neodev.nvim', opts = {} },
     },
     config = function()
+        -- Sets a border for :LspInfo
         require('lspconfig.ui.windows').default_options.border = 'rounded'
+
         -- Brief Aside: **What is LSP?**
         --
         -- LSP is an acronym you've probably heard, but might not understand what it is.
@@ -103,7 +105,6 @@ return {
 
                 -- Opens a popup that displays documentation about the word under your cursor
                 --  See `:help K` for why this keymap
-                nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
                 nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
                 -- WARN: This is not Goto Definition, this is Goto Declaration.
@@ -150,7 +151,7 @@ return {
                 -- This may be unwanted, since they displace some of your code
                 if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
                     nmap('<leader>th', function()
-                        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+                        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
                     end, '[t]oggle Inlay [h]ints')
                 end
             end,
@@ -257,6 +258,15 @@ return {
                 },
             },
         })
+
+        -- Set border globally instead of per client
+        -- See https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization#borders
+        local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+        function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+            opts = opts or {}
+            opts.border = opts.border or 'rounded'
+            return orig_util_open_floating_preview(contents, syntax, opts, ...)
+        end
 
         -- You can add other tools here that you want Mason to install
         -- for you, so that they are available from within Neovim.

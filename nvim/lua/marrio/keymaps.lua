@@ -10,9 +10,6 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true, desc = 'Move down by rows, not lines, unless count is provided' })
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [e]rror messages' })
 vim.keymap.set('n', '<leader>dl', vim.diagnostic.setloclist, { desc = 'Open [d]iagnostics [l]ist' })
 
 -- Reselect visual selection after indenting.
@@ -50,24 +47,23 @@ vim.keymap.set('n', '<C-PageDown>', ':bnext<CR>', { desc = 'next _n_ buffer ' })
 vim.keymap.set('n', '<C-PageUp>', ':bNext<CR>', { desc = 'Previous _N_ buffer ' })
 
 -- These mappings control the size of splits (height/width)
-vim.keymap.set("n", "<M-,>", "<c-w>5<")
-vim.keymap.set("n", "<M-.>", "<c-w>5>")
-vim.keymap.set("n", "<M-t>", "<C-W>+")
-vim.keymap.set("n", "<M-s>", "<C-W>-")
+vim.keymap.set('n', '<M-,>', '<c-w>5<')
+vim.keymap.set('n', '<M-.>', '<c-w>5>')
+vim.keymap.set('n', '<M-t>', '<C-W>+')
+vim.keymap.set('n', '<M-s>', '<C-W>-')
 
-vim.keymap.set("n", "<M-j>", function()
-  if vim.opt.diff:get() then
-    vim.cmd [[normal! ]c]]
-  else
-    vim.cmd [[m .+1<CR>==]]
-  end
+vim.keymap.set('n', '<M-j>', function()
+    if vim.opt.diff:get() then
+        vim.cmd([[normal! ]c]])
+    else
+        vim.cmd([[m .+1<CR>==]])
+    end
 end)
 
-vim.keymap.set("n", "<M-k>", function()
-  if vim.opt.diff:get() then
-    vim.cmd [[normal! [c]]
-  else
-    vim.cmd [[m .-2<CR>==]]
-  end
+vim.keymap.set('n', '<M-k>', function()
+    if vim.opt.diff:get() then
+        vim.cmd([[normal! [c]])
+    else
+        vim.cmd([[m .-2<CR>==]])
+    end
 end)
-
