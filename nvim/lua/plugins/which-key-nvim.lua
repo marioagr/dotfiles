@@ -16,6 +16,7 @@ return {
             ['<leader>'] = { name = 'VISUAL <leader>' },
             ['<leader>h'] = { 'Git [h]unk' },
             ['<leader>l'] = { '[l]aravel' },
+            ['<leader>ls'] = { '[s]ail' },
             ['<leader>n'] = { '[n]otifications' },
             ['<leader>gs'] = { '[g]it [s]igns' },
             ['<leader>s'] = { '[s]earch' },

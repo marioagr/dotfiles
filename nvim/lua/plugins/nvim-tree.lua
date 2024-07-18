@@ -31,12 +31,7 @@ return {
         },
     },
     keys = {
-        { '<leader>tt', ':NvimTreeToggle<CR>', desc = '[t]oggle Nvim[t]ree' },
-        --[[
-            Currently not being used.
-            Reason: <C-w>(h|<Left>|l|<Right>) to change between buffer windows.
-            { '<leader>tf', ':NvimTreeFocus<CR>', desc = 'Focus NvimTree' },
-        --]]
-        { '<leader>tc', ':NvimTreeFindFileToggle<CR>', desc = 'Nvim[t]ree in [c]urrent file' },
+        { '<leader>ee', ':NvimTreeToggle<CR>', desc = 'Open [e]xplor[e]r Nvimtree' },
+        { '<leader>ef', ':NvimTreeFindFileToggle<CR>', desc = 'Open [e]xplorer looking at current [f]ile' },
     },
 }
