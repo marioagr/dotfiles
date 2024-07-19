@@ -3,24 +3,34 @@ return {
     -- https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-clue.md
     'folke/which-key.nvim',
     event = 'VimEnter',
-    opts = {},
     config = function()
-        -- register which-key VISUAL mode
-        -- required for visual <leader>hs (hunk stage) to work
-        require('which-key').register({
-            ['<leader>'] = { name = 'VISUAL <leader>' },
-            ['<leader>h'] = { 'Git [h]unk' },
-        }, { mode = 'v' })
-
-        require('which-key').register({
-            ['<leader>'] = { name = 'VISUAL <leader>' },
-            ['<leader>h'] = { 'Git [h]unk' },
-            ['<leader>l'] = { '[l]aravel' },
-            ['<leader>ls'] = { '[s]ail' },
-            ['<leader>n'] = { '[n]otifications' },
-            ['<leader>gs'] = { '[g]it [s]igns' },
-            ['<leader>s'] = { '[s]earch' },
-            ['<leader>w'] = { '[w]orkspace' },
-        }, { mode = 'n' })
+        require('which-key').setup({
+            preset = 'modern',
+            delay = 750,
+            expand = 1,
+            spec = {
+                { '<leader>h', group = 'Git [h]unk', mode = { 'n', 'v' } },
+                { '<leader>l', group = '[l]aravel' },
+                { '<leader>ls', group = '[s]ail' },
+                { '<leader>n', group = '[n]otifications' },
+                { '<leader>gs', group = '[g]it [s]igns' },
+                { '<leader>s', group = '[s]earch' },
+                { '<leader>w', group = '[w]orkspace' },
+            },
+            win = {
+                wo = {
+                    winblend = 10,
+                },
+            },
+        })
     end,
+    keys = {
+        {
+            '<leader>?',
+            function()
+                require('which-key').show({ global = false })
+            end,
+            desc = 'Buffer Local Keymaps (which-key)',
+        },
+    },
 }

@@ -1,7 +1,6 @@
 return {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
-    -- See `:help lualine.txt`
     opts = {
         options = {
             icons_enabled = true,
@@ -19,11 +18,12 @@ return {
                 { 'diagnostics', sources = { 'nvim_diagnostic' } },
             },
             lualine_c = {
-                'filename',
+                { 'filename', path = 1 },
+                'searchcount',
             },
             lualine_x = {
                 'filetype',
-                'encoding',
+                { 'encoding', show_bomb = true },
                 'fileformat',
             },
             lualine_y = {
@@ -33,6 +33,11 @@ return {
                 'location',
                 'progress',
             },
+        },
+        extensions = {
+            'lazy',
+            'mason',
+            'nvim-tree',
         },
     },
 }
