@@ -3,7 +3,8 @@ return {
     opts = {
         user_default_options = {
             css = true,
-            sass = { enable = true },
+            -- Disabled due to some problem when [g]oing to [d]efinition on PHP files
+            -- sass = { enable = true, parsers = 'css' },
             tailwind = true,
         },
     },
