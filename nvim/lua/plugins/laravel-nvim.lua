@@ -1,3 +1,4 @@
+-- Ease some things with Laravel projects
 return {
     'adalessa/laravel.nvim',
     dependencies = {

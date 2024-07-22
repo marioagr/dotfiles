@@ -1,3 +1,4 @@
+-- Delete Neovim buffers without losing window layout
 return {
     'ojroques/nvim-bufdel',
     config = function()

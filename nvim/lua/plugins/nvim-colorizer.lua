@@ -1,3 +1,4 @@
+-- Highlight colors
 return {
     'NvChad/nvim-colorizer.lua',
     opts = {

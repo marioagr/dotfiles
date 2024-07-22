@@ -1,3 +1,4 @@
+-- Highlight TODO comments and provides a search box
 return {
     'folke/todo-comments.nvim',
     event = 'VimEnter',
