@@ -67,3 +67,7 @@ vim.keymap.set('n', '<M-k>', function()
         vim.cmd([[m .-2<CR>==]])
     end
 end)
+
+-- Use F3 to view search results
+vim.keymap.set('n', '<F3>', ':cnext<CR>', { desc = 'Go to next search result' })
+vim.keymap.set('n', '<F15>', ':cprev<CR>', { desc = 'Go to previous search result' }) -- Shift-F3 = F15
