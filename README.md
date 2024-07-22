@@ -7,10 +7,10 @@
 
 ## Neovim
 
-### Pending plugins
 
 ### Possible plugins
 - kndndrj/nvim-dbee (DB client inside neovim)
+- debugloop/telescope-undo.nvim (Undo visualization on Telescope)
 - sindrets/diffview.nvim (Easier diffview to see changed file changes)
 - nvim-pack/nvim-spectre (Ease the search/replace experience)
 - gelguy/wilder.nvim (Better? wildmenu)
@@ -24,4 +24,5 @@
 - ecthelionvi/NeoComposer.nvim (Macros, not the PHP Composer)
 - VidocqH/data-viewer.nvim (CSV, tsv & sqlite viewer)
 - elentok/togglr.nvim (Toggle values)
+- stevearc/overseer.nvim (Task runner and management)
 
