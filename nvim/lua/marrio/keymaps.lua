@@ -34,39 +34,35 @@ vim.keymap.set('v', 'p', '"_dP', { desc = 'Preserve yank without replacing it by
 -- Quickly clear search highlighting.
 vim.keymap.set('n', '<leader>k', ':nohlsearch<CR>', { desc = 'Clear search highlighting' })
 
--- Move lines up and down using Alt+[j|k].
-vim.keymap.set('i', '<A-Down>', '<Esc>:move .+1<CR>==gi', { desc = 'Move line down in Insert mode' })
-vim.keymap.set('i', '<A-Up>', '<Esc>:move .-2<CR>==gi', { desc = 'Move line up in Insert mode' })
-vim.keymap.set('n', '<A-Down>', ':move .+1<CR>==', { desc = 'Move line down in Normal mode' })
-vim.keymap.set('n', '<A-Up>', ':move .-2<CR>==', { desc = 'Move line up in Normal mode' })
-vim.keymap.set('v', '<A-Down>', ":move '>+1<CR>gv=gv", { desc = 'Move line down in Visual mode' })
-vim.keymap.set('v', '<A-Up>', ":move '<-2<CR>gv=gv", { desc = 'Move line up in Visual mode' })
-
 -- Buffer next and buffer previous
 vim.keymap.set('n', '<C-PageDown>', ':bnext<CR>', { desc = 'next _n_ buffer ' })
 vim.keymap.set('n', '<C-PageUp>', ':bNext<CR>', { desc = 'Previous _N_ buffer ' })
 
--- These mappings control the size of splits (height/width)
-vim.keymap.set('n', '<M-,>', '<c-w>5<')
-vim.keymap.set('n', '<M-.>', '<c-w>5>')
-vim.keymap.set('n', '<M-t>', '<C-W>+')
-vim.keymap.set('n', '<M-s>', '<C-W>-')
+-- These mappings control the size of splits
+vim.keymap.set('n', '<M-.>', '<c-w>5>') -- Increase width
+vim.keymap.set('n', '<M-,>', '<c-w>5<') -- Decrease width
+vim.keymap.set('n', '<M-t>', '<C-W>+') -- Increase height
+vim.keymap.set('n', '<M-s>', '<C-W>-') -- Decrease height
 
-vim.keymap.set('n', '<M-j>', function()
+-- Move lines up and down
+vim.keymap.set('n', '<M-Down>', function()
     if vim.opt.diff:get() then
         vim.cmd([[normal! ]c]])
     else
         vim.cmd([[m .+1<CR>==]])
     end
-end)
-
-vim.keymap.set('n', '<M-k>', function()
+end, { desc = 'diff: next change, normal mode: Move line down' })
+vim.keymap.set('n', '<M-Up>', function()
     if vim.opt.diff:get() then
         vim.cmd([[normal! [c]])
     else
         vim.cmd([[m .-2<CR>==]])
     end
-end)
+end, { desc = 'diff: prev change, normal mode: Move line up' })
+vim.keymap.set('i', '<M-Down>', '<Esc>:move .+1<CR>==gi', { desc = 'Move line down in Insert mode' })
+vim.keymap.set('i', '<M-Up>', '<Esc>:move .-2<CR>==gi', { desc = 'Move line up in Insert mode' })
+vim.keymap.set('v', '<M-Down>', ":move '>+1<CR>gv=gv", { desc = 'Move line down in Visual mode' })
+vim.keymap.set('v', '<M-Up>', ":move '<-2<CR>gv=gv", { desc = 'Move line up in Visual mode' })
 
 -- Use F3 to view search results
 vim.keymap.set('n', '<F3>', ':cnext<CR>', { desc = 'Go to next search result' })
