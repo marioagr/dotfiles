@@ -5,6 +5,11 @@ return {
         'kyazdani42/nvim-web-devicons',
     },
     opts = {
+        hijack_cursor = true,
+        select_prompts = true,
+        help = {
+            sort_by = 'desc',
+        },
         renderer = {
             group_empty = true,
             icons = {
@@ -16,6 +21,7 @@ return {
             indent_markers = {
                 enable = true,
             },
+            highlight_clipboard = 'all',
         },
         filters = {
             custom = { '^.git$' },
