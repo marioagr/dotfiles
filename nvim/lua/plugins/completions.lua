@@ -23,6 +23,7 @@ return {
 
         -- Adds LSP completion capabilities
         'hrsh7th/cmp-buffer', -- source for buffer words
+        'hrsh7th/cmp-cmdline',
         'hrsh7th/cmp-nvim-lsp', -- For Neovim's built-in language server client
         'hrsh7th/cmp-path', -- For filesystem paths
         'hrsh7th/cmp-nvim-lsp-signature-help', -- For displaying function signatures with the current parameter emphasized
@@ -142,8 +143,27 @@ return {
             },
         })
 
-        -- TODO: Add completion for vim-dadbod/SQL
+        -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+        cmp.setup.cmdline(':', {
+            mapping = cmp.mapping.preset.cmdline(),
+            sources = cmp.config.sources({
+                { name = 'path' },
+            }, {
+                { name = 'cmdline' },
+            }),
+            ---@diagnostic disable-next-line: missing-fields
+            matching = { disallow_symbol_nonprefix_matching = false },
+        })
 
+        cmp.setup.filetype({ 'sql', 'mysql', 'plsql' }, {
+            sources = cmp.config.sources({
+                { name = 'vim-dadbod-completion' },
+                { name = 'buffer' },
+                { name = 'luasnip' }, -- Maybe seek a way to filter only SQL related snippets?
+            }),
+        })
+
+        -- This one was from omnifunc
         local function cmp_complete()
             require('cmp').complete()
         end
