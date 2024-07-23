@@ -3,7 +3,11 @@
     NO PLUGINS
 --]]
 
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+-- Do nothing when space key is pressed
+vim.keymap.set({ 'n', 'v' }, '<Space>', '<NOP>', { silent = true })
+
+-- Save buffer
+vim.keymap.set('n', '<leader>w', ':w<CR>')
 
 -- When text is wrapped, move by terminal rows instead, not lines, unless a count is provided.
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true, desc = 'Move up by rows, not lines, unless count is provided' })
