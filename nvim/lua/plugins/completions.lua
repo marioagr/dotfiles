@@ -142,6 +142,8 @@ return {
             },
         })
 
+        -- TODO: Add completion for vim-dadbod/SQL
+
         local function cmp_complete()
             require('cmp').complete()
         end
