@@ -9,6 +9,9 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<NOP>', { silent = true })
 -- Save buffer
 vim.keymap.set('n', '<leader>w', ':w<CR>')
 
+-- Quit
+vim.keymap.set('n', '<leader>Q', ':q<CR>')
+
 -- When text is wrapped, move by terminal rows instead, not lines, unless a count is provided.
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true, desc = 'Move up by rows, not lines, unless count is provided' })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true, desc = 'Move down by rows, not lines, unless count is provided' })
