@@ -7,7 +7,7 @@
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<NOP>', { silent = true })
 
 -- Save buffer
-vim.keymap.set('n', '<leader>w', ':w<CR>')
+vim.keymap.set('n', '<leader>W', ':w<CR>')
 
 -- Quit
 vim.keymap.set('n', '<leader>Q', ':q<CR>')

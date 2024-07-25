@@ -5,6 +5,12 @@ return {
         'kyazdani42/nvim-web-devicons',
     },
     opts = {
+        --[[
+        -- NOTE: Keep netrw but without the file browser features
+        -- It helps to use features like spell and the automatic download of .spl &.sug files
+        --]]
+        disable_netrw = false,
+        hijack_netrw = true,
         hijack_cursor = true,
         select_prompts = true,
         help = {

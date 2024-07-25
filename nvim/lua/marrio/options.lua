@@ -42,6 +42,8 @@ vim.opt.mouse = 'a' -- enable mouse for all modes
 vim.opt.termguicolors = true
 
 vim.opt.spell = true
+vim.opt.spelllang = 'en_us,es_mx'
+vim.opt.spellfile = vim.fn.expand('~/.local/share/nvim/site/spell/en.utf-8.add') .. ',' .. vim.fn.expand('~/.local/share/nvim/site/spell/es.utf-8.add')
 
 -- Ignore case in search patterns.
 vim.opt.ignorecase = true

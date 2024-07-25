@@ -129,8 +129,11 @@ return {
                     prompt_title = 'All Files (.gitignore & .hidden)',
                 })
             end
+            local function oldfiles_in_cwd()
+                builtin.oldfiles({ only_cwd = true })
+            end
 
-            vim.keymap.set('n', '<leader>so', builtin.oldfiles, { desc = '[s]earch recently [o]pened files' })
+            vim.keymap.set('n', '<leader>so', oldfiles_in_cwd, { desc = '[s]earch recently [o]pened files' })
             vim.keymap.set('n', '<leader><space>', builtin.buffers, { desc = '[ ] Find existing buffers' })
             vim.keymap.set('n', '<leader>/', search_in_buffer, { desc = '[/] Fuzzily search in current buffer' })
             vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = '[s]earch [/] in Open Files' })
@@ -145,6 +148,7 @@ return {
             vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[s]earch by [G]rep on Git Root' })
             vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[s]earch [d]iagnostics' })
             vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[s]earch [r]esume' })
+            vim.keymap.set('n', '<leader>ts', builtin.spell_suggest, { desc = 'Open [t]elescope with [s]pell suggestions' })
         end,
     },
 }
