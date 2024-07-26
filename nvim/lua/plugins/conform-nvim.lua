@@ -24,6 +24,8 @@ return {
                     lsp_format = 'fallback',
                 }
             end,
+            -- List of formatters available at
+            -- https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters
             formatters_by_ft = {
                 blade = { 'blade-formatter' },
                 -- Conform can also run multiple formatters sequentially
@@ -31,8 +33,16 @@ return {
                 -- You can use a sub-list to tell conform to run *until* a formatter is found.
                 javascript = { { 'prettierd', 'prettier' } },
                 lua = { 'stylua' },
+                markdown = { 'mdslw' },
                 php = { 'pint' },
-                yml = { 'yamlls' },
+            },
+            formatters = {
+                mdslw = {
+                    env = {
+                        MDSLW_MAX_WIDTH = 120,
+                        MDSLW_LANG = 'en es',
+                    },
+                },
             },
         })
 

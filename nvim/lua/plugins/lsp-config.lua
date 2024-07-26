@@ -193,7 +193,6 @@ return {
             -- But for many setups, the LSP (`tsserver`) will work just fine
             -- tsserver = {},
             html = { filetypes = { 'html', 'twig', 'hbs', 'php' } },
-
             intelephense = {},
             -- https://github.com/b0o/schemastore.nvim
             jsonls = {
@@ -204,7 +203,6 @@ return {
                     },
                 },
             },
-
             lua_ls = {
                 -- cmd = {...},
                 -- filetypes = { ...},
