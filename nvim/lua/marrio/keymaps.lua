@@ -41,10 +41,6 @@ vim.keymap.set('v', 'p', '"_dP', { desc = 'Preserve yank without replacing it by
 -- Quickly clear search highlighting.
 vim.keymap.set('n', '<leader>k', ':nohlsearch<CR>', { desc = 'Clear search highlighting' })
 
--- Buffer next and buffer previous
-vim.keymap.set('n', '<C-PageDown>', ':bnext<CR>', { desc = 'next _n_ buffer ' })
-vim.keymap.set('n', '<C-PageUp>', ':bNext<CR>', { desc = 'Previous _N_ buffer ' })
-
 -- These mappings control the size of splits
 vim.keymap.set('n', '<M-.>', '<c-w>5>') -- Increase width
 vim.keymap.set('n', '<M-,>', '<c-w>5<') -- Decrease width
@@ -74,3 +70,14 @@ vim.keymap.set('v', '<M-Up>', ":move '<-2<CR>gv=gv", { desc = 'Move line up in V
 -- Use F3 to view search results
 vim.keymap.set('n', '<F3>', ':cnext<CR>', { desc = 'Go to next search result' })
 vim.keymap.set('n', '<F15>', ':cprev<CR>', { desc = 'Go to previous search result' }) -- Shift-F3 = F15
+
+--[[
+--  NOTE: To be able to use vim-unimpaired or mini.bracketed
+--  Ideally this could be achieved setting the option langmap (plus langremap as per the help)
+--  vim.o.langmap = '{[,}],[{,]}' -- In normal mode remaps { to [, } to ], [ to {, ] to }
+--  vim.o.langremap = false --  By default is off but just to be sure
+--  But due to a bug in vim (https://github.com/echasnovski/mini.nvim/issues/235#issuecomment-1462367177)
+--  this is the recommended way
+--]]
+vim.keymap.set('n', '{', '[', { remap = true })
+vim.keymap.set('n', '}', ']', { remap = true })

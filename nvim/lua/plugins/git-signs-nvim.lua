@@ -2,17 +2,9 @@
 return {
     'lewis6991/gitsigns.nvim',
     opts = {
-        -- See `:help gitsigns.txt`
-        signs = {
-            add = { text = '+' },
-            change = { text = '~' },
-            delete = { text = '_' },
-            topdelete = { text = '‾' },
-            changedelete = { text = '~' },
-        },
         numhl = true,
         on_attach = function(bufnr)
-            local gs = package.loaded.gitsigns
+            local gs = require('gitsigns')
 
             local function map(mode, l, r, opts)
                 opts = opts or {}
@@ -21,20 +13,20 @@ return {
             end
 
             -- Navigation
-            map({ 'n', 'v' }, ']c', function()
-                if vim.wo.diff then
-                    return ']c'
-                end
+            map({ 'n', 'v' }, ']h', function()
+                -- if vim.wo.diff then
+                --     return ']c'
+                -- end
                 vim.schedule(function()
                     gs.next_hunk()
                 end)
                 return '<Ignore>'
             end, { expr = true, desc = 'Jump to next hunk' })
 
-            map({ 'n', 'v' }, '[c', function()
-                if vim.wo.diff then
-                    return '[c'
-                end
+            map({ 'n', 'v' }, '[h', function()
+                -- if vim.wo.diff then
+                --     return '[c'
+                -- end
                 vim.schedule(function()
                     gs.prev_hunk()
                 end)
@@ -68,8 +60,8 @@ return {
 
             -- Toggles
             -- TODO: Toggle line and word along with colorizer
-            map('n', '<leader>gsl', ':Gitsigns toggle_linehl<CR>', { desc = '[g]it[s]igns [l]ine highlight' })
-            map('n', '<leader>gsw', ':Gitsigns toggle_word_diff<CR>', { desc = '[g]it[s]igns [w]ord diff' })
+            map('n', '<leader>gsl', gs.toggle_linehl, { desc = '[g]it[s]igns [l]ine highlight' })
+            map('n', '<leader>gsw', gs.toggle_word_diff, { desc = '[g]it[s]igns [w]ord diff' })
             map('n', '<leader>gsb', gs.toggle_current_line_blame, { desc = '[g]it[s]igns [b]lame line' })
             map('n', '<leader>gsd', gs.toggle_deleted, { desc = '[g]it[s]igns show [d]eleted' })
 
