@@ -94,7 +94,7 @@ return {
 
                 -- Fuzzy find all the symbols in your current workspace
                 --  Similar to document symbols, except searches over your whole project.
-                nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[w]orkspace [s]ymbols')
+                nmap('<leader>Ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [s]ymbols')
 
                 -- Rename the variable under your cursor
                 --  Most Language Servers support renaming across files, etc.
@@ -111,9 +111,9 @@ return {
                 -- WARN: This is not Goto Definition, this is Goto Declaration.
                 --  For example, in C this would take you to the header
                 nmap('gD', vim.lsp.buf.declaration, '[g]o to [D]eclaration')
-                nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[w]orkspace [a]dd Folder')
-                -- nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[w]orkspace [r]emove Folder')
-                nmap('<leader>wl', workspace_list_folders, '[w]orkspace [l]ist Folders')
+                nmap('<leader>Wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [a]dd Folder')
+                -- nmap('<leader>Wr', vim.lsp.buf.remove_workspace_folder, '[w]orkspace [r]emove Folder')
+                nmap('<leader>Wl', workspace_list_folders, '[W]orkspace [l]ist Folders')
 
                 -- vim.keymap.set('n', '<leader>ft', vim.lsp.buf.format, { desc = 'Format code using None-LSP' })
 

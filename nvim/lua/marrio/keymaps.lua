@@ -6,11 +6,13 @@
 -- Do nothing when space key is pressed
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<NOP>', { silent = true })
 
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Easily escape Terminal mode' })
+
 -- Save buffer
-vim.keymap.set('n', '<leader>W', ':w<CR>')
+vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = ':write' })
 
 -- Quit
-vim.keymap.set('n', '<leader>Q', ':q<CR>')
+vim.keymap.set('n', '<leader>Q', ':q<CR>', { desc = ':quit' })
 
 -- When text is wrapped, move by terminal rows instead, not lines, unless a count is provided.
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true, desc = 'Move up by rows, not lines, unless count is provided' })

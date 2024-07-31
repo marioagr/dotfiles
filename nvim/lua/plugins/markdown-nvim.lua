@@ -6,11 +6,11 @@ return {
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
     keys = {
         {
-            '<leader>mt',
+            '<leader>tm',
             function()
                 require('render-markdown').toggle()
             end,
-            desc = '[m]arkdown [t]oggle',
+            desc = '[t]oggle [m]arkdown',
         },
     },
 }

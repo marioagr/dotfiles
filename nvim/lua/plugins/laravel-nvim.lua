@@ -15,6 +15,8 @@ return {
         { '<leader>lr', ':Laravel routes<cr>', desc = 'Show current routes of the project' },
         { '<leader>lsu', ':Sail up -d<cr>', desc = 'Start Sail dettached' },
         { '<leader>lsd', ':Sail down<cr>', desc = 'Stop Sail' },
+        { '<leader>Nd', ':Npm dev<cr>', desc = 'Run [N]pm [d]ev' },
+        { '<leader>Nb', ':Npm build<cr>', desc = 'Run [N]pm [b]uild' },
     },
     event = { 'VeryLazy' },
     opts = {

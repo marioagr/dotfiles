@@ -11,6 +11,6 @@ return {
     },
     lazy = false,
     keys = {
-        { '<leader>ct', ':ColorizerToggle<CR>', desc = 'Toggle highlight colors' },
+        { '<leader>tc', ':ColorizerToggle<CR>', desc = '[t]oggle highlight [c]olors' },
     },
 }

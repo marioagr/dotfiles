@@ -9,13 +9,15 @@ return {
             delay = 750,
             expand = 1,
             spec = {
+                { '<leader>gs', group = '[g]it [s]igns' },
                 { '<leader>h', group = 'Git [h]unk', mode = { 'n', 'v' } },
                 { '<leader>l', group = '[l]aravel' },
                 { '<leader>ls', group = '[s]ail' },
                 { '<leader>n', group = '[n]otifications' },
-                { '<leader>gs', group = '[g]it [s]igns' },
+                { '<leader>N', group = '[N]pm (Laravel)' },
                 { '<leader>s', group = '[s]earch' },
-                { '<leader>w', group = '[w]orkspace' },
+                { '<leader>t', group = '[T]oggle|[T]elescope' },
+                { '<leader>W', group = '[W]orkspace' },
             },
             win = {
                 wo = {
