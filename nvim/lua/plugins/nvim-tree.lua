@@ -22,7 +22,7 @@ return {
                 show = {
                     folder_arrow = false,
                 },
-                -- git_placement = 'after',
+                git_placement = 'after',
             },
             indent_markers = {
                 enable = true,

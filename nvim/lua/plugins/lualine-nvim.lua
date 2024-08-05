@@ -1,6 +1,5 @@
--- statusline
+-- Set lualine as statusline
 return {
-    -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     config = function()
         local dbui = {
