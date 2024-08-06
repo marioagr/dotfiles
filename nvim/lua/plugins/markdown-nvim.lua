@@ -1,15 +1,17 @@
 return {
-    'MeanderingProgrammer/markdown.nvim',
+    'MeanderingProgrammer/render-markdown.nvim',
     main = 'render-markdown',
-    opts = {},
+    opts = {
+        code = {
+            border = 'thick',
+        },
+    },
     ft = { 'markdown' },
-    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
     keys = {
         {
             '<leader>tm',
-            function()
-                require('render-markdown').toggle()
-            end,
+            ':RenderMarkdown toggle<CR>',
             desc = '[t]oggle [m]arkdown',
         },
     },

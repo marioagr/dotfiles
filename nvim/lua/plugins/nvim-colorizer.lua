@@ -9,7 +9,6 @@ return {
             tailwind = true,
         },
     },
-    lazy = false,
     keys = {
         { '<leader>tc', ':ColorizerToggle<CR>', desc = '[t]oggle highlight [c]olors' },
     },
