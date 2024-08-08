@@ -3,6 +3,8 @@ return {
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
         'nvim-treesitter/nvim-treesitter-textobjects',
+        -- NOTE: Not sure if it is necessary, but not included by now
+        -- 'JoosepAlviste/nvim-ts-context-commentstring',
     },
     build = ':TSUpdate',
     opts = {
@@ -87,6 +89,7 @@ return {
             require('nvim-treesitter.install').prefer_git = true
 
             require('nvim-treesitter.configs').setup(opts)
+            -- require('ts_context_commentstring').setup()
 
             local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
             ---@diagnostic disable-next-line: inject-field
