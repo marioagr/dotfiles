@@ -72,10 +72,10 @@ return {
             },
             mapping = cmp.mapping.preset.insert({
                 -- Select the [n]ext item
-                ['<C-Down>'] = cmp.mapping.select_next_item(),
+                ['<C-Down>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
 
                 -- Select the [p]revious item
-                ['<C-Up>'] = cmp.mapping.select_prev_item(),
+                ['<C-Up>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
 
                 -- Move docs [f]orward
                 ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -88,12 +88,12 @@ return {
                 -- Accept ([y]es) the completion.
                 --  This will auto-import if your LSP supports it.
                 --  This will expand snippets if the LSP sent a snippet.
-                ['<C-Right>'] = cmp.mapping.confirm(),
+                ['<C-Right>'] = cmp.mapping(cmp.mapping.confirm(), { 'i', 'c' }),
 
                 -- Manually trigger a completion from nvim-cmp.
                 --  Generally you don't need this, because nvim-cmp will display
                 --  completions whenever it has completion options available.
-                ['<C-Space>'] = cmp.mapping.complete(),
+                ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
 
                 -- Think of <M-Right> as moving to the right of your snippet expansion.
                 --  So if you have a snippet that's like:
