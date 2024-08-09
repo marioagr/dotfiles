@@ -192,7 +192,31 @@ return {
             --
             -- But for many setups, the LSP (`tsserver`) will work just fine
             -- tsserver = {},
-            html = { filetypes = { 'html', 'twig', 'hbs', 'php' } },
+            cssls = {
+                filetypes = {
+                    'css', -- Already supported
+                    'less', -- Already supported
+                    'scss', -- Already supported
+                    'html',
+                    'blade',
+                },
+            },
+            emmet_language_server = {
+                filetypes = {
+                    'html',
+                    'css',
+                    'php',
+                    'blade',
+                },
+            },
+            html = {
+                filetypes = {
+                    'html',
+                    'twig',
+                    'hbs',
+                    'php',
+                },
+            },
             intelephense = {},
             -- https://github.com/b0o/schemastore.nvim
             jsonls = {
