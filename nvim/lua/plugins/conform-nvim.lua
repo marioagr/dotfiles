@@ -26,6 +26,7 @@ return {
             end,
             -- List of formatters available at
             -- https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters
+            -- HACK: Also add the formatter used in the ensure_installed variable at the lsp-config.lua file.
             formatters_by_ft = {
                 blade = { 'blade-formatter' },
                 -- Conform can also run multiple formatters sequentially
