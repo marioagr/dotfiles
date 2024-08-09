@@ -33,6 +33,7 @@ return {
                     layout_config = {
                         prompt_position = 'top',
                     },
+                    scroll_strategy = 'limit',
                     sorting_strategy = 'ascending',
                     mappings = {
                         i = {
@@ -140,7 +141,7 @@ return {
             vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[s]earch [s]elect Telescope' })
             vim.keymap.set('n', '<leader>gf', builtin.git_files, { desc = 'Search [g]it [f]iles' })
             vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[s]earch [f]iles' })
-            vim.keymap.set('n', '<leader>sF', search_all_files, { desc = '[s]earch all [F]iles' })
+            vim.keymap.set('n', '<leader>sa', search_all_files, { desc = '[s]earch [a]ll files' })
             vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[s]earch [h]elp' })
             vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[s]earch [k]eymaps' })
             vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[s]earch current [w]ord' })
