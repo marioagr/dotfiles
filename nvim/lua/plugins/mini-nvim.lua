@@ -25,6 +25,10 @@ return {
         -- See nvim/lua/marrio/keymaps.lua
         require('mini.bracketed').setup()
 
+        -- Split/Join arguments inside (), [], {}
         require('mini.splitjoin').setup()
+
+        -- Animate common Neovim actions
+        require('mini.animate').setup()
     end,
 }
