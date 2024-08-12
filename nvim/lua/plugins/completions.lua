@@ -3,6 +3,7 @@ return {
     'hrsh7th/nvim-cmp',
     dependencies = {
         -- Snippet Engine & its associated nvim-cmp source
+        -- NOTE: Maybe try 'garymjr/nvim-snippets'
         {
             'L3MON4D3/LuaSnip',
             dependencies = {
@@ -60,6 +61,14 @@ return {
                 format = lspkind.cmp_format({
                     mode = 'symbol_text',
                     show_labelDetails = true,
+                    menu = {
+                        buffer = '[Buffer]',
+                        nvim_lsp = '[LSP]',
+                        luasnip = '[LuaSnip]',
+                        nvim_lua = '[Lua]',
+                        latex_symbols = '[Latex]',
+                        path = '[Path]',
+                    },
                 }),
             },
             mapping = cmp.mapping.preset.insert({

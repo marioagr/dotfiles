@@ -15,6 +15,9 @@ return {
 
         -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
         { 'folke/lazydev.nvim', ft = 'lua', opts = {} },
+
+        -- Allows extra capabilities provided by nvim-cmp
+        'hrsh7th/cmp-nvim-lsp',
     },
     config = function()
         -- Sets a border for :LspInfo

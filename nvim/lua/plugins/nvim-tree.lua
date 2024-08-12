@@ -18,6 +18,8 @@ return {
         },
         renderer = {
             group_empty = true,
+            hidden_display = 'all',
+            highlight_clipboard = 'all',
             icons = {
                 show = {
                     folder_arrow = false,
@@ -27,7 +29,6 @@ return {
             indent_markers = {
                 enable = true,
             },
-            highlight_clipboard = 'all',
         },
         filters = {
             custom = { '^.git$' },
