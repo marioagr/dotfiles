@@ -14,7 +14,17 @@ return {
         { 'j-hui/fidget.nvim', opts = {} },
 
         -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
-        { 'folke/lazydev.nvim', ft = 'lua', opts = {} },
+        {
+            'folke/lazydev.nvim',
+            ft = 'lua',
+            opts = {
+                library = {
+                    -- Load luvit types when the `vim.uv` word is found
+                    { path = 'luvit-meta/library', words = { 'vim%.uv' } },
+                },
+            },
+        },
+        { 'Bilal2453/luvit-meta', lazy = true },
 
         -- Allows extra capabilities provided by nvim-cmp
         'hrsh7th/cmp-nvim-lsp',
@@ -126,7 +136,7 @@ return {
                 --
                 -- When you move your cursor, the highlights will be cleared (the second autocommand).
                 local client = vim.lsp.get_client_by_id(event.data.client_id)
-                if client and client.server_capabilities.documentHighlightProvider then
+                if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
                     local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
                     vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
                         buffer = event.buf,
@@ -153,7 +163,7 @@ return {
                 -- code, if the language server you are using supports them
                 --
                 -- This may be unwanted, since they displace some of your code
-                if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+                if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
                     nmap('<leader>th', function()
                         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
                     end, '[t]oggle Inlay [h]ints')
@@ -195,6 +205,7 @@ return {
             --
             -- But for many setups, the LSP (`tsserver`) will work just fine
             -- tsserver = {},
+            biome = {},
             cssls = {
                 filetypes = {
                     'css', -- Already supported
@@ -305,6 +316,7 @@ return {
             'mdslw', -- Markdown formatter
             'pint', -- PHP formatter
             'blade-formatter',
+            'biome', -- JavaScript and Typescript
         })
         require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
 

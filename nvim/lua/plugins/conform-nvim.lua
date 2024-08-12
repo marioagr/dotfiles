@@ -1,7 +1,8 @@
 -- Lightweight yet powerful formatter plugin for Neovim
 return {
     'stevearc/conform.nvim',
-    lazy = false,
+    event = { 'BufWritePre' },
+    cmd = { 'ConformInfo' },
     config = function()
         local conform = require('conform')
         conform.setup({
@@ -30,9 +31,11 @@ return {
             formatters_by_ft = {
                 blade = { 'blade-formatter' },
                 -- Conform can also run multiple formatters sequentially
-                css = { 'prettierd', 'prettier' },
-                -- You can use a sub-list to tell conform to run *until* a formatter is found.
-                javascript = { { 'prettierd', 'prettier' } },
+                -- You can use 'stop_after_first' to run the first available formatter from the list
+                css = { 'prettierd', 'prettier', stop_after_first = true },
+                html = { 'prettierd', 'prettier', stop_after_first = true },
+                javascript = { 'biome' },
+                typescript = { 'biome' },
                 lua = { 'stylua' },
                 markdown = { 'mdslw' },
                 php = { 'pint' },

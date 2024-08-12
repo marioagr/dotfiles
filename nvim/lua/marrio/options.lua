@@ -74,7 +74,10 @@ vim.opt.scrolloff = 5
 vim.opt.sidescrolloff = 5
 
 -- Sync clipboard between OS and Neovim
-vim.opt.clipboard = 'unnamedplus'
+-- Schedule the setting after `UiEnter` because it can increase startup-time.
+vim.schedule(function()
+    vim.opt.clipboard = 'unnamedplus'
+end)
 
 -- When and how to draw the signcolumn. always, with fixed space for 2 signs
 vim.opt.signcolumn = 'yes:3'

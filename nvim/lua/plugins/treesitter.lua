@@ -85,9 +85,6 @@ return {
         -- [[ Configure treesitter ]] See `:help nvim-treesitter`
         -- Defer treesitter setup after first render to improve startup time of 'nvim {filename}'
         vim.defer_fn(function()
-            -- Prefer git instead of curl in order to improve connectivity in some environments
-            require('nvim-treesitter.install').prefer_git = true
-
             require('nvim-treesitter.configs').setup(opts)
             -- require('ts_context_commentstring').setup()
 
