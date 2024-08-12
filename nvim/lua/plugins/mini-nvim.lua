@@ -27,8 +27,5 @@ return {
 
         -- Split/Join arguments inside (), [], {}
         require('mini.splitjoin').setup()
-
-        -- Animate common Neovim actions
-        require('mini.animate').setup()
     end,
 }
