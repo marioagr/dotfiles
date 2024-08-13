@@ -34,8 +34,8 @@ return {
                 -- You can use 'stop_after_first' to run the first available formatter from the list
                 css = { 'prettierd', 'prettier', stop_after_first = true },
                 html = { 'prettierd', 'prettier', stop_after_first = true },
-                javascript = { 'biome' },
-                typescript = { 'biome' },
+                javascript = { 'prettierd', 'prettier', stop_after_first = true },
+                typescript = { 'prettierd', 'prettier', stop_after_first = true },
                 lua = { 'stylua' },
                 markdown = { 'mdslw' },
                 php = { 'pint' },

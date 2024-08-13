@@ -205,7 +205,6 @@ return {
             --
             -- But for many setups, the LSP (`tsserver`) will work just fine
             -- tsserver = {},
-            biome = {},
             cssls = {
                 filetypes = {
                     'css', -- Already supported
@@ -316,7 +315,6 @@ return {
             'mdslw', -- Markdown formatter
             'pint', -- PHP formatter
             'blade-formatter',
-            'biome', -- JavaScript and Typescript
         })
         require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
 
