@@ -18,7 +18,7 @@ return {
         },
         renderer = {
             group_empty = true,
-            hidden_display = 'all',
+            hidden_display = 'simple',
             highlight_clipboard = 'all',
             icons = {
                 show = {

@@ -12,6 +12,7 @@ return {
             render = 'compact',
             stages = 'slide',
             timeout = 5000,
+            top_down = false,
         })
 
         local function dismiss_notifications()
