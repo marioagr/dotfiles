@@ -133,6 +133,17 @@ return {
             local function oldfiles_in_cwd()
                 builtin.oldfiles({ only_cwd = true })
             end
+            local function grep_search_simple()
+                builtin.live_grep({
+                    glob_pattern = {
+                        '!**/composer.lock',
+                        '!**/package-lock.json',
+                        '!**/bun.lockb',
+                        '!**/vendor/**',
+                        '!**/node_modules/**',
+                    },
+                })
+            end
 
             vim.keymap.set('n', '<leader>so', oldfiles_in_cwd, { desc = '[s]earch recently [o]pened files' })
             vim.keymap.set('n', '<leader><space>', builtin.buffers, { desc = '[ ] Find existing buffers' })
@@ -145,8 +156,8 @@ return {
             vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[s]earch [h]elp' })
             vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[s]earch [k]eymaps' })
             vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[s]earch current [w]ord' })
-            vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[s]earch by [g]rep' })
-            vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[s]earch by [G]rep on Git Root' })
+            vim.keymap.set('n', '<leader>sg', grep_search_simple, { desc = '[s]earch by [g]rep' })
+            vim.keymap.set('n', '<leader>sG', builtin.live_grep, { desc = '[s]earch by [G]rep on all files' })
             vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[s]earch [d]iagnostics' })
             vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[s]earch [r]esume' })
             vim.keymap.set('n', '<leader>ts', builtin.spell_suggest, { desc = 'Open [t]elescope with [s]pell suggestions' })
