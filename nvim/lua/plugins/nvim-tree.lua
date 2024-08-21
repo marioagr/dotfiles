@@ -32,6 +32,7 @@ return {
         },
         filters = {
             custom = { '^.git$' },
+            git_ignored = false,
         },
         diagnostics = {
             enable = true,
