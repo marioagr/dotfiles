@@ -11,9 +11,6 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Easily escape Termina
 -- Save buffer
 vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = ':write' })
 
--- Quit
-vim.keymap.set('n', '<leader>Q', ':q<CR>', { desc = ':quit' })
-
 -- When text is wrapped, move by terminal rows instead, not lines, unless a count is provided.
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true, desc = 'Move up by rows, not lines, unless count is provided' })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true, desc = 'Move down by rows, not lines, unless count is provided' })
@@ -36,8 +33,9 @@ vim.keymap.set('v', 'y', 'myy`y', { desc = 'Maintain cursor position when yankin
 -- ["] choose the [_] register (which acts like a black-hole) then [d]elete it and [P]aste it
 vim.keymap.set('v', 'p', '"_dP', { desc = 'Preserve yank without replacing it by the selected text' })
 
--- Easy insertion of a trailing ; or , from insert mode.
--- vim.keymap.set('i', ';;', '<Esc>A;', { desc = 'Insert [;] at the eol' })
+-- Easy insertion of a trailing ; or ,
+vim.keymap.set('n', ';;', '<Esc>A;<Esc>', { desc = 'Insert [;] at the eol' })
+vim.keymap.set('i', ';;', '<Esc>A;', { desc = 'Insert [;] at the eol' })
 -- vim.keymap.set('i', ',,', '<Esc>A,', { desc = 'Insert [,] at the eol' })
 
 -- Quickly clear search highlighting.
