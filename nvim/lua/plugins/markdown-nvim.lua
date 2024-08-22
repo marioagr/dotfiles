@@ -1,4 +1,5 @@
 return {
+    -- An alternative is 'OXY2DEV/markview.nvim'
     'MeanderingProgrammer/render-markdown.nvim',
     main = 'render-markdown',
     opts = {

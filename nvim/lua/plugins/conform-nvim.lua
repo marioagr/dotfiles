@@ -1,4 +1,37 @@
 -- Lightweight yet powerful formatter plugin for Neovim
+---@return nil|conform.FormatOpts
+local function custom_opts_for_format(bufnr)
+    bufnr = bufnr or 0
+
+    ---@type conform.FormatOpts
+    local do_not_apply_formatting_opts = { dry_run = true } -- Do not apply formatting
+
+    -- [[
+    --  Disable with a global or buffer-local variable
+    --  Disable format_on_save "lsp_fallback" for languages that don't
+    --      have a well standardized coding style. You can add additional
+    --      languages here or re-enable it for the disabled ones.
+    -- ]]
+    local disable_filetypes = { 'c', 'cpp' }
+    if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat or vim.tbl_contains(disable_filetypes, vim.bo[bufnr].filetype) then
+        return do_not_apply_formatting_opts
+    end
+
+    -- Disable autoformat for files in certain paths
+    local bufname = vim.api.nvim_buf_get_name(bufnr)
+    local cwd = vim.fn.getcwd() -- Maybe get rid of this? In case I'm editing a file that is outside of the workspace
+    if bufname:match(cwd .. '/node_modules/') or bufname:match(cwd .. '/vendor/') then
+        return do_not_apply_formatting_opts
+    end
+
+    ---@type conform.FormatOpts
+    return {
+        async = true,
+        timeout_ms = 1000,
+        lsp_format = 'fallback',
+    }
+end
+
 return {
     'stevearc/conform.nvim',
     event = { 'BufWritePre' },
@@ -7,24 +40,7 @@ return {
         local conform = require('conform')
         conform.setup({
             -- notify_on_error = false,
-            format_on_save = function(bufnr)
-                -- [[
-                --  Disable with a global or buffer-local variable
-                --  Disable "format_on_save lsp_fallback" for languages that don't
-                --      have a well standardized coding style. You can add additional
-                --      languages here or re-enable it for the disabled ones.
-                -- ]]
-                local disable_filetypes = { c = true, cpp = true }
-
-                if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat or disable_filetypes[vim.bo[bufnr].filetype] then
-                    return {}
-                end
-
-                return {
-                    timeout_ms = 1000,
-                    lsp_format = 'fallback',
-                }
-            end,
+            format_after_save = custom_opts_for_format,
             -- List of formatters available at
             -- https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters
             -- HACK: Also add the formatter used in the ensure_installed variable at the lsp-config.lua file.
@@ -70,16 +86,16 @@ return {
         })
 
         vim.api.nvim_create_user_command('FormatStatus', function()
-            function isDisabled(case)
-                if vim[case].disable_autoformat == true then
+            local function is_disabled(option)
+                if vim[option].disable_autoformat == true then
                     return 'disabled'
                 else
                     return 'enabled'
                 end
             end
 
-            vim.notify('Formatter is ' .. isDisabled('g'), vim.log.levels.INFO, { title = 'Global' })
-            vim.notify('Formatter is ' .. isDisabled('b'), vim.log.levels.INFO, { title = 'Buffer' })
+            vim.notify('Formatter is ' .. is_disabled('g'), vim.log.levels.INFO, { title = 'Global' })
+            vim.notify('Formatter is ' .. is_disabled('b'), vim.log.levels.INFO, { title = 'Buffer' })
         end, {
             desc = 'Check status for formatter',
         })
@@ -88,10 +104,10 @@ return {
         {
             '<leader>ff',
             function()
-                require('conform').format({ async = true, lsp_fallback = true })
+                require('conform').format(custom_opts_for_format())
             end,
             mode = { 'n', 'v' },
-            desc = '[N]ormal: Format buffer, [V]isual: Format selection',
+            desc = 'Format buffer or selection',
         },
     },
     init = function()

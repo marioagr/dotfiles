@@ -27,5 +27,31 @@ return {
 
         -- Split/Join arguments inside (), [], {}
         require('mini.splitjoin').setup()
+
+        -- Session management made easy
+        local sessions = require('mini.sessions')
+        sessions.setup({
+            autoread = true, -- Load local session on startup
+        })
+
+        ---@diagnostic disable-next-line: param-type-mismatch
+        vim.keymap.set('n', '<leader>Wm', function()
+            sessions.write(sessions.config.file)
+        end, { desc = '[W[orkspace [m]ake a local Vim session' })
+
+        ---@diagnostic disable-next-line: param-type-mismatch
+        vim.keymap.set('n', '<leader>Wr', function()
+            sessions.read()
+        end, { desc = '[W]orkspace [r]ead a Vim session' })
+
+        ---@diagnostic disable-next-line: param-type-mismatch
+        vim.keymap.set('n', '<leader>Wd', function()
+            sessions.delete()
+        end, { desc = '[W]orkspace [d]elete a local Vim session' })
+
+        ---@diagnostic disable-next-line: param-type-mismatch
+        vim.keymap.set('n', '<leader>Wl', function()
+            sessions.select()
+        end, { desc = '[W]orkspace [l]ist sessions' })
     end,
 }

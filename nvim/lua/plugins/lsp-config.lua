@@ -126,7 +126,7 @@ return {
                 nmap('gD', vim.lsp.buf.declaration, '[g]o to [D]eclaration')
                 nmap('<leader>Wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [a]dd Folder')
                 -- nmap('<leader>Wr', vim.lsp.buf.remove_workspace_folder, '[w]orkspace [r]emove Folder')
-                nmap('<leader>Wl', workspace_list_folders, '[W]orkspace [l]ist Folders')
+                -- nmap('<leader>Wl', workspace_list_folders, '[W]orkspace [l]ist Folders')
 
                 -- vim.keymap.set('n', '<leader>ft', vim.lsp.buf.format, { desc = 'Format code using None-LSP' })
 

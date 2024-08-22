@@ -5,6 +5,8 @@ return {
         'nvim-treesitter/nvim-treesitter-textobjects',
         -- NOTE: Not sure if it is necessary, but not included by now
         -- 'JoosepAlviste/nvim-ts-context-commentstring',
+        -- An alternative could be
+        -- 'folke/ts-comments.nvim'
     },
     build = ':TSUpdate',
     opts = {
