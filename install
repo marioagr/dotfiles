@@ -10,19 +10,19 @@ DOTFILES=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
 # Choose between Tmux and Zellij, right now testing Zellij
 # rm -rf $HOME/.tmux.conf
 # ln -s $DOTFILES/tmux/tmux.conf $HOME/.tmux.conf
+# mkdir -p $HOME/.local/bin
+# rm -rf $HOME/.local/bin/t
+# ln -s $DOTFILES/scripts/t $HOME/.local/bin/t
+
 rm -rf $HOME/.config/zellij
 ln -s $DOTFILES/zellij $HOME/.config/zellij
-
-mkdir -p $HOME/.local/bin
-
-rm -rf $HOME/.local/bin/t
-ln -s $DOTFILES/scripts/t $HOME/.local/bin/t
 
 rm -rf $HOME/.config/nvim
 ln -s $DOTFILES/nvim $HOME/.config/nvim
 
-rm -r $HOME/.gitconfig
+rm -r $HOME/.gitconfig $HOME/.gitignore
 ln -s $DOTFILES/git/.gitconfig $HOME/.gitconfig
+ln -s $DOTFILES/git/.gitignore $HOME/.gitignore
 
 rm $HOME/.config/lazygit/config.yml
 ln -s $DOTFILES/lazygit/config.yml $HOME/.config/lazygit/config.yml

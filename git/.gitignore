@@ -1,0 +1,8 @@
+# Global ignore config
+
+Session.vim
+
+# Libraries/packages folders
+node_modules/
+vendor/
+

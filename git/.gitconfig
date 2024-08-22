@@ -18,7 +18,7 @@
 
 [core]
 	editor = nvim
-	# excludesfile = ~/.gitignore
+	excludesfile = ~/.gitignore
 	# Set a global gitignore file that applies to all repositories,
 	# for things like .idea or .DS_Store
 	pager = delta
