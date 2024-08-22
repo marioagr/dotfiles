@@ -45,6 +45,7 @@ return {
             -- https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters
             -- HACK: Also add the formatter used in the ensure_installed variable at the lsp-config.lua file.
             formatters_by_ft = {
+                antlers = { 'antlersformat' },
                 blade = { 'blade-formatter' },
                 -- Conform can also run multiple formatters sequentially
                 -- You can use 'stop_after_first' to run the first available formatter from the list
@@ -57,6 +58,13 @@ return {
                 php = { 'pint' },
             },
             formatters = {
+                -- NOTE: Important to install it via npm
+                -- npm -g i 'antlers-formatter'
+                antlersformat = {
+                    command = 'antlersformat',
+                    args = { 'format', '$FILENAME' },
+                    stdin = false,
+                },
                 mdslw = {
                     env = {
                         MDSLW_MAX_WIDTH = 120,

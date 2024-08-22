@@ -193,6 +193,7 @@ return {
         --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
         --  - settings (table): Override the default settings passed when initializing the server.
         --    For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+        -- TODO: Check a way to extend the filetypes and not override them?
         local servers = {
             -- clangd = {},
             -- gopls = {},
@@ -205,6 +206,13 @@ return {
             --
             -- But for many setups, the LSP (`tsserver`) will work just fine
             -- tsserver = {},
+            antlersls = {
+                -- filetypes = {
+                -- 'antlers.html',
+                -- 'antlers',
+                -- 'html',
+                -- },
+            },
             cssls = {
                 filetypes = {
                     'css', -- Already supported
@@ -212,6 +220,7 @@ return {
                     'scss', -- Already supported
                     'html',
                     'blade',
+                    'antlers',
                 },
             },
             emmet_language_server = {
@@ -220,6 +229,7 @@ return {
                     'css',
                     'php',
                     'blade',
+                    'antlers',
                 },
             },
             html = {
@@ -228,6 +238,7 @@ return {
                     'twig',
                     'hbs',
                     'php',
+                    'antlers',
                 },
             },
             intelephense = {},
@@ -258,7 +269,13 @@ return {
                     },
                 },
             },
-            tailwindcss = {},
+            tailwindcss = {
+                filetypes = {
+                    'antlers',
+                    'blade',
+                    'html',
+                },
+            },
             -- In case I need to configure it deeply
             -- https://www.arthurkoziel.com/json-schemas-in-neovim/
             yamlls = {
@@ -316,6 +333,7 @@ return {
             'pint', -- PHP formatter
             'blade-formatter',
         })
+
         require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
 
         require('mason-lspconfig').setup({
@@ -330,5 +348,13 @@ return {
                 end,
             },
         })
+
+        -- Configuration for antlers
+        vim.filetype.add({
+            pattern = {
+                ['.*%.antlers%.html'] = 'antlers',
+            },
+        })
+        vim.treesitter.language.register('html', 'antlers')
     end,
 }
