@@ -46,7 +46,9 @@ return {
 
         ---@diagnostic disable-next-line: param-type-mismatch
         vim.keymap.set('n', '<leader>Wd', function()
-            sessions.delete()
+            sessions.delete(nil, {
+                force = true,
+            })
         end, { desc = '[W]orkspace [d]elete a local Vim session' })
 
         ---@diagnostic disable-next-line: param-type-mismatch
