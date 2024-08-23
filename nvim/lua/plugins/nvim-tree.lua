@@ -43,24 +43,6 @@ return {
             vim.cmd('edit ' .. file.fname)
         end)
 
-        local function custom_attach(bufnr)
-            local function keymap_opts(desc)
-                return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
-            end
-
-            -- default mappings
-            api.config.mappings.default_on_attach(bufnr)
-
-            -- custom mappings
-            vim.keymap.set('n', '?', api.tree.toggle_help, keymap_opts('Help'))
-
-            -- Automatically focus already-opened file by Enter (<CR>)
-            vim.keymap.set('n', '<CR>', function()
-                api.node.open.tab_drop()
-                api.tree.close_in_all_tabs()
-            end, keymap_opts('Tab drop'))
-        end
-
         local my_opts = {
             --[[
             -- NOTE: Keep netrw but without the file browser features
@@ -69,8 +51,21 @@ return {
             disable_netrw = false,
             hijack_netrw = true,
             hijack_cursor = true,
+            actions = {
+                open_file = {
+                    quit_on_open = true,
+                },
+            },
+            diagnostics = {
+                enable = true,
+                show_on_dirs = true,
+            },
             help = {
                 sort_by = 'desc',
+            },
+            filters = {
+                custom = { '^.git$' },
+                git_ignored = false,
             },
             renderer = {
                 group_empty = true,
@@ -87,14 +82,6 @@ return {
                 },
             },
             select_prompts = true,
-            filters = {
-                custom = { '^.git$' },
-                git_ignored = false,
-            },
-            diagnostics = {
-                enable = true,
-                show_on_dirs = true,
-            },
             sort_by = function(nodes)
                 table.sort(nodes, sort_by_natural)
             end,
@@ -103,7 +90,6 @@ return {
                 preserve_window_proportions = true,
                 width = 50,
             },
-            on_attach = custom_attach,
         }
 
         require('nvim-tree').setup(my_opts)
