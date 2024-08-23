@@ -123,8 +123,14 @@ return {
                     prompt_title = 'Live Grep in Open Files',
                 })
             end
+            local function search_files()
+                builtin.find_files({
+                    follow = true,
+                })
+            end
             local function search_all_files()
                 builtin.find_files({
+                    follow = true,
                     hidden = true,
                     no_ignore = true,
                     prompt_title = 'All Files (.gitignore & .hidden)',
@@ -151,7 +157,7 @@ return {
             vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = '[s]earch [/] in Open Files' })
             vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[s]earch [s]elect Telescope' })
             vim.keymap.set('n', '<leader>gf', builtin.git_files, { desc = 'Search [g]it [f]iles' })
-            vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[s]earch [f]iles' })
+            vim.keymap.set('n', '<leader>sf', search_files, { desc = '[s]earch [f]iles' })
             vim.keymap.set('n', '<leader>sa', search_all_files, { desc = '[s]earch [a]ll files' })
             vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[s]earch [h]elp' })
             vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[s]earch [k]eymaps' })
