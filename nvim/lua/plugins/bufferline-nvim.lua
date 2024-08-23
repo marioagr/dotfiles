@@ -7,18 +7,6 @@ return {
     },
     opts = {
         options = {
-            show_close_item = false,
-            max_name_length = 25,
-            numbers = 'ordinal',
-            separator_style = 'slope',
-            offsets = {
-                {
-                    filetype = 'NvimTree',
-                    text = ' Files',
-                    highlight = 'StatusLine',
-                    text_align = 'left',
-                },
-            },
             custom_areas = {
                 left = function()
                     return {
@@ -26,17 +14,23 @@ return {
                     }
                 end,
             },
-            hover = {
-                enabled = true,
-                delay = 200,
-                reveal = { 'close' },
-            },
             diagnostics = 'nvim_lsp',
             -- Show indicators in tabs
             diagnostics_indicator = function(count, level, diagnostics_dict, context)
                 local icon = level:match('error') and ' ' or ' '
                 return ' ' .. icon .. count
             end,
+            max_name_length = 25,
+            numbers = 'ordinal',
+            offsets = {
+                {
+                    filetype = 'NvimTree',
+                    highlight = 'StatusLine',
+                    text = ' Files',
+                    text_align = 'left',
+                },
+            },
+            separator_style = 'slope',
         },
     },
 }
