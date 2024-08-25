@@ -25,6 +25,13 @@ return {
                 },
             },
         }
+        local function is_formatter_enabled()
+            if vim.g.disable_autoformat then
+                return ''
+            else
+                return '󰉶'
+            end
+        end
         require('lualine').setup({
             options = {
                 icons_enabled = true,
@@ -51,6 +58,7 @@ return {
                     'fileformat',
                 },
                 lualine_y = {
+                    is_formatter_enabled,
                     '(vim.bo.expandtab and "␠ " or "⇥ ") .. " " .. vim.bo.shiftwidth',
                 },
                 lualine_z = {

@@ -73,40 +73,6 @@ return {
                 },
             },
         })
-
-        vim.api.nvim_create_user_command('FormatDisable', function(args)
-            if args.bang then
-                -- FormatDisable! will disable formatting just for this buffer
-                vim.b.disable_autoformat = true
-            else
-                vim.g.disable_autoformat = true
-            end
-        end, {
-            desc = 'Disable autoformat-on-save(!)',
-            bang = true,
-        })
-
-        vim.api.nvim_create_user_command('FormatEnable', function()
-            vim.b.disable_autoformat = false
-            vim.g.disable_autoformat = false
-        end, {
-            desc = 'Re-enable autoformat-on-save',
-        })
-
-        vim.api.nvim_create_user_command('FormatStatus', function()
-            local function is_disabled(option)
-                if vim[option].disable_autoformat == true then
-                    return 'disabled'
-                else
-                    return 'enabled'
-                end
-            end
-
-            vim.notify('Formatter is ' .. is_disabled('g'), vim.log.levels.INFO, { title = 'Global' })
-            vim.notify('Formatter is ' .. is_disabled('b'), vim.log.levels.INFO, { title = 'Buffer' })
-        end, {
-            desc = 'Check status for formatter',
-        })
     end,
     keys = {
         {
@@ -117,8 +83,32 @@ return {
             mode = { 'n', 'v' },
             desc = 'Format buffer or selection',
         },
+        {
+            '<leader>tf',
+            function()
+                if vim.g.disable_autoformat or vim.b.disable_autoformat then
+                    vim.cmd(':FormatEnable')
+                else
+                    vim.cmd(':FormatDisable')
+                end
+            end,
+            desc = '[t]oggle [f]ormatter',
+        },
     },
     init = function()
-        vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+        vim.o.formatexpr = "v:lua.require('conform').formatexpr()"
+
+        vim.api.nvim_create_user_command('FormatDisable', function()
+            vim.g.disable_autoformat = true
+        end, {
+            desc = 'Disable format',
+            bang = true,
+        })
+
+        vim.api.nvim_create_user_command('FormatEnable', function()
+            vim.g.disable_autoformat = false
+        end, {
+            desc = 'Re-enable format',
+        })
     end,
 }
