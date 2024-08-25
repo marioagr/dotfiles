@@ -14,6 +14,17 @@ return {
                 },
             },
         }
+        local grug_far = {
+            filetypes = { 'grug-far', 'gurg-far-history', 'grug-far-help' },
+            sections = {
+                lualine_a = {
+                    'mode',
+                },
+                lualine_b = {
+                    'filename',
+                },
+            },
+        }
         require('lualine').setup({
             options = {
                 icons_enabled = true,
@@ -52,6 +63,7 @@ return {
                 'mason',
                 'nvim-tree',
                 dbui,
+                grug_far,
             },
         })
     end,

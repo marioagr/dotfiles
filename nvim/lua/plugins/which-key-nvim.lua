@@ -16,7 +16,8 @@ return {
                 { '<leader>n', group = '[n]otifications' },
                 { '<leader>N', group = '[N]pm (Laravel)' },
                 { '<leader>s', group = '[s]earch' },
-                { '<leader>t', group = '[T]oggle|[T]elescope' },
+                { '<leader>S', group = 'Grug [S]earch', mode = { 'n', 'v' } },
+                { '<leader>t', group = '[T]oggle or [T]elescope' },
                 { '<leader>W', group = '[W]orkspace' },
             },
             win = {
