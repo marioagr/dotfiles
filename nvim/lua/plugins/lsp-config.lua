@@ -71,8 +71,9 @@ return {
                 --
                 --  In this case, we create a function that lets us more easily define mappings specific
                 --  for LSP related items. It sets the mode, buffer and description for us each time.
-                local nmap = function(keys, func, desc)
-                    vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+                local map = function(keys, func, desc, mode)
+                    mode = mode or 'n'
+                    vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
                 end
 
                 local function use_code_action()
@@ -87,44 +88,44 @@ return {
                 -- Jump to the definition of the word under your cursor.
                 --  This is where a variable was first declared, or where a function is defined, etc.
                 --  To jump back, press <C-T>.
-                nmap('gd', require('telescope.builtin').lsp_definitions, '[g]o to [d]efinition')
+                map('gd', require('telescope.builtin').lsp_definitions, '[g]o to [d]efinition')
 
                 -- Find references for the word under your cursor.
-                nmap('gr', require('telescope.builtin').lsp_references, '[g]o to [r]eferences')
+                map('gr', require('telescope.builtin').lsp_references, '[g]o to [r]eferences')
 
                 -- Jump to the implementation of the word under your cursor.
                 --  Useful when your language has ways of declaring types without an actual implementation.
-                nmap('gi', require('telescope.builtin').lsp_implementations, '[g]o to [i]mplementation')
+                map('gi', require('telescope.builtin').lsp_implementations, '[g]o to [i]mplementation')
 
                 -- Jump to the type of the word under your cursor.
                 --  Useful when you're not sure what type a variable is and you want to see
                 --  the definition of its *type*, not where it was *defined*.
-                nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+                map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
 
                 -- Fuzzy find all the symbols in your current document.
                 --  Symbols are things like variables, functions, types, etc.
-                nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[d]ocument [s]ymbols')
+                map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[d]ocument [s]ymbols')
 
                 -- Fuzzy find all the symbols in your current workspace
                 --  Similar to document symbols, except searches over your whole project.
-                nmap('<leader>Ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [s]ymbols')
+                map('<leader>Ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [s]ymbols')
 
                 -- Rename the variable under your cursor
                 --  Most Language Servers support renaming across files, etc.
-                nmap('<leader>rn', vim.lsp.buf.rename, '[r]e[n]ame')
+                map('<leader>rn', vim.lsp.buf.rename, '[r]e[n]ame')
 
                 -- Execute a code action, usually your cursor needs to be on top of an error
                 -- or a suggestion from your LSP for this to activate.
-                nmap('<leader>ca', use_code_action, '[c]ode [a]ction')
+                map('<leader>ca', use_code_action, '[c]ode [a]ction', { 'n', 'x' })
 
                 -- Opens a popup that displays documentation about the word under your cursor
                 --  See `:help K` for why this keymap
-                nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+                map('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
                 -- WARN: This is not Goto Definition, this is Goto Declaration.
                 --  For example, in C this would take you to the header
-                nmap('gD', vim.lsp.buf.declaration, '[g]o to [D]eclaration')
-                nmap('<leader>Wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [a]dd Folder')
+                map('gD', vim.lsp.buf.declaration, '[g]o to [D]eclaration')
+                map('<leader>Wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [a]dd Folder')
                 -- nmap('<leader>Wr', vim.lsp.buf.remove_workspace_folder, '[w]orkspace [r]emove Folder')
                 -- nmap('<leader>Wl', workspace_list_folders, '[W]orkspace [l]ist Folders')
 
@@ -164,7 +165,7 @@ return {
                 --
                 -- This may be unwanted, since they displace some of your code
                 if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
-                    nmap('<leader>th', function()
+                    map('<leader>th', function()
                         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
                     end, '[t]oggle Inlay [h]ints')
                 end

@@ -9,6 +9,7 @@ return {
             delay = 750,
             expand = 1,
             spec = {
+                { '<leader>c', group = '[c]ode', mode = { 'n', 'x' } },
                 { '<leader>gs', group = '[g]it [s]igns' },
                 { '<leader>h', group = 'Git [h]unk', mode = { 'n', 'v' } },
                 { '<leader>l', group = '[l]aravel' },
