@@ -113,6 +113,8 @@ return {
                 -- Rename the variable under your cursor
                 --  Most Language Servers support renaming across files, etc.
                 map('<leader>rn', vim.lsp.buf.rename, '[r]e[n]ame')
+                -- List the references under the cursor
+                map('<leader>rl', vim.lsp.buf.references, '[r]eferenes [l]ist')
 
                 -- Execute a code action, usually your cursor needs to be on top of an error
                 -- or a suggestion from your LSP for this to activate.
@@ -127,7 +129,7 @@ return {
                 map('gD', vim.lsp.buf.declaration, '[g]o to [D]eclaration')
                 map('<leader>Wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [a]dd Folder')
                 -- nmap('<leader>Wr', vim.lsp.buf.remove_workspace_folder, '[w]orkspace [r]emove Folder')
-                -- nmap('<leader>Wl', workspace_list_folders, '[W]orkspace [l]ist Folders')
+                map('<leader>WL', workspace_list_folders, '[W]orkspace [l]ist Folders')
 
                 -- vim.keymap.set('n', '<leader>ft', vim.lsp.buf.format, { desc = 'Format code using None-LSP' })
 
