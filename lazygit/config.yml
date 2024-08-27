@@ -7,6 +7,6 @@ gui:
 git:
   paging:
     colorArg: always
-    pager: 'delta --dark --paging=never'
+    pager: 'delta'
 
 confirmOnQuit: true

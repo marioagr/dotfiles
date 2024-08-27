@@ -19,8 +19,6 @@
 [core]
 	editor = nvim
 	excludesfile = ~/.gitignore
-	# Set a global gitignore file that applies to all repositories,
-	# for things like .idea or .DS_Store
 	pager = delta
 
 [interactive]
@@ -29,7 +27,10 @@
 [delta]
 	line-numbers = true
 	navigate = true    # use n and N to move between diff sections
+	paging = never
+	tabs = 4
 	true-color = always
+	wrap-max-lines = unlimited
 
 [merge]
 	conflictstyle = zdiff3
