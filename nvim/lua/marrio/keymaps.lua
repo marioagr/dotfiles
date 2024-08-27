@@ -67,10 +67,6 @@ vim.keymap.set('i', '<M-Up>', '<Esc>:move .-2<CR>==gi', { desc = 'Move line up i
 vim.keymap.set('v', '<M-Down>', ":move '>+1<CR>gv=gv", { desc = 'Move line down in Visual mode' })
 vim.keymap.set('v', '<M-Up>', ":move '<-2<CR>gv=gv", { desc = 'Move line up in Visual mode' })
 
--- Use F3 to view search results
-vim.keymap.set('n', '<F3>', ':cnext<CR>', { desc = 'Go to next search result' })
-vim.keymap.set('n', '<F15>', ':cprev<CR>', { desc = 'Go to previous search result' }) -- Shift-F3 = F15
-
 --[[
 --  NOTE: To be able to use vim-unimpaired or mini.bracketed
 --  Ideally this could be achieved setting the option langmap (plus langremap as per the help)
