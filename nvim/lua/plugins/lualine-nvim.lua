@@ -14,6 +14,7 @@ return {
                 },
             },
         }
+
         local grug_far = {
             filetypes = { 'grug-far', 'gurg-far-history', 'grug-far-help' },
             sections = {
@@ -25,13 +26,24 @@ return {
                 },
             },
         }
-        local function is_formatter_enabled()
-            if vim.g.disable_autoformat then
-                return ''
-            else
-                return '󰉶'
+
+        local function status_formatter()
+            local disabled_icon = ''
+            local enabled_icon = '󰉶'
+            local buffer_icon = enabled_icon
+            local global_icon = enabled_icon
+
+            if vim.b.disable_autoformat then
+                buffer_icon = disabled_icon
             end
+
+            if vim.g.disable_autoformat then
+                global_icon = disabled_icon
+            end
+
+            return require('string').format('b %s g %s', buffer_icon, global_icon)
         end
+
         require('lualine').setup({
             options = {
                 icons_enabled = true,
@@ -58,7 +70,7 @@ return {
                     'fileformat',
                 },
                 lualine_y = {
-                    is_formatter_enabled,
+                    status_formatter,
                     '(vim.bo.expandtab and "␠ " or "⇥ ") .. " " .. vim.bo.shiftwidth',
                 },
                 lualine_z = {
