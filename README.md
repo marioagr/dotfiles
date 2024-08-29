@@ -9,7 +9,9 @@
 
 
 ### Possible plugins
+- hinell/lsp-timeout.nvim (Start/stop LSPs upon demand)
 - mfussenegger/nvim-lint (Linter complementary to built-in LSP)
+- andymass/vim-matchup (Better ¿ % ?)
 - debugloop/telescope-undo.nvim (Undo visualization on Telescope)
 - sindrets/diffview.nvim (Easier diffview to see changed file changes)
 - MagicDuck/grug-far.nvim (Search/replace using rg or ast-grep)
@@ -27,4 +29,3 @@
 - stevearc/overseer.nvim (Task runner and management)
 - rachartier/tiny-inline-diagnostic.nvim (Prettier inline diagnostic messages)
 - HiPhish/rainbow-delimiters.nvim
-

@@ -3,6 +3,7 @@ return {
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
         'nvim-treesitter/nvim-treesitter-textobjects',
+        { 'windwp/nvim-ts-autotag', opts = {} },
         -- NOTE: Not sure if it is necessary, but not included by now
         -- 'JoosepAlviste/nvim-ts-context-commentstring',
         -- An alternative could be
