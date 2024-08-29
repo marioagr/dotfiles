@@ -209,39 +209,27 @@ return {
             --
             -- But for many setups, the LSP (`tsserver`) will work just fine
             -- tsserver = {},
-            antlersls = {
-                -- filetypes = {
-                -- 'antlers.html',
-                -- 'antlers',
-                -- 'html',
-                -- },
-            },
+            antlersls = {},
             cssls = {
                 filetypes = {
-                    'css', -- Already supported
-                    'less', -- Already supported
-                    'scss', -- Already supported
-                    'html',
-                    'blade',
                     'antlers',
+                    'blade',
+                    'html',
                 },
             },
             emmet_language_server = {
                 filetypes = {
-                    'html',
-                    'css',
-                    'php',
-                    'blade',
                     'antlers',
+                    'blade',
+                    'php',
                 },
             },
             html = {
                 filetypes = {
-                    'html',
-                    'twig',
+                    'antlers',
                     'hbs',
                     'php',
-                    'antlers',
+                    'twig',
                 },
             },
             intelephense = {},
@@ -275,8 +263,13 @@ return {
             tailwindcss = {
                 filetypes = {
                     'antlers',
-                    'blade',
-                    'html',
+                },
+                settings = {
+                    tailwindCss = {
+                        includeLanguages = {
+                            antlers = 'html',
+                        },
+                    },
                 },
             },
             -- In case I need to configure it deeply
@@ -297,6 +290,16 @@ return {
                 },
             },
         }
+
+        -- Merge LSPs defined ft list with my servers table
+        for server_name, opts in pairs(servers) do
+            -- Get LSP defined ft list
+            local current_server_ft_list = require('lspconfig.server_configurations.' .. server_name).default_config.filetypes
+            -- Get my defined ft list for a given LSP from the servers table
+            opts.filetypes = opts.filetypes or {}
+            -- "Merge" them
+            vim.list_extend(opts.filetypes, current_server_ft_list)
+        end
 
         -- Ensure the servers and tools above are installed
         --  To check the current status of installed tools and/or manually install
