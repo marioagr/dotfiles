@@ -334,7 +334,6 @@ return {
         vim.list_extend(ensure_installed, {
             'stylua', -- Used to format lua code
             'prettierd',
-            'prettier',
             'mdslw', -- Markdown formatter
             'pint', -- PHP formatter
             'blade-formatter',
@@ -354,13 +353,5 @@ return {
                 end,
             },
         })
-
-        -- Configuration for antlers
-        vim.filetype.add({
-            pattern = {
-                ['.*%.antlers%.html'] = 'antlers',
-            },
-        })
-        vim.treesitter.language.register('html', 'antlers')
     end,
 }
