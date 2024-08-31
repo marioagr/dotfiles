@@ -5,6 +5,7 @@ return {
         'kyazdani42/nvim-web-devicons',
         -- 'onedark.nvim',
     },
+    lazy = false,
     config = function()
         ---@type bufferline.UserConfig
         local my_opts = {
@@ -28,11 +29,15 @@ return {
                 diagnostics = 'nvim_lsp',
                 -- Show indicators in tabs
                 diagnostics_indicator = function(count, level, diagnostics_dict, context)
-                    local icon = level:match('error') and ' ' or ' '
-                    return ' ' .. icon .. count
+                    local icon = level:match('error') and '' or ''
+                    return count .. icon
                 end,
-                max_name_length = 25,
-                numbers = 'ordinal',
+                groups = {
+                    items = {
+                        require('bufferline.groups').builtin.pinned:with({ icon = '󰐃' }),
+                    },
+                },
+                max_name_length = 15,
                 offsets = {
                     {
                         filetype = 'NvimTree',
@@ -41,10 +46,32 @@ return {
                         text_align = 'left',
                     },
                 },
-                separator_style = 'slope',
             },
         }
 
         require('bufferline').setup(my_opts)
     end,
+    keys = {
+        {
+            '<leader>bp',
+            function()
+                vim.cmd('BufferLineTogglePin')
+            end,
+            desc = 'Pin current buffer',
+        },
+        {
+            '<leader>b{',
+            function()
+                vim.cmd('BufferLineMovePrev')
+            end,
+            desc = 'Move buffer backwards',
+        },
+        {
+            '<leader>b}',
+            function()
+                vim.cmd('BufferLineMoveNext')
+            end,
+            desc = 'Move buffer forwards',
+        },
+    },
 }
