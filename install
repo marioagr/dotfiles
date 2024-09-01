@@ -5,14 +5,6 @@ DOTFILES=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
 # remove any previous directories or files
 # create the symlink
 # ln -s $DOTFILES/nvim to (destination directory eg. $HOME/.config/nvim)
-#
-
-# Choose between Tmux and Zellij, right now testing Zellij
-# rm -rf $HOME/.tmux.conf
-# ln -s $DOTFILES/tmux/tmux.conf $HOME/.tmux.conf
-# mkdir -p $HOME/.local/bin
-# rm -rf $HOME/.local/bin/t
-# ln -s $DOTFILES/scripts/t $HOME/.local/bin/t
 
 rm -rf $HOME/.config/zellij
 ln -s $DOTFILES/zellij $HOME/.config/zellij
