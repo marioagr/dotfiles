@@ -1,3 +1,7 @@
+## Maybe useful in the future
+
+https://devblogs.microsoft.com/commandline/share-environment-vars-between-wsl-and-windows/#what-are-environment-variables
+
 ## Zellij
 
 ### Possible plugins
@@ -6,7 +10,6 @@
 - [Zellij Workspace](https://github.com/vdbulcke/zellij-workspace)
 
 ## Neovim
-
 
 ### Possible plugins
 - hinell/lsp-timeout.nvim (Start/stop LSPs upon demand)
