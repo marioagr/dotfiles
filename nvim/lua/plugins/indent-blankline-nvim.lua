@@ -29,7 +29,8 @@ return {
         require('ibl').setup({
             indent = {
                 char = '▏',
-                -- highlight = highlight, -- IDK looks pretty but...
+                -- IDK looks pretty but...
+                -- highlight = highlight,
             },
             exclude = {
                 filetypes = {
@@ -47,5 +48,12 @@ return {
                 },
             },
         })
+
+        -- With the current wezterm (WSL2) config this highlight is... bad
+        -- Maybe switch to mini.indentscope or not use it at all
+        -- sources:
+        --  https://github.com/lukas-reineke/indent-blankline.nvim/issues/754
+        --  https://github.com/lukas-reineke/indent-blankline.nvim/issues/686
+        vim.api.nvim_set_hl(0, '@ibl.scope.underline.1', { underline = true, bold = true })
     end,
 }
