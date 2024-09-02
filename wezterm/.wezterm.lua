@@ -8,6 +8,7 @@ config.font = wt.font('Cascadia Mono NF')
 config.hide_tab_bar_if_only_one_tab = true
 config.scrollback_lines = 5000
 config.ui_key_cap_rendering = 'WindowsSymbols'
+config.window_decorations = 'RESIZE'
 config.window_padding = {
     left = 0,
     right = 0,
