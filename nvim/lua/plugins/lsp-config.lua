@@ -13,7 +13,7 @@ return {
         -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
         { 'j-hui/fidget.nvim', opts = {} },
 
-        -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
+        -- lazydev configures Lua LSP for your Neovim config, runtime and plugins
         {
             'folke/lazydev.nvim',
             ft = 'lua',
@@ -321,6 +321,7 @@ return {
         -- Set border globally instead of per client
         -- See https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization#borders
         local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+        ---@diagnostic disable-next-line: duplicate-set-field
         function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
             opts = opts or {}
             opts.border = opts.border or 'rounded'

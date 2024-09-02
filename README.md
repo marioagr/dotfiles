@@ -32,3 +32,5 @@ https://devblogs.microsoft.com/commandline/share-environment-vars-between-wsl-an
 - stevearc/overseer.nvim (Task runner and management)
 - rachartier/tiny-inline-diagnostic.nvim (Prettier inline diagnostic messages)
 - HiPhish/rainbow-delimiters.nvim
+- AllenDang/nvim-expand-expr (Kind of NumberMonger)
+- mawkler/refjump.nvim (...)
