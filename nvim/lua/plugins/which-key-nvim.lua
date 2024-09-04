@@ -21,11 +21,6 @@ return {
                 { '<leader>t', group = '[T]oggle or [T]elescope' },
                 { '<leader>W', group = '[W]orkspace' },
             },
-            win = {
-                wo = {
-                    winblend = 10,
-                },
-            },
         })
     end,
 }

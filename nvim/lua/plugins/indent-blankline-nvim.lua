@@ -47,13 +47,18 @@ return {
                     'NvimTree',
                 },
             },
+            scope = {
+                -- This seems to solve the problem of the highlight but
+                -- I'll leave the workaround below if I need it
+                -- with other highlights (see note below)
+                show_start = false,
+            },
         })
 
-        -- With the current wezterm (WSL2) config this highlight is... bad
-        -- Maybe switch to mini.indentscope or not use it at all
-        -- sources:
+        -- NOTE: With the current wezterm (WSL2) config this highlight is...
+        -- Maybe switch to mini.indentscope or not use it at all sources:
         --  https://github.com/lukas-reineke/indent-blankline.nvim/issues/754
         --  https://github.com/lukas-reineke/indent-blankline.nvim/issues/686
-        vim.api.nvim_set_hl(0, '@ibl.scope.underline.1', { underline = true, bold = true })
+        -- vim.api.nvim_set_hl(0, '@ibl.scope.underline.1', { underline = true, bold = true })
     end,
 }
