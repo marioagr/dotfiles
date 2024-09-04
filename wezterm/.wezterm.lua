@@ -5,7 +5,7 @@ local config = wezterm.config_builder()
 
 config.color_scheme = 'Ubuntu'
 -- config.color_scheme = 'tokyonight_moon'
-config.font = wezterm.font('Cascadia Mono NF')
+config.font = wezterm.font_with_fallback({ 'Cascadia Mono', 'Caskaydia Mono NF' })
 config.hide_tab_bar_if_only_one_tab = true
 config.scrollback_lines = 5000
 config.ui_key_cap_rendering = 'WindowsSymbols'
