@@ -209,5 +209,5 @@ pane_frames false
 
 theme "tokyo-night-dark"
 
-scrollback_editor "/snap/bin/nvim"
+scrollback_editor "nvim"
 

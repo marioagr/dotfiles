@@ -1,10 +1,11 @@
 -- Wezterm API
-local wt = require('wezterm')
-local config = wt.config_builder()
+local wezterm = require('wezterm')
+local mux = wezterm.mux
+local config = wezterm.config_builder()
 
 config.color_scheme = 'Ubuntu'
 -- config.color_scheme = 'tokyonight_moon'
-config.font = wt.font('Cascadia Mono NF')
+config.font = wezterm.font('Cascadia Mono NF')
 config.hide_tab_bar_if_only_one_tab = true
 config.scrollback_lines = 5000
 config.ui_key_cap_rendering = 'WindowsSymbols'
@@ -30,6 +31,15 @@ config.front_end = 'Software'
 -- use this config to press without space and inserts it directly
 config.use_dead_keys = false
 
+config.keys = {
+    -- Disable debug keymap and send it to the terminal
+    {
+        key = 'l',
+        mods = 'CTRL|SHIFT',
+        action = wezterm.action.DisableDefaultAssignment,
+    },
+}
+
 -- Normalize pasted newlines
 -- config.canonicalize_pasted_newlines
 
@@ -38,5 +48,10 @@ config.use_dead_keys = false
 
 -- https://wezfurlong.org/wezterm/faq.html?h=underline#how-do-i-enable-undercurl-curly-underlines
 -- https://wezfurlong.org/wezterm/multiplexing.html#connecting-into-windows-subsystem-for-linux
+
+wezterm.on('gui-startup', function(cmd)
+    local tab, pane, window = mux.spawn_window(cmd or {})
+    window:gui_window():maximize()
+end)
 
 return config
