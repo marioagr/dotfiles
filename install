@@ -20,7 +20,7 @@ rm $HOME/.config/lazygit/config.yml
 ln -s $DOTFILES/lazygit/config.yml $HOME/.config/lazygit/config.yml
 
 rm -f /mnt/c/Users/Mario/.wezterm.lua
-cp ./wezterm/.wezterm.lua /mnt/c/Users/Mario/.wezterm.lua
+cp $DOTFILES/wezterm/.wezterm.lua /mnt/c/Users/Mario/.wezterm.lua
 
 # rm -rf $HOME/.config/phpactor
 # ln -s $DOTFILES/phpactor $HOME/.config/phpactor

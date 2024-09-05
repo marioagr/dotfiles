@@ -5,7 +5,7 @@ local config = wezterm.config_builder()
 
 config.color_scheme = 'Ubuntu'
 -- config.color_scheme = 'tokyonight_moon'
-config.font = wezterm.font_with_fallback({ 'Cascadia Mono', 'Caskaydia Mono NF' })
+config.font = wezterm.font_with_fallback({ 'Cascadia Mono', 'Symbols Nerd Font Mono' })
 config.hide_tab_bar_if_only_one_tab = true
 config.scrollback_lines = 5000
 config.ui_key_cap_rendering = 'WindowsSymbols'
@@ -29,7 +29,7 @@ config.front_end = 'Software'
 
 -- Instead of pressing AltGr+{<space> twice to insert just "^",
 -- use this config to press without space and inserts it directly
-config.use_dead_keys = false
+-- config.use_dead_keys = false
 
 config.keys = {
     -- Disable debug keymap and send it to the terminal

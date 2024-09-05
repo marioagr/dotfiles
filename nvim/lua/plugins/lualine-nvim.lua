@@ -41,7 +41,7 @@ return {
                 global_icon = disabled_icon
             end
 
-            return require('string').format('b %s g %s', buffer_icon, global_icon)
+            return require('string').format('b %s  g %s', buffer_icon, global_icon)
         end
 
         require('lualine').setup({
@@ -71,7 +71,7 @@ return {
                 },
                 lualine_y = {
                     status_formatter,
-                    '(vim.bo.expandtab and "␠ " or "⇥ ") .. " " .. vim.bo.shiftwidth',
+                    '(vim.bo.expandtab and "␠ " or "⇥ ") .. vim.bo.shiftwidth',
                 },
                 lualine_z = {
                     'location',

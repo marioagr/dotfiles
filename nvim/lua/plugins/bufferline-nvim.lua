@@ -17,7 +17,7 @@ return {
                 custom_areas = {
                     left = function()
                         return {
-                            { text = '  ', fg = '#3e93d3' },
+                            { text = '   ', fg = '#3e93d3' },
                         }
                     end,
                 },
