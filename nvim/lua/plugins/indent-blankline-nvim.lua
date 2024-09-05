@@ -51,7 +51,7 @@ return {
                 -- This seems to solve the problem of the highlight but
                 -- I'll leave the workaround below if I need it
                 -- with other highlights (see note below)
-                show_start = false,
+                -- show_start = false,
             },
         })
 

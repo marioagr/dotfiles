@@ -39,11 +39,4 @@ require('lazy').setup('plugins', {
     },
 })
 
--- Add patterns for fts and set them to their corresponding language
-vim.filetype.add({
-    pattern = {
-        ['.*%.antlers%.html'] = 'antlers',
-        ['.*%.blade%.php'] = 'blade',
-    },
-})
-vim.treesitter.language.register('html', 'antlers')
+require('marrio.fixes')

@@ -77,3 +77,19 @@ vim.keymap.set('v', '<M-Up>', ":move '<-2<CR>gv=gv", { desc = 'Move line up in V
 --]]
 vim.keymap.set('n', '{', '[', { remap = true })
 vim.keymap.set('n', '}', ']', { remap = true })
+
+-- Toggle spelling
+vim.keymap.set('n', '<leader>tS', function()
+    vim.cmd([[setlocal spell!]])
+    -- I feel like its a bit hacky to use "._value" but meh
+    if vim.opt_local.spell._value then
+        -- NOTE: Check if it can be replaced the same notification
+        vim.notify('Enabled', nil, {
+            title = 'Spelling',
+        })
+    else
+        vim.notify('Disabled', nil, {
+            title = 'Spelling',
+        })
+    end
+end, { desc = '[t]oggle [S]pelling checking' })
