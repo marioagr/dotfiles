@@ -18,6 +18,11 @@ config.window_padding = {
     bottom = 0,
 }
 
+config.inactive_pane_hsb = {
+    saturation = 0.5,
+    brightness = 0.5,
+}
+
 -- Use WSL by default
 -- config.default_prog = { 'wsl.exe', '-d', 'Ubuntu' }
 config.default_domain = 'WSL:Ubuntu'
