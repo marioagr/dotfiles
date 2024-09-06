@@ -78,7 +78,7 @@ return {
 
                 local function use_code_action()
                     ---@diagnostic disable-next-line: missing-fields
-                    vim.lsp.buf.code_action({ context = { only = { 'quickfix', 'refactor', 'source' } } })
+                    vim.lsp.buf.code_action()
                 end
 
                 local function workspace_list_folders()
