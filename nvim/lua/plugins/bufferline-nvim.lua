@@ -21,8 +21,8 @@ return {
                         }
                     end,
                 },
-                custom_filter = function(buf, bufnums)
-                    local omit_these = { 'grug-far', 'gurg-far-history', 'grug-far-help' }
+                custom_filter = function(buf)
+                    local omit_these = { 'grug-far', 'gurg-far-history', 'grug-far-help', 'qf' }
 
                     if vim.tbl_contains(omit_these, vim.bo[buf].filetype) then
                         return false
@@ -32,7 +32,7 @@ return {
                 end,
                 diagnostics = 'nvim_lsp',
                 -- Show indicators in tabs
-                diagnostics_indicator = function(count, level, diagnostics_dict, context)
+                diagnostics_indicator = function(count, level)
                     local icon = level:match('error') and '' or ''
                     return count .. icon
                 end,

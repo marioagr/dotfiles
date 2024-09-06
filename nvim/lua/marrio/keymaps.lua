@@ -42,10 +42,10 @@ vim.keymap.set('i', ';;', '<Esc>A;', { desc = 'Insert [;] at the eol' })
 vim.keymap.set('n', '<leader>k', ':nohlsearch<CR>', { desc = 'Clear search highlighting' })
 
 -- These mappings control the size of splits
-vim.keymap.set('n', '<M-.>', '<c-w>5>') -- Increase width
-vim.keymap.set('n', '<M-,>', '<c-w>5<') -- Decrease width
-vim.keymap.set('n', '<M-t>', '<C-W>+') -- Increase height
-vim.keymap.set('n', '<M-s>', '<C-W>-') -- Decrease height
+vim.keymap.set('n', '<M-.>', '<c-w>5>', { desc = 'Increase width' })
+vim.keymap.set('n', '<M-,>', '<c-w>5<', { desc = 'Decrease width' })
+vim.keymap.set('n', '<M-t>', '<C-W>+', { desc = 'Increase height' })
+vim.keymap.set('n', '<M-s>', '<C-W>-', { desc = 'Increase height' })
 
 -- Move lines up and down
 vim.keymap.set('n', '<M-Down>', function()
@@ -81,15 +81,19 @@ vim.keymap.set('n', '}', ']', { remap = true })
 -- Toggle spelling
 vim.keymap.set('n', '<leader>tS', function()
     vim.cmd([[setlocal spell!]])
-    -- I feel like its a bit hacky to use "._value" but meh
-    if vim.opt_local.spell._value then
-        -- NOTE: Check if it can be replaced the same notification
-        vim.notify('Enabled', nil, {
-            title = 'Spelling',
-        })
-    else
-        vim.notify('Disabled', nil, {
-            title = 'Spelling',
-        })
+    local function spelling_status()
+        -- I feel like its a bit hacky to use "._value" but meh
+        if vim.opt_local.spell._value then
+            return 'Enabled'
+        else
+            return 'Disabled'
+        end
     end
+    SpellNotification = vim.notify(spelling_status(), nil, {
+        title = 'Spelling',
+        replace = SpellNotification,
+        on_close = function()
+            SpellNotification = nil
+        end,
+    })
 end, { desc = '[t]oggle [S]pelling checking' })
