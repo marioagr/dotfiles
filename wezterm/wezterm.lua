@@ -1,13 +1,14 @@
 -- Wezterm API
 local wezterm = require('wezterm')
-local mux = wezterm.mux
 local config = wezterm.config_builder()
+local mux = wezterm.mux
+local my_keys = require('my_keys')
 
 config.color_scheme = 'Ubuntu'
 -- config.color_scheme = 'tokyonight_moon'
 config.font = wezterm.font_with_fallback({ 'Cascadia Mono', 'Symbols Nerd Font Mono' })
 config.font_size = 12
-config.hide_tab_bar_if_only_one_tab = true
+-- config.hide_tab_bar_if_only_one_tab = true
 config.scrollback_lines = 5000
 config.ui_key_cap_rendering = 'WindowsSymbols'
 config.window_decorations = 'INTEGRATED_BUTTONS|RESIZE'
@@ -37,30 +38,36 @@ config.front_end = 'Software'
 -- use this config to press without space and inserts it directly
 -- config.use_dead_keys = false
 
-config.keys = {
-    -- Disable debug keymap and send it to the terminal
-    {
-        key = 'L',
-        mods = 'CTRL|SHIFT',
-        action = wezterm.action.DisableDefaultAssignment,
-    },
-    -- https://wezfurlong.org/wezterm/config/lua/keyassignment/PromptInputLine.html#example-of-interactively-picking-a-name-and-creating-a-new-workspace
-    {
-        key = 'E',
-        mods = 'CTRL|SHIFT',
-        action = wezterm.action.PromptInputLine({
-            description = 'Enter new name for tab',
-            action = wezterm.action_callback(function(window, pane, line)
-                -- line will be `nil` if they hit escape without entering anything
-                -- An empty string if they just hit enter
-                -- Or the actual line of text they wrote
-                if line then
-                    window:active_tab():set_title(line)
-                end
-            end),
-        }),
-    },
-}
+wezterm.on('update-status', function(window, pane)
+    window:set_left_status(window:active_workspace())
+end)
+
+wezterm.on('update-right-status', function(window, pane)
+    local kt_name = window:active_key_table()
+    local leader = ''
+    local zoomed_text = ''
+
+    if kt_name then
+        kt_name = 'Mode: ' .. kt_name
+    else
+        kt_name = ''
+    end
+
+    if window:leader_is_active() then
+        leader = 'LEADER'
+        if kt_name ~= '' then
+            leader = ' - ' .. leader
+        end
+    end
+
+    if pane.is_zoomed then
+        zoomed_text = '󰁌 '
+    end
+
+    window:set_right_status(zoomed_text .. '' .. kt_name .. leader)
+end)
+
+my_keys.apply_to_config(config)
 
 -- Normalize pasted newlines
 -- config.canonicalize_pasted_newlines

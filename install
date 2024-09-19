@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 DOTFILES=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
+WIN_HOME=/mnt/c/Users/${USER^}
 
 # remove any previous directories or files
 # create the symlink
@@ -19,8 +20,8 @@ ln -s $DOTFILES/git/.gitignore $HOME/.gitignore
 rm $HOME/.config/lazygit/config.yml
 ln -s $DOTFILES/lazygit/config.yml $HOME/.config/lazygit/config.yml
 
-rm -f /mnt/c/Users/Mario/.wezterm.lua
-cp $DOTFILES/wezterm/.wezterm.lua /mnt/c/Users/Mario/.wezterm.lua
+rm -f $MY_WIN_HOME/.config/wezterm/wezterm.lua $WIN_HOME/.config/wezterm/my_keys.lua
+cp -r $DOTFILES/wezterm/ $WIN_HOME/.config/
 
 # rm -rf $HOME/.config/phpactor
 # ln -s $DOTFILES/phpactor $HOME/.config/phpactor
