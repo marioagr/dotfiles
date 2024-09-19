@@ -51,8 +51,8 @@ return {
                 -- You can use 'stop_after_first' to run the first available formatter from the list
                 css = { 'prettierd' },
                 html = { 'prettierd' },
-                javascript = { 'prettierd' },
-                typescript = { 'prettierd' },
+                javascript = { 'biome', 'prettierd', stop_after_first = true },
+                typescript = { 'biome', 'prettierd', stop_after_first = true },
                 lua = { 'stylua' },
                 markdown = { 'mdslw' },
                 php = { 'pint' },
@@ -64,6 +64,16 @@ return {
                     command = 'antlersformat',
                     args = { 'format', '$FILENAME' },
                     stdin = false,
+                },
+                ['blade-formatter'] = {
+                    append_args = {
+                        -- auto|force|force-aligned|force-expand-multiline|aligned-multiple|preserve|preserve-aligned
+                        '--wrap-attributes="force-expand-multiline"',
+                        '--sort-tailwindcss-classes',
+                        -- none|alphabetical|code-guide|idiomatic|vuejs|custom
+                        '--sort-html-attributes="code-guide"',
+                        '--no-multiple-empty-lines',
+                    },
                 },
                 mdslw = {
                     env = {
