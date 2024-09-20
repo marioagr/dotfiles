@@ -202,10 +202,10 @@ local key_tables = {
         },
 
         -- Select next workspace
-        { key = 'RightArrow', mods = 'LEADER', action = act.SwitchWorkspaceRelative(1) },
+        { key = 'RightArrow', mods = '', action = act.SwitchWorkspaceRelative(1) },
 
         -- Select previous workspace
-        { key = 'LeftArrow', mods = 'LEADER', action = act.SwitchWorkspaceRelative(-1) },
+        { key = 'LeftArrow', mods = '', action = act.SwitchWorkspaceRelative(-1) },
     },
 
     tabs = {
