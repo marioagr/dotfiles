@@ -12,9 +12,9 @@ local keys = {
     { key = '-', mods = 'SUPER', action = act.DecreaseFontSize },
     { key = '0', mods = 'SUPER', action = act.ResetFontSize },
 
-    -- Miscellaneous
-    { key = 'k', mods = 'SUPER', action = act.ClearScrollback('ScrollbackOnly') },
+    -- Create new Wezterm windows
     { key = 'n', mods = 'SUPER', action = act.SpawnWindow },
+
     -- TODO: Check how to configure this correctly
     { key = 'c', mods = 'CTRL|SHIFT', action = act.CopyTo('Clipboard') },
     { key = 'v', mods = 'CTRL|SHIFT', action = act.PasteFrom('Clipboard') },
@@ -23,23 +23,42 @@ local keys = {
     { key = 'x', mods = 'CTRL|SHIFT', action = act.ActivateCopyMode },
     { key = 'phys:Space', mods = 'CTRL|SHIFT', action = act.QuickSelect },
 
+    -- Select pane
+    { key = 'LeftArrow', mods = 'CTRL|SHIFT', action = act.ActivatePaneDirection('Left') },
+    { key = 'RightArrow', mods = 'CTRL|SHIFT', action = act.ActivatePaneDirection('Right') },
+    { key = 'UpArrow', mods = 'CTRL|SHIFT', action = act.ActivatePaneDirection('Up') },
+    { key = 'DownArrow', mods = 'CTRL|SHIFT', action = act.ActivatePaneDirection('Down') },
+
+    -- Change height/width of pane
+    { key = 'LeftArrow', mods = 'CTRL|SHIFT|ALT', action = act.AdjustPaneSize({ 'Left', 1 }) },
+    { key = 'RightArrow', mods = 'CTRL|SHIFT|ALT', action = act.AdjustPaneSize({ 'Right', 1 }) },
+    { key = 'UpArrow', mods = 'CTRL|SHIFT|ALT', action = act.AdjustPaneSize({ 'Up', 1 }) },
+    { key = 'DownArrow', mods = 'CTRL|SHIFT|ALT', action = act.AdjustPaneSize({ 'Down', 1 }) },
+
     -- Tabs without LEADER
     { key = 'PageDown', mods = 'CTRL', action = act.ActivateTabRelative(1) },
-    { key = 'PageUp', mods = 'CTRL|SHIFT', action = act.MoveTabRelative(-1) },
-    { key = 'PageDown', mods = 'CTRL|SHIFT', action = act.MoveTabRelative(1) },
     { key = 'PageUp', mods = 'CTRL', action = act.ActivateTabRelative(-1) },
+
+    { key = 'PageDown', mods = 'CTRL|SHIFT', action = act.MoveTabRelative(1) },
+    { key = 'PageUp', mods = 'CTRL|SHIFT', action = act.MoveTabRelative(-1) },
 
     -- Scroll
     { key = 'UpArrow', mods = 'SHIFT', action = act.ScrollByLine(-1) },
     { key = 'DownArrow', mods = 'SHIFT', action = act.ScrollByLine(1) },
+
     { key = 'PageDown', mods = 'SHIFT', action = act.ScrollByPage(1) },
     { key = 'PageUp', mods = 'SHIFT', action = act.ScrollByPage(-1) },
+
+    -- See the link below for more info and the wezterm.sh file
+    -- https://wezfurlong.org/wezterm/shell-integration.html
+    { key = 'LeftArrow', mods = 'SHIFT', action = act.ScrollToPrompt(-1) },
+    { key = 'RightArrow', mods = 'SHIFT', action = act.ScrollToPrompt(1) },
 
     -- Disable debug keymap and send it to the terminal
     { key = 'L', mods = 'CTRL|SHIFT', action = act.DisableDefaultAssignment },
 
     -- Show debug overlay
-    { key = 'D', mods = 'LEADER', action = act.ShowDebugOverlay },
+    { key = 'd', mods = 'LEADER', action = act.ShowDebugOverlay },
 
     -- [w]orkspace "mode" by pressing LEADER+w
     {
@@ -66,7 +85,6 @@ local keys = {
         mods = 'LEADER',
         action = act.ActivateKeyTable({
             name = 'panes',
-            one_shot = false,
         }),
     },
 }
@@ -188,11 +206,6 @@ local key_tables = {
 
         -- Select previous workspace
         { key = 'LeftArrow', mods = 'LEADER', action = act.SwitchWorkspaceRelative(-1) },
-
-        -- Related to session_manager plugin
-        { key = 's', mods = 'LEADER', action = act({ EmitEvent = 'save_session' }) },
-        { key = 'l', mods = 'LEADER', action = act({ EmitEvent = 'load_session' }) },
-        { key = 'r', mods = 'LEADER', action = act({ EmitEvent = 'restore_session' }) },
     },
 
     tabs = {
@@ -223,27 +236,13 @@ local key_tables = {
     },
 
     panes = {
-        -- Cancel the mode by pressing escape
-        { key = 'Escape', action = act.PopKeyTable },
-
+        -- Split vertically/horizontally
         { key = 'v', mods = '', action = act.SplitVertical({ domain = 'CurrentPaneDomain' }) },
         { key = 'h', mods = '', action = act.SplitHorizontal({ domain = 'CurrentPaneDomain' }) },
 
         -- Toggle "full screen" of current pane
         -- TODO: Show in right-status when its in full mode and other panes exist
         { key = 'z', mods = '', action = act.TogglePaneZoomState },
-
-        -- Select pane
-        { key = 'LeftArrow', mods = 'CTRL', action = act.ActivatePaneDirection('Left') },
-        { key = 'RightArrow', mods = 'CTRL', action = act.ActivatePaneDirection('Right') },
-        { key = 'UpArrow', mods = 'CTRL', action = act.ActivatePaneDirection('Up') },
-        { key = 'DownArrow', mods = 'CTRL', action = act.ActivatePaneDirection('Down') },
-
-        -- Change height/width of pane
-        { key = 'LeftArrow', mods = 'ALT', action = act.AdjustPaneSize({ 'Left', 1 }) },
-        { key = 'RightArrow', mods = 'ALT', action = act.AdjustPaneSize({ 'Right', 1 }) },
-        { key = 'UpArrow', mods = 'ALT', action = act.AdjustPaneSize({ 'Up', 1 }) },
-        { key = 'DownArrow', mods = 'ALT', action = act.AdjustPaneSize({ 'Down', 1 }) },
     },
 }
 
