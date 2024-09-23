@@ -10,7 +10,7 @@ return {
         ---@diagnostic disable-next-line: missing-fields
         vim.notify.setup({
             fps = 60,
-            render = 'compact',
+            render = 'wrapped-compact',
             stages = 'slide',
             timeout = 5000,
             top_down = false,
