@@ -78,6 +78,15 @@ return {
                 -- Select the [p]revious item
                 ['<C-Up>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
 
+                -- Toggle docs view
+                ['<M-d>'] = function()
+                    if cmp.visible_docs() then
+                        cmp.close_docs()
+                    else
+                        cmp.open_docs()
+                    end
+                end,
+
                 -- Move docs [f]orward
                 ['<C-f>'] = cmp.mapping.scroll_docs(4),
 
