@@ -35,3 +35,4 @@ https://devblogs.microsoft.com/commandline/share-environment-vars-between-wsl-an
 - AllenDang/nvim-expand-expr (Kind of NumberMonger)
 - mawkler/refjump.nvim (...)
 - gregorias/toggle.nvim ([See keymaps file](nvim/lua/marrio/keymaps.lua))
+- jake-stewart/multicursor.nvim (...)
