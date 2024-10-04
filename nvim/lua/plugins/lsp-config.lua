@@ -295,7 +295,7 @@ return {
         -- Merge LSPs defined ft list with my servers table
         for server_name, opts in pairs(servers) do
             -- Get LSP defined ft list
-            local current_server_ft_list = require('lspconfig.server_configurations.' .. server_name).default_config.filetypes
+            local current_server_ft_list = require('lspconfig.configs.' .. server_name).default_config.filetypes
             -- Get my defined ft list for a given LSP from the servers table
             opts.filetypes = opts.filetypes or {}
             -- "Merge" them
