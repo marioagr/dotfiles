@@ -5,7 +5,8 @@ return {
         'nvim-telescope/telescope.nvim',
         'tpope/vim-dotenv',
         'MunifTanjim/nui.nvim',
-        'nvimtools/none-ls.nvim',
+        -- 'nvimtools/none-ls.nvim',
+        'kevinhwang91/promise-async',
     },
     cmd = { 'Sail', 'Artisan', 'Composer', 'Npm', 'Yarn', 'Laravel' },
     keys = {
