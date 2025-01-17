@@ -11,7 +11,7 @@ return {
     cmd = { 'Laravel' },
     keys = {
         { '<leader>la', ':Laravel artisan<cr>', desc = 'Open Laravel Artisan menu' },
-        { '<leader>lc', ':Laravel commands<cr>', desc = 'Execute a (user defined) command' },
+        { '<leader>lc', ':Laravel commands<cr>', desc = 'Execute a user [c]ommand' },
         { '<leader>lf', ':Laravel related<cr>', desc = 'Show Laravel related files' },
         { '<leader>lh', ':Laravel history<cr>', desc = 'Show history of Laravel commands' },
         { '<leader>lm', ':Laravel make<cr>', desc = 'Available content to [m]ake' },

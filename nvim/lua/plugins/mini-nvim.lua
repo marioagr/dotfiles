@@ -12,21 +12,9 @@ return {
             n_lines = 500,
         })
 
-        -- Add/delete/replace surroundings (brackets, quotes, etc.)
-        -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
-        -- - sd'   - [S]urround [D]elete [']quotes
-        -- - sr)'  - [S]urround [R]eplace [)] [']
-        -- Number of lines within which surrounding is searched
-        require('mini.surround').setup({
-            n_lines = 100,
-        })
-
         -- https://github.com/echasnovski/mini.nvim/issues/235#issuecomment-1462367177
         -- See nvim/lua/marrio/keymaps.lua
         require('mini.bracketed').setup()
-
-        -- Split/Join arguments inside (), [], {}
-        require('mini.splitjoin').setup()
 
         -- Session management made easy
         local sessions = require('mini.sessions')
@@ -55,5 +43,17 @@ return {
         vim.keymap.set('n', '<leader>Wl', function()
             sessions.select()
         end, { desc = '[W]orkspace [l]ist sessions' })
+
+        -- Add/delete/replace surroundings (brackets, quotes, etc.)
+        -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
+        -- - sd'   - [S]urround [D]elete [']quotes
+        -- - sr)'  - [S]urround [R]eplace [)] [']
+        -- Number of lines within which surrounding is searched
+        require('mini.surround').setup({
+            n_lines = 100,
+        })
+
+        -- Split/Join arguments inside (), [], {}
+        require('mini.splitjoin').setup()
     end,
 }
