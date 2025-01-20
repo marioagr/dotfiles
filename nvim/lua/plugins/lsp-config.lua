@@ -2,7 +2,20 @@ return {
     'neovim/nvim-lspconfig',
     dependencies = {
         -- Automatically install LSPs and related tools to stdpath for neovim
-        { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
+        -- NOTE: Must be loaded before dependants
+        {
+            'williamboman/mason.nvim',
+            opts = {
+                ui = {
+                    border = 'rounded',
+                    icons = {
+                        package_installed = '✓',
+                        package_pending = '...',
+                        package_uninstalled = '✗',
+                    },
+                },
+            },
+        },
         'williamboman/mason-lspconfig.nvim',
         'WhoIsSethDaniel/mason-tool-installer.nvim',
 
@@ -208,7 +221,6 @@ return {
             --    https://github.com/pmizio/typescript-tools.nvim
             --
             -- But for many setups, the LSP (`ts_ls`) will work just fine
-            -- ts_ls = {},
             antlersls = {},
             cssls = {
                 filetypes = {
@@ -308,16 +320,6 @@ return {
         --    :Mason
         --
         --  You can press `g?` for help in this menu
-        require('mason').setup({
-            ui = {
-                border = 'rounded',
-                icons = {
-                    package_installed = '✓',
-                    package_pending = '...',
-                    package_uninstalled = '✗',
-                },
-            },
-        })
 
         -- Set border globally instead of per client
         -- See https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization#borders

@@ -8,7 +8,7 @@ local function custom_opts_for_format(bufnr)
 
     -- [[
     --  Disable with a global or buffer-local variable
-    --  Disable format_on_save "lsp_fallback" for languages that don't
+    --  Disable format_on_save "lsp_format" for languages that don't
     --      have a well standardized coding style. You can add additional
     --      languages here or re-enable it for the disabled ones.
     -- ]]

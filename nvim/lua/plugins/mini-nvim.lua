@@ -25,7 +25,7 @@ return {
         ---@diagnostic disable-next-line: param-type-mismatch
         vim.keymap.set('n', '<leader>Wm', function()
             sessions.write(sessions.config.file)
-        end, { desc = '[W[orkspace [m]ake a local Vim session' })
+        end, { desc = '[W]orkspace [m]ake a local Vim session' })
 
         ---@diagnostic disable-next-line: param-type-mismatch
         vim.keymap.set('n', '<leader>Wr', function()
