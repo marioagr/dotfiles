@@ -54,6 +54,10 @@ return {
                     cmd = { 'dump-autoload' },
                     desc = 'Dumps the composer autoload',
                 },
+                ['ide-helper'] = {
+                    cmd = { 'ide-helper' },
+                    desc = 'Runs ide-helper commands defined in composer.json',
+                },
             },
             sail = {
                 start = {
