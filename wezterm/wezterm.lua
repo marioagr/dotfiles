@@ -38,6 +38,7 @@ config.front_end = 'Software'
 -- use this config to press without space and inserts it directly
 -- config.use_dead_keys = false
 
+---@diagnostic disable-next-line: unused-local
 wezterm.on('update-status', function(window, pane)
     window:set_left_status(window:active_workspace())
 end)
@@ -79,6 +80,7 @@ my_keys.apply_to_config(config)
 -- https://wezfurlong.org/wezterm/multiplexing.html#connecting-into-windows-subsystem-for-linux
 
 wezterm.on('gui-startup', function(cmd)
+    ---@diagnostic disable-next-line: unused-local
     local tab, pane, window = mux.spawn_window(cmd or {})
     window:gui_window():maximize()
 end)

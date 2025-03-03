@@ -48,20 +48,6 @@ vim.keymap.set('n', '<M-t>', '<C-W>+', { desc = 'Increase height' })
 vim.keymap.set('n', '<M-s>', '<C-W>-', { desc = 'Increase height' })
 
 -- Move lines up and down
-vim.keymap.set('n', '<M-Down>', function()
-    if vim.opt.diff:get() then
-        vim.cmd([[normal! ]c]])
-    else
-        vim.cmd([[m .+1<CR>==]])
-    end
-end, { desc = 'diff: next change, normal mode: Move line down' })
-vim.keymap.set('n', '<M-Up>', function()
-    if vim.opt.diff:get() then
-        vim.cmd([[normal! [c]])
-    else
-        vim.cmd([[m .-2<CR>==]])
-    end
-end, { desc = 'diff: prev change, normal mode: Move line up' })
 vim.keymap.set('i', '<M-Down>', '<Esc>:move .+1<CR>==gi', { desc = 'Move line down in Insert mode' })
 vim.keymap.set('i', '<M-Up>', '<Esc>:move .-2<CR>==gi', { desc = 'Move line up in Insert mode' })
 vim.keymap.set('v', '<M-Down>', ":move '>+1<CR>gv=gv", { desc = 'Move line down in Visual mode' })
