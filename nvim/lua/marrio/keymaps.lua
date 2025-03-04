@@ -42,8 +42,9 @@ vim.keymap.set('i', ';;', '<Esc>A;', { desc = 'Insert [;] at the eol' })
 vim.keymap.set('n', '<leader>k', ':nohlsearch<CR>', { desc = 'Clear search highlighting' })
 
 -- These mappings control the size of splits
-vim.keymap.set('n', '<M-.>', '<c-w>5>', { desc = 'Increase width' })
-vim.keymap.set('n', '<M-,>', '<c-w>5<', { desc = 'Decrease width' })
+-- Alt + ([w]ider || [n]arrow || [t]aller || [s]horter)
+vim.keymap.set('n', '<M-w>', '<c-w>5>', { desc = 'Increase width' })
+vim.keymap.set('n', '<M-n>', '<c-w>5<', { desc = 'Decrease width' })
 vim.keymap.set('n', '<M-t>', '<C-W>+', { desc = 'Increase height' })
 vim.keymap.set('n', '<M-s>', '<C-W>-', { desc = 'Increase height' })
 

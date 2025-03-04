@@ -105,20 +105,20 @@ return {
                 --  completions whenever it has completion options available.
                 ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
 
-                -- Think of <M-Right> as moving to the right of your snippet expansion.
+                -- Think of <M-.> as moving to the right of your snippet expansion.
                 --  So if you have a snippet that's like:
-                --  function $name($args)
-                --    $body
+                --  function $1($2)
+                --    $3
                 --  end
                 --
-                -- <M-Right> will move you to the right of each of the expansion locations.
-                -- <M-Left> is similar, except moving you backwards.
-                ['<M-Right>'] = cmp.mapping(function()
+                -- <M-.> will move you to the right of each of the expansion locations.
+                -- <M-,> is similar, except moving you backwards.
+                ['<M-.>'] = cmp.mapping(function()
                     if luasnip.expand_or_locally_jumpable() then
                         luasnip.expand_or_jump()
                     end
                 end, { 'i', 's' }),
-                ['<M-Left>'] = cmp.mapping(function()
+                ['<M-,>'] = cmp.mapping(function()
                     if luasnip.locally_jumpable(-1) then
                         luasnip.jump(-1)
                     end
