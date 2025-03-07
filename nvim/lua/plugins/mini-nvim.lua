@@ -14,7 +14,9 @@ return {
 
         -- https://github.com/echasnovski/mini.nvim/issues/235#issuecomment-1462367177
         -- See nvim/lua/marrio/keymaps.lua
-        require('mini.bracketed').setup()
+        require('mini.bracketed').setup({
+            buffer = { suffix = '' }, -- Disable buffers in "favor" of bufferline commands
+        })
 
         require('mini.move').setup({
             mappings = {

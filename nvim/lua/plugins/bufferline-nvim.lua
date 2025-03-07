@@ -54,14 +54,45 @@ return {
         }
 
         require('bufferline').setup(my_opts)
+
+        -- Keep the default values and append the "globals" to save pinned buffers
+        vim.opt_global.sessionoptions = table.concat(vim.list_extend(vim.opt_global.sessionoptions:get('default'), { 'globals' }), ',')
     end,
     keys = {
+        {
+            '[b',
+            function()
+                vim.cmd('BufferLineCyclePrev')
+            end,
+            desc = 'Navigate to previous buffer',
+        },
+        {
+            ']b',
+            function()
+                vim.cmd('BufferLineCycleNext')
+            end,
+            desc = 'Navigate to next buffer',
+        },
+        {
+            '[B',
+            function()
+                require('bufferline').go_to(1)
+            end,
+            desc = 'Navigate to first buffer',
+        },
+        {
+            ']B',
+            function()
+                require('bufferline').go_to(-1)
+            end,
+            desc = 'Navigate to last buffer',
+        },
         {
             '<leader>bp',
             function()
                 vim.cmd('BufferLineTogglePin')
             end,
-            desc = 'Pin current buffer',
+            desc = 'Pin/Unpin buffer',
         },
         {
             '<leader>b{',
