@@ -6,7 +6,7 @@
 -- Add patterns for fts and set them to their corresponding language
 vim.filetype.add({
     pattern = {
-        ['.*%.antlers%.html'] = 'antlers',
+        -- ['.*%.antlers%.html'] = 'antlers',
         ['.*%.blade%.php'] = 'blade',
     },
 })

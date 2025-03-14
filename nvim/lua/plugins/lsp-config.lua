@@ -221,24 +221,24 @@ return {
             --    https://github.com/pmizio/typescript-tools.nvim
             --
             -- But for many setups, the LSP (`ts_ls`) will work just fine
-            antlersls = {},
+            -- antlersls = {},
             cssls = {
                 filetypes = {
-                    'antlers',
+                    -- 'antlers',
                     'blade',
                     'html',
                 },
             },
             emmet_language_server = {
                 filetypes = {
-                    'antlers',
+                    -- 'antlers',
                     'blade',
                     'php',
                 },
             },
             html = {
                 filetypes = {
-                    'antlers',
+                    -- 'antlers',
                     'hbs',
                     'php',
                     'twig',
@@ -273,16 +273,16 @@ return {
                 },
             },
             tailwindcss = {
-                filetypes = {
-                    'antlers',
-                },
-                settings = {
-                    tailwindCss = {
-                        includeLanguages = {
-                            antlers = 'html',
-                        },
-                    },
-                },
+                -- filetypes = {
+                --     'antlers',
+                -- },
+                -- settings = {
+                --     tailwindCss = {
+                --         includeLanguages = {
+                --             antlers = 'html',
+                --         },
+                --     },
+                -- },
             },
             ts_ls = {},
             -- In case I need to configure it deeply
