@@ -60,6 +60,9 @@ return {
                 enable = true,
                 show_on_dirs = true,
             },
+            git = {
+                timeout = 1000,
+            },
             help = {
                 sort_by = 'desc',
             },
