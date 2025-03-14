@@ -105,22 +105,26 @@ return {
                 --  completions whenever it has completion options available.
                 ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
 
-                -- Think of <M-.> as moving to the right of your snippet expansion.
+                -- Think of <Tab> as moving to the right of your snippet expansion.
                 --  So if you have a snippet that's like:
                 --  function $1($2)
                 --    $3
                 --  end
                 --
-                -- <M-.> will move you to the right of each of the expansion locations.
-                -- <M-,> is similar, except moving you backwards.
-                ['<M-.>'] = cmp.mapping(function()
-                    if luasnip.expand_or_locally_jumpable() then
+                -- <Tab> will move you to the right of each of the expansion locations.
+                -- <S-Tab> is similar, except moving you backwards.
+                ['<Tab>'] = cmp.mapping(function(fallback)
+                    if cmp.visible() or luasnip.expand_or_locally_jumpable() then
                         luasnip.expand_or_jump()
+                    else
+                        fallback()
                     end
                 end, { 'i', 's' }),
-                ['<M-,>'] = cmp.mapping(function()
-                    if luasnip.locally_jumpable(-1) then
+                ['<S-Tab>'] = cmp.mapping(function(fallback)
+                    if cmp.visible() or luasnip.locally_jumpable(-1) then
                         luasnip.jump(-1)
+                    else
+                        fallback()
                     end
                 end, { 'i', 's' }),
             }),
