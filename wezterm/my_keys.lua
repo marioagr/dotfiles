@@ -66,7 +66,7 @@ local keys = {
         mods = 'LEADER',
         action = act.ActivateKeyTable({
             name = 'workspace',
-            one_shot = false,
+            -- one_shot = false,
         }),
     },
 
@@ -171,7 +171,7 @@ local key_tables = {
 
     workspace = {
         -- Cancel the mode by pressing escape
-        { key = 'Escape', action = act.PopKeyTable },
+        -- { key = 'Escape', action = act.PopKeyTable },
 
         -- Prompt for a name to use for a new workspace and switch to it.
         {
@@ -192,6 +192,31 @@ local key_tables = {
             }),
         },
 
+        {
+            key = 's',
+            action = wezterm.action_callback(function(window, pane)
+                local mux_window = window:mux_window()
+
+                if #mux_window:tabs() ~= 1 then
+                    return
+                end
+
+                window:perform_action(act.SpawnTab('CurrentPaneDomain'), pane)
+                -- Wait for it to change to the correct directory
+                wezterm.sleep_ms(2500)
+
+                window:perform_action(act.SpawnTab('CurrentPaneDomain'), pane)
+                -- Wait for it to change to the correct directory
+                wezterm.sleep_ms(2500)
+
+                local tabs = mux_window:tabs()
+
+                tabs[1]:set_title('nvim')
+                tabs[2]:set_title('cli')
+                tabs[3]:set_title('sail-npm')
+            end),
+        },
+
         -- NOTE: Maybe use InputSelector?
         -- Show the launcher in fuzzy selection mode and have it list all workspaces and allow activating one.
         {
@@ -202,21 +227,20 @@ local key_tables = {
         },
 
         -- Select next workspace
-        { key = 'RightArrow', mods = '', action = act.SwitchWorkspaceRelative(1) },
+        { key = 'RightArrow', action = act.SwitchWorkspaceRelative(1) },
 
         -- Select previous workspace
-        { key = 'LeftArrow', mods = '', action = act.SwitchWorkspaceRelative(-1) },
+        { key = 'LeftArrow', action = act.SwitchWorkspaceRelative(-1) },
     },
 
     tabs = {
-        { key = 'n', mods = '', action = act.SpawnTab('CurrentPaneDomain') },
-        { key = 'x', mods = '', action = act.CloseCurrentTab({ confirm = true }) },
-        { key = 'l', mods = '', action = act.ShowTabNavigator },
+        { key = 'n', action = act.SpawnTab('CurrentPaneDomain') },
+        { key = 'x', action = act.CloseCurrentTab({ confirm = true }) },
+        { key = 'l', action = act.ShowTabNavigator },
 
         -- Rename tab
         {
             key = 'r',
-            mods = '',
             action = act.PromptInputLine({
                 description = wezterm.format({
                     { Attribute = { Intensity = 'Bold' } },
@@ -237,12 +261,12 @@ local key_tables = {
 
     panes = {
         -- Split vertically/horizontally
-        { key = 'v', mods = '', action = act.SplitVertical({ domain = 'CurrentPaneDomain' }) },
-        { key = 'h', mods = '', action = act.SplitHorizontal({ domain = 'CurrentPaneDomain' }) },
+        { key = 'v', action = act.SplitVertical({ domain = 'CurrentPaneDomain' }) },
+        { key = 'h', action = act.SplitHorizontal({ domain = 'CurrentPaneDomain' }) },
 
         -- Toggle "full screen" of current pane
         -- TODO: Show in right-status when its in full mode and other panes exist
-        { key = 'z', mods = '', action = act.TogglePaneZoomState },
+        { key = 'z', action = act.TogglePaneZoomState },
     },
 }
 

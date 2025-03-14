@@ -28,8 +28,8 @@ config.inactive_pane_hsb = {
 -- config.default_prog = { 'wsl.exe', '-d', 'Ubuntu' }
 config.default_domain = 'WSL:Ubuntu'
 
--- Disable GPU rendering?
-config.front_end = 'Software'
+-- Disable GPU rendering
+-- config.front_end = 'Software'
 -- config.animation_fps = 1
 -- config.cursor_blink_ease_in = 'Constant'
 -- config.cursor_blink_ease_out = 'Constant'
