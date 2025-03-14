@@ -31,7 +31,7 @@ vim.treesitter.language.register('html', 'antlers')
 --]]
 
 -- I'll leave them this way, at least it shows the words underlined when spelling is on
-vim.cmd([[ hi SpellBad cterm=underline gui=underline ]])
-vim.cmd([[ hi SpellCap cterm=underline gui=underline ]])
-vim.cmd([[ hi SpellRare cterm=underline gui=underline ]])
-vim.cmd([[ hi SpellLocal cterm=underline gui=underline ]])
+-- vim.cmd([[ hi SpellBad cterm=underline gui=underline ]])
+-- vim.cmd([[ hi SpellCap cterm=underline gui=underline ]])
+-- vim.cmd([[ hi SpellRare cterm=underline gui=underline ]])
+-- vim.cmd([[ hi SpellLocal cterm=underline gui=underline ]])
