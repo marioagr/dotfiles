@@ -43,10 +43,9 @@ wezterm.on('update-status', function(window, pane)
     window:set_left_status(window:active_workspace())
 end)
 
-wezterm.on('update-right-status', function(window, pane)
+wezterm.on('update-right-status', function(window)
     local kt_name = window:active_key_table()
     local leader = ''
-    local zoomed_text = ''
 
     if kt_name then
         kt_name = 'Mode: ' .. kt_name
@@ -61,11 +60,38 @@ wezterm.on('update-right-status', function(window, pane)
         end
     end
 
-    if pane.is_zoomed then
-        zoomed_text = '󰁌 '
+    window:set_right_status(kt_name .. leader)
+end)
+
+-- This function returns the suggested title for a tab.
+-- It prefers the title that was set via `tab:set_title()`
+-- or `wezterm cli set-tab-title`, but falls back to the
+-- title of the active pane in that tab.
+function get_tab_title(tab_info)
+    local title = tab_info.tab_title
+    -- if the tab title is explicitly set, take that
+    if title and #title > 0 then
+        return title
+    end
+    -- Otherwise, use the title from the active pane
+    -- in that tab
+    return tab_info.active_pane.title
+end
+
+wezterm.on('format-tab-title', function(tab, tabs, panes)
+    local title = get_tab_title(tab)
+
+    local zoomed = ''
+    if tab.active_pane.is_zoomed then
+        zoomed = '󰁌'
     end
 
-    window:set_right_status(zoomed_text .. '' .. kt_name .. leader)
+    wezterm.log_info('tabs: ', tabs)
+    wezterm.log_info('panes: ', panes)
+
+    title = string.format('%s  %s', zoomed, title)
+
+    return title
 end)
 
 my_keys.apply_to_config(config)

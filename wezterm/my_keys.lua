@@ -202,11 +202,11 @@ local key_tables = {
                 end
 
                 window:perform_action(act.SpawnTab('CurrentPaneDomain'), pane)
-                -- Wait for it to change to the correct directory
+                -- I have to wait to "connect" to WSL2 so... ¯\_(ツ)_/¯
                 wezterm.sleep_ms(2500)
 
                 window:perform_action(act.SpawnTab('CurrentPaneDomain'), pane)
-                -- Wait for it to change to the correct directory
+                -- I have to wait to "connect" to WSL2 so... ¯\_(ツ)_/¯
                 wezterm.sleep_ms(2500)
 
                 local tabs = mux_window:tabs()
@@ -235,6 +235,24 @@ local key_tables = {
 
     tabs = {
         { key = 'n', action = act.SpawnTab('CurrentPaneDomain') },
+        {
+            key = 'N',
+            action = act.PromptInputLine({
+                description = wezterm.format({
+                    { Attribute = { Intensity = 'Bold' } },
+                    { Foreground = { AnsiColor = 'Green' } },
+                    { Text = 'Enter new name for tab:' },
+                }),
+                action = wezterm.action_callback(function(window, pane, line)
+                    if line then
+                        window:perform_action(act.SpawnTab('CurrentPaneDomain'), pane)
+                        -- I have to wait to "connect" to WSL2 so... ¯\_(ツ)_/¯
+                        wezterm.sleep_ms(1000)
+                        window:active_tab():set_title(line)
+                    end
+                end),
+            }),
+        },
         { key = 'x', action = act.CloseCurrentTab({ confirm = true }) },
         { key = 'l', action = act.ShowTabNavigator },
 
@@ -265,7 +283,6 @@ local key_tables = {
         { key = 'h', action = act.SplitHorizontal({ domain = 'CurrentPaneDomain' }) },
 
         -- Toggle "full screen" of current pane
-        -- TODO: Show in right-status when its in full mode and other panes exist
         { key = 'z', action = act.TogglePaneZoomState },
     },
 }
