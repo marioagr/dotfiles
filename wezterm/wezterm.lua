@@ -5,13 +5,12 @@ local mux = wezterm.mux
 local my_keys = require('my_keys')
 
 config.color_scheme = 'Ubuntu'
--- config.color_scheme = 'tokyonight_moon'
+config.default_domain = 'WSL:Ubuntu'
 config.font = wezterm.font_with_fallback({ 'Cascadia Mono', 'Symbols Nerd Font Mono' })
-config.font_size = 12
--- config.hide_tab_bar_if_only_one_tab = true
+config.font_size = 13
 config.scrollback_lines = 5000
 config.ui_key_cap_rendering = 'WindowsSymbols'
-config.window_decorations = 'INTEGRATED_BUTTONS|RESIZE'
+config.window_decorations = 'RESIZE'
 config.window_padding = {
     left = 0,
     right = 0,
@@ -24,43 +23,76 @@ config.inactive_pane_hsb = {
     brightness = 0.5,
 }
 
--- Use WSL by default
--- config.default_prog = { 'wsl.exe', '-d', 'Ubuntu' }
-config.default_domain = 'WSL:Ubuntu'
-
--- Disable GPU rendering
--- config.front_end = 'Software'
--- config.animation_fps = 1
--- config.cursor_blink_ease_in = 'Constant'
--- config.cursor_blink_ease_out = 'Constant'
+config.use_fancy_tab_bar = false
+config.tab_max_width = 32
+config.colors = {
+    tab_bar = {
+        background = '#000000',
+        active_tab = {
+            bg_color = '#8900ae',
+            fg_color = '#ffffff',
+        },
+        inactive_tab = {
+            bg_color = '#330040',
+            fg_color = '#aaaaaa',
+            intensity = 'Half',
+        },
+        inactive_tab_hover = {
+            bg_color = '#5d0076',
+            fg_color = '#909090',
+            italic = true,
+        },
+        new_tab = {
+            bg_color = '#000000',
+            fg_color = '#bbbbbb',
+        },
+        new_tab_hover = {
+            bg_color = '#5d0076',
+            fg_color = '#ffffff',
+            italic = true,
+        },
+    },
+}
 
 -- Instead of pressing AltGr+{<space> twice to insert just "^",
 -- use this config to press without space and inserts it directly
 -- config.use_dead_keys = false
 
+-- Normalize pasted newlines
+-- config.canonicalize_pasted_newlines
+
+my_keys.apply_to_config(config)
+
+-- https://wezfurlong.org/wezterm/config/lua/config/debug_key_events.html
+-- config.debug_key_events = true
+
+-- https://wezfurlong.org/wezterm/faq.html?h=underline#how-do-i-enable-undercurl-curly-underlines
+-- https://wezfurlong.org/wezterm/multiplexing.html#connecting-into-windows-subsystem-for-linux
+
 ---@diagnostic disable-next-line: unused-local
 wezterm.on('update-status', function(window, pane)
-    window:set_left_status(window:active_workspace())
-end)
+    local active_kt = window:active_key_table()
+    local status_text = {}
 
-wezterm.on('update-right-status', function(window)
-    local kt_name = window:active_key_table()
-    local leader = ''
-
-    if kt_name then
-        kt_name = 'Mode: ' .. kt_name
-    else
-        kt_name = ''
+    if active_kt then
+        table.insert(status_text, { Foreground = { AnsiColor = 'Aqua' } })
+        table.insert(status_text, { Text = 'Mode: ' .. active_kt })
     end
 
+    wezterm.log_info(active_kt)
     if window:leader_is_active() then
-        leader = 'LEADER'
-        if kt_name ~= '' then
-            leader = ' - ' .. leader
+        if active_kt then
+            table.insert(status_text, 'ResetAttributes')
+            table.insert(status_text, { Text = ' - ' })
         end
+        table.insert(status_text, { Foreground = { AnsiColor = 'Green' } })
+        table.insert(status_text, { Text = 'LEADER' })
     end
 
-    window:set_right_status(kt_name .. leader)
+    table.insert(status_text, { Text = '  ' })
+
+    window:set_left_status(' ' .. window:active_workspace() .. ' ')
+    window:set_right_status(wezterm.format(status_text))
 end)
 
 -- This function returns the suggested title for a tab.
@@ -69,41 +101,53 @@ end)
 -- title of the active pane in that tab.
 function get_tab_title(tab_info)
     local title = tab_info.tab_title
-    -- if the tab title is explicitly set, take that
+
     if title and #title > 0 then
         return title
     end
-    -- Otherwise, use the title from the active pane
-    -- in that tab
+
     return tab_info.active_pane.title
 end
 
-wezterm.on('format-tab-title', function(tab, tabs, panes)
-    local title = get_tab_title(tab)
+wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
+    local SOLID_LEFT_ARROW = wezterm.nerdfonts.pl_right_hard_divider
+    local SOLID_RIGHT_ARROW = wezterm.nerdfonts.pl_left_hard_divider
+    local EXPANDED_PANE = wezterm.nerdfonts.md_arrow_expand_all
 
-    local zoomed = ''
-    if tab.active_pane.is_zoomed then
-        zoomed = '󰁌'
+    local edge_background = '#000000'
+    local background = '#330040'
+    local foreground = '#aaaaaa'
+
+    if tab.is_active then
+        background = '#8900ae'
+        foreground = '#ffffff'
+    elseif hover then
+        background = '#5d0076'
+        foreground = '#909090'
     end
 
-    wezterm.log_info('tabs: ', tabs)
-    wezterm.log_info('panes: ', panes)
+    local edge_foreground = background
 
-    title = string.format('%s  %s', zoomed, title)
+    local title = get_tab_title(tab)
 
-    return title
+    if tab.active_pane.is_zoomed then
+        title = string.format('%s  %s', EXPANDED_PANE, title)
+    end
+
+    title = wezterm.truncate_right(title, max_width - 2)
+
+    return {
+        { Background = { Color = edge_background } },
+        { Foreground = { Color = edge_foreground } },
+        { Text = SOLID_LEFT_ARROW },
+        { Background = { Color = background } },
+        { Foreground = { Color = foreground } },
+        { Text = title },
+        { Background = { Color = edge_background } },
+        { Foreground = { Color = edge_foreground } },
+        { Text = SOLID_RIGHT_ARROW },
+    }
 end)
-
-my_keys.apply_to_config(config)
-
--- Normalize pasted newlines
--- config.canonicalize_pasted_newlines
-
--- https://wezfurlong.org/wezterm/config/lua/config/debug_key_events.html
--- config.debug_key_events = true
-
--- https://wezfurlong.org/wezterm/faq.html?h=underline#how-do-i-enable-undercurl-curly-underlines
--- https://wezfurlong.org/wezterm/multiplexing.html#connecting-into-windows-subsystem-for-linux
 
 wezterm.on('gui-startup', function(cmd)
     ---@diagnostic disable-next-line: unused-local
