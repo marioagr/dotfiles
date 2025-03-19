@@ -13,8 +13,6 @@ return {
             'nvim-telescope/telescope-live-grep-args.nvim',
             {
                 'nvim-telescope/telescope-fzf-native.nvim',
-                -- NOTE: If you are having trouble with this installation,
-                --       refer to the README for telescope-fzf-native for more instructions.
                 build = 'make',
                 cond = function()
                     return vim.fn.executable('make') == 1
@@ -24,17 +22,15 @@ return {
         },
         config = function()
             local actions = require('telescope.actions')
+            local builtin = require('telescope.builtin')
+            local themes = require('telescope.themes')
 
             require('telescope').setup({
                 defaults = {
-                    path_display = { truncate = 1 },
-                    prompt_prefix = '  ',
-                    selection_caret = '󰐊 ',
+                    file_ignore_patterns = { '%.git/' },
                     layout_config = {
                         prompt_position = 'top',
                     },
-                    scroll_strategy = 'limit',
-                    sorting_strategy = 'ascending',
                     mappings = {
                         i = {
                             ['<esc>'] = actions.close,
@@ -44,25 +40,36 @@ return {
                             ['<C-d>'] = false,
                         },
                     },
-                    file_ignore_patterns = { '%.git/' },
+                    path_display = {
+                        truncate = 1,
+                    },
+                    preview = {
+                        timeout = 500,
+                    },
+                    prompt_prefix = '  ',
+                    scroll_strategy = 'limit',
+                    selection_caret = '󰐊 ',
+                    sorting_strategy = 'ascending',
                 },
                 pickers = {
                     buffers = {
                         previewer = false,
-                        -- layout_config = {
-                        --     width = 88,
-                        -- },
+                        theme = 'ivy',
+                        layout_config = {
+                            height = 15,
+                        },
                     },
                     old_files = {
                         prompt_title = 'History',
                     },
                     lsp_references = {
                         previewer = false,
+                        theme = 'ivy',
                     },
                 },
                 extensions = {
                     ['ui-select'] = {
-                        require('telescope.themes').get_dropdown(),
+                        themes.get_cursor(),
                     },
                 },
             })
@@ -70,9 +77,6 @@ return {
             require('telescope').load_extension('fzf')
             require('telescope').load_extension('live_grep_args')
             require('telescope').load_extension('ui-select')
-
-            -- See `:help telescope.builtin`
-            local builtin = require('telescope.builtin')
 
             -- Telescope live_grep in git root
             -- Function to find the git root directory based on the current buffer's path
@@ -111,16 +115,22 @@ return {
             vim.api.nvim_create_user_command('LiveGrepGitRoot', live_grep_git_root, {})
 
             local function search_in_buffer()
-                -- You can pass additional configuration to telescope to change theme, layout, etc.
-                builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({
+                builtin.current_buffer_fuzzy_find(themes.get_ivy({
                     previewer = false,
+                    layout_config = {
+                        height = 20,
+                    },
                 }))
             end
             local function telescope_live_grep_open_files()
-                builtin.live_grep({
+                builtin.live_grep(themes.get_ivy({
                     grep_open_files = true,
+                    previewer = false,
                     prompt_title = 'Live Grep in Open Files',
-                })
+                    picker = {
+                        preview_width = 0.3,
+                    },
+                }))
             end
             local function search_files()
                 builtin.find_files({
@@ -149,13 +159,20 @@ return {
                     },
                 })
             end
+            local function text_suggestions()
+                builtin.spell_suggest(themes.get_ivy({
+                    layout_config = {
+                        height = 20,
+                    },
+                }))
+            end
 
             vim.keymap.set('n', '<leader>so', oldfiles_in_cwd, { desc = '[s]earch recently [o]pened files' })
-            vim.keymap.set('n', '<leader><space>', builtin.buffers, { desc = '[ ] Find existing buffers' })
-            vim.keymap.set('n', '<leader>/', search_in_buffer, { desc = '[/] Fuzzily search in current buffer' })
+            vim.keymap.set('n', '<leader>sb', builtin.buffers, { desc = '[s]earch existing buffers' })
+            vim.keymap.set('n', '<leader><space>', search_in_buffer, { desc = '[ ][ ] Fuzzily search in current buffer' })
             vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = '[s]earch [/] in Open Files' })
             vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[s]earch [s]elect Telescope' })
-            vim.keymap.set('n', '<leader>gf', builtin.git_files, { desc = 'Search [g]it [f]iles' })
+            -- vim.keymap.set('n', '<leader>gf', builtin.git_files, { desc = 'Search [g]it [f]iles' })
             vim.keymap.set('n', '<leader>sf', search_files, { desc = '[s]earch [f]iles' })
             vim.keymap.set('n', '<leader>sa', search_all_files, { desc = '[s]earch [a]ll files' })
             vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[s]earch [h]elp' })
@@ -165,7 +182,7 @@ return {
             vim.keymap.set('n', '<leader>sG', builtin.live_grep, { desc = '[s]earch by [G]rep on all files' })
             vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[s]earch [d]iagnostics' })
             vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[s]earch [r]esume' })
-            vim.keymap.set('n', '<leader>ts', builtin.spell_suggest, { desc = 'Open [t]elescope with [s]pell suggestions' })
+            vim.keymap.set('n', '<leader>ts', text_suggestions, { desc = 'Open [t]elescope with [s]pell suggestions' })
         end,
     },
 }
