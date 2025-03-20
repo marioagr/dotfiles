@@ -24,6 +24,19 @@ return {
             local actions = require('telescope.actions')
             local builtin = require('telescope.builtin')
             local themes = require('telescope.themes')
+            local action_layouts = require('telescope.actions.layout')
+
+            local common_mappings = {
+                ['<C-d>'] = actions.results_scrolling_down,
+                ['<C-u>'] = actions.results_scrolling_up,
+
+                ['<PageDown>'] = actions.preview_scrolling_down,
+                ['<PageUp>'] = actions.preview_scrolling_up,
+
+                ['<M-Down>'] = actions.cycle_history_next,
+                ['<M-Up>'] = actions.cycle_history_prev,
+                ['<M-p>'] = action_layouts.toggle_preview,
+            }
 
             require('telescope').setup({
                 defaults = {
@@ -32,13 +45,8 @@ return {
                         prompt_position = 'top',
                     },
                     mappings = {
-                        i = {
-                            ['<esc>'] = actions.close,
-                            ['<C-Down>'] = actions.cycle_history_next,
-                            ['<C-Up>'] = actions.cycle_history_prev,
-                            ['<C-u>'] = false,
-                            ['<C-d>'] = false,
-                        },
+                        n = common_mappings,
+                        i = common_mappings,
                     },
                     path_display = {
                         truncate = 1,
