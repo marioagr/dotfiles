@@ -46,7 +46,9 @@ return {
                     },
                     mappings = {
                         n = common_mappings,
-                        i = common_mappings,
+                        i = vim.tbl_extend('keep', common_mappings, {
+                            ['<esc>'] = actions.close,
+                        }),
                     },
                     path_display = {
                         truncate = 1,
