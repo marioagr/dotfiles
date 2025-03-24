@@ -192,7 +192,7 @@ return {
             vim.keymap.set('n', '<leader>sG', builtin.live_grep, { desc = '[s]earch by [G]rep on all files' })
             vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[s]earch [d]iagnostics' })
             vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[s]earch [r]esume' })
-            vim.keymap.set('n', '<leader>ts', text_suggestions, { desc = 'Open [t]elescope with [s]pell suggestions' })
+            vim.keymap.set('n', '<leader>sS', text_suggestions, { desc = 'Open [t]elescope with [s]pell suggestions' })
         end,
     },
 }
