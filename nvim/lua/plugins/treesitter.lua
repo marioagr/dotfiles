@@ -44,12 +44,16 @@ return {
                 lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
                 keymaps = {
                     -- You can use the capture groups defined in textobjects.scm
-                    ['aa'] = { query = '@parameter.outer', desc = 'Around parameter' },
-                    ['ia'] = { query = '@parameter.inner', desc = 'Inner parameter' },
-                    ['af'] = { query = '@function.outer', desc = 'Around a function region' },
-                    ['if'] = { query = '@function.inner', desc = 'Inside a function region' },
-                    ['ac'] = { query = '@class.outer', desc = 'Around a class region' },
-                    ['ic'] = { query = '@class.inner', desc = 'Inside a class region' },
+                    ['aa'] = { query = '@parameter.outer', desc = 'Around p[a]rameter' },
+                    ['ia'] = { query = '@parameter.inner', desc = 'Inner p[a]rameter' },
+                    ['af'] = { query = '@function.outer', desc = 'Around a [f]unction region' },
+                    ['if'] = { query = '@function.inner', desc = 'Inside a [f]unction region' },
+                    ['ac'] = { query = '@comment.outer', desc = 'Around a [c]omment region' },
+                    ['ic'] = { query = '@comment.inner', desc = 'Inside a [c]omment region' },
+                    ['aC'] = { query = '@class.outer', desc = 'Around a [C]lass region' },
+                    ['iC'] = { query = '@class.inner', desc = 'Inside a [C]lass region' },
+                    ['ai'] = { query = '@conditional.outer', desc = 'Around an [i]f (conditional) region' },
+                    ['ii'] = { query = '@conditional.inner', desc = 'Inside an [i]f (conditional) region' },
                 },
             },
             move = {
