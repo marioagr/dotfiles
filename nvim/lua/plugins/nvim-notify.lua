@@ -12,7 +12,7 @@ return {
             fps = 60,
             render = 'wrapped-compact',
             stages = 'slide',
-            timeout = 5000,
+            timeout = 3000,
             top_down = false,
         })
     end,

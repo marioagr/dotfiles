@@ -8,6 +8,7 @@ vim.filetype.add({
     pattern = {
         -- ['.*%.antlers%.html'] = 'antlers',
         ['.*%.blade%.php'] = 'blade',
+        ['.*/composer%.lock'] = 'json',
     },
 })
 -- Use the HTML treesitter for antlers
