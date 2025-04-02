@@ -12,7 +12,7 @@ vim.filetype.add({
     },
 })
 -- Use the HTML treesitter for antlers
-vim.treesitter.language.register('html', 'antlers')
+-- vim.treesitter.language.register('html', 'antlers')
 
 --[[
 --  For example, when using Zellij, "undercurl" seems to have problems rendering so to fix the problem
