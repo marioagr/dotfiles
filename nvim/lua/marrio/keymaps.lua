@@ -65,6 +65,30 @@ vim.keymap.set('v', '<M-Up>', ":move '<-2<CR>gv=gv", { desc = 'Move line up in V
 vim.keymap.set('n', '{', '[', { remap = true })
 vim.keymap.set('n', '}', ']', { remap = true })
 
+vim.keymap.set('n', '<leader>t{}', function()
+    if vim.fn.mapcheck('{', 'n') == '' then
+        vim.keymap.set('n', '{', '[', { remap = true })
+        vim.keymap.set('n', '}', ']', { remap = true })
+    else
+        vim.keymap.del('n', '{')
+        vim.keymap.del('n', '}')
+    end
+    local function curly_braces_state()
+        if vim.fn.mapcheck('{', 'n') == '' then
+            return 'Original'
+        else
+            return 'Altered'
+        end
+    end
+    CurlyBracesNotification = vim.notify(curly_braces_state(), nil, {
+        title = 'Curly Braces',
+        replace = CurlyBracesNotification,
+        on_close = function()
+            CurlyBracesNotification = nil
+        end,
+    })
+end)
+
 -- Toggle spelling
 vim.keymap.set('n', '<leader>tS', function()
     vim.cmd([[setlocal spell!]])
