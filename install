@@ -7,9 +7,6 @@ WIN_HOME=/mnt/c/Users/${USER^}
 # create the symlink
 # ln -s $DOTFILES/nvim to (destination directory eg. $HOME/.config/nvim)
 
-rm -rf $HOME/.config/zellij
-ln -s $DOTFILES/zellij $HOME/.config/zellij
-
 rm -rf $HOME/.config/nvim
 ln -s $DOTFILES/nvim $HOME/.config/nvim
 
