@@ -43,9 +43,6 @@ return {
         'hrsh7th/cmp-nvim-lsp',
     },
     config = function()
-        -- Sets a border for :LspInfo
-        require('lspconfig.ui.windows').default_options.border = 'rounded'
-
         -- Brief Aside: **What is LSP?**
         --
         -- LSP is an acronym you've probably heard, but might not understand what it is.
@@ -320,16 +317,6 @@ return {
         --    :Mason
         --
         --  You can press `g?` for help in this menu
-
-        -- Set border globally instead of per client
-        -- See https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization#borders
-        local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
-        ---@diagnostic disable-next-line: duplicate-set-field
-        function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-            opts = opts or {}
-            opts.border = opts.border or 'rounded'
-            return orig_util_open_floating_preview(contents, syntax, opts, ...)
-        end
 
         -- You can add other tools here that you want Mason to install
         -- for you, so that they are available from within Neovim.

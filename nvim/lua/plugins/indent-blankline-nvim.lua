@@ -13,7 +13,6 @@ return {
                     'terminal',
                     'dashboard',
                     'packer',
-                    'lspinfo',
                     'TelescopePrompt',
                     'TelescopeResults',
                 },

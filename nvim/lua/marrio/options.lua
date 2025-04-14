@@ -103,11 +103,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end,
 })
 
-vim.diagnostic.config({
-    float = {
-        border = 'rounded',
-    },
-})
-
 -- Change from dynamic due to a ¿performance? issue
 vim.g.omni_sql_default_compl_type = 'syntax'
+
+vim.diagnostic.config({ virtual_text = true })
+
+vim.opt.winborder = 'rounded'

@@ -16,6 +16,11 @@ return {
         -- See nvim/lua/marrio/keymaps.lua
         require('mini.bracketed').setup({
             buffer = { suffix = '' }, -- Disable buffers in "favor" of bufferline commands
+            -- Disable the following in favor of native nvim beybinds
+            diagnostic = { suffix = '' },
+            location = { suffix = '' },
+            quickfix = { suffix = '' },
+            treesitter = { suffix = '' },
         })
 
         require('mini.move').setup({

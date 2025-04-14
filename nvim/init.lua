@@ -34,9 +34,6 @@ require('lazy').setup('plugins', {
     ui = {
         border = 'rounded',
     },
-    profiling = {
-        -- require = true,
-    },
 })
 
 require('marrio.fixes')
