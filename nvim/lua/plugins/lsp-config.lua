@@ -311,12 +311,15 @@ return {
             vim.list_extend(opts.filetypes, current_server_ft_list)
         end
 
-        -- Ensure the servers and tools above are installed
-        --  To check the current status of installed tools and/or manually install
-        --  other tools, you can run
-        --    :Mason
-        --
-        --  You can press `g?` for help in this menu
+        -- Set border globally instead of per client
+        --- @see https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization#borders
+        local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+        ---@diagnostic disable-next-line: duplicate-set-field
+        function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+            opts = opts or {}
+            opts.border = opts.border or 'rounded'
+            return orig_util_open_floating_preview(contents, syntax, opts, ...)
+        end
 
         -- You can add other tools here that you want Mason to install
         -- for you, so that they are available from within Neovim.
