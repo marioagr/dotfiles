@@ -11,6 +11,6 @@ return {
             },
             signs = false,
         })
-        vim.keymap.set('n', '<leader>tl', ':TodoTelescope<CR>', { desc = '[t]odo [l]ist' })
+        __setKeymap('<leader>tl', ':TodoTelescope<CR>', { desc = '[t]odo [l]ist' })
     end,
 }

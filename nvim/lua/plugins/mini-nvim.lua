@@ -46,24 +46,24 @@ return {
         })
 
         ---@diagnostic disable-next-line: param-type-mismatch
-        vim.keymap.set('n', '<leader>Wm', function()
+        __setKeymap('<leader>Wm', function()
             sessions.write(sessions.config.file)
         end, { desc = '[W]orkspace [m]ake a local Vim session' })
 
         ---@diagnostic disable-next-line: param-type-mismatch
-        vim.keymap.set('n', '<leader>Wr', function()
+        __setKeymap('<leader>Wr', function()
             sessions.read()
         end, { desc = '[W]orkspace [r]ead a Vim session' })
 
         ---@diagnostic disable-next-line: param-type-mismatch
-        vim.keymap.set('n', '<leader>Wd', function()
+        __setKeymap('<leader>Wd', function()
             sessions.delete(nil, {
                 force = true,
             })
         end, { desc = '[W]orkspace [d]elete a local Vim session' })
 
         ---@diagnostic disable-next-line: param-type-mismatch
-        vim.keymap.set('n', '<leader>Wl', function()
+        __setKeymap('<leader>Wl', function()
             sessions.select()
         end, { desc = '[W]orkspace [l]ist sessions' })
 

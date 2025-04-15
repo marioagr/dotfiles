@@ -1,58 +1,66 @@
 --[[
-    "Native" keymaps for neovim
+    "Native" keymaps for Neovim
     NO PLUGINS
 --]]
 
--- Do nothing when space key is pressed
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<NOP>', { silent = true })
+---@param keybind string Which keys will trigger it
+---@param rhs string|function What it will do
+---@param opts? table See: vim.api.nvim_set_keymap opts
+---@param mode? string|string[] Mode "short-name"
+---@see vim.api.nvim_set_keymap
+__setKeymap = function(keybind, rhs, opts, mode)
+    vim.keymap.set(mode or 'n', keybind, rhs, opts or {})
+end
 
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Easily escape Terminal mode' })
+-- Do nothing when space key is pressed
+__setKeymap('<Space>', '<NOP>', { silent = true }, { 'n', 'v' })
+
+__setKeymap('<Esc><Esc>', '<C-\\><C-n>', { desc = 'Easily escape Terminal mode' }, 't')
 
 -- Save buffer
-vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = ':write' })
+__setKeymap('<leader>w', ':w<CR>', { desc = '[w]rite buffer' })
 
 -- When text is wrapped, move by terminal rows instead, not lines, unless a count is provided.
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true, desc = 'Move up by rows, not lines, unless count is provided' })
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true, desc = 'Move down by rows, not lines, unless count is provided' })
+__setKeymap('k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true, desc = 'Move up by rows, not lines, unless count is provided' })
+__setKeymap('j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true, desc = 'Move down by rows, not lines, unless count is provided' })
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>dl', vim.diagnostic.setloclist, { desc = 'Open [d]iagnostics [l]ist' })
+__setKeymap('<leader>dl', vim.diagnostic.setloclist, { desc = 'Open [d]iagnostics [l]ist' })
 
--- Reselect visual selection after indenting.
-vim.keymap.set('v', '<', '<gv', { desc = 'De-indent without losing selection' })
-vim.keymap.set('v', '>', '>gv', { desc = 'Indent without losing selection' })
+-- Re-select visual selection after indenting.
+__setKeymap('<', '<gv', { desc = 'De-indent without losing selection' }, 'v')
+__setKeymap('>', '>gv', { desc = 'Indent without losing selection' }, 'v')
 
 -- Maintain the cursor position when yanking a visual selection.
 -- [M]ark at [y] position then use [`y] and go to that mark
-vim.keymap.set('v', 'y', 'myy`y', { desc = 'Maintain cursor position when yanking a visual selection' })
+__setKeymap('y', 'myy`y', { desc = 'Maintain cursor position when yanking a visual selection' }, 'v')
 
 -- Disable annoying command line history typo.
--- vim.keymap.set('n', 'q:', 'q:')
+-- __setKeybind('q:', 'q:')
 
 -- Paste replace visual selection without copying it.
 -- ["] choose the [_] register (which acts like a black-hole) then [d]elete it and [P]aste it
-vim.keymap.set('v', 'p', '"_dP', { desc = 'Preserve yank without replacing it by the selected text' })
+__setKeymap('p', '"_dP', { desc = 'Preserve yank without replacing it by the selected text' }, 'v')
 
 -- Easy insertion of a trailing ; or ,
-vim.keymap.set('n', ';;', '<Esc>A;<Esc>', { desc = 'Insert [;] at the eol' })
-vim.keymap.set('i', ';;', '<Esc>A;', { desc = 'Insert [;] at the eol' })
--- vim.keymap.set('i', ',,', '<Esc>A,', { desc = 'Insert [,] at the eol' })
+__setKeymap(';;', '<Esc>A;<Esc>', { desc = 'Insert [;] at the eol' })
+__setKeymap(';;', '<Esc>A;', { desc = 'Insert [;] at the eol' }, 'i')
 
 -- Quickly clear search highlighting.
-vim.keymap.set('n', '<leader>k', ':nohlsearch<CR>', { desc = 'Clear search highlighting' })
+__setKeymap('<leader>k', ':nohlsearch<CR>', { desc = 'Clear search highlighting' })
 
 -- These mappings control the size of splits
 -- Alt + ([w]ider || [n]arrow || [t]aller || [s]horter)
-vim.keymap.set('n', '<M-w>', '<c-w>5>', { desc = 'Increase width' })
-vim.keymap.set('n', '<M-n>', '<c-w>5<', { desc = 'Decrease width' })
-vim.keymap.set('n', '<M-t>', '<C-W>+', { desc = 'Increase height' })
-vim.keymap.set('n', '<M-s>', '<C-W>-', { desc = 'Increase height' })
+__setKeymap('<M-w>', '<c-w>5>', { desc = 'Increase width' })
+__setKeymap('<M-n>', '<c-w>5<', { desc = 'Decrease width' })
+__setKeymap('<M-t>', '<C-W>+', { desc = 'Increase height' })
+__setKeymap('<M-s>', '<C-W>-', { desc = 'Increase height' })
 
 -- Move lines up and down
-vim.keymap.set('i', '<M-Down>', '<Esc>:move .+1<CR>==gi', { desc = 'Move line down in Insert mode' })
-vim.keymap.set('i', '<M-Up>', '<Esc>:move .-2<CR>==gi', { desc = 'Move line up in Insert mode' })
-vim.keymap.set('v', '<M-Down>', ":move '>+1<CR>gv=gv", { desc = 'Move line down in Visual mode' })
-vim.keymap.set('v', '<M-Up>', ":move '<-2<CR>gv=gv", { desc = 'Move line up in Visual mode' })
+__setKeymap('<M-Down>', '<Esc>:move .+1<CR>==gi', { desc = 'Move line down in Insert mode' }, 'i')
+__setKeymap('<M-Up>', '<Esc>:move .-2<CR>==gi', { desc = 'Move line up in Insert mode' }, 'i')
+__setKeymap('<M-Down>', ":move '>+1<CR>gv=gv", { desc = 'Move line down in Visual mode' }, 'v')
+__setKeymap('<M-Up>', ":move '<-2<CR>gv=gv", { desc = 'Move line up in Visual mode' }, 'v')
 
 --[[
 --  NOTE: To be able to use vim-unimpaired or mini.bracketed
@@ -62,13 +70,13 @@ vim.keymap.set('v', '<M-Up>', ":move '<-2<CR>gv=gv", { desc = 'Move line up in V
 --  But due to a bug in vim (https://github.com/echasnovski/mini.nvim/issues/235#issuecomment-1462367177)
 --  this is the recommended way
 --]]
-vim.keymap.set('n', '{', '[', { remap = true })
-vim.keymap.set('n', '}', ']', { remap = true })
+__setKeymap('{', '[', { remap = true })
+__setKeymap('}', ']', { remap = true })
 
-vim.keymap.set('n', '<leader>t{}', function()
+__setKeymap('<leader>t{}', function()
     if vim.fn.mapcheck('{', 'n') == '' then
-        vim.keymap.set('n', '{', '[', { remap = true })
-        vim.keymap.set('n', '}', ']', { remap = true })
+        __setKeymap('{', '[', { remap = true })
+        __setKeymap('}', ']', { remap = true })
     else
         vim.keymap.del('n', '{')
         vim.keymap.del('n', '}')
@@ -90,7 +98,7 @@ vim.keymap.set('n', '<leader>t{}', function()
 end)
 
 -- Toggle spelling
-vim.keymap.set('n', '<leader>tS', function()
+__setKeymap('<leader>tS', function()
     vim.cmd([[setlocal spell!]])
     local function spelling_status()
         -- I feel like its a bit hacky to use "._value" but meh

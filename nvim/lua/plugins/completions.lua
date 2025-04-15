@@ -182,6 +182,6 @@ return {
             require('cmp').complete()
         end
 
-        vim.keymap.set('i', '<C-x><C-o>', cmp_complete, { desc = 'Show cmp completion' })
+        __setKeymap('<C-x><C-o>', cmp_complete, { desc = 'Show cmp completion' }, 'i')
     end,
 }
