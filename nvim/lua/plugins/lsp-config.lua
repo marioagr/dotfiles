@@ -33,11 +33,10 @@ return {
             opts = {
                 library = {
                     -- Load luvit types when the `vim.uv` word is found
-                    { path = 'luvit-meta/library', words = { 'vim%.uv' } },
+                    { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
                 },
             },
         },
-        { 'Bilal2453/luvit-meta', lazy = true },
 
         -- Allows extra capabilities provided by nvim-cmp
         'hrsh7th/cmp-nvim-lsp',
@@ -86,62 +85,48 @@ return {
                     vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
                 end
 
-                local function use_code_action()
-                    ---@diagnostic disable-next-line: missing-fields
-                    vim.lsp.buf.code_action()
-                end
+                -- Rename the variable under your cursor.
+                --  Most Language Servers support renaming across files, etc.
+                map('grn', vim.lsp.buf.rename, '[r]e[n]ame')
 
-                local function workspace_list_folders()
-                    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-                end
-
-                -- Jump to the definition of the word under your cursor.
-                --  This is where a variable was first declared, or where a function is defined, etc.
-                --  To jump back, press <C-T>.
-                map('gd', require('telescope.builtin').lsp_definitions, '[g]o to [d]efinition')
+                -- Execute a code action, usually your cursor needs to be on top of an error
+                -- or a suggestion from your LSP for this to activate.
+                map('gra', vim.lsp.buf.code_action, '[c]ode [a]ction', { 'n', 'x' })
 
                 -- Find references for the word under your cursor.
-                map('gr', require('telescope.builtin').lsp_references, '[g]o to [r]eferences')
+                map('grr', require('telescope.builtin').lsp_references, '[rr]eferences')
 
                 -- Jump to the implementation of the word under your cursor.
                 --  Useful when your language has ways of declaring types without an actual implementation.
-                map('gi', require('telescope.builtin').lsp_implementations, '[g]o to [i]mplementation')
+                map('gri', require('telescope.builtin').lsp_implementations, '[r]ead [i]mplementation(s)')
+
+                -- Jump to the definition of the word under your cursor.
+                --  This is where a variable was first declared, or where a function is defined, etc.
+                --  To jump back, press <C-t>.
+                map('grd', require('telescope.builtin').lsp_definitions, '[r]ead [d]efinition')
+
+                -- Fuzzy find all the symbols in your current document.
+                --  Symbols are things like variables, functions, types, etc.
+                map('gO', require('telescope.builtin').lsp_document_symbols, 'Open Document Symbols')
+
+                -- Fuzzy find all the symbols in your current workspace
+                --  Similar to document symbols, except searches over your whole project.
+                map('gW', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Open [W]orkspace Symbols')
 
                 -- Jump to the type of the word under your cursor.
                 --  Useful when you're not sure what type a variable is and you want to see
                 --  the definition of its *type*, not where it was *defined*.
-                map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-
-                -- Fuzzy find all the symbols in your current document.
-                --  Symbols are things like variables, functions, types, etc.
-                map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[d]ocument [s]ymbols')
-
-                -- Fuzzy find all the symbols in your current workspace
-                --  Similar to document symbols, except searches over your whole project.
-                map('<leader>Ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [s]ymbols')
-
-                -- Rename the variable under your cursor
-                --  Most Language Servers support renaming across files, etc.
-                map('<leader>rn', vim.lsp.buf.rename, '[r]e[n]ame')
-                -- List the references under the cursor
-                map('<leader>rl', vim.lsp.buf.references, '[r]eferenes [l]ist')
-
-                -- Execute a code action, usually your cursor needs to be on top of an error
-                -- or a suggestion from your LSP for this to activate.
-                map('<leader>ca', use_code_action, '[c]ode [a]ction', { 'n', 'x' })
+                map('grt', require('telescope.builtin').lsp_type_definitions, '[r]ead [t]ype Definition')
 
                 -- Opens a popup that displays documentation about the word under your cursor
                 --  See `:help K` for why this keymap
-                map('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+                map('<C-s>', vim.lsp.buf.signature_help, 'Signature Help')
 
-                -- WARN: This is not Goto Definition, this is Goto Declaration.
-                --  For example, in C this would take you to the header
-                map('gD', vim.lsp.buf.declaration, '[g]o to [D]eclaration')
-                map('<leader>Wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [a]dd Folder')
+                -- map('<leader>Wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [a]dd Folder')
                 -- nmap('<leader>Wr', vim.lsp.buf.remove_workspace_folder, '[w]orkspace [r]emove Folder')
-                map('<leader>WL', workspace_list_folders, '[W]orkspace [l]ist Folders')
-
-                -- vim.keymap.set('n', '<leader>ft', vim.lsp.buf.format, { desc = 'Format code using None-LSP' })
+                map('<leader>WL', function()
+                    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+                end, '[W]orkspace [l]ist Folders')
 
                 -- The following two autocommands are used to highlight references of the
                 -- word under your cursor when your cursor rests there for a little while.
@@ -149,7 +134,7 @@ return {
                 --
                 -- When you move your cursor, the highlights will be cleared (the second autocommand).
                 local client = vim.lsp.get_client_by_id(event.data.client_id)
-                if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+                if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
                     local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
                     vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
                         buffer = event.buf,
@@ -176,7 +161,7 @@ return {
                 -- code, if the language server you are using supports them
                 --
                 -- This may be unwanted, since they displace some of your code
-                if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+                if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
                     map('<leader>th', function()
                         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
                     end, '[t]oggle Inlay [h]ints')
@@ -185,10 +170,32 @@ return {
         })
 
         -- Sign configuration
-        vim.fn.sign_define('DiagnosticSignError', { text = '', texthl = 'DiagnosticSignError' })
-        vim.fn.sign_define('DiagnosticSignWarn', { text = '', texthl = 'DiagnosticSignWarn' })
-        vim.fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'DiagnosticSignInfo' })
-        vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticSignHint' })
+        ---@see vim.diagnostic.Opts.Signs
+        vim.diagnostic.config({
+            severity_sort = true,
+            float = { border = 'rounded', source = 'if_many' },
+            signs = {
+                text = {
+                    [vim.diagnostic.severity.ERROR] = '󰅚 ',
+                    [vim.diagnostic.severity.WARN] = '󰀪 ',
+                    [vim.diagnostic.severity.INFO] = '󰋽 ',
+                    [vim.diagnostic.severity.HINT] = '󰌶 ',
+                },
+            } or {},
+            virtual_text = {
+                source = 'if_many',
+                spacing = 2,
+                format = function(diagnostic)
+                    local diagnostic_message = {
+                        [vim.diagnostic.severity.ERROR] = diagnostic.message,
+                        [vim.diagnostic.severity.WARN] = diagnostic.message,
+                        [vim.diagnostic.severity.INFO] = diagnostic.message,
+                        [vim.diagnostic.severity.HINT] = diagnostic.message,
+                    }
+                    return diagnostic_message[diagnostic.severity]
+                end,
+            },
+        })
 
         -- LSP servers and clients are able to communicate to each other what features they support.
         --  By default, Neovim doesn't support everything that is in the LSP Specification.
@@ -264,6 +271,9 @@ return {
                         completion = {
                             callSnippet = 'Replace',
                         },
+                        codeLens = {
+                            enable = true,
+                        },
                         -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
                         -- diagnostics = { disable = { 'missing-fields' } },
                     },
@@ -336,6 +346,8 @@ return {
         require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
 
         require('mason-lspconfig').setup({
+            ensure_installed = {},
+            automatic_installation = false,
             handlers = {
                 function(server_name)
                     local server = servers[server_name] or {}

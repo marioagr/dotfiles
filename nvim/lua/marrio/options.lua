@@ -11,7 +11,9 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 
 -- Decrease update time
--- vim.opt.updatetime = 250
+vim.opt.updatetime = 250
+
+-- Decrease mapped sequence wait time
 vim.opt.timeoutlen = 300
 
 -- Do smart autoindenting when starting a new line.

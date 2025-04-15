@@ -9,8 +9,7 @@ return {
         expand = 1,
         spec = {
             { '<leader>b', group = '[b]ufferline', mode = { 'n' } },
-            { '<leader>c', group = '[c]ode', mode = { 'n', 'x' } },
-            { '<leader>d', group = 'Doc symbols | Diagnostics | dadbod-ui', mode = { 'n' } },
+            { '<leader>d', group = 'dadbod-ui', mode = { 'n' } },
             { '<leader>e', group = 'file [e]xplorer', mode = { 'n' } },
             { '<leader>g', group = '[g]it', mode = { 'n' } },
             { '<leader>gs', group = '[g]it [s]igns' },
@@ -20,12 +19,11 @@ return {
             { '<leader>n', group = '[n]otifications' },
             { '<leader>N', group = '[N]pm (Laravel)' },
             { '<leader>p', group = 'parameter | phpactor' },
-            { '<leader>r', group = 'references' },
             { '<leader>s', group = '[s]earch' },
             { '<leader>S', group = 'Grug [S]earch', mode = { 'n', 'v' } },
             { '<leader>t', group = '[T]oggle or [T]elescope' },
             { '<leader>W', group = '[W]orkspace' },
-            { '<leader>*', group = 'Search Word or selection in all cwd (quickfix list)', mode = { 'n', 'v' } },
+            { '<leader>*', group = 'Quickfix list word or selection in cwd', mode = { 'n', 'v' } },
         },
     },
 }
