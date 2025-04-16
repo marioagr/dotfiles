@@ -1,187 +1,141 @@
+-- Autocompletion
 return {
-    -- Autocompletion
-    'hrsh7th/nvim-cmp',
+    'saghen/blink.cmp',
+    event = 'VimEnter',
+    version = '1.*',
     dependencies = {
-        -- Snippet Engine & its associated nvim-cmp source
-        -- NOTE: Maybe try 'garymjr/nvim-snippets'
+        -- Snippet Engine
         {
             'L3MON4D3/LuaSnip',
-            dependencies = {
-                -- Adds a number of user-friendly snippets
-                'rafamadriz/friendly-snippets',
-            },
+            version = '2.*',
             build = 'make install_jsregexp',
+            config = function()
+                require('luasnip.loaders.from_vscode').lazy_load()
+            end,
         },
-        'saadparwaiz1/cmp_luasnip',
-
-        -- Adds LSP completion capabilities
-        'hrsh7th/cmp-buffer', -- source for buffer words
-        'hrsh7th/cmp-cmdline',
-        'hrsh7th/cmp-nvim-lsp', -- For Neovim's built-in language server client
-        'hrsh7th/cmp-path', -- For filesystem paths
-        'hrsh7th/cmp-nvim-lsp-signature-help', -- For displaying function signatures with the current parameter emphasized
-        -- 'hrsh7th/cmp-calc', -- Math calculations, has to be enabled below on cmp.setup.sources
-        'hrsh7th/cmp-omni', -- Guess this helps with the omnifunc function?
-
+        {
+            'xzbdmw/colorful-menu.nvim',
+            opts = {},
+        },
         -- Add VSCode-like pictograms to Neovim built-in lsp
         'onsails/lspkind.nvim',
-        { 'folke/lazydev.nvim', ft = 'lua', opts = {} },
+        'folke/lazydev.nvim',
     },
-    -- Recommended config
-    event = { 'InsertEnter', 'CmdlineEnter' },
-    config = function()
-        -- [[ Configure nvim-cmp ]]
-        -- See `:help cmp`
-        local cmp = require('cmp')
-        local lspkind = require('lspkind')
-        local luasnip = require('luasnip')
-        require('luasnip.loaders.from_vscode').lazy_load()
-        luasnip.config.setup({})
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
+    opts = {
+        keymap = {
+            preset = 'default',
+            -- Override default
+            ['<Up>'] = {},
+            ['<Down>'] = {},
 
-        cmp.setup({
-            snippet = {
-                expand = function(args)
-                    luasnip.lsp_expand(args.body)
-                end,
+            ['<C-Up>'] = { 'select_prev' },
+            ['<C-Down>'] = { 'select_next' },
+
+            ['<C-k>'] = {},
+            ['<C-s>'] = { 'show_signature', 'hide_signature', 'fallback' },
+
+            ['<C-y>'] = {},
+            ['<C-Right>'] = { 'accept', 'fallback' },
+        },
+
+        appearance = {
+            nerd_font_variant = 'mono',
+        },
+
+        completion = {
+            accept = {
+                -- How long to wait for the LSP to resolve the item with additional information before continuing as-is
+                resolve_timeout_ms = 250,
             },
+            documentation = {
+                auto_show = false,
+                auto_show_delay_ms = 1000,
+            },
+            menu = {
+                border = 'rounded',
+                draw = {
+                    -- Components to render, grouped by column
+                    padding = { 0, 1 },
+                    columns = { { 'kind_icon' }, { 'label', gap = 1 }, { 'source_name' } },
+                    components = {
+                        kind_icon = {
+                            text = function(ctx)
+                                local lspkind = require('lspkind')
+                                local icon = ctx.kind_icon
+                                if vim.tbl_contains({ 'Path' }, ctx.source_name) then
+                                    local dev_icon, _ = require('nvim-web-devicons').get_icon(ctx.label)
+                                    if dev_icon then
+                                        icon = dev_icon
+                                    end
+                                else
+                                    icon = lspkind.symbolic(ctx.kind, { mode = 'symbol' })
+                                end
+
+                                return icon .. ctx.icon_gap
+                            end,
+                            highlight = function(ctx)
+                                local hl = 'BlinkCmpKind' .. ctx.kind or require('blink.cmp.completion.windows.render.tailwind').get_hl(ctx)
+                                if vim.tbl_contains({ 'Path' }, ctx.source_name) then
+                                    local dev_icon, dev_hl = require('nvim-web-devicons').get_icon(ctx.label)
+                                    if dev_icon then
+                                        hl = dev_hl
+                                    end
+                                end
+                                return hl
+                            end,
+                        },
+                        label = {
+                            text = function(ctx)
+                                return require('colorful-menu').blink_components_text(ctx)
+                            end,
+                            highlight = function(ctx)
+                                return require('colorful-menu').blink_components_highlight(ctx)
+                            end,
+                        },
+                    },
+                    -- Use treesitter to highlight the label text for the given list of sources
+                    treesitter = { 'lsp' },
+                },
+            },
+        },
+
+        -- Default list of enabled providers defined so that you can extend it
+        -- elsewhere in your config, without redefining it, due to `opts_extend`
+        sources = {
+            default = { 'lsp', 'buffer', 'snippets', 'path', 'lazydev' },
+            per_filetype = { sql = { 'dadbod' } },
+            providers = {
+                dadbod = { module = 'vim_dadbod_completion.blink' },
+                lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+            },
+        },
+
+        snippets = { preset = 'luasnip' },
+
+        -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
+        -- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
+        -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
+        --
+        -- See the fuzzy documentation for more information
+        fuzzy = {
+            implementation = 'prefer_rust_with_warning',
+            sorts = {
+                'exact',
+                'score',
+                'sort_text',
+            },
+        },
+
+        -- Shows a signature help window while you type arguments for a function
+        signature = {
+            enabled = true,
             window = {
-                completion = cmp.config.window.bordered(),
-                documentation = cmp.config.window.bordered(),
+                -- TODO: Try this
+                show_documentation = false,
             },
-            completion = {
-                --[[
-                    Recommended to be disabled but meh
-                        autocomplete = false,
-                    Can be overriden instead of vim.opt.completeopt
-                        completeopt = 'menu,menuone,preview',
-                --]]
-            },
-            ---@diagnostic disable-next-line: missing-fields
-            formatting = {
-                format = lspkind.cmp_format({
-                    mode = 'symbol_text',
-                    show_labelDetails = true,
-                    menu = {
-                        buffer = '[Buffer]',
-                        nvim_lsp = '[LSP]',
-                        luasnip = '[LuaSnip]',
-                        nvim_lua = '[Lua]',
-                        latex_symbols = '[Latex]',
-                        path = '[Path]',
-                    },
-                }),
-            },
-            mapping = cmp.mapping.preset.insert({
-                -- Select the [n]ext item
-                ['<C-Down>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
-
-                -- Select the [p]revious item
-                ['<C-Up>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
-
-                -- Toggle docs view
-                ['<M-d>'] = function()
-                    if cmp.visible_docs() then
-                        cmp.close_docs()
-                    else
-                        cmp.open_docs()
-                    end
-                end,
-
-                -- Move docs [f]orward
-                ['<C-f>'] = cmp.mapping.scroll_docs(4),
-
-                -- Move docs [b]ackward
-                ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-
-                -- ['<C-e'>] = cmp.abort,
-
-                -- Accept ([y]es) the completion.
-                --  This will auto-import if your LSP supports it.
-                --  This will expand snippets if the LSP sent a snippet.
-                ['<C-Right>'] = cmp.mapping(cmp.mapping.confirm(), { 'i', 'c' }),
-
-                -- Manually trigger a completion from nvim-cmp.
-                --  Generally you don't need this, because nvim-cmp will display
-                --  completions whenever it has completion options available.
-                ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-
-                -- Think of <Tab> as moving to the right of your snippet expansion.
-                --  So if you have a snippet that's like:
-                --  function $1($2)
-                --    $3
-                --  end
-                --
-                -- <Tab> will move you to the right of each of the expansion locations.
-                -- <S-Tab> is similar, except moving you backwards.
-                ['<Tab>'] = cmp.mapping(function(fallback)
-                    if cmp.visible() or luasnip.expand_or_locally_jumpable() then
-                        luasnip.expand_or_jump()
-                    else
-                        fallback()
-                    end
-                end, { 'i', 's' }),
-                ['<S-Tab>'] = cmp.mapping(function(fallback)
-                    if cmp.visible() or luasnip.locally_jumpable(-1) then
-                        luasnip.jump(-1)
-                    else
-                        fallback()
-                    end
-                end, { 'i', 's' }),
-            }),
-            sources = cmp.config.sources({
-                {
-                    name = 'lazydev',
-                    -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
-                    group_index = 0,
-                },
-                { name = 'nvim_lsp' },
-                { name = 'luasnip' },
-                { name = 'nvim_lsp_signature_help' },
-                {
-                    name = 'omni',
-                    option = {
-                        disable_omnifuncs = { 'v:lua.vim.lsp.omnifunc' },
-                    },
-                },
-            }, {
-                { name = 'path' },
-                { name = 'buffer' },
-            }),
-        })
-
-        -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-        cmp.setup.cmdline({ '/', '?' }, {
-            mapping = cmp.mapping.preset.cmdline(),
-            sources = {
-                { name = 'buffer' },
-            },
-        })
-
-        -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-        cmp.setup.cmdline(':', {
-            mapping = cmp.mapping.preset.cmdline(),
-            sources = cmp.config.sources({
-                { name = 'path' },
-            }, {
-                { name = 'cmdline' },
-            }),
-            ---@diagnostic disable-next-line: missing-fields
-            matching = { disallow_symbol_nonprefix_matching = false },
-        })
-
-        cmp.setup.filetype({ 'sql', 'mysql', 'plsql' }, {
-            sources = cmp.config.sources({
-                { name = 'vim-dadbod-completion' },
-                { name = 'buffer' },
-                { name = 'luasnip' }, -- Maybe seek a way to filter only SQL related snippets?
-            }),
-        })
-
-        -- This one was from omnifunc
-        local function cmp_complete()
-            require('cmp').complete()
-        end
-
-        __setKeymap('<C-x><C-o>', cmp_complete, { desc = 'Show cmp completion' }, 'i')
-    end,
+        },
+    },
+    opts_extend = { 'sources.default' },
 }
