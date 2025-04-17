@@ -131,6 +131,7 @@ return {
                     },
                 }))
             end
+
             local function telescope_live_grep_open_files()
                 builtin.live_grep(themes.get_ivy({
                     grep_open_files = true,
@@ -141,11 +142,13 @@ return {
                     },
                 }))
             end
+
             local function search_files()
                 builtin.find_files({
                     follow = true,
                 })
             end
+
             local function search_all_files()
                 builtin.find_files({
                     follow = true,
@@ -154,9 +157,11 @@ return {
                     prompt_title = 'All Files (.gitignore & .hidden)',
                 })
             end
+
             local function oldfiles_in_cwd()
                 builtin.oldfiles({ only_cwd = true })
             end
+
             local function grep_search_simple()
                 builtin.live_grep({
                     glob_pattern = {
@@ -168,6 +173,13 @@ return {
                     },
                 })
             end
+
+            local function grep_search_advanced()
+                builtin.live_grep({
+                    additional_args = { '-u', '-u' },
+                })
+            end
+
             local function text_suggestions()
                 builtin.spell_suggest(themes.get_ivy({
                     layout_config = {
@@ -188,7 +200,7 @@ return {
             __setKeymap('<leader>sk', builtin.keymaps, { desc = '[s]earch [k]eymaps' })
             __setKeymap('<leader>sw', builtin.grep_string, { desc = '[s]earch current [w]ord' })
             __setKeymap('<leader>sg', grep_search_simple, { desc = '[s]earch by [g]rep' })
-            __setKeymap('<leader>sG', builtin.live_grep, { desc = '[s]earch by [G]rep on all files' })
+            __setKeymap('<leader>sG', grep_search_advanced, { desc = '[s]earch by [G]rep on all files' })
             __setKeymap('<leader>sd', builtin.diagnostics, { desc = '[s]earch [d]iagnostics' })
             __setKeymap('<leader>sr', builtin.resume, { desc = '[s]earch [r]esume' })
             __setKeymap('<leader>sS', text_suggestions, { desc = 'Open [t]elescope with [s]pell suggestions' })
