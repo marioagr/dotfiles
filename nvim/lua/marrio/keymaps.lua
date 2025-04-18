@@ -116,3 +116,35 @@ __setKeymap('<leader>tS', function()
         end,
     })
 end, { desc = '[t]oggle [S]pelling checking' })
+
+-- Go to /.../file:line under cursor
+-- NOTE: This may end up as a black hole for this kind of gf/grd alternatives
+__setKeymap('<M-Enter>', function()
+    local file_w_line = vim.fn.expand('<cWORD>')
+    -- Pattern /.../file:123
+    local file, line = string.match(file_w_line, '([^:]+):(%d+)')
+
+    if not line then
+        -- Pattern /.../file(123)
+        file, line = string.match(file_w_line, '([^%(]+)%((%d+)%)')
+    end
+
+    local is_in_docker = vim.fn.filereadable('docker-compose.yml') == 1
+    local cwd = vim.fn.getcwd()
+
+    if is_in_docker then
+        file = file:gsub('^/var/www/html', cwd)
+    end
+
+    local is_readable = vim.fn.filereadable(file) == 1
+
+    if is_readable then
+        if line ~= '' then
+            vim.cmd(string.format('edit +%s %s', line, file))
+        else
+            vim.cmd(string.format('edit %s', file))
+        end
+    else
+        print('File not found: ' .. file)
+    end
+end, { desc = 'Go to file:line under cursor' })
