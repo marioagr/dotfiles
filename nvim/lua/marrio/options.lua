@@ -11,7 +11,8 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 
 -- Decrease update time
-vim.opt.updatetime = 250
+-- Used for highlight on CursorHold/CursorHoldI
+vim.opt.updatetime = 2000
 
 -- Decrease mapped sequence wait time
 vim.opt.timeoutlen = 300
