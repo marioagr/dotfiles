@@ -60,6 +60,7 @@ return {
             end, { desc = '[r]eset hunk' })
 
             -- Normal mode
+            map('n', '<leader>h_', gs.refresh, { desc = 'gitsigns refresh' })
             map('n', '<leader>hs', gs.stage_hunk, { desc = '[s]tage/un[s]tage hunk' })
             map('n', '<leader>hr', gs.reset_hunk, { desc = '[r]eset hunk' })
             map('n', '<leader>hp', gs.preview_hunk, { desc = '[p]review hunk' })
