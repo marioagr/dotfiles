@@ -129,6 +129,10 @@ __setKeymap('<M-Enter>', function()
         file, line = string.match(file_w_line, '([^%(]+)%((%d+)%)')
     end
 
+    if not file then
+        return
+    end
+
     local is_in_docker = vim.fn.filereadable('docker-compose.yml') == 1
     local cwd = vim.fn.getcwd()
 
