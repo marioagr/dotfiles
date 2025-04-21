@@ -160,13 +160,11 @@ local key_tables = {
         { key = 'Enter', mods = 'NONE', action = act.CopyMode('PriorMatch') },
         { key = 'Escape', mods = 'NONE', action = act.CopyMode('Close') },
         { key = 'n', mods = 'CTRL', action = act.CopyMode('NextMatch') },
+        { key = 'DownArrow', mods = 'NONE', action = act.CopyMode('NextMatch') },
         { key = 'p', mods = 'CTRL', action = act.CopyMode('PriorMatch') },
+        { key = 'UpArrow', mods = 'NONE', action = act.CopyMode('PriorMatch') },
         { key = 'r', mods = 'CTRL', action = act.CopyMode('CycleMatchType') },
         { key = 'u', mods = 'CTRL', action = act.CopyMode('ClearPattern') },
-        { key = 'PageUp', mods = 'NONE', action = act.CopyMode('PriorMatchPage') },
-        { key = 'PageDown', mods = 'NONE', action = act.CopyMode('NextMatchPage') },
-        { key = 'UpArrow', mods = 'NONE', action = act.CopyMode('PriorMatch') },
-        { key = 'DownArrow', mods = 'NONE', action = act.CopyMode('NextMatch') },
     },
 
     workspace = {
@@ -203,17 +201,22 @@ local key_tables = {
 
                 window:perform_action(act.SpawnTab('CurrentPaneDomain'), pane)
                 -- I have to wait to "connect" to WSL2 so... ¯\_(ツ)_/¯
-                wezterm.sleep_ms(2500)
+                wezterm.sleep_ms(1500)
 
                 window:perform_action(act.SpawnTab('CurrentPaneDomain'), pane)
                 -- I have to wait to "connect" to WSL2 so... ¯\_(ツ)_/¯
-                wezterm.sleep_ms(2500)
+                wezterm.sleep_ms(1500)
+
+                window:perform_action(act.SpawnTab('CurrentPaneDomain'), pane)
+                -- I have to wait to "connect" to WSL2 so... ¯\_(ツ)_/¯
+                wezterm.sleep_ms(1500)
 
                 local tabs = mux_window:tabs()
 
                 tabs[1]:set_title('nvim')
-                tabs[2]:set_title('cli')
-                tabs[3]:set_title('sail-npm')
+                tabs[2]:set_title('lazygit')
+                tabs[3]:set_title('cli')
+                tabs[4]:set_title('sail-npm')
             end),
         },
 
