@@ -71,7 +71,7 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 5
+vim.opt.scrolloff = 3
 
 -- The minimal number of screen columns to keep to the left and to the right of the cursor if 'nowrap' is set.
 vim.opt.sidescrolloff = 5
