@@ -10,7 +10,7 @@ return {
             version = '2.*',
             build = 'make install_jsregexp',
         },
-        'raifiamadriz/friendly-snippets',
+        'rafamadriz/friendly-snippets',
         {
             'xzbdmw/colorful-menu.nvim',
             opts = {},

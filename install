@@ -7,7 +7,7 @@ WIN_HOME=/mnt/c/Users/${USER^}
 # create the symlink
 # ln -s $DOTFILES/nvim to (destination directory eg. $HOME/.config/nvim)
 
-rm -rf $HOME/.config/nvim
+unlink $HOME/.config/nvim
 ln -s $DOTFILES/nvim $HOME/.config/nvim
 
 rm -r $HOME/.gitconfig $HOME/.gitignore
