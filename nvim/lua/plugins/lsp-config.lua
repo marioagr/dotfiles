@@ -5,6 +5,9 @@ return {
         -- NOTE: Must be loaded before dependants
         {
             'williamboman/mason.nvim',
+            ---@module 'mason.settings'
+            ---@type MasonSettings
+            ---@diagnostic disable-next-line: missing-fields
             opts = {
                 ui = {
                     border = 'rounded',
@@ -30,6 +33,9 @@ return {
         {
             'folke/lazydev.nvim',
             ft = 'lua',
+            ---@module "lazydev"
+            ---@type lazydev.Config
+            ---@diagnostic disable-next-line: missing-fields
             opts = {
                 library = {
                     -- Load luvit types when the `vim.uv` word is found

@@ -17,7 +17,7 @@ return {
         })
     end,
     keys = {
-        { '<leader>nl', ':Telescope notify<CR>', desc = '[n]otifications [l]ist' },
+        { '<leader>sn', ':Telescope notify<CR>', desc = '[s]earch [n]otifications' },
         {
             '<leader>nd',
             function()

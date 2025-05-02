@@ -10,7 +10,6 @@ https://devblogs.microsoft.com/commandline/share-environment-vars-between-wsl-an
 - andymass/vim-matchup (Better ¿ % ?)
 - debugloop/telescope-undo.nvim (Undo visualization on Telescope)
 - sindrets/diffview.nvim (Easier diffview to see changed file changes)
-- MagicDuck/grug-far.nvim (Search/replace using rg or ast-grep)
 - nvim-pack/nvim-spectre (Ease the search/replace experience)
 - gelguy/wilder.nvim (Better wildmenu)
 - kdheepak/lazygit.nvim (Integrate lazygit inside neovim)
@@ -25,7 +24,7 @@ https://devblogs.microsoft.com/commandline/share-environment-vars-between-wsl-an
 - stevearc/overseer.nvim (Task runner and management)
 - rachartier/tiny-inline-diagnostic.nvim (Prettier inline diagnostic messages)
 - HiPhish/rainbow-delimiters.nvim
-- AllenDang/nvim-expand-expr (Kind of NumberMonger)
+- AllenDang/nvim-expand-expr (Kind of NumberMonger, but unnecessary when macros are correctly used)
 - mawkler/refjump.nvim (...)
 - gregorias/toggle.nvim ([See keymaps file](nvim/lua/marrio/keymaps.lua))
 - jake-stewart/multicursor.nvim (...)

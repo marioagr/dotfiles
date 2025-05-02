@@ -11,7 +11,7 @@ return {
         {
             '<leader>Ss',
             function()
-                require('grug-far').grug_far()
+                require('grug-far').open()
             end,
             mode = { 'n', 'v' },
             desc = 'Grug find! Grug replace! Grug happy!',
@@ -19,7 +19,7 @@ return {
         {
             '<leader>Sc',
             function()
-                require('grug-far').grug_far({ prefills = { paths = vim.fn.expand('%') } })
+                require('grug-far').open({ prefills = { paths = vim.fn.expand('%') } })
             end,
             mode = { 'n', 'v' },
             desc = 'Find & Replace in current file',

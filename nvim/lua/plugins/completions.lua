@@ -20,27 +20,19 @@ return {
         'folke/lazydev.nvim',
     },
     config = function()
+        ---@module 'blink.cmp'
+        ---@type blink.cmp.Config
         require('blink-cmp').setup({
-            keymap = {
-                preset = 'default',
-                -- <C-space> 'show',
-                ['<C-e>'] = { 'hide', 'fallback' },
-                -- <ctrl-y> select_and_accept
-                ['<M-CR>'] = { 'select_and_accept', 'fallback' },
-
-                ['<Up>'] = {},
-                ['<Down>'] = {},
-
-                ['<C-Up>'] = { 'select_prev' },
-                ['<C-Down>'] = { 'select_next' },
-
-                ['<C-k>'] = {},
-                ['<C-s>'] = { 'show_signature', 'hide_signature', 'fallback' },
-
-                ['<M-d>'] = { 'show_documentation', 'hide_documentation' },
-            },
             appearance = {
                 nerd_font_variant = 'mono',
+            },
+            fuzzy = {
+                implementation = 'prefer_rust_with_warning',
+                sorts = {
+                    'exact',
+                    'score',
+                    'sort_text',
+                },
             },
             completion = {
                 accept = {
@@ -103,6 +95,30 @@ return {
                     },
                 },
             },
+            keymap = {
+                preset = 'default',
+                -- <C-space> 'show',
+                ['<C-e>'] = { 'hide', 'fallback' },
+                -- <ctrl-y> select_and_accept
+                ['<M-CR>'] = { 'select_and_accept', 'fallback' },
+
+                ['<Up>'] = {},
+                ['<Down>'] = {},
+
+                ['<C-Up>'] = { 'select_prev' },
+                ['<C-Down>'] = { 'select_next' },
+
+                ['<C-k>'] = {},
+                ['<C-s>'] = { 'show_signature', 'hide_signature', 'fallback' },
+
+                ['<M-d>'] = { 'show_documentation', 'hide_documentation' },
+            },
+            signature = {
+                enabled = true,
+                window = {
+                    show_documentation = false,
+                },
+            },
             sources = {
                 default = { 'lsp', 'buffer', 'snippets', 'path', 'lazydev' },
                 per_filetype = { sql = { 'dadbod' } },
@@ -111,21 +127,7 @@ return {
                     lazydev = { module = 'lazydev.integrations.blink' },
                 },
             },
-            fuzzy = {
-                implementation = 'prefer_rust_with_warning',
-                sorts = {
-                    'exact',
-                    'score',
-                    'sort_text',
-                },
-            },
             snippets = { preset = 'luasnip' },
-            signature = {
-                enabled = true,
-                window = {
-                    show_documentation = false,
-                },
-            },
         })
 
         require('luasnip.loaders.from_vscode').lazy_load()

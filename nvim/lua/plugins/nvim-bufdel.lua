@@ -5,6 +5,10 @@ return {
         require('bufdel').setup({
             quit = false, -- quit Neovim when last buffer is closed
         })
-        __setKeymap('<leader>q', ':BufDel<CR>', { desc = 'Close buffer' })
     end,
+    keys = {
+        { '<leader>q', ':BufDel<CR>', desc = 'Close buffer' },
+        { '<leader>Qa', ':BufDelAll<CR>', desc = 'Close all buffers' },
+        { '<leader>Qq', ':BufDelOthers<CR>', desc = 'Close other buffers' },
+    },
 }

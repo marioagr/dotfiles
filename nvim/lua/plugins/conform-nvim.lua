@@ -37,8 +37,9 @@ return {
     event = { 'BufWritePre' },
     cmd = { 'ConformInfo' },
     config = function()
-        local conform = require('conform')
-        conform.setup({
+        ---@module "conform"
+        ---@type conform.setupOpts
+        local opts = {
             -- notify_on_error = false,
             format_after_save = custom_opts_for_format,
             -- List of formatters available at
@@ -67,22 +68,23 @@ return {
                 -- },
                 ['blade-formatter'] = {
                     append_args = {
-                        -- auto|force|force-aligned|force-expand-multiline|aligned-multiple|preserve|preserve-aligned
-                        '--wrap-attributes="force-expand-multiline"',
                         '--sort-tailwindcss-classes',
-                        -- none|alphabetical|code-guide|idiomatic|vuejs|custom
-                        '--sort-html-attributes="code-guide"',
+                        '--sort-html-attributes="custom"', --Needed for ↓
+                        '--custom-html-attributes-order=":.+,id,name,wire:.+,class,type"',
                         '--no-multiple-empty-lines',
+                        '--component-prefix="x-,livewire:,flux:"',
                     },
                 },
                 mdslw = {
                     env = {
-                        MDSLW_MAX_WIDTH = 120,
+                        MDSLW_MAX_WIDTH = 0,
                         MDSLW_LANG = 'en es',
                     },
                 },
             },
-        })
+        }
+
+        require('conform').setup(opts)
     end,
     keys = {
         {

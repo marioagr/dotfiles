@@ -11,7 +11,10 @@ return {
     },
     build = ':TSUpdate',
     config = function(_)
-        require('nvim-treesitter.configs').setup({
+        ---@module 'nvim-treesitter.configs'
+        ---@type TSConfig
+        ---@diagnostic disable-next-line: missing-fields
+        local opts = {
             ensure_installed = {
                 'blade',
                 'css',
@@ -124,7 +127,9 @@ return {
                     },
                 },
             },
-        })
+        }
+
+        require('nvim-treesitter.configs').setup(opts)
         -- require('ts_context_commentstring').setup()
     end,
 }
