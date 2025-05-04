@@ -9,7 +9,7 @@ return {
         expand = 1,
         spec = {
             { '<leader>b', group = '[b]ufferline', mode = { 'n' } },
-            { '<leader>d', group = 'dadbod-ui', mode = { 'n' } },
+            { '<leader>d', group = '[d]adbod-ui', mode = { 'n' } },
             { '<leader>e', group = 'file [e]xplorer', mode = { 'n' } },
             { '<leader>g', group = '[g]it', mode = { 'n' } },
             { '<leader>gs', group = '[g]it [s]igns' },
@@ -21,7 +21,7 @@ return {
             { '<leader>p', group = 'parameter | phpactor' },
             { '<leader>s', group = '[s]earch' },
             { '<leader>S', group = 'Grug [S]earch', mode = { 'n', 'v' } },
-            { '<leader>t', group = '[T]oggle or [T]elescope' },
+            { '<leader>t', group = '[t]oggle' },
             { '<leader>W', group = '[W]orkspace' },
             { '<leader>*', group = 'Quickfix list word or selection in cwd', mode = { 'n', 'v' } },
         },

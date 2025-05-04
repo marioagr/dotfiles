@@ -131,5 +131,7 @@ return {
 
         require('nvim-treesitter.configs').setup(opts)
         -- require('ts_context_commentstring').setup()
+
+        __setKeymap('<leader>tH', ':TSToggle highlight<CR>', { desc = 'tree-sitter [H]ighlight' })
     end,
 }

@@ -10,6 +10,6 @@ return {
         },
     },
     keys = {
-        { '<leader>tc', ':ColorizerToggle<CR>', desc = '[t]oggle highlight [c]olors' },
+        { '<leader>tc', ':ColorizerToggle<CR>', desc = 'highlight [c]olors' },
     },
 }

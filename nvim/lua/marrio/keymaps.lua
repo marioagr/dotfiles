@@ -95,7 +95,7 @@ __setKeymap('<leader>t{}', function()
             CurlyBracesNotification = nil
         end,
     })
-end)
+end, { desc = 'Act as {} or []' })
 
 -- Toggle spelling
 __setKeymap('<leader>tS', function()
@@ -115,7 +115,7 @@ __setKeymap('<leader>tS', function()
             SpellNotification = nil
         end,
     })
-end, { desc = '[t]oggle [S]pelling checking' })
+end, { desc = '[S]pelling checking' })
 
 -- Go to /.../file:line under cursor
 -- NOTE: This may end up as a black hole for this kind of gf/grd alternatives

@@ -13,7 +13,7 @@ return {
         {
             '<leader>tm',
             ':RenderMarkdown toggle<CR>',
-            desc = '[t]oggle [m]arkdown',
+            desc = '[m]arkdown render',
         },
     },
 }

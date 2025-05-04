@@ -93,21 +93,21 @@ return {
                 require('conform').format(custom_opts_for_format())
             end,
             mode = { 'n', 'v' },
-            desc = 'Format buffer or selection',
+            desc = '[f]ormat',
         },
         {
             '<leader>tf',
             function()
                 vim.b.disable_autoformat = not vim.b.disable_autoformat
             end,
-            desc = 'Buffer: [t]oggle [f]ormatter',
+            desc = 'buffer [f]ormatter',
         },
         {
             '<leader>tF',
             function()
                 vim.g.disable_autoformat = not vim.g.disable_autoformat
             end,
-            desc = 'Global: [t]oggle [F]ormatter',
+            desc = 'Global [F]ormatter',
         },
     },
     init = function()
