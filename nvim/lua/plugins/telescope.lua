@@ -189,8 +189,8 @@ return {
             end
 
             __setKeymap('<leader>so', oldfiles_in_cwd, { desc = '[s]earch recently [o]pened files' })
-            __setKeymap('<leader>sb', builtin.buffers, { desc = '[s]earch existing buffers' })
-            __setKeymap('<leader><space>', search_in_buffer, { desc = '[ ][ ] Fuzzily search in current buffer' })
+            __setKeymap('<leader><leader>', builtin.buffers, { desc = '[s]earch existing buffers' })
+            __setKeymap('<leader>/', search_in_buffer, { desc = '[ ][ ] Fuzzily search in current buffer' })
             __setKeymap('<leader>s/', telescope_live_grep_open_files, { desc = '[s]earch [/] in Open Files' })
             __setKeymap('<leader>ss', builtin.builtin, { desc = '[s]earch [s]elect Telescope' })
             -- __set_keybind('<leader>gf', builtin.git_files, { desc = 'Search [g]it [f]iles' })
