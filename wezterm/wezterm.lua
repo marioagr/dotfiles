@@ -99,7 +99,7 @@ end)
 -- It prefers the title that was set via `tab:set_title()`
 -- or `wezterm cli set-tab-title`, but falls back to the
 -- title of the active pane in that tab.
-function get_tab_title(tab_info)
+local function get_tab_title(tab_info)
     local title = tab_info.tab_title
 
     if title and #title > 0 then
