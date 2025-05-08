@@ -44,6 +44,7 @@ return {
                     auto_show_delay_ms = 1000,
                 },
                 list = {
+                    max_items = 250,
                     selection = {
                         preselect = false,
                     },
@@ -123,6 +124,10 @@ return {
                 default = { 'lsp', 'buffer', 'snippets', 'path', 'lazydev' },
                 per_filetype = { sql = { 'dadbod' } },
                 providers = {
+                    lsp = { fallbacks = {} },
+                    buffer = {
+                        max_items = 25,
+                    },
                     dadbod = { module = 'vim_dadbod_completion.blink' },
                     lazydev = { module = 'lazydev.integrations.blink' },
                 },
