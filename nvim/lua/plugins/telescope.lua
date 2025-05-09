@@ -24,6 +24,7 @@ return {
             local builtin = require('telescope.builtin')
             local themes = require('telescope.themes')
             local action_layouts = require('telescope.actions.layout')
+            local lga_actions = require('telescope-live-grep-args.actions')
 
             local common_mappings = {
                 ['<C-d>'] = actions.results_scrolling_down,
@@ -77,6 +78,18 @@ return {
                     },
                 },
                 extensions = {
+                    live_grep_args = {
+                        -- auto_quoting = true, -- enable/disable auto-quoting
+                        -- define mappings, e.g.
+                        mappings = { -- extend mappings
+                            i = {
+                                ['<C-\\>'] = lga_actions.quote_prompt(),
+                                ['<C-i>'] = lga_actions.quote_prompt({ postfix = ' --iglob ' }),
+                                -- -- freeze the current list and start a fuzzy search in the frozen list
+                                -- ['<C-space>'] = lga_actions.to_fuzzy_refine,
+                            },
+                        },
+                    },
                     ['ui-select'] = {
                         themes.get_cursor(),
                     },
@@ -163,7 +176,9 @@ return {
             end
 
             local function grep_search_simple()
-                builtin.live_grep({
+                require('telescope').extensions.live_grep_args.live_grep_args({
+                    prompt_title = 'Live Grep',
+                    -- TODO: Check why this does not work
                     glob_pattern = {
                         '!**/composer.lock',
                         '!**/package-lock.json',
@@ -175,7 +190,8 @@ return {
             end
 
             local function grep_search_advanced()
-                builtin.live_grep({
+                require('telescope').extensions.live_grep_args.live_grep_args({
+                    prompt_title = 'Live Grep ALL',
                     additional_args = { '-u', '-u' },
                 })
             end
