@@ -7,8 +7,6 @@ return {
             'nvim-lua/plenary.nvim',
             'kyazdani42/nvim-web-devicons',
             -- Fuzzy Finder Algorithm which requires local dependencies to be built.
-            -- Only load if `make` is available. Make sure you have the system
-            -- requirements installed.
             'nvim-telescope/telescope-live-grep-args.nvim',
             {
                 'nvim-telescope/telescope-fzf-native.nvim',
@@ -41,8 +39,9 @@ return {
             require('telescope').setup({
                 defaults = {
                     file_ignore_patterns = { '%.git/' },
+                    layout_strategy = 'flex',
                     layout_config = {
-                        prompt_position = 'top',
+                        width = 0.9,
                     },
                     mappings = {
                         n = common_mappings,
@@ -58,8 +57,7 @@ return {
                     },
                     prompt_prefix = '  ',
                     scroll_strategy = 'limit',
-                    selection_caret = '󰐊 ',
-                    sorting_strategy = 'ascending',
+                    selection_caret = ' ',
                 },
                 pickers = {
                     buffers = {
@@ -150,9 +148,6 @@ return {
                     grep_open_files = true,
                     previewer = false,
                     prompt_title = 'Live Grep in Open Files',
-                    picker = {
-                        preview_width = 0.3,
-                    },
                 }))
             end
 

@@ -58,26 +58,31 @@ return {
                         components = {
                             kind_icon = {
                                 text = function(ctx)
-                                    local lspkind = require('lspkind')
                                     local icon = ctx.kind_icon
-                                    if vim.tbl_contains({ 'Path' }, ctx.source_name) then
+
+                                    if ctx.source_name == 'Path' then
                                         local dev_icon, _ = require('nvim-web-devicons').get_icon(ctx.label)
                                         if dev_icon then
                                             icon = dev_icon
                                         end
+                                    elseif ctx.source_name == 'Blade-nav' then
+                                        icon = ''
                                     else
-                                        icon = lspkind.symbolic(ctx.kind, { mode = 'symbol' })
+                                        icon = require('lspkind').symbolic(ctx.kind, { mode = 'symbol' })
                                     end
 
                                     return icon .. ctx.icon_gap
                                 end,
                                 highlight = function(ctx)
                                     local hl = 'BlinkCmpKind' .. ctx.kind or require('blink.cmp.completion.windows.render.tailwind').get_hl(ctx)
-                                    if vim.tbl_contains({ 'Path' }, ctx.source_name) then
+
+                                    if ctx.source_name == 'Path' then
                                         local dev_icon, dev_hl = require('nvim-web-devicons').get_icon(ctx.label)
                                         if dev_icon then
                                             hl = dev_hl
                                         end
+                                    elseif ctx.source_name == 'Blade-nav' then
+                                        hl = 'BlinkCmpKindBladeNav'
                                     end
                                     return hl
                                 end,
@@ -94,6 +99,7 @@ return {
                         -- Use treesitter to highlight the label text for the given list of sources
                         treesitter = { 'lsp' },
                     },
+                    max_height = 20,
                 },
             },
             keymap = {
@@ -121,15 +127,28 @@ return {
                 },
             },
             sources = {
-                default = { 'lsp', 'buffer', 'snippets', 'path', 'lazydev' },
-                per_filetype = { sql = { 'dadbod' } },
+                per_filetype = {
+                    blade = { inherit_defaults = true, 'blade-nav' },
+                    sql = { 'dadbod', 'buffer' },
+                    lua = { 'lazydev', inherit_defaults = true },
+                },
                 providers = {
                     lsp = { fallbacks = {} },
-                    buffer = {
-                        max_items = 25,
-                    },
+                    buffer = { max_items = 25 },
+                    snippets = { max_items = 25 },
                     dadbod = { module = 'vim_dadbod_completion.blink' },
-                    lazydev = { module = 'lazydev.integrations.blink' },
+                    lazydev = {
+                        name = 'LazyDev',
+                        module = 'lazydev.integrations.blink',
+                        score_offset = 100,
+                    },
+                    ['blade-nav'] = {
+                        module = 'blade-nav.blink',
+                        opts = {
+                            close_tag_on_complete = false,
+                        },
+                        score_offset = 100,
+                    },
                 },
             },
             snippets = { preset = 'luasnip' },

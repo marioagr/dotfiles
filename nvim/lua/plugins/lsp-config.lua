@@ -4,7 +4,7 @@ return {
         -- Automatically install LSPs and related tools to stdpath for neovim
         -- NOTE: Must be loaded before dependants
         {
-            'williamboman/mason.nvim',
+            'mason-org/mason.nvim',
             ---@module 'mason.settings'
             ---@type MasonSettings
             ---@diagnostic disable-next-line: missing-fields
@@ -16,10 +16,11 @@ return {
                         package_pending = '...',
                         package_uninstalled = '✗',
                     },
+                    width = 0.9,
                 },
             },
         },
-        'williamboman/mason-lspconfig.nvim',
+        'mason-org/mason-lspconfig.nvim',
         'WhoIsSethDaniel/mason-tool-installer.nvim',
 
         -- Universal JSON schema store, where schemas for popular JSON documents can be found.
@@ -207,7 +208,8 @@ return {
         --  By default, Neovim doesn't support everything that is in the LSP Specification.
         --  When you add blink.cmp, luasnip, etc. Neovim now has *more* capabilities.
         --  So, we create new capabilities with blink.cmp, and then broadcast that to the servers.
-        local capabilities = require('blink.cmp').get_lsp_capabilities()
+        -- TODO: In theory this is no longer neccessary with new Neovim 0.11+ vim.lsp.config
+        -- local capabilities = require('blink.cmp').get_lsp_capabilities()
 
         -- Enable the following language servers
         --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -218,7 +220,6 @@ return {
         --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
         --  - settings (table): Override the default settings passed when initializing the server.
         --    For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
-        -- TODO: Check a way to extend the filetypes and not override them?
         local servers = {
             -- clangd = {},
             -- gopls = {},
@@ -230,6 +231,7 @@ return {
             --    https://github.com/pmizio/typescript-tools.nvim
             --
             -- But for many setups, the LSP (`ts_ls`) will work just fine
+
             -- antlersls = {},
             cssls = {
                 filetypes = {
@@ -254,10 +256,10 @@ return {
                 },
             },
             intelephense = {},
-            -- https://github.com/b0o/schemastore.nvim
             jsonls = {
                 settings = {
                     json = {
+                        -- https://github.com/b0o/schemastore.nvim
                         schemas = require('schemastore').json.schemas(),
                         validate = { enable = true },
                     },
@@ -338,31 +340,35 @@ return {
 
         -- You can add other tools here that you want Mason to install
         -- for you, so that they are available from within Neovim.
-        -- NOTE: Used in Conform.nvim
         local ensure_installed = vim.tbl_keys(servers or {})
-        vim.list_extend(ensure_installed, {
-            'stylua', -- Used to format lua code
-            'prettierd',
-            'mdslw', -- Markdown formatter
-            'pint', -- PHP formatter
-            'blade-formatter',
+
+        vim.lsp.config('*', {
+            root_markers = { '.git' },
         })
 
-        require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
+        for server_name, config in pairs(servers) do
+            vim.lsp.config(server_name, config)
+            -- This is handled by mason-config
+            -- vim.lsp.enable(server_name)
+        end
 
+        ---@diagnostic disable-next-line: missing-fields
         require('mason-lspconfig').setup({
-            ensure_installed = {},
-            automatic_installation = false,
-            handlers = {
-                function(server_name)
-                    local server = servers[server_name] or {}
-                    -- This handles overriding only values explicitly passed by the server
-                    -- configuration above. Useful when disabling certain features of
-                    -- an LSP (for example, turning off formatting for ts_ls)
-                    server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-                    require('lspconfig')[server_name].setup(server)
-                end,
-            },
+            automatic_enable = true,
         })
+
+        -- NOTE: Used in conform-nvim
+        local ei_w_formatters = {
+            'prettierd',
+            'tailwindcss',
+            'blade-formatter',
+            'stylua',
+            'mdslw',
+            'pint',
+        }
+
+        vim.list_extend(ei_w_formatters, ensure_installed)
+
+        require('mason-tool-installer').setup({ ensure_installed = ei_w_formatters })
     end,
 }
