@@ -14,6 +14,7 @@ return {
         { '<leader>lc', ':Laravel commands<cr>', desc = 'Execute a user [c]ommand' },
         { '<leader>lf', ':Laravel related<cr>', desc = 'Show related [f]iles' },
         { '<leader>lh', ':Laravel history<cr>', desc = 'Show [h]istory of commands' },
+        { '<leader>ll', ':e storage/logs/laravel.log<CR>', desc = 'Open [l]ogs' },
         { '<leader>lm', ':Laravel make<cr>', desc = 'Available content to [m]ake' },
         { '<leader>lr', ':Laravel routes<cr>', desc = 'Show current [r]outes of the project' },
         { '<leader>lR', ':Laravel resources<cr>', desc = 'Go to a [R]esource of the project' },

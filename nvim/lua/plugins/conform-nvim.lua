@@ -70,7 +70,7 @@ return {
                     append_args = {
                         '--sort-tailwindcss-classes',
                         '--sort-html-attributes="custom"', --Needed for ↓
-                        '--custom-html-attributes-order=":.+,wire:.+,x-.+,id,nameclass,type"',
+                        '--custom-html-attributes-order=":.+,wire:.+,x-.+,id,name,class,type"',
                         '--no-multiple-empty-lines',
                         '--component-prefix="x-,livewire:,flux:"',
                     },
