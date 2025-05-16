@@ -234,26 +234,26 @@ return {
 
             -- antlersls = {},
             cssls = {
-                filetypes = {
+                filetypes = vim.list_extend(require('lspconfig.configs.cssls').default_config.filetypes, {
                     -- 'antlers',
                     'blade',
                     'html',
-                },
+                }),
             },
             emmet_language_server = {
-                filetypes = {
+                filetypes = vim.list_extend(require('lspconfig.configs.emmet_language_server').default_config.filetypes, {
                     -- 'antlers',
                     'blade',
                     'php',
-                },
+                }),
             },
             html = {
-                filetypes = {
+                filetypes = vim.list_extend(require('lspconfig.configs.html').default_config.filetypes, {
                     -- 'antlers',
                     'hbs',
                     'php',
                     'twig',
-                },
+                }),
             },
             intelephense = {},
             jsonls = {
@@ -290,13 +290,14 @@ return {
                 -- filetypes = {
                 --     'antlers',
                 -- },
-                -- settings = {
-                --     tailwindCss = {
-                --         includeLanguages = {
-                --             antlers = 'html',
-                --         },
-                --     },
-                -- },
+                settings = {
+                    tailwindCSS = {
+                        classAttributes = vim.list_extend(require('lspconfig.configs.tailwindcss').default_config.settings.tailwindCSS.classAttributes, { 'class:input' }),
+                        -- includeLanguages = {
+                        --     antlers = 'html',
+                        -- },
+                    },
+                },
             },
             ts_ls = {},
             -- In case I need to configure it deeply
@@ -317,16 +318,6 @@ return {
                 },
             },
         }
-
-        -- Merge LSPs defined ft list with my servers table
-        for server_name, opts in pairs(servers) do
-            -- Get LSP defined ft list
-            local current_server_ft_list = require('lspconfig.configs.' .. server_name).default_config.filetypes
-            -- Get my defined ft list for a given LSP from the servers table
-            opts.filetypes = opts.filetypes or {}
-            -- "Merge" them
-            vim.list_extend(opts.filetypes, current_server_ft_list)
-        end
 
         -- Set border globally instead of per client
         --- @see https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization#borders
@@ -354,11 +345,12 @@ return {
 
         ---@diagnostic disable-next-line: missing-fields
         require('mason-lspconfig').setup({
+            ensure_installed = ensure_installed,
             automatic_enable = true,
         })
 
         -- NOTE: Used in conform-nvim
-        local ei_w_formatters = {
+        local mason_extras = {
             'prettierd',
             'tailwindcss',
             'blade-formatter',
@@ -367,8 +359,6 @@ return {
             'pint',
         }
 
-        vim.list_extend(ei_w_formatters, ensure_installed)
-
-        require('mason-tool-installer').setup({ ensure_installed = ei_w_formatters })
+        require('mason-tool-installer').setup({ ensure_installed = mason_extras })
     end,
 }
