@@ -70,7 +70,19 @@ return {
                     append_args = {
                         '--sort-tailwindcss-classes',
                         '--sort-html-attributes="custom"', --Needed for ↓
-                        '--custom-html-attributes-order=":.+,wire:.+,x-.+,id,name,class,type"',
+                        string.format(
+                            '--custom-html-attributes-order="%s"',
+                            table.concat({
+                                'id',
+                                'name',
+                                'type',
+                                'class',
+                                ':.+',
+                                'x-.+',
+                                'wire:.+',
+                                'data-.+',
+                            }, ',')
+                        ),
                         '--no-multiple-empty-lines',
                         '--component-prefix="x-,livewire:,flux:"',
                     },

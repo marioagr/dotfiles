@@ -293,6 +293,7 @@ return {
                 settings = {
                     tailwindCSS = {
                         classAttributes = vim.list_extend(require('lspconfig.configs.tailwindcss').default_config.settings.tailwindCSS.classAttributes, { 'class:input' }),
+                        emmetCompletions = true,
                         -- includeLanguages = {
                         --     antlers = 'html',
                         -- },
