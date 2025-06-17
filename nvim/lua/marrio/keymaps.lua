@@ -17,6 +17,22 @@ __setKeymap('<Space>', '<NOP>', { silent = true }, { 'n', 'v' })
 
 __setKeymap('<Esc><Esc>', '<C-\\><C-n>', { desc = 'Easily escape Terminal mode' }, 't')
 
+---@param forward boolean
+local function search_and_center(forward)
+    if forward then
+        vim.cmd([[silent! normal! n]])
+    else
+        vim.cmd([[silent! normal! N]])
+    end
+    vim.cmd([[normal! zz]])
+end
+__setKeymap('n', function()
+    search_and_center(true)
+end, { desc = 'Search and center vertically' })
+__setKeymap('N', function()
+    search_and_center(false)
+end, { desc = 'Search and center vertically' })
+
 -- Save buffer
 __setKeymap('<leader>w', ':w<CR>', { desc = '[w]rite buffer' })
 
