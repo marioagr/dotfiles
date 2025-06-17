@@ -12,6 +12,7 @@ return {
     keys = {
         { '<leader>la', ':Laravel artisan<cr>', desc = 'Open Artisan menu' },
         { '<leader>lc', ':Laravel commands<cr>', desc = 'Execute a user [c]ommand' },
+        { '<leader>le', ':e .env<CR>', desc = 'Open [e]nv file' },
         { '<leader>lf', ':Laravel related<cr>', desc = 'Show related [f]iles' },
         { '<leader>lh', ':Laravel history<cr>', desc = 'Show [h]istory of commands' },
         { '<leader>ll', ':e storage/logs/laravel.log<CR>', desc = 'Open [l]ogs' },
