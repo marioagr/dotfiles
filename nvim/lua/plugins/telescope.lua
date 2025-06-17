@@ -178,8 +178,9 @@ return {
                         '!**/composer.lock',
                         '!**/package-lock.json',
                         '!**/bun.lockb',
-                        '!**/vendor/**',
-                        '!**/node_modules/**',
+                    },
+                    additional_args = {
+                        '--hidden',
                     },
                 })
             end
