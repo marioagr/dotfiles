@@ -54,9 +54,6 @@ return {
         }
 
         require('bufferline').setup(my_opts)
-
-        -- Keep the default values and append the "globals" to save pinned buffers
-        vim.opt_global.sessionoptions = table.concat(vim.list_extend(vim.opt_global.sessionoptions:get('default'), { 'globals' }), ',')
     end,
     keys = {
         {

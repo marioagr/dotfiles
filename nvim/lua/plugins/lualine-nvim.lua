@@ -28,20 +28,25 @@ return {
         }
 
         local function status_formatter()
-            local disabled_icon = ''
-            local enabled_icon = '󰉶'
-            local buffer_icon = enabled_icon
-            local global_icon = enabled_icon
+            local buffer_autoformat_disabled_icon = '󰯮 '
+            local buffer_autoformat_enabled_icon = '󰬉 '
+            local buffer_icon = buffer_autoformat_enabled_icon
 
-            if vim.b.disable_autoformat then
-                buffer_icon = disabled_icon
+            local global_autoformat_disabled_icon = '󰯽 '
+            local global_autoformat_enabled_icon = '󰬎 '
+            local global_icon = global_autoformat_enabled_icon
+
+            if vim.b.DisableAutoFormat == 1 then
+                buffer_icon = buffer_autoformat_disabled_icon
+            else
+                vim.b.DisableAutoFormat = 0
             end
 
-            if vim.g.disable_autoformat then
-                global_icon = disabled_icon
+            if vim.g.DisableAutoFormatGlobally == 1 then
+                global_icon = global_autoformat_disabled_icon
             end
 
-            return require('string').format('b %s  g %s', buffer_icon, global_icon)
+            return require('string').format('%s%s', buffer_icon, global_icon)
         end
 
         require('lualine').setup({

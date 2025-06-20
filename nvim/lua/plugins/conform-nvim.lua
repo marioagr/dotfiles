@@ -13,7 +13,7 @@ local function custom_opts_for_format(bufnr)
     --      languages here or re-enable it for the disabled ones.
     -- ]]
     local disable_filetypes = { 'c', 'cpp' }
-    if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat or vim.tbl_contains(disable_filetypes, vim.bo[bufnr].filetype) then
+    if (vim.g.DisableAutoFormatGlobally == 1) or (vim.b[bufnr].DisableAutoFormat == 1) or vim.tbl_contains(disable_filetypes, vim.bo[bufnr].filetype) then
         return do_not_apply_formatting_opts
     end
 
@@ -110,14 +110,22 @@ return {
         {
             '<leader>tf',
             function()
-                vim.b.disable_autoformat = not vim.b.disable_autoformat
+                if vim.b.DisableAutoFormat == 0 then
+                    vim.b.DisableAutoFormat = 1
+                else
+                    vim.b.DisableAutoFormat = 0
+                end
             end,
             desc = 'buffer [f]ormatter',
         },
         {
             '<leader>tF',
             function()
-                vim.g.disable_autoformat = not vim.g.disable_autoformat
+                if vim.g.DisableAutoFormatGlobally == 0 then
+                    vim.g.DisableAutoFormatGlobally = 1
+                else
+                    vim.g.DisableAutoFormatGlobally = 0
+                end
             end,
             desc = 'Global [F]ormatter',
         },

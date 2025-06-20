@@ -45,24 +45,20 @@ return {
             autoread = true, -- Load local session on startup
         })
 
-        ---@diagnostic disable-next-line: param-type-mismatch
         __setKeymap('<leader>Wm', function()
             sessions.write(sessions.config.file)
         end, { desc = '[W]orkspace [m]ake a local Vim session' })
 
-        ---@diagnostic disable-next-line: param-type-mismatch
         __setKeymap('<leader>Wr', function()
             sessions.read()
         end, { desc = '[W]orkspace [r]ead a Vim session' })
 
-        ---@diagnostic disable-next-line: param-type-mismatch
         __setKeymap('<leader>Wd', function()
             sessions.delete(nil, {
                 force = true,
             })
         end, { desc = '[W]orkspace [d]elete a local Vim session' })
 
-        ---@diagnostic disable-next-line: param-type-mismatch
         __setKeymap('<leader>Wl', function()
             sessions.select()
         end, { desc = '[W]orkspace [l]ist sessions' })

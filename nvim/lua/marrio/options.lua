@@ -123,3 +123,7 @@ vim.diagnostic.config({
 --- @see https://github.com/nvim-lua/plenary.nvim/pull/649
 --]]
 -- vim.opt.winborder = 'rounded'
+
+-- Keep the default values and append the "globals" to save pinned buffers
+vim.opt_global.sessionoptions = table.concat(vim.list_extend(vim.opt_global.sessionoptions:get('default'), { 'globals' }), ',')
+vim.g.DisableAutoFormatGlobally = 0
