@@ -35,12 +35,24 @@ local keys = {
     { key = 'UpArrow', mods = 'CTRL|SHIFT|ALT', action = act.AdjustPaneSize({ 'Up', 1 }) },
     { key = 'DownArrow', mods = 'CTRL|SHIFT|ALT', action = act.AdjustPaneSize({ 'Down', 1 }) },
 
-    -- Tabs without LEADER
+    -- Cycle through tabs
     { key = 'PageDown', mods = 'CTRL', action = act.ActivateTabRelative(1) },
     { key = 'PageUp', mods = 'CTRL', action = act.ActivateTabRelative(-1) },
 
     { key = 'PageDown', mods = 'CTRL|SHIFT', action = act.MoveTabRelative(1) },
     { key = 'PageUp', mods = 'CTRL|SHIFT', action = act.MoveTabRelative(-1) },
+
+    -- Goto tab #
+    { key = '1', mods = 'CTRL|ALT', action = act.ActivateTab(0) },
+    { key = '2', mods = 'CTRL|ALT', action = act.ActivateTab(1) },
+    { key = '3', mods = 'CTRL|ALT', action = act.ActivateTab(2) },
+    { key = '4', mods = 'CTRL|ALT', action = act.ActivateTab(3) },
+    { key = '5', mods = 'CTRL|ALT', action = act.ActivateTab(4) },
+    { key = '6', mods = 'CTRL|ALT', action = act.ActivateTab(5) },
+    { key = '7', mods = 'CTRL|ALT', action = act.ActivateTab(6) },
+    { key = '8', mods = 'CTRL|ALT', action = act.ActivateTab(7) },
+    { key = '9', mods = 'CTRL|ALT', action = act.ActivateTab(8) },
+    { key = '0', mods = 'CTRL|ALT', action = act.ActivateTab(9) },
 
     -- Scroll
     { key = 'UpArrow', mods = 'SHIFT', action = act.ScrollByLine(-1) },
@@ -54,11 +66,8 @@ local keys = {
     { key = 'LeftArrow', mods = 'SHIFT', action = act.ScrollToPrompt(-1) },
     { key = 'RightArrow', mods = 'SHIFT', action = act.ScrollToPrompt(1) },
 
-    -- Disable debug keymap and send it to the terminal
-    { key = 'L', mods = 'CTRL|SHIFT', action = act.DisableDefaultAssignment },
-
     -- Show debug overlay
-    { key = 'd', mods = 'LEADER', action = act.ShowDebugOverlay },
+    { key = 'D', mods = 'LEADER', action = act.ShowDebugOverlay },
 
     -- [w]orkspace "mode" by pressing LEADER+w
     {

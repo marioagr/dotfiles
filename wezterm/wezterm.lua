@@ -128,10 +128,10 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
 
     local edge_foreground = background
 
-    local title = get_tab_title(tab)
+    local title = string.format('%s| %s', tab.tab_index + 1, get_tab_title(tab))
 
     if tab.active_pane.is_zoomed then
-        title = string.format('%s  %s', EXPANDED_PANE, title)
+        title = string.format('%s %s', EXPANDED_PANE, title)
     end
 
     title = wezterm.truncate_right(title, max_width - 2)
