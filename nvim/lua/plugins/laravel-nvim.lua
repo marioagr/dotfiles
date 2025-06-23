@@ -41,6 +41,24 @@ return {
                     desc = "Re-creates the db and seed's it",
                 },
             },
+            composer = {
+                autoload = {
+                    cmd = { 'dump-autoload' },
+                    desc = 'Dumps the composer autoload',
+                },
+                install = {
+                    cmd = { 'install' },
+                    desc = 'Run composer install',
+                },
+                update = {
+                    cmd = { 'update' },
+                    desc = 'Run composer update',
+                },
+                ['ide-helper'] = {
+                    cmd = { 'ide-helper' },
+                    desc = 'Runs ide-helper commands defined in composer.json',
+                },
+            },
             npm = {
                 build = {
                     cmd = { 'run', 'build' },
@@ -49,16 +67,6 @@ return {
                 dev = {
                     cmd = { 'run', 'dev' },
                     desc = 'Builds the javascript assets',
-                },
-            },
-            composer = {
-                autoload = {
-                    cmd = { 'dump-autoload' },
-                    desc = 'Dumps the composer autoload',
-                },
-                ['ide-helper'] = {
-                    cmd = { 'ide-helper' },
-                    desc = 'Runs ide-helper commands defined in composer.json',
                 },
             },
             sail = {

@@ -11,6 +11,12 @@ return {
             keyword = 'wide',
             pattern = { [[.*<(KEYWORDS)\s*:]], [[.*\@(KEYWORDS)\s*]] },
         },
+        keywords = {
+            DANGER = {
+                icon = ' ',
+                color = 'error',
+            },
+        },
         signs = false,
     },
     keys = {
