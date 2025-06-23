@@ -98,8 +98,9 @@ vim.opt.backup = true
 vim.opt.backupdir:remove('.')
 
 -- [[ Highlight on yank ]]
--- See `:help vim.highlight.on_yank()`
+-- See `:help vim.hl.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
+    desc = 'Highlight when yanking (copying) text',
     group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
     callback = function()
         vim.hl.on_yank({ timeout = 250 })
