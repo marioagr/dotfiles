@@ -13,11 +13,13 @@ return {
         },
         keywords = {
             DANGER = {
-                icon = ' ',
+                icon = ' ',
                 color = 'error',
             },
+            REVIEW = {
+                icon = ' ',
+            },
         },
-        signs = false,
     },
     keys = {
         {

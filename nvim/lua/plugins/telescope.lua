@@ -215,7 +215,7 @@ return {
             __setKeymap('<leader>sG', grep_search_advanced, { desc = '[s]earch by [G]rep on all files' })
             __setKeymap('<leader>sd', builtin.diagnostics, { desc = '[s]earch [d]iagnostics' })
             __setKeymap('<leader>sr', builtin.resume, { desc = '[s]earch [r]esume' })
-            __setKeymap('<leader>sS', text_suggestions, { desc = 'Open [t]elescope with [s]pell suggestions' })
+            __setKeymap('<leader>sz', text_suggestions, { desc = 'Open [t]elescope with [s]pell suggestions' })
         end,
     },
 }
