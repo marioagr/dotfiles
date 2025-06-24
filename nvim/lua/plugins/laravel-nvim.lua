@@ -19,70 +19,40 @@ return {
         { '<leader>lm', ':Laravel make<cr>', desc = 'Available content to [m]ake' },
         { '<leader>lr', ':Laravel routes<cr>', desc = 'Show current [r]outes of the project' },
         { '<leader>lR', ':Laravel resources<cr>', desc = 'Go to a [R]esource of the project' },
+        {
+            'gf',
+            function()
+                if require('laravel').app('gf').cursor_on_resource() then
+                    return '<cmd>Laravel gf<CR>'
+                else
+                    return 'gf'
+                end
+            end,
+            noremap = false,
+            expr = true,
+        },
     },
     event = { 'VeryLazy' },
-    opts = {
-        lsp_server = 'intelephense',
-        ui = {
-            nui_opts = {
-                split = {
-                    position = 'bottom',
-                    win_options = {
-                        signcolumn = 'no',
+    config = function()
+        -- local default_user_commands = require('laravel.options.user_commands')
+        local opts = {
+            lsp_server = 'intelephense',
+            ui = {
+                nui_opts = {
+                    split = {
+                        position = 'bottom',
+                        win_options = {
+                            signcolumn = 'no',
+                        },
                     },
                 },
-                -- Maybe set the same window option for the popup?
             },
-        },
-        user_commands = {
-            artisan = {
-                ['db:fresh'] = {
-                    cmd = { 'migrate:fresh', '--seed' },
-                    desc = "Re-creates the db and seed's it",
-                },
+            user_commands = require('marrio.extras.laravel.user-commands'),
+            user_providers = {
+                require('marrio.extras.laravel.history-provider'),
             },
-            composer = {
-                autoload = {
-                    cmd = { 'dump-autoload' },
-                    desc = 'Dumps the composer autoload',
-                },
-                install = {
-                    cmd = { 'install' },
-                    desc = 'Run composer install',
-                },
-                update = {
-                    cmd = { 'update' },
-                    desc = 'Run composer update',
-                },
-                ['ide-helper'] = {
-                    cmd = { 'ide-helper' },
-                    desc = 'Runs ide-helper commands defined in composer.json',
-                },
-            },
-            npm = {
-                build = {
-                    cmd = { 'run', 'build' },
-                    desc = 'Builds the javascript assets',
-                },
-                dev = {
-                    cmd = { 'run', 'dev' },
-                    desc = 'Builds the javascript assets',
-                },
-            },
-            sail = {
-                start = {
-                    cmd = { 'up', '-d' },
-                    desc = 'Start Sail dettached',
-                },
-                stop = {
-                    cmd = { 'stop' },
-                    desc = 'Stop Sail',
-                },
-                build_no_cache = {
-                    cmd = { 'build', '--no-cache' },
-                    desc = 'Build Sail with no cache',
-                },
-            },
-        },
-    },
+        }
+
+        require('laravel').setup(opts)
+    end,
 }
