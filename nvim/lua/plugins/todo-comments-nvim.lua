@@ -16,9 +16,19 @@ return {
                 icon = ' ',
                 color = 'error',
             },
+            INFO = {
+                icon = ' ',
+                color = 'info',
+            },
+            NOTE = {
+                alt = {},
+            },
             REVIEW = {
                 icon = ' ',
             },
+        },
+        colors = {
+            info = { '#82aaff' },
         },
     },
     keys = {
