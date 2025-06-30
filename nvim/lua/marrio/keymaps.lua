@@ -184,7 +184,10 @@ __setKeymap('<leader>R', function()
 
     local commands = {}
     for line in io.lines(file_path) do
-        table.insert(commands, line)
+        -- Skip lines starting with #
+        if not line:match('^%s*#') then
+            table.insert(commands, line)
+        end
     end
 
     -- Remove the last line if it's empty
