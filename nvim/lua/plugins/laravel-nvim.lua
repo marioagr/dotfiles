@@ -37,6 +37,11 @@ return {
         -- local default_user_commands = require('laravel.options.user_commands')
         local opts = {
             lsp_server = 'intelephense',
+            features = {
+                model_info = {
+                    enable = false,
+                },
+            },
             ui = {
                 nui_opts = {
                     split = {
