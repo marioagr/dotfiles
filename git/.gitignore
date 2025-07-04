@@ -1,7 +1,7 @@
 # Global ignore config
 
 Session.vim
-nvim_commands.txt
+nvim_commands.sh
 
 # Libraries/packages folders
 node_modules/

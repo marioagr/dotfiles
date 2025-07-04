@@ -170,7 +170,7 @@ __setKeymap('<M-Enter>', function()
 end, { desc = 'Go to file:line under cursor' })
 
 __setKeymap('<leader>R', function()
-    local file_path = vim.fn.getcwd() .. '/nvim_commands.txt'
+    local file_path = vim.fn.getcwd() .. '/nvim_commands.sh'
     local actions = require('telescope.actions')
     local action_state = require('telescope.actions.state')
     local pickers = require('telescope.pickers')
@@ -215,6 +215,10 @@ __setKeymap('<leader>R', function()
             previewer = previewers.new_buffer_previewer({
                 define_preview = function(self, _, _)
                     vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, vim.split(preview_content, '\n'))
+                    vim.api.nvim_set_option_value('filetype', 'sh', {
+                        scope = 'local',
+                        buf = self.state.bufnr,
+                    })
                 end,
             }),
             layout_strategy = 'vertical',
