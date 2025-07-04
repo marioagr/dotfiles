@@ -39,8 +39,8 @@ local keys = {
     { key = 'PageDown', mods = 'CTRL', action = act.ActivateTabRelative(1) },
     { key = 'PageUp', mods = 'CTRL', action = act.ActivateTabRelative(-1) },
 
-    { key = 'PageDown', mods = 'CTRL|SHIFT', action = act.MoveTabRelative(1) },
-    { key = 'PageUp', mods = 'CTRL|SHIFT', action = act.MoveTabRelative(-1) },
+    { key = 'PageDown', mods = 'CTRL|ALT', action = act.MoveTabRelative(1) },
+    { key = 'PageUp', mods = 'CTRL|ALT', action = act.MoveTabRelative(-1) },
 
     -- Goto tab #
     { key = '1', mods = 'CTRL|ALT', action = act.ActivateTab(0) },
