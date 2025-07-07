@@ -56,7 +56,9 @@ __setKeymap('y', 'myy`y', { desc = 'Maintain cursor position when yanking a visu
 
 -- Paste replace visual selection without copying it.
 -- ["] choose the [_] register (which acts like a black-hole) then [d]elete it and [P]aste it
-__setKeymap('p', '"_dP', { desc = 'Preserve yank without replacing it by the selected text' }, 'v')
+-- NOTE: With LuaSnip when this was with the mode 'v', it caused a problem that pasted text
+-- instead of just inserting a p
+__setKeymap('p', '"_dP', { desc = 'Preserve yank without replacing it by the selected text' }, 'x')
 
 -- Easy insertion of a trailing ; or ,
 __setKeymap(';;', '<Esc>A;<Esc>', { desc = 'Insert [;] at the eol' })
