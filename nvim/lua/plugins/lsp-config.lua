@@ -244,7 +244,6 @@ return {
                 filetypes = vim.list_extend(require('lspconfig.configs.emmet_language_server').default_config.filetypes, {
                     -- 'antlers',
                     'blade',
-                    'php',
                 }),
             },
             html = {
