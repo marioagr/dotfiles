@@ -209,13 +209,13 @@ local key_tables = {
                 end
 
                 window:perform_action(act.SpawnTab('CurrentPaneDomain'), pane)
-                wezterm.sleep_ms(1500) -- I have to wait to "connect" to WSL2 so... ¯\_(ツ)_/¯
+                wezterm.sleep_ms(2000) -- I have to wait to "connect" to WSL2 so... ¯\_(ツ)_/¯
 
                 window:perform_action(act.SpawnTab('CurrentPaneDomain'), pane)
-                wezterm.sleep_ms(1500) -- I have to wait to "connect" to WSL2 so... ¯\_(ツ)_/¯
+                wezterm.sleep_ms(2000) -- I have to wait to "connect" to WSL2 so... ¯\_(ツ)_/¯
 
                 window:perform_action(act.SpawnTab('CurrentPaneDomain'), pane)
-                wezterm.sleep_ms(1500) -- I have to wait to "connect" to WSL2 so... ¯\_(ツ)_/¯
+                wezterm.sleep_ms(2000) -- I have to wait to "connect" to WSL2 so... ¯\_(ツ)_/¯
 
                 local tabs = mux_window:tabs()
 

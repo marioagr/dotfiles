@@ -1,6 +1,12 @@
 local default_user_commands = require('laravel.options.user_commands')
 
 local new_commands = vim.tbl_deep_extend('force', default_user_commands, {
+    artisan = {
+        ['optimize:clear'] = {
+            cmd = { 'optimize:clear' },
+            desc = 'Clear cache and other things',
+        },
+    },
     composer = {
         install = {
             cmd = { 'install' },
