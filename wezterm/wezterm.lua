@@ -6,7 +6,7 @@ local my_keys = require('my_keys')
 
 config.color_scheme = 'Ubuntu'
 config.default_domain = 'WSL:Ubuntu'
-config.font = wezterm.font_with_fallback({ 'Cascadia Mono', 'Symbols Nerd Font Mono' })
+config.font = wezterm.font_with_fallback({ 'CaskaydiaCove Nerd Font Mono', 'Symbols Nerd Font Mono' })
 config.font_size = 13
 config.scrollback_lines = 5000
 config.ui_key_cap_rendering = 'WindowsSymbols'
