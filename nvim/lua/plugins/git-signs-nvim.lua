@@ -19,36 +19,28 @@ return {
             -- Navigation
             map({ 'n', 'v' }, '[h', function()
                 vim.schedule(function()
-                    gs.nav_hunk('prev', {
-                        target = 'all',
-                    })
+                    gs.nav_hunk('prev')
                 end)
                 return '<Ignore>'
             end, { expr = true, desc = 'Jump to previous hunk' })
 
             map({ 'n', 'v' }, ']h', function()
                 vim.schedule(function()
-                    gs.nav_hunk('next', {
-                        target = 'all',
-                    })
+                    gs.nav_hunk('next')
                 end)
                 return '<Ignore>'
             end, { expr = true, desc = 'Jump to next hunk' })
 
             map({ 'n', 'v' }, '[H', function()
                 vim.schedule(function()
-                    gs.nav_hunk('first', {
-                        target = 'all',
-                    })
+                    gs.nav_hunk('first')
                 end)
                 return '<Ignore>'
             end, { expr = true, desc = 'Jump to first hunk' })
 
             map({ 'n', 'v' }, ']H', function()
                 vim.schedule(function()
-                    gs.nav_hunk('last', {
-                        target = 'all',
-                    })
+                    gs.nav_hunk('last')
                 end)
                 return '<Ignore>'
             end, { expr = true, desc = 'Jump to last hunk' })
