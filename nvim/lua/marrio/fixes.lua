@@ -5,9 +5,13 @@
 
 -- Add patterns for fts and set them to their corresponding language
 vim.filetype.add({
+    filename = {
+        ['docker-compose.yml'] = 'yaml.docker-compose',
+        ['docker-compose.yaml'] = 'yaml.docker-compose',
+        ['composer.lock'] = 'json',
+    },
     pattern = {
         -- ['.*%.antlers%.html'] = 'antlers',
-        ['.*/composer%.lock'] = 'json',
     },
 })
 -- Use the HTML treesitter for antlers
