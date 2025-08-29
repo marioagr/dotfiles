@@ -54,7 +54,13 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 vim.opt.list = true -- enable the below listchars
-vim.opt.listchars = { tab = '▸ ', trail = '·', nbsp = '␣' }
+vim.opt.listchars = {
+    eol = '↩',
+    tab = '▸ ',
+    trail = '•',
+    nbsp = '␣',
+}
+vim.opt.showbreak = '↪'
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
