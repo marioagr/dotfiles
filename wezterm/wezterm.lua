@@ -134,7 +134,7 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
         title = '  ' .. title
     elseif title == 'lazygit' or title == 'git' then
         title = '󰊢  ' .. title
-    elseif title == 'cli' then
+    elseif title == 'cli' or title == 'opencode' then
         title = '  ' .. title
     elseif title == 'docker' or title:find('sail') then
         title = '  ' .. title

@@ -208,21 +208,18 @@ local key_tables = {
                     return
                 end
 
-                window:perform_action(act.SpawnTab('CurrentPaneDomain'), pane)
-                wezterm.sleep_ms(2000) -- I have to wait to "connect" to WSL2 so... ¯\_(ツ)_/¯
-
-                window:perform_action(act.SpawnTab('CurrentPaneDomain'), pane)
-                wezterm.sleep_ms(2000) -- I have to wait to "connect" to WSL2 so... ¯\_(ツ)_/¯
-
-                window:perform_action(act.SpawnTab('CurrentPaneDomain'), pane)
-                wezterm.sleep_ms(2000) -- I have to wait to "connect" to WSL2 so... ¯\_(ツ)_/¯
+                for i = 1, 4, 1 do
+                    window:perform_action(act.SpawnTab('CurrentPaneDomain'), pane)
+                    wezterm.sleep_ms(2000) -- I have to wait to "connect" to WSL2 so... ¯\_(ツ)_/¯
+                end
 
                 local tabs = mux_window:tabs()
 
                 tabs[1]:set_title('nvim')
                 tabs[2]:set_title('lazygit')
                 tabs[3]:set_title('cli')
-                tabs[4]:set_title('sail-npm')
+                tabs[4]:set_title('opencode')
+                tabs[5]:set_title('sail-npm')
             end),
         },
 
