@@ -34,8 +34,13 @@ return {
     keys = {
         {
             '<leader>st',
-            ':TodoTelescope<CR>',
+            ':TodoTelescope keywords=TODO,FIX,DANGER,REVIEW<CR>',
             desc = '[s]earch [t]odos',
+        },
+        {
+            '<leader>sT',
+            ':TodoTelescope<CR>',
+            desc = '[s]earch all [T]odos',
         },
     },
 }

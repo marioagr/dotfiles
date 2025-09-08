@@ -69,6 +69,10 @@ return {
         -- - sr)'  - [S]urround [R]eplace [)] [']
         -- Number of lines within which surrounding is searched
         require('mini.surround').setup({
+            mappings = {
+                find = '',
+                find_left = '',
+            },
             n_lines = 100,
         })
 

@@ -207,7 +207,7 @@ return {
             __setKeymap('<leader>ss', builtin.builtin, { desc = '[s]earch [s]elect Telescope' })
             -- __set_keybind('<leader>gf', builtin.git_files, { desc = 'Search [g]it [f]iles' })
             __setKeymap('<leader>sf', search_files, { desc = '[s]earch [f]iles' })
-            __setKeymap('<leader>sa', search_all_files, { desc = '[s]earch [a]ll files' })
+            __setKeymap('<leader>sF', search_all_files, { desc = '[s]earch all [F]iles' })
             __setKeymap('<leader>sh', builtin.help_tags, { desc = '[s]earch [h]elp' })
             __setKeymap('<leader>sk', builtin.keymaps, { desc = '[s]earch [k]eymaps' })
             __setKeymap('<leader>sw', builtin.grep_string, { desc = '[s]earch current [w]ord' })
