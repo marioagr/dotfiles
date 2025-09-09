@@ -6,7 +6,7 @@ return {
     ---@diagnostic disable-next-line: missing-fields
     opts = {
         numhl = true,
-        sign_priority = 15,
+        sign_priority = 100,
         on_attach = function(bufnr)
             local gs = require('gitsigns')
 

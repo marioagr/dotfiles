@@ -2,6 +2,17 @@
 return {
     'nvim-lualine/lualine.nvim',
     config = function()
+        local nvim_dap = {
+            filetypes = { 'dapui_scopes', 'dapui_breakpoints', 'dapui_stacks', 'dapui_watches', 'dap-repl', 'dapui_console' },
+            sections = {
+                lualine_a = {
+                    'mode',
+                },
+                lualine_b = {
+                    'filename',
+                },
+            },
+        }
         local dbui = {
             filetypes = { 'dbui' },
             sections = {
@@ -89,6 +100,7 @@ return {
                 'nvim-tree',
                 dbui,
                 grug_far,
+                nvim_dap,
             },
         })
     end,
