@@ -85,25 +85,11 @@ return {
             desc = 'Navigate to last buffer',
         },
         {
-            '<leader>bp',
+            '<leader>tb',
             function()
                 vim.cmd('BufferLineTogglePin')
             end,
-            desc = 'Pin/Unpin buffer',
-        },
-        {
-            '<leader>b{',
-            function()
-                vim.cmd('BufferLineMovePrev')
-            end,
-            desc = 'Move buffer backwards',
-        },
-        {
-            '<leader>b}',
-            function()
-                vim.cmd('BufferLineMoveNext')
-            end,
-            desc = 'Move buffer forwards',
+            desc = '[t]oggle pin [b]uffer',
         },
     },
 }
