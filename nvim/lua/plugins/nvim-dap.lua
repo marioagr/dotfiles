@@ -118,40 +118,40 @@ return {
                 request = 'launch',
                 port = 9003,
             },
-            {
-                name = 'Launch currently open script',
-                type = 'php',
-                request = 'launch',
-                program = '${file}',
-                cwd = '${fileDirname}',
-                port = 0,
-                runtimeArgs = {
-                    '-dxdebug.start_with_request=yes',
-                },
-                env = {
-                    XDEBUG_MODE = 'debug,develop',
-                    XDEBUG_CONFIG = 'client_port=${port}',
-                },
-            },
-            {
-                name = 'Launch Built-in web server',
-                type = 'php',
-                request = 'launch',
-                runtimeArgs = {
-                    '-dxdebug.mode=debug',
-                    '-dxdebug.start_with_request=yes',
-                    '-S',
-                    'localhost:0',
-                },
-                program = '',
-                cwd = '${workspaceRoot}',
-                port = 9003,
-                serverReadyAction = {
-                    pattern = 'Development Server \\(http://localhost:({0-9}+)\\) started',
-                    uriFormat = 'http://localhost:%s',
-                    action = 'openExternally',
-                },
-            },
+            -- {
+            --     name = 'Launch currently open script',
+            --     type = 'php',
+            --     request = 'launch',
+            --     program = '${file}',
+            --     cwd = '${fileDirname}',
+            --     port = 0,
+            --     runtimeArgs = {
+            --         '-dxdebug.start_with_request=yes',
+            --     },
+            --     env = {
+            --         XDEBUG_MODE = 'debug,develop',
+            --         XDEBUG_CONFIG = 'client_port=${port}',
+            --     },
+            -- },
+            -- {
+            --     name = 'Launch Built-in web server',
+            --     type = 'php',
+            --     request = 'launch',
+            --     runtimeArgs = {
+            --         '-dxdebug.mode=debug',
+            --         '-dxdebug.start_with_request=yes',
+            --         '-S',
+            --         'localhost:0',
+            --     },
+            --     program = '',
+            --     cwd = '${workspaceRoot}',
+            --     port = 9003,
+            --     serverReadyAction = {
+            --         pattern = 'Development Server \\(http://localhost:({0-9}+)\\) started',
+            --         uriFormat = 'http://localhost:%s',
+            --         action = 'openExternally',
+            --     },
+            -- },
         }
 
         -- Dap UI setup
@@ -160,10 +160,10 @@ return {
             layouts = {
                 {
                     elements = {
-                        { id = 'breakpoints', size = 0.40 },
-                        { id = 'scopes', size = 0.10 },
+                        { id = 'breakpoints', size = 0.35 },
+                        { id = 'scopes', size = 0.35 },
                         { id = 'watches', size = 0.15 },
-                        { id = 'stacks', size = 0.35 },
+                        { id = 'stacks', size = 0.15 },
                     },
                     size = 70,
                     position = 'right',
