@@ -15,11 +15,32 @@ return {
     },
     keys = {
         {
+            '<F1>',
+            function()
+                require('dapui').eval(nil, { enter = true })
+            end,
+            desc = 'Debug: See last session result.',
+        },
+        {
             '<F5>',
             function()
                 require('dap').continue()
             end,
             desc = 'Debug: Start/Continue',
+        },
+        {
+            '<F8>',
+            function()
+                require('dap').toggle_breakpoint()
+            end,
+            desc = 'Debug: [t]oggle [b]reakpoint',
+        },
+        {
+            '<F20>', -- Shift+F8
+            function()
+                require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))
+            end,
+            desc = 'Debug: Set Breakpoint',
         },
         {
             '<F10>',
@@ -42,32 +63,11 @@ return {
             end,
             desc = 'Debug: Step Out',
         },
-        {
-            '<F8>',
-            function()
-                require('dap').toggle_breakpoint()
-            end,
-            desc = 'Debug: [t]oggle [b]reakpoint',
-        },
-        {
-            '<F20>', -- Shift+F8
-            function()
-                require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))
-            end,
-            desc = 'Debug: Set Breakpoint',
-        },
         -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
         {
             '<F12>',
             function()
                 require('dapui').toggle()
-            end,
-            desc = 'Debug: See last session result.',
-        },
-        {
-            '<leader>?',
-            function()
-                require('dapui').eval(nil, { enter = true })
             end,
             desc = 'Debug: See last session result.',
         },
@@ -89,6 +89,9 @@ return {
                 'php',
             },
         })
+
+        -- NOTE: Maybe use https://github.com/lucaSartore/nvim-dap-exception-breakpoints
+        dap.defaults.php.exception_breakpoints = { 'Notice', 'Warning', 'Error', 'Exception' }
 
         dap.configurations.php = {
             {
@@ -190,26 +193,8 @@ return {
             vim.fn.sign_define(tp, { text = icon, texthl = hl, numhl = hl })
         end
 
-        dap.listeners.before.attach.dapui_config = function()
-            dapui.open()
-        end
-        dap.listeners.before.launch.dapui_config = function()
-            dapui.open()
-        end
-        dap.listeners.before.event_terminated.dapui_config = function()
-            dapui.close()
-        end
-        dap.listeners.before.event_exited.dapui_config = function()
-            dapui.close()
-        end
-
-        -- Install golang specific config
-        -- require('dap-go').setup({
-        --     delve = {
-        --         -- On Windows delve must be run attached or it crashes.
-        --         -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
-        --         detached = vim.fn.has('win32') == 0,
-        --     },
-        -- })
+        dap.listeners.after.event_initialized['dapui_config'] = dapui.open
+        dap.listeners.before.event_terminated['dapui_config'] = dapui.close
+        dap.listeners.before.event_exited['dapui_config'] = dapui.close
     end,
 }
