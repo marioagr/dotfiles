@@ -219,7 +219,7 @@ local key_tables = {
                 tabs[2]:set_title('lazygit')
                 tabs[3]:set_title('cli')
                 tabs[4]:set_title('opencode')
-                tabs[5]:set_title('sail-npm')
+                tabs[5]:set_title('sail & npm')
             end),
         },
 
