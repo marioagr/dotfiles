@@ -91,7 +91,7 @@ return {
         })
 
         -- NOTE: Maybe use https://github.com/lucaSartore/nvim-dap-exception-breakpoints
-        dap.defaults.php.exception_breakpoints = { 'Notice', 'Warning', 'Error', 'Exception' }
+        dap.defaults.php.exception_breakpoints = { 'Error', 'Exception' }
 
         dap.configurations.php = {
             {
