@@ -49,6 +49,7 @@
   "vim-dadbod-completion": { "branch": "master", "commit": "a8dac0b3cf6132c80dc9b18bef36d4cf7a9e1fe6" },
   "vim-dadbod-ui": { "branch": "master", "commit": "e8b53c0f3aa6e6127ac2a2d2071d9aade6c6e373" },
   "vim-dotenv": { "branch": "master", "commit": "5c51cfcf8d87280d6414e03cd6b253eb70ecb800" },
+  "vim-eunuch": { "branch": "master", "commit": "e86bb794a1c10a2edac130feb0ea590a00d03f1e" },
   "vim-heritage": { "branch": "main", "commit": "574baeb0679681a710adce5110a0d8b2ae1c2637" },
   "vim-lastplace": { "branch": "master", "commit": "e58cb0df716d3c88605ae49db5c4741db8b48aa9" },
   "vim-rooter": { "branch": "master", "commit": "51402fb77c4d6ae94994e37dc7ca13bec8f4afcc" },
