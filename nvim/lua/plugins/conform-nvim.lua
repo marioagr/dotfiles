@@ -93,9 +93,6 @@ return {
                         MDSLW_LANG = 'en es',
                     },
                 },
-                pint = {
-                    stdin = true,
-                },
             },
         }
 
