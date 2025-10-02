@@ -1,9 +1,10 @@
 # Global ignore config
 
+# My Neovim files
 Session.vim
 nvim_commands.sh
 
-# Libraries/packages folders
+# Common libraries/packages folders
 node_modules/
 vendor/
 
