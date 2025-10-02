@@ -10,3 +10,21 @@ git:
     pager: 'delta'
 
 confirmOnQuit: true
+
+customCommands:
+  - key: 'u'
+    context: 'commits'
+    description: 'Restore file from parent commit'
+    prompts:
+      - type: 'input'
+        title: 'File to restore:'
+        key: 'fileToRestore'
+        suggestions:
+          command: 'git diff-tree --no-commit-id --name-only -r {{.SelectedLocalCommit.Sha}}'
+      - type: 'confirm'
+        title: 'Confirm Restore'
+        body: 'Are you sure you want to restore "{{.Form.fileToRestore}}" from {{.SelectedLocalCommit.Sha}}~1?'
+    command: 'git restore --source={{.SelectedLocalCommit.Sha}}~1 --worktree -- {{.Form.fileToRestore | quote}}'
+    loadingText: 'Restoring file...'
+    after:
+      checkForConflicts: true
