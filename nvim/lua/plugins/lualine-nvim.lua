@@ -38,28 +38,6 @@ return {
             },
         }
 
-        local function status_formatter()
-            local buffer_autoformat_disabled_icon = '󰯮'
-            local buffer_autoformat_enabled_icon = '󰬉'
-            local buffer_icon = buffer_autoformat_enabled_icon
-
-            local global_autoformat_disabled_icon = '󰯽'
-            local global_autoformat_enabled_icon = '󰬎'
-            local global_icon = global_autoformat_enabled_icon
-
-            if vim.b.DisableAutoFormat == 1 then
-                buffer_icon = buffer_autoformat_disabled_icon
-            else
-                vim.b.DisableAutoFormat = 0
-            end
-
-            if vim.g.DisableAutoFormatGlobally == 1 then
-                global_icon = global_autoformat_disabled_icon
-            end
-
-            return require('string').format('%s %s', buffer_icon, global_icon)
-        end
-
         require('lualine').setup({
             options = {
                 icons_enabled = true,
@@ -86,7 +64,39 @@ return {
                     'fileformat',
                 },
                 lualine_y = {
-                    status_formatter,
+                    -- Is formatting disabled?
+                    {
+                        function()
+                            local is_disabled_in = ''
+
+                            if vim.b.DisableAutoFormat == 1 then
+                                is_disabled_in = is_disabled_in .. 'B'
+                            else
+                                vim.b.DisableAutoFormat = 0
+                            end
+
+                            if vim.g.DisableAutoFormatGlobally == 1 then
+                                if is_disabled_in ~= '' then
+                                    is_disabled_in = is_disabled_in .. ' B'
+                                else
+                                    is_disabled_in = 'B'
+                                end
+                            end
+
+                            return is_disabled_in
+                        end,
+                        icon = '󰉩',
+                        cond = function()
+                            local disabled_in_buffer = vim.g.DisableAutoFormat or false
+                            local disabled_globally = vim.g.DisableAutoFormatGlobally or false
+
+                            if disabled_in_buffer or disabled_globally then
+                                return true
+                            else
+                                return false
+                            end
+                        end,
+                    },
                     '(vim.bo.expandtab and "␠ " or "⇥ ") .. vim.bo.shiftwidth',
                 },
                 lualine_z = {
