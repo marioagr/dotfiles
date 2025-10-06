@@ -120,6 +120,21 @@ return {
 
                 ['<M-d>'] = { 'show_documentation', 'hide_documentation' },
             },
+            cmdline = {
+                keymap = {
+                    preset = 'default',
+                    ['<C-Space>'] = { 'show', 'hide', 'fallback' },
+
+                    ['<M-CR>'] = { 'select_and_accept', 'fallback' },
+
+                    ['<C-Up>'] = { 'select_prev' },
+                    ['<C-Down>'] = { 'select_next' },
+
+                    ['<Right>'] = { 'fallback' },
+                    ['<Left>'] = { 'fallback' },
+                },
+                -- completion = { menu = { auto_show = true } },
+            },
             signature = {
                 enabled = true,
                 window = {
