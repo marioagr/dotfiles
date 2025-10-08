@@ -52,11 +52,6 @@ return {
     event = { 'VeryLazy' },
     opts = {
         lsp_server = 'intelephense',
-        features = {
-            history = {
-                allow_duplicates = false,
-            },
-        },
         extensions = {
             composer_info = { enable = false },
             model_info = { enable = false },
