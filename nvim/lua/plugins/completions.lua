@@ -122,7 +122,7 @@ return {
             },
             cmdline = {
                 keymap = {
-                    preset = 'default',
+                    preset = 'cmdline',
                     ['<C-Space>'] = { 'show', 'hide', 'fallback' },
 
                     ['<M-CR>'] = { 'select_and_accept', 'fallback' },
