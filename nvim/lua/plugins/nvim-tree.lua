@@ -1,9 +1,10 @@
 -- File tree sidebar
 return {
-    'kyazdani42/nvim-tree.lua',
+    'nvim-tree/nvim-tree.lua',
     dependencies = {
-        'kyazdani42/nvim-web-devicons',
+        'nvim-tree/nvim-web-devicons',
     },
+    lazy = false,
     config = function()
         -- Sort files naturally (respecting numbers within files names)
         -- 1, 2, 3, ... 10, 20, 30 instead of 1, 10, 2, 20, 3, 30 ...

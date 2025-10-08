@@ -5,7 +5,7 @@ return {
         event = 'VimEnter',
         dependencies = {
             'nvim-lua/plenary.nvim',
-            'kyazdani42/nvim-web-devicons',
+            'nvim-tree/nvim-web-devicons',
             -- Fuzzy Finder Algorithm which requires local dependencies to be built.
             'nvim-telescope/telescope-live-grep-args.nvim',
             {
