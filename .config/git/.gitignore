@@ -5,6 +5,6 @@ Session.vim
 nvim_commands.sh
 
 # Common libraries/packages folders
-node_modules/
-vendor/
+/node_modules
+/vendor
 

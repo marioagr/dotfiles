@@ -7,18 +7,24 @@ WIN_HOME=/mnt/c/Users/${USER^}
 # create the symlink
 # ln -s $DOTFILES/nvim to (destination directory eg. $HOME/.config/nvim)
 
-rm $HOME/.bash_aliases
+# INFO: WSL
+
+unlink $HOME/.bash_aliases
 ln -s $DOTFILES/bash/aliases.sh $HOME/.bash_aliases
 
 unlink $HOME/.config/nvim
 ln -s $DOTFILES/nvim $HOME/.config/nvim
 
-rm $HOME/.gitconfig $HOME/.gitignore
-ln -s $DOTFILES/git/.gitconfig $HOME/.gitconfig
-ln -s $DOTFILES/git/.gitignore $HOME/.gitignore
+unlink $HOME/.config/git
+ln -s $DOTFILES/.config/git $HOME/.config/git
 
-rm $HOME/.config/lazygit/config.yml
-ln -s $DOTFILES/lazygit/config.yml $HOME/.config/lazygit/config.yml
+unlink $HOME/.config/lazygit
+ln -s $DOTFILES/.config/lazygit $HOME/.config/lazygit
+
+unlink $HOME/.config/opencode
+ln -s $DOTFILES/.config/opencode $HOME/.config/opencode
+
+# INFO: Windows
 
 rm -f $MY_WIN_HOME/.config/wezterm/wezterm.lua $WIN_HOME/.config/wezterm/my_keys.lua
 cp -r $DOTFILES/wezterm/ $WIN_HOME/.config/

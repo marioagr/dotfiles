@@ -18,7 +18,7 @@
 
 [core]
     editor = nvim
-    excludesfile = ~/.gitignore
+    excludesfile = ~/.config/git/.gitignore
     pager = delta
 
 [interactive]
