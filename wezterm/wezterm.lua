@@ -54,6 +54,14 @@ config.colors = {
     },
 }
 
+config.launch_menu = {
+    {
+        label = 'Powershell',
+        domain = { DomainName = 'local' },
+        args = { 'pwsh.exe' },
+    },
+}
+
 -- Instead of pressing AltGr+{<space> twice to insert just "^",
 -- use this config to press without space and inserts it directly
 -- config.use_dead_keys = false
