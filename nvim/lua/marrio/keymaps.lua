@@ -61,6 +61,8 @@ __setKeymap('y', 'myy`y', { desc = 'Maintain cursor position when yanking a visu
 __setKeymap('p', '"_dP', { desc = 'Preserve yank without replacing it by the selected text' }, 'x')
 
 -- Easy insertion of a trailing ; or ,
+__setKeymap(',,', '<Esc>A,<Esc>', { desc = 'Insert [,] at the eol' })
+__setKeymap(',,', '<Esc>A,', { desc = 'Insert [,] at the eol' }, 'i')
 __setKeymap(';;', '<Esc>A;<Esc>', { desc = 'Insert [;] at the eol' })
 __setKeymap(';;', '<Esc>A;', { desc = 'Insert [;] at the eol' }, 'i')
 
