@@ -138,14 +138,16 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
 
     local title = get_tab_title(tab)
 
-    if title == 'nvim' or title == 'neovim' then
+    if string.match(title, 'n[eo]*vim') then
         title = '  ' .. title
-    elseif title == 'lazygit' or title == 'git' then
+    elseif string.match(title, '[lazy]*git') then
         title = '󰊢  ' .. title
-    elseif title == 'cli' or title == 'opencode' then
+    elseif string.match(title, 'c[ommand]*li[ne]*') or string.match(title, 'opencode') then
         title = '  ' .. title
-    elseif title == 'docker' or title:find('sail') then
+    elseif string.match(title, 'docker[-compose]*') or title:find('sail') then
         title = '  ' .. title
+    elseif string.match(title, '[wW]indows') or string.match(title, 'p[o]*w[er]*sh[ell]*') then
+        title = '  ' .. title
     end
 
     title = string.format('%s: %s', tab.tab_index + 1, title)
