@@ -8,9 +8,9 @@ local keys = {
     { key = 'Space', mods = 'LEADER|ALT', action = wezterm.action.SendKey({ key = 'Space', mods = 'ALT' }) },
 
     -- Font related
-    { key = '+', mods = 'SUPER', action = act.IncreaseFontSize },
-    { key = '-', mods = 'SUPER', action = act.DecreaseFontSize },
-    { key = '0', mods = 'SUPER', action = act.ResetFontSize },
+    { key = '+', mods = 'CTRL|ALT', action = act.IncreaseFontSize },
+    { key = '-', mods = 'CTRL|ALT', action = act.DecreaseFontSize },
+    { key = '|', mods = 'CTRL|ALT', action = act.ResetFontSize },
 
     -- Create new Wezterm windows
     { key = 'n', mods = 'SUPER', action = act.SpawnWindow },
