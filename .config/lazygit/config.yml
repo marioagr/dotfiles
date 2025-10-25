@@ -1,12 +1,12 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/jesseduffield/lazygit/master/schema/config.json
 gui:
+  statusPanelView: allBranchesLog
   filterMode: fuzzy
   nerdFontsVersion: '3'
   showDivergenceFromBaseBranch: 'arrowAndNumber'
 
 git:
   paging:
-    colorArg: always
     pager: 'delta'
 
 confirmOnQuit: true
