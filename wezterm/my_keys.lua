@@ -287,6 +287,7 @@ local key_tables = {
         { key = 'v', action = act.SplitVertical({ domain = 'CurrentPaneDomain' }) },
         { key = 'h', action = act.SplitHorizontal({ domain = 'CurrentPaneDomain' }) },
 
+        { key = 'x', action = act.CloseCurrentPane({ confirm = true }) },
         -- Toggle "full screen" of current pane
         { key = 'z', action = act.TogglePaneZoomState },
     },
