@@ -19,3 +19,5 @@ alias lzd='lazydocker'
 
 alias doc="docker-compose"
 
+alias opc='opencode'
+
