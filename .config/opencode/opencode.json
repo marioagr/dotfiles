@@ -4,6 +4,9 @@
     "share": "disabled",
     "autoshare": false,
     "autoupdate": false,
+    "experimental": {
+        "disable_paste_summary": true
+    },
     "keybinds": {
         "session_share": "",
         "messages_half_page_up": "alt+pgup",
