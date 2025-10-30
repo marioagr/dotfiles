@@ -1,0 +1,12 @@
+{
+    "match": {
+        "prefix": "match",
+        "body": [
+            "match (${1:\\$this}) {",
+            "\t${2:self::}${3:case} => ${4:result},",
+            "\tdefault => ${7:null},",
+            "};"
+        ],
+        "description": "PHP match expression"
+    }
+}
