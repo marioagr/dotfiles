@@ -68,6 +68,10 @@ return {
         },
         user_commands = {
             artisan = {
+                ['blueprint:build'] = {
+                    cmd = { 'blueprint:build', '-m' },
+                    desc = 'Use draft.yml to generate files (overwrites migrations)',
+                },
                 ['db:fresh'] = {
                     cmd = { 'migrate:fresh', '--seed' },
                     desc = "Re-creates the db and seed's it",
