@@ -29,6 +29,8 @@ ln -s $DOTFILES/.config/opencode $HOME/.config/opencode
 rm -f $MY_WIN_HOME/.config/wezterm/wezterm.lua $WIN_HOME/.config/wezterm/my_keys.lua
 cp -r $DOTFILES/wezterm/ $WIN_HOME/.config/
 
+cp $DOTFILES/.config/git/.gitignore $WIN_HOME/.gitignore
+
 # rm -rf $HOME/.config/phpactor
 # ln -s $DOTFILES/phpactor $HOME/.config/phpactor
 
