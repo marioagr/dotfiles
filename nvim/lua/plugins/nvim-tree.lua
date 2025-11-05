@@ -69,6 +69,7 @@ return {
             },
             filters = {
                 custom = { '^.git$' },
+                git_ignored = false,
             },
             live_filter = {
                 always_show_folders = false,
