@@ -173,7 +173,7 @@ __setKeymap('<M-Enter>', function()
     end
 end, { desc = 'Go to file:line under cursor' })
 
-__setKeymap('<leader>R', function()
+__setKeymap('<leader><C-r>', function()
     local file_path = vim.fn.getcwd() .. '/nvim_commands.sh'
     local actions = require('telescope.actions')
     local action_state = require('telescope.actions.state')
@@ -181,31 +181,87 @@ __setKeymap('<leader>R', function()
     local finders = require('telescope.finders')
     local previewers = require('telescope.previewers')
 
-    if not vim.fn.filereadable(file_path) then
-        print('File not found: ' .. file_path)
+    local function ensure_script_with_template(path)
+        local created_or_emptied = false
+
+        local function write_template(p)
+            local template = table.concat({
+                '#!/usr/bin/env bash',
+                '# Archivo: ' .. p,
+                '# Descripción: Lista de comandos para ejecutar desde Neovim.',
+                '# Instrucciones:',
+                '#   - Escribe un comando por línea.',
+                '#   - Las líneas que comienzan con "#" serán ignoradas.',
+                '#   - Las líneas vacías se omiten al ejecutar en cadena.',
+                '#   - La última línea no llevará "&& \\" automáticamente.',
+                '',
+                '# Ejemplos:',
+                '# echo "Inicio"',
+                '# ls -la',
+                '# echo "Fin"',
+                '',
+                '',
+            }, '\n')
+
+            local f, err = io.open(p, 'w')
+            if not f then
+                vim.notify('No se pudo crear el archivo: ' .. (err or ''), vim.log.levels.ERROR)
+                return false
+            end
+            f:write(template)
+            f:close()
+
+            pcall(function()
+                if vim.fn.has('win32') == 0 and vim.fn.executable('chmod') == 1 then
+                    vim.fn.system({ 'chmod', '+x', p })
+                end
+            end)
+
+            return true
+        end
+
+        if vim.fn.filereadable(path) == 0 then
+            created_or_emptied = write_template(path)
+        else
+            local stat = vim.loop.fs_stat(path)
+            if stat and stat.size == 0 then
+                created_or_emptied = write_template(path)
+            end
+        end
+
+        if created_or_emptied then
+            vim.cmd('edit ' .. vim.fn.fnameescape(path))
+            return true
+        end
+        return false
+    end
+
+    if ensure_script_with_template(file_path) then
         return
     end
 
-    local commands = {}
+    local raw_lines = {}
     for line in io.lines(file_path) do
-        -- Skip lines starting with #
         if not line:match('^%s*#') then
-            table.insert(commands, line)
+            table.insert(raw_lines, line)
         end
     end
 
-    -- Remove the last line if it's empty
-    if #commands > 0 and commands[#commands]:match('^%s*$') then
-        table.remove(commands)
+    local commands = {}
+    for _, l in ipairs(raw_lines) do
+        if not l:match('^%s*$') then
+            table.insert(commands, l)
+        end
     end
 
-    -- Append '&& \' to each line except the last one, but skip empty lines
+    if #commands == 0 then
+        vim.notify('El archivo no contiene comandos. Abriendo para edición...', vim.log.levels.INFO)
+        vim.cmd('edit ' .. vim.fn.fnameescape(file_path))
+        return
+    end
+
     for i = 1, #commands - 1 do
-        if commands[i]:match('^%s*$') then
-            commands[i] = 'echo ""' -- Echo empty lines
-        else
-            commands[i] = commands[i] .. ' && \\'
-        end
+        commands[i] = commands[i] .. ' && \\'
     end
 
     local preview_content = table.concat(commands, '\n')
@@ -239,7 +295,6 @@ __setKeymap('<leader>R', function()
                     if selection[1] == 'Yes' then
                         vim.cmd('split | terminal')
 
-                        -- Send commands to the terminal
                         for _, cmd in ipairs(commands) do
                             vim.api.nvim_chan_send(vim.b.terminal_job_id, cmd .. '\n')
                         end
