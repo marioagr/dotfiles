@@ -8,11 +8,11 @@
         "disable_paste_summary": true
     },
     "keybinds": {
-        "session_share": "",
+        "session_share": "none",
         "messages_half_page_up": "alt+pgup",
         "messages_half_page_down": "alt+pgdown",
         "messages_first": "ctrl+home",
-        "messages_last": "ctrl+end"
+        "messages_last": "ctrl+end",
     },
     "agent": {
         "advisor": {
