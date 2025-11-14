@@ -60,10 +60,34 @@ return {
                 },
                 lualine_x = {
                     'filetype',
-                    { 'encoding', show_bomb = true },
-                    'fileformat',
+                    {
+                        'encoding',
+                        show_bomb = true,
+                        cond = function()
+                            if vim.opt.fileencoding:get() ~= 'utf-8' then
+                                return true
+                            end
+                        end,
+                    },
+                    {
+                        'fileformat',
+                        cond = function()
+                            if vim.bo.fileformat ~= 'unix' then
+                                return true
+                            end
+                        end,
+                    },
                 },
                 lualine_y = {
+                    -- Spelling
+                    {
+                        function()
+                            return '󰓆'
+                        end,
+                        cond = function()
+                            return vim.opt_local.spell._value
+                        end,
+                    },
                     -- Is formatting disabled?
                     {
                         function()
@@ -77,9 +101,9 @@ return {
 
                             if vim.g.DisableAutoFormatGlobally == 1 then
                                 if is_disabled_in ~= '' then
-                                    is_disabled_in = is_disabled_in .. ' B'
+                                    is_disabled_in = is_disabled_in .. ' G'
                                 else
-                                    is_disabled_in = 'B'
+                                    is_disabled_in = 'G'
                                 end
                             end
 
@@ -97,7 +121,22 @@ return {
                             end
                         end,
                     },
-                    '(vim.bo.expandtab and "␠ " or "⇥ ") .. vim.bo.shiftwidth',
+                    -- Sapces/Tab && width
+                    {
+                        function()
+                            local icon = '␠ '
+                            if not vim.bo.expandtab then
+                                icon = '↹ '
+                            end
+
+                            return icon .. vim.bo.shiftwidth
+                        end,
+                        cond = function()
+                            if not vim.bo.expandtab or vim.bo.shiftwidth ~= 4 then
+                                return true
+                            end
+                        end,
+                    },
                 },
                 lualine_z = {
                     'location',
