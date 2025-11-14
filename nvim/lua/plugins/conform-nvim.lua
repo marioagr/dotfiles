@@ -40,6 +40,7 @@ return {
         ---@module "conform"
         ---@type conform.setupOpts
         local opts = {
+            log_level = vim.log.levels.DEBUG,
             -- notify_on_error = false,
             format_after_save = custom_opts_for_format,
             -- List of formatters available at
@@ -52,8 +53,8 @@ return {
                 -- You can use 'stop_after_first' to run the first available formatter from the list
                 css = { 'prettierd' },
                 html = { 'prettierd' },
-                javascript = { 'biome', 'prettierd', stop_after_first = true },
-                typescript = { 'biome', 'prettierd', stop_after_first = true },
+                javascript = { 'prettierd', stop_after_first = true },
+                typescript = { 'prettierd', stop_after_first = true },
                 lua = { 'stylua' },
                 markdown = { 'mdslw' },
                 php = { 'pint' },
@@ -91,6 +92,11 @@ return {
                     env = {
                         MDSLW_MAX_WIDTH = 0,
                         MDSLW_LANG = 'en es',
+                    },
+                },
+                prettierd = {
+                    env = {
+                        PRETTIERD_DEFAULT_CONFIG = vim.fn.stdpath('config') .. '/utils/.prettierrc',
                     },
                 },
             },
