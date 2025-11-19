@@ -15,8 +15,20 @@ local keys = {
     -- Create new Wezterm windows
     { key = 'n', mods = 'SUPER', action = act.SpawnWindow },
 
-    -- TODO: Check how to configure this correctly
-    { key = 'c', mods = 'CTRL|SHIFT', action = act.CopyTo('Clipboard') },
+    {
+        key = 'c',
+        mods = 'CTRL|SHIFT',
+        action = wezterm.action_callback(function(window, pane)
+            local has_selection = window:get_selection_text_for_pane(pane) ~= ''
+            if has_selection then
+                window:perform_action(act.CopyTo('Clipboard'), pane)
+
+                window:perform_action(act.ClearSelection, pane)
+
+                -- window:toast_notification('wezterm', 'Copied!', nil, 1000)
+            end
+        end),
+    },
     { key = 'v', mods = 'CTRL|SHIFT', action = act.PasteFrom('Clipboard') },
     { key = 'f', mods = 'CTRL|SHIFT', action = act.Search('CurrentSelectionOrEmptyString') },
     { key = 'p', mods = 'CTRL|SHIFT', action = act.ActivateCommandPalette },
