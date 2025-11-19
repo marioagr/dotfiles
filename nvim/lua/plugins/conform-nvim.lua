@@ -51,10 +51,10 @@ return {
                 blade = { 'blade-formatter' },
                 -- Conform can also run multiple formatters sequentially
                 -- You can use 'stop_after_first' to run the first available formatter from the list
-                css = { 'prettierd' },
-                html = { 'prettierd' },
-                javascript = { 'prettierd', stop_after_first = true },
-                typescript = { 'prettierd', stop_after_first = true },
+                css = { 'prettier', stop_after_first = true },
+                html = { 'prettier', stop_after_first = true },
+                javascript = { 'prettier', stop_after_first = true },
+                typescript = { 'prettier', stop_after_first = true },
                 lua = { 'stylua' },
                 markdown = { 'mdslw' },
                 php = { 'pint' },
@@ -92,11 +92,6 @@ return {
                     env = {
                         MDSLW_MAX_WIDTH = 0,
                         MDSLW_LANG = 'en es',
-                    },
-                },
-                prettierd = {
-                    env = {
-                        PRETTIERD_DEFAULT_CONFIG = vim.fn.stdpath('config') .. '/utils/.prettierrc',
                     },
                 },
             },

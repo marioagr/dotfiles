@@ -354,7 +354,7 @@ return {
 
         -- NOTE: Used in conform-nvim
         local mason_extras = {
-            'prettierd',
+            'prettier',
             'tailwindcss',
             'blade-formatter',
             'stylua',
