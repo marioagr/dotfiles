@@ -115,17 +115,29 @@ return {
                 }))
             end
 
-            local function search_files()
+            ---@param with_preview boolean
+            local function search_files(with_preview)
+                if with_preview == nil then
+                    with_preview = false
+                end
+
                 builtin.find_files({
                     follow = true,
+                    preview = with_preview,
                 })
             end
 
-            local function search_all_files()
+            ---@param with_preview boolean
+            local function search_all_files(with_preview)
+                if with_preview == nil then
+                    with_preview = false
+                end
+
                 builtin.find_files({
                     follow = true,
                     hidden = true,
                     no_ignore = true,
+                    preview = with_preview,
                     prompt_title = 'All Files (.gitignore & .hidden)',
                 })
             end
@@ -170,8 +182,18 @@ return {
             __setKeymap('<leader>s/', telescope_live_grep_open_files, { desc = '[s]earch [/] in Open Files' })
             __setKeymap('<leader>ss', builtin.builtin, { desc = '[s]earch [s]elect Telescope' })
             -- __set_keybind('<leader>gf', builtin.git_files, { desc = 'Search [g]it [f]iles' })
-            __setKeymap('<leader>sf', search_files, { desc = '[s]earch [f]iles' })
-            __setKeymap('<leader>sF', search_all_files, { desc = '[s]earch all [F]iles' })
+            __setKeymap('<leader>sf', function()
+                search_files(false)
+            end, { desc = '[s]earch [f]iles' })
+            __setKeymap('<leader>sF', function()
+                search_all_files(false)
+            end, { desc = '[s]earch all [F]iles' })
+            __setKeymap('<leader>sp', function()
+                search_files(true)
+            end, { desc = '[s]earch [f]iles' })
+            __setKeymap('<leader>sP', function()
+                search_all_files(true)
+            end, { desc = '[s]earch all [F]iles' })
             __setKeymap('<leader>sh', builtin.help_tags, { desc = '[s]earch [h]elp' })
             __setKeymap('<leader>sk', builtin.keymaps, { desc = '[s]earch [k]eymaps' })
             __setKeymap('<leader>sw', builtin.grep_string, { desc = '[s]earch current [w]ord' })
