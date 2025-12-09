@@ -9,23 +9,39 @@ WIN_HOME=/mnt/c/Users/${USER^}
 
 # INFO: WSL
 
+################
+# Bash aliases #
+################
 unlink $HOME/.bash_aliases
 ln -s $DOTFILES/bash/aliases.sh $HOME/.bash_aliases
 
+#################
+# Neovim / nvim #
+#################
 unlink $HOME/.config/nvim
 ln -s $DOTFILES/nvim $HOME/.config/nvim
 
+#######
+# Git #
+#######
 unlink $HOME/.config/git
 ln -s $DOTFILES/.config/git $HOME/.config/git
 
+###########
+# Lazygit #
+###########
 unlink $HOME/.config/lazygit
 ln -s $DOTFILES/.config/lazygit $HOME/.config/lazygit
 
+############
+# OpenCode #
+############
 unlink $HOME/.config/opencode/opencode.json
 ln -s $DOTFILES/.config/opencode/opencode.json $HOME/.config/opencode/opencode.json
 
-# INFO: Windows
-
+###########
+# Windows #
+###########
 rm -f $MY_WIN_HOME/.config/wezterm/wezterm.lua $WIN_HOME/.config/wezterm/my_keys.lua
 cp -r $DOTFILES/wezterm/ $WIN_HOME/.config/
 
