@@ -11,6 +11,7 @@ vim.filetype.add({
         ['composer.lock'] = 'json',
     },
     pattern = {
+        ['%.env.*'] = 'sh',
         ['.*%.tinker'] = 'php',
         -- ['.*%.antlers%.html'] = 'antlers',
     },
