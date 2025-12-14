@@ -85,6 +85,20 @@ return {
             desc = 'Navigate to last buffer',
         },
         {
+            '<M-PageUp>',
+            function()
+                vim.cmd('BufferLineMovePrev')
+            end,
+            desc = 'Move buffer backwards',
+        },
+        {
+            '<M-PageDown>',
+            function()
+                vim.cmd('BufferLineMoveNext')
+            end,
+            desc = 'Move buffer forwards',
+        },
+        {
             '<leader>tb',
             function()
                 vim.cmd('BufferLineTogglePin')
