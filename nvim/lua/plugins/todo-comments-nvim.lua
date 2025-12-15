@@ -7,6 +7,9 @@ return {
     ---@type TodoOptions
     ---@diagnostic disable-next-line: missing-fields
     opts = {
+        colors = {
+            info = { '#82aaff' },
+        },
         highlight = {
             keyword = 'wide',
             pattern = { [[.*<(KEYWORDS)\s*:]], [[.*\@(KEYWORDS)\s*]] },
@@ -27,8 +30,19 @@ return {
                 icon = ' ',
             },
         },
-        colors = {
-            info = { '#82aaff' },
+        search = {
+            command = 'rg',
+            args = {
+                -- Defaults
+                '--color=never',
+                '--no-heading',
+                '--with-filename',
+                '--line-number',
+                '--column',
+
+                -- Ignore any comments in vendor folders
+                '-g=!**/vendor/**',
+            },
         },
     },
     keys = {
