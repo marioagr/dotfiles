@@ -43,6 +43,7 @@ return {
                 -- Ignore any comments in vendor folders
                 '-g=!**/vendor/**',
             },
+            pattern = [[\b(KEYWORDS):]],
         },
     },
     keys = {
