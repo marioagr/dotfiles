@@ -18,6 +18,16 @@ return {
         -- Add VSCode-like pictograms to Neovim built-in lsp
         'onsails/lspkind.nvim',
         'folke/lazydev.nvim',
+
+        {
+            'saghen/blink.compat',
+            -- use v2.* for blink.cmp v1.*
+            version = '2.*',
+            -- lazy.nvim will automatically load the plugin when it's required by blink.cmp
+            lazy = true,
+            -- make sure to set opts so that lazy.nvim calls blink.compat's setup
+            opts = {},
+        },
     },
     config = function()
         ---@module 'blink.cmp'
@@ -142,13 +152,13 @@ return {
                 },
             },
             sources = {
+                default = { 'lsp', 'buffer', 'snippets', 'laravel' },
                 per_filetype = {
                     blade = { inherit_defaults = true, 'blade-nav' },
                     sql = { 'dadbod', 'buffer' },
                     lua = { 'lazydev', inherit_defaults = true },
                 },
                 providers = {
-                    lsp = { fallbacks = {} },
                     buffer = { max_items = 25 },
                     snippets = { max_items = 25 },
                     dadbod = { module = 'vim_dadbod_completion.blink' },
@@ -163,6 +173,11 @@ return {
                             close_tag_on_complete = false,
                         },
                         score_offset = 100,
+                    },
+                    laravel = {
+                        name = 'laravel',
+                        module = 'blink.compat.source',
+                        score_offset = 95, -- show at a higher priority than lsp
                     },
                 },
             },
