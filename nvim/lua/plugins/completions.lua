@@ -159,6 +159,7 @@ return {
                     lua = { 'lazydev', inherit_defaults = true },
                 },
                 providers = {
+                    lsp = { fallbacks = {} },
                     buffer = { max_items = 25 },
                     snippets = { max_items = 25 },
                     dadbod = { module = 'vim_dadbod_completion.blink' },
