@@ -4,6 +4,7 @@ gui:
   filterMode: fuzzy
   nerdFontsVersion: '3'
   showDivergenceFromBaseBranch: 'arrowAndNumber'
+  sidePanelWidth: 0.25
 
 git:
   paging:
