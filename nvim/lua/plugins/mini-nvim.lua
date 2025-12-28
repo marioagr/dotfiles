@@ -1,7 +1,7 @@
 return {
     -- Full list of modules at: https://github.com/echasnovski/mini.nvim?tab=readme-ov-file#modules
-    'echasnovski/mini.nvim',
-    version = false,
+    'nvim-mini/mini.nvim',
+    version = '*',
     config = function()
         -- Better Around/Inside textobjects
         -- Examples:
