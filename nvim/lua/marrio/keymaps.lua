@@ -194,7 +194,7 @@ __setKeymap('<leader><C-r>', function()
         if vim.fn.filereadable(path) == 0 then
             created_or_emptied = write_template(path)
         else
-            local stat = vim.loop.fs_stat(path)
+            local stat = vim.uv.fs_stat(path)
             if stat and stat.size == 0 then
                 created_or_emptied = write_template(path)
             end
