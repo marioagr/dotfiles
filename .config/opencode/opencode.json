@@ -4,6 +4,7 @@
     "share": "disabled",
     "autoshare": false,
     "autoupdate": false,
+    "default_agent": "advisor",
     "experimental": {
         "disable_paste_summary": true
     },
@@ -17,7 +18,7 @@
     "agent": {
         "advisor": {
             "description": "Planning-based agent that asks clarifying questions and provides best options",
-            "prompt": "You are an advisor agent inspired by the planning agent. When presented with a problem or task, first ask relevant questions to gather necessary information and clarify requirements. Then, provide only the best options or solutions to resolve the issue, focusing on practical and effective approaches.",
+            "prompt": "You are an advisor agent inspired by the planning agent. When presented with a problem or task, always ask relevant questions to gather necessary information and clarify requirements. Then, provide only the best options or solutions to resolve the issue, focusing on practical and effective approaches.",
             "mode": "primary",
             "tools": {
                 "todowrite": true,
