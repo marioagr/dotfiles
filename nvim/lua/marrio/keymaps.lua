@@ -158,25 +158,26 @@ __setKeymap('<leader><C-r>', function()
         local function write_template(p)
             local template = table.concat({
                 '#!/usr/bin/env bash',
-                '# Archivo: ' .. p,
-                '# Descripción: Lista de comandos para ejecutar desde Neovim.',
-                '# Instrucciones:',
-                '#   - Escribe un comando por línea.',
-                '#   - Las líneas que comienzan con "#" serán ignoradas.',
-                '#   - Las líneas vacías se omiten al ejecutar en cadena.',
-                '#   - La última línea no llevará "&& \\" automáticamente.',
-                '',
-                '# Ejemplos:',
-                '# echo "Inicio"',
+                '# File: ' .. p,
+                '# Description: Command list to execute in Neovim.',
+                '#',
+                '# Instructions:',
+                '#    - Write a command per line.',
+                '#    - The comment lines (starting with #) will be ignored.',
+                '#    - Empty lines will be ignored.',
+                '#    - " && \\" will be appended automatically',
+                '#',
+                '# Examples:',
+                '# echo "Start"',
                 '# ls -la',
-                '# echo "Fin"',
+                '# echo "Finish"',
                 '',
                 '',
             }, '\n')
 
             local f, err = io.open(p, 'w')
             if not f then
-                vim.notify('No se pudo crear el archivo: ' .. (err or ''), vim.log.levels.ERROR)
+                vim.notify('File could not be created: ' .. (err or ''), vim.log.levels.ERROR)
                 return false
             end
             f:write(template)
@@ -226,7 +227,6 @@ __setKeymap('<leader><C-r>', function()
     end
 
     if #commands == 0 then
-        vim.notify('El archivo no contiene comandos. Abriendo para edición...', vim.log.levels.INFO)
         vim.cmd('edit ' .. vim.fn.fnameescape(file_path))
         return
     end
