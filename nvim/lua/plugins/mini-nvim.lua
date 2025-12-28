@@ -39,6 +39,21 @@ return {
             },
         })
 
+        require('mini.notify').setup()
+        vim.notify = MiniNotify.make_notify({
+            ERROR = {
+                duration = 10000,
+            },
+        })
+
+        __setKeymap('<leader>sn', function()
+            MiniNotify.show_history()
+        end, { desc = '[s]how [n]otifications' })
+
+        __setKeymap('<leader>nc', function()
+            MiniNotify.clear()
+        end, { desc = '[n]otifications [c]lear' })
+
         -- Session management made easy
         local sessions = require('mini.sessions')
         sessions.setup({

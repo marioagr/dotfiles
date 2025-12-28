@@ -121,7 +121,7 @@ return {
                             end
                         end,
                     },
-                    -- Sapces/Tab && width
+                    -- Spaces/Tab && width
                     {
                         function()
                             local icon = '␠ '
@@ -133,6 +133,15 @@ return {
                         end,
                         cond = function()
                             if not vim.bo.expandtab or vim.bo.shiftwidth ~= 4 then
+                                return true
+                            end
+                        end,
+                    },
+                    -- Braces "config"
+                    {
+                        icon = '{ ¶ }',
+                        cond = function()
+                            if vim.fn.mapcheck('{', 'n') == '' then
                                 return true
                             end
                         end,

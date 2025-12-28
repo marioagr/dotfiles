@@ -101,40 +101,11 @@ __setKeymap('<leader>t{}', function()
         vim.keymap.del('n', '{')
         vim.keymap.del('n', '}')
     end
-    local function curly_braces_state()
-        if vim.fn.mapcheck('{', 'n') == '' then
-            return 'Original'
-        else
-            return 'Altered'
-        end
-    end
-    CurlyBracesNotification = vim.notify(curly_braces_state(), nil, {
-        title = 'Curly Braces',
-        replace = CurlyBracesNotification,
-        on_close = function()
-            CurlyBracesNotification = nil
-        end,
-    })
 end, { desc = 'Act as {} or []' })
 
 -- Toggle spelling
 __setKeymap('<leader>tS', function()
     vim.cmd([[setlocal spell!]])
-    local function spelling_status()
-        -- I feel like its a bit hacky to use "._value" but meh
-        if vim.opt_local.spell._value then
-            return 'Enabled'
-        else
-            return 'Disabled'
-        end
-    end
-    SpellNotification = vim.notify(spelling_status(), nil, {
-        title = 'Spelling',
-        replace = SpellNotification,
-        on_close = function()
-            SpellNotification = nil
-        end,
-    })
 end, { desc = '[S]pelling checking' })
 
 -- Go to /.../file:line under cursor
