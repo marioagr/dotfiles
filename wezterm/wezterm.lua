@@ -83,11 +83,10 @@ wezterm.on('update-status', function(window, pane)
     local status_text = {}
 
     if active_kt then
-        table.insert(status_text, { Foreground = { AnsiColor = 'Aqua' } })
-        table.insert(status_text, { Text = 'Mode: ' .. active_kt })
+        table.insert(status_text, { Foreground = { AnsiColor = 'Navy' } })
+        table.insert(status_text, { Text = 'Mode: ' .. active_kt .. ' « ' })
     end
 
-    wezterm.log_info(active_kt)
     if window:leader_is_active() then
         if active_kt then
             table.insert(status_text, 'ResetAttributes')
@@ -95,11 +94,30 @@ wezterm.on('update-status', function(window, pane)
         end
         table.insert(status_text, { Foreground = { AnsiColor = 'Green' } })
         table.insert(status_text, { Text = 'LEADER' })
+        table.insert(status_text, { Text = ' « ' })
     end
 
-    table.insert(status_text, { Text = '  ' })
+    local workspaces = mux.get_workspace_names()
+    local current_workspace = window:active_workspace()
 
-    window:set_left_status(' ' .. window:active_workspace() .. ' ')
+    for index, value in ipairs(workspaces) do
+        if value == current_workspace then
+            table.insert(status_text, { Foreground = { AnsiColor = 'White' } })
+        else
+            table.insert(status_text, { Foreground = { AnsiColor = 'Grey' } })
+        end
+
+        table.insert(status_text, { Text = value })
+
+        if index < #workspaces then
+            table.insert(status_text, { Foreground = { AnsiColor = 'Grey' } })
+            table.insert(status_text, { Text = ' | ' })
+        end
+    end
+
+    -- Empty left status
+    window:set_left_status('')
+
     window:set_right_status(wezterm.format(status_text))
 end)
 
