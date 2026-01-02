@@ -1,5 +1,6 @@
 local wezterm = require('wezterm')
 local act = wezterm.action
+local mux = wezterm.mux
 local M = {}
 
 local leader_key = { key = 'Space', mods = 'ALT', timeout_milliseconds = 1000 }
@@ -206,6 +207,24 @@ local key_tables = {
                     -- An empty string if they just hit enter or the actual line of text they wrote
                     if line then
                         window:perform_action(act.SwitchToWorkspace({ name = line }), pane)
+                    end
+                end),
+            }),
+        },
+
+        {
+            key = 'r',
+            action = act.PromptInputLine({
+                description = wezterm.format({
+                    { Attribute = { Intensity = 'Bold' } },
+                    { Foreground = { AnsiColor = 'Green' } },
+                    { Text = 'Rename workspace to:' },
+                }),
+                action = wezterm.action_callback(function(window, pane, line)
+                    -- line will be `nil` if they hit escape without entering anything
+                    -- An empty string if they just hit enter or the actual line of text they wrote
+                    if line then
+                        mux.rename_workspace(mux.get_active_workspace(), line)
                     end
                 end),
             }),
