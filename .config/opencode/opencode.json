@@ -1,20 +1,5 @@
 {
     "$schema": "https://opencode.ai/config.json",
-    "theme": "opencode",
-    "share": "disabled",
-    "autoshare": false,
-    "autoupdate": false,
-    "default_agent": "advisor",
-    "experimental": {
-        "disable_paste_summary": true
-    },
-    "keybinds": {
-        "session_share": "none",
-        "messages_half_page_up": "alt+pgup",
-        "messages_half_page_down": "alt+pgdown",
-        "messages_first": "ctrl+home",
-        "messages_last": "ctrl+end",
-    },
     "agent": {
         "advisor": {
             "description": "Planning-based agent that asks clarifying questions and provides best options",
@@ -31,5 +16,18 @@
                 "webfetch": "allow"
             },
         }
-    }
+    },
+    "autoshare": false,
+    "autoupdate": false,
+    "default_agent": "advisor",
+    "experimental": {
+        "disable_paste_summary": true
+    },
+    "keybinds": {
+        "session_export": "none",
+        "session_share": "none",
+        "session_unshare": "none",
+        "terminal_suspend": "none"
+    },
+    "share": "disabled",
 }
