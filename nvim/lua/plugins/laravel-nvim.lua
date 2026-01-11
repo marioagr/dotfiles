@@ -6,7 +6,6 @@ return {
     'adalessa/laravel.nvim',
     dir = dir_exists and laravel_nvim_dev_dir or nil,
     dependencies = {
-        'tpope/vim-dotenv',
         'MunifTanjim/nui.nvim',
         'nvim-lua/plenary.nvim',
         'nvim-neotest/nvim-nio',
