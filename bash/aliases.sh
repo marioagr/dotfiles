@@ -4,6 +4,7 @@ alias artisan='php artisan'
 alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'
 
 alias sund='sail up -d && sail npm run dev'
+alias srnd='sail restart && sail npm run dev'
 alias supd='sail up -d && sail pnpm run dev'
 
 # NPM
