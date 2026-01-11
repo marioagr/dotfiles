@@ -50,7 +50,7 @@ return {
     },
     event = { 'VeryLazy' },
     opts = {
-        lsp_server = 'intelephense',
+        lsp_server = 'phpactor',
         extensions = {
             composer_info = { enable = false },
             model_info = { enable = false },

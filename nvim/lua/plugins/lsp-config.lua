@@ -216,7 +216,11 @@ return {
                     'twig',
                 }),
             },
-            intelephense = {},
+            phpactor = {
+                init_options = {
+                    ['indexer.enabled_watchers'] = { 'watchman', 'inotify', 'lsp', 'find', 'php' },
+                },
+            },
             jsonls = {
                 settings = {
                     json = {
