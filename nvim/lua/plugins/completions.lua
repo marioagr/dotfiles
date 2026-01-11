@@ -60,7 +60,6 @@ return {
                     },
                 },
                 menu = {
-                    border = 'rounded',
                     draw = {
                         -- Components to render, grouped by column
                         padding = { 0, 1 },

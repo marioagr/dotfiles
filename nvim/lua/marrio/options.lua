@@ -118,18 +118,12 @@ vim.g.omni_sql_default_compl_type = 'syntax'
 
 vim.diagnostic.config({ virtual_text = true })
 
-vim.diagnostic.config({
-    float = {
-        border = 'rounded',
-    },
-})
-
 --[[
 --- NOTE: Maybe wait for the isses/pull requests about winborder
 --- @see https://github.com/nvim-telescope/telescope.nvim/issues/3436
 --- @see https://github.com/nvim-lua/plenary.nvim/pull/649
 --]]
--- vim.opt.winborder = 'rounded'
+vim.opt.winborder = 'rounded'
 
 -- Keep the default values and append the "globals" to save pinned buffers
 vim.opt_global.sessionoptions = table.concat(vim.list_extend(vim.opt_global.sessionoptions:get('default'), { 'globals' }), ',')

@@ -10,7 +10,6 @@ return {
             ---@diagnostic disable-next-line: missing-fields
             opts = {
                 ui = {
-                    border = 'rounded',
                     icons = {
                         package_installed = '✓',
                         package_pending = '...',
@@ -178,7 +177,7 @@ return {
         ---@see vim.diagnostic.Opts.Signs
         vim.diagnostic.config({
             severity_sort = true,
-            float = { border = 'rounded', source = 'if_many' },
+            float = { source = 'if_many' },
             signs = {
                 text = {
                     [vim.diagnostic.severity.ERROR] = '󰅚 ',
@@ -324,7 +323,6 @@ return {
         ---@diagnostic disable-next-line: duplicate-set-field
         function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
             opts = opts or {}
-            opts.border = opts.border or 'rounded'
             return orig_util_open_floating_preview(contents, syntax, opts, ...)
         end
 
