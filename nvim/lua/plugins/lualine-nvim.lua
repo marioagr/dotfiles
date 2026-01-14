@@ -52,7 +52,13 @@ return {
                     'branch',
                     'diff',
                     '" " .. tostring(#vim.tbl_keys(vim.lsp.get_clients()))',
-                    { 'diagnostics', sources = { 'nvim_diagnostic' } },
+                    {
+                        'diagnostics',
+                        sources = { 'nvim_diagnostic' },
+                        cond = function()
+                            return vim.diagnostic.is_enabled({ bufnr = 0 })
+                        end,
+                    },
                 },
                 lualine_c = {
                     { 'filename', path = 1 },

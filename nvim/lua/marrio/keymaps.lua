@@ -42,6 +42,9 @@ __setKeymap('j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true, desc
 
 -- Diagnostic keymaps
 __setKeymap('<leader>dl', vim.diagnostic.setloclist, { desc = 'Open [d]iagnostics [l]ist' })
+__setKeymap('<leader>td', function()
+    vim.diagnostic.enable(not vim.diagnostic.is_enabled(), { bufnr = 0 })
+end, { desc = '[t]oggle [d]iagnostics' })
 
 -- Re-select visual selection after indenting.
 __setKeymap('<', '<gv', { desc = 'De-indent without losing selection' }, 'v')
