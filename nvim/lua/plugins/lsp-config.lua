@@ -78,59 +78,27 @@ return {
         vim.api.nvim_create_autocmd('LspAttach', {
             group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
             callback = function(event)
-                --  NOTE: Remember that lua is a real programming language, and as such it is possible
-                --  to define small helper and utility functions so you don't have to repeat yourself
-                --  many times.
-                --
-                --  In this case, we create a function that lets us more easily define mappings specific
-                --  for LSP related items. It sets the mode, buffer and description for us each time.
-                local map = function(keys, func, desc, mode)
-                    mode = mode or 'n'
-                    __setKeymap(keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc }, mode)
-                end
+                local buf = event.buf
 
                 -- Rename the variable under your cursor.
                 --  Most Language Servers support renaming across files, etc.
-                map('grn', vim.lsp.buf.rename, '[r]e[n]ame')
+                __setKeymap('grn', vim.lsp.buf.rename, { buffer = buf, desc = '[r]e[n]ame' })
 
                 -- Execute a code action, usually your cursor needs to be on top of an error
                 -- or a suggestion from your LSP for this to activate.
-                map('gra', vim.lsp.buf.code_action, '[c]ode [a]ction', { 'n', 'x' })
-
-                -- Find references for the word under your cursor.
-                map('grr', require('telescope.builtin').lsp_references, '[rr]eferences')
-
-                -- Jump to the implementation of the word under your cursor.
-                --  Useful when your language has ways of declaring types without an actual implementation.
-                map('gri', require('telescope.builtin').lsp_implementations, '[r]ead [i]mplementation(s)')
-
-                -- Jump to the definition of the word under your cursor.
-                --  This is where a variable was first declared, or where a function is defined, etc.
-                --  To jump back, press <C-t>.
-                map('grd', require('telescope.builtin').lsp_definitions, '[r]ead [d]efinition')
-
-                -- Fuzzy find all the symbols in your current document.
-                --  Symbols are things like variables, functions, types, etc.
-                map('gO', require('telescope.builtin').lsp_document_symbols, 'Open Document Symbols')
-
-                -- Fuzzy find all the symbols in your current workspace
-                --  Similar to document symbols, except searches over your whole project.
-                map('gW', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Open [W]orkspace Symbols')
-
-                -- Jump to the type of the word under your cursor.
-                --  Useful when you're not sure what type a variable is and you want to see
-                --  the definition of its *type*, not where it was *defined*.
-                map('grt', require('telescope.builtin').lsp_type_definitions, '[r]ead [t]ype Definition')
+                __setKeymap('gra', vim.lsp.buf.code_action, { buffer = buf, desc = '[c]ode [a]ction' }, { 'n', 'x' })
 
                 -- Opens a popup that displays documentation about the word under your cursor
                 --  See `:help K` for why this keymap
-                map('<C-s>', vim.lsp.buf.signature_help, 'Signature Help')
+                __setKeymap('<C-s>', vim.lsp.buf.signature_help, { desc = 'Signature Help' })
 
-                -- map('<leader>Wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [a]dd Folder')
-                -- nmap('<leader>Wr', vim.lsp.buf.remove_workspace_folder, '[w]orkspace [r]emove Folder')
-                map('<leader>WL', function()
+                -- __setKeymap('<leader>Wa', vim.lsp.buf.add_workspace_folder, { buffer = buf, desc = '[W]orkspace [a]dd Folder' })
+
+                -- __setKeymap('<leader>Wr', vim.lsp.buf.remove_workspace_folder, { buffer = buf, desc = '[w]orkspace [r]emove Folder' })
+
+                __setKeymap('<leader>WL', function()
                     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-                end, '[W]orkspace [l]ist Folders')
+                end, { buffer = buf, desc = '[W]orkspace [l]ist Folders' })
 
                 -- The following two autocommands are used to highlight references of the
                 -- word under your cursor when your cursor rests there for a little while.
@@ -138,16 +106,16 @@ return {
                 --
                 -- When you move your cursor, the highlights will be cleared (the second autocommand).
                 local client = vim.lsp.get_client_by_id(event.data.client_id)
-                -- if client and client:supports_method('textDocument/documentHighlight', event.buf) then
+                -- if client and client:supports_method('textDocument/documentHighlight', buf) then
                 --     local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
                 --     vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-                --         buffer = event.buf,
+                --         buffer = buf,
                 --         group = highlight_augroup,
                 --         callback = vim.lsp.buf.document_highlight,
                 --     })
                 --
                 --     vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-                --         buffer = event.buf,
+                --         buffer = buf,
                 --         group = highlight_augroup,
                 --         callback = vim.lsp.buf.clear_references,
                 --     })
@@ -157,18 +125,17 @@ return {
                 --     group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
                 --     callback = function(event)
                 --         vim.lsp.buf.clear_references()
-                --         vim.api.nvim_clear_autocmds({ group = 'kickstart-lsp-highlight', buffer = event.buf })
+                --         vim.api.nvim_clear_autocmds({ group = 'kickstart-lsp-highlight', buffer = buf })
                 --     end,
                 -- })
 
                 -- The following autocommand is used to enable inlay hints in your
                 -- code, if the language server you are using supports them
-                --
                 -- This may be unwanted, since they displace some of your code
-                if client and client:supports_method('textDocument/inlayHint', event.buf) then
-                    map('<leader>th', function()
-                        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
-                    end, 'inlay [h]ints')
+                if client and client:supports_method('textDocument/inlayHint', buf) then
+                    __setKeymap('<leader>th', function()
+                        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = buf }))
+                    end, { buffer = buf, desc = 'inlay [h]ints' })
                 end
             end,
         })
