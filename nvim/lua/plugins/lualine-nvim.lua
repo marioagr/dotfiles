@@ -51,7 +51,12 @@ return {
                 lualine_b = {
                     'branch',
                     'diff',
-                    '" " .. tostring(#vim.tbl_keys(vim.lsp.get_clients()))',
+                    {
+                        function()
+                            return #vim.tbl_keys(vim.lsp.get_clients())
+                        end,
+                        icon = '',
+                    },
                     {
                         'diagnostics',
                         sources = { 'nvim_diagnostic' },
