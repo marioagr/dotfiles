@@ -3,7 +3,6 @@ return {
     'akinsho/bufferline.nvim',
     dependencies = {
         'nvim-tree/nvim-web-devicons',
-        -- 'onedark.nvim',
     },
     lazy = false,
     config = function()
@@ -11,13 +10,13 @@ return {
         local my_opts = {
             options = {
                 modified_icon = '●',
-                left_trunc_marker = '',
-                right_trunc_marker = '',
+                left_trunc_marker = '󰁎',
+                right_trunc_marker = '󰁕',
                 show_buffer_close_icons = false,
                 custom_areas = {
                     left = function()
                         return {
-                            { text = '   ', fg = '#3e93d3' },
+                            { text = '  ', fg = '#5fb950' },
                         }
                     end,
                 },
@@ -31,7 +30,6 @@ return {
                     return true
                 end,
                 diagnostics = 'nvim_lsp',
-                -- Show indicators in tabs
                 diagnostics_indicator = function(count, level)
                     local icon = level:match('error') and '' or ''
                     return count .. icon
