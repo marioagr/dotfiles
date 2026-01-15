@@ -19,7 +19,7 @@ return {
             { '<leader>n', group = '[n]otifications' },
             { '<leader>N', group = '[N]pm (Laravel)' },
             { '<leader>p', group = 'parameter | phpactor' },
-            { '<leader>s', group = '[s]earch' },
+            { '<leader>s', group = '[s]earch', mode = { 'n', 'v' } },
             { '<leader>S', group = 'Grug [S]earch', mode = { 'n', 'v' } },
             { '<leader>t', group = '[t]oggle' },
             { '<leader>W', group = '[W]orkspace' },

@@ -184,7 +184,7 @@ return {
             __setKeymap('<leader>sP', function() search_all_files(true) end, { desc = '[s]earch all [F]iles' })
             __setKeymap('<leader>sh', builtin.help_tags, { desc = '[s]earch [h]elp' })
             __setKeymap('<leader>sk', builtin.keymaps, { desc = '[s]earch [k]eymaps' })
-            __setKeymap('<leader>sw', builtin.grep_string, { desc = '[s]earch current [w]ord' })
+            __setKeymap('<leader>sw', builtin.grep_string, { desc = '[s]earch current [w]ord' }, { 'n', 'v' })
             __setKeymap('<leader>sg', grep_search_simple, { desc = '[s]earch by [g]rep' })
             __setKeymap('<leader>sG', grep_search_advanced, { desc = '[s]earch by [G]rep on all files' })
             __setKeymap('<leader>sd', builtin.diagnostics, { desc = '[s]earch [d]iagnostics' })
