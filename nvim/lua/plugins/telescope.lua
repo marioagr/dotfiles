@@ -11,9 +11,7 @@ return {
             {
                 'nvim-telescope/telescope-fzf-native.nvim',
                 build = 'make',
-                cond = function()
-                    return vim.fn.executable('make') == 1
-                end,
+                cond = function() return vim.fn.executable('make') == 1 end,
             },
             'nvim-telescope/telescope-ui-select.nvim',
         },
@@ -142,9 +140,7 @@ return {
                 })
             end
 
-            local function oldfiles_in_cwd()
-                builtin.oldfiles({ only_cwd = true })
-            end
+            local function oldfiles_in_cwd() builtin.oldfiles({ only_cwd = true }) end
 
             local function grep_search_simple()
                 require('telescope').extensions.live_grep_args.live_grep_args({
@@ -182,18 +178,10 @@ return {
             __setKeymap('<leader>s/', telescope_live_grep_open_files, { desc = '[s]earch [/] in Open Files' })
             __setKeymap('<leader>ss', builtin.builtin, { desc = '[s]earch [s]elect Telescope' })
             -- __set_keybind('<leader>gf', builtin.git_files, { desc = 'Search [g]it [f]iles' })
-            __setKeymap('<leader>sf', function()
-                search_files(false)
-            end, { desc = '[s]earch [f]iles' })
-            __setKeymap('<leader>sF', function()
-                search_all_files(false)
-            end, { desc = '[s]earch all [F]iles' })
-            __setKeymap('<leader>sp', function()
-                search_files(true)
-            end, { desc = '[s]earch [f]iles' })
-            __setKeymap('<leader>sP', function()
-                search_all_files(true)
-            end, { desc = '[s]earch all [F]iles' })
+            __setKeymap('<leader>sf', function() search_files(false) end, { desc = '[s]earch [f]iles' })
+            __setKeymap('<leader>sF', function() search_all_files(false) end, { desc = '[s]earch all [F]iles' })
+            __setKeymap('<leader>sp', function() search_files(true) end, { desc = '[s]earch [f]iles' })
+            __setKeymap('<leader>sP', function() search_all_files(true) end, { desc = '[s]earch all [F]iles' })
             __setKeymap('<leader>sh', builtin.help_tags, { desc = '[s]earch [h]elp' })
             __setKeymap('<leader>sk', builtin.keymaps, { desc = '[s]earch [k]eymaps' })
             __setKeymap('<leader>sw', builtin.grep_string, { desc = '[s]earch current [w]ord' })

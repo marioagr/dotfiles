@@ -10,25 +10,19 @@ return {
     keys = {
         {
             '<leader>Ss',
-            function()
-                require('grug-far').open()
-            end,
+            function() require('grug-far').open() end,
             mode = { 'n', 'v' },
             desc = 'Grug find! Grug replace! Grug happy!',
         },
         {
             '<leader>Sc',
-            function()
-                require('grug-far').open({ prefills = { paths = vim.fn.expand('%') } })
-            end,
+            function() require('grug-far').open({ prefills = { paths = vim.fn.expand('%') } }) end,
             mode = { 'n', 'v' },
             desc = 'Find & Replace in current file',
         },
         {
             '<leader>Sg',
-            function()
-                require('grug-far').toggle_instance({ instanceName = 'global_search_replace', staticTitle = 'Find and Replace (All files)' })
-            end,
+            function() require('grug-far').toggle_instance({ instanceName = 'global_search_replace', staticTitle = 'Find and Replace (All files)' }) end,
             mode = { 'n', 'v' },
             desc = 'Find & Replace in all files (toggleable)',
         },

@@ -56,51 +56,37 @@ return {
     keys = {
         {
             '[b',
-            function()
-                vim.cmd('BufferLineCyclePrev')
-            end,
+            function() vim.cmd('BufferLineCyclePrev') end,
             desc = 'Navigate to previous buffer',
         },
         {
             ']b',
-            function()
-                vim.cmd('BufferLineCycleNext')
-            end,
+            function() vim.cmd('BufferLineCycleNext') end,
             desc = 'Navigate to next buffer',
         },
         {
             '[B',
-            function()
-                require('bufferline').go_to(1)
-            end,
+            function() require('bufferline').go_to(1) end,
             desc = 'Navigate to first buffer',
         },
         {
             ']B',
-            function()
-                require('bufferline').go_to(-1)
-            end,
+            function() require('bufferline').go_to(-1) end,
             desc = 'Navigate to last buffer',
         },
         {
             '<M-PageUp>',
-            function()
-                vim.cmd('BufferLineMovePrev')
-            end,
+            function() vim.cmd('BufferLineMovePrev') end,
             desc = 'Move buffer backwards',
         },
         {
             '<M-PageDown>',
-            function()
-                vim.cmd('BufferLineMoveNext')
-            end,
+            function() vim.cmd('BufferLineMoveNext') end,
             desc = 'Move buffer forwards',
         },
         {
             '<leader>tb',
-            function()
-                vim.cmd('BufferLineTogglePin')
-            end,
+            function() vim.cmd('BufferLineTogglePin') end,
             desc = '[t]oggle pin [b]uffer',
         },
     },

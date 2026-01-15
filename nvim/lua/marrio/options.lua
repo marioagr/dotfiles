@@ -82,9 +82,7 @@ vim.o.sidescrolloff = 5
 
 -- Sync clipboard between OS and Neovim
 -- Schedule the setting after `UiEnter` because it can increase startup-time.
-vim.schedule(function()
-    vim.o.clipboard = 'unnamedplus'
-end)
+vim.schedule(function() vim.o.clipboard = 'unnamedplus' end)
 
 -- When and how to draw the signcolumn. always, with fixed space for 2 signs
 vim.o.signcolumn = 'yes:3'
@@ -105,9 +103,7 @@ vim.opt.backupdir:remove('.')
 vim.api.nvim_create_autocmd('TextYankPost', {
     desc = 'Highlight when yanking (copying) text',
     group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-    callback = function()
-        vim.hl.on_yank({ timeout = 250 })
-    end,
+    callback = function() vim.hl.on_yank({ timeout = 250 }) end,
 })
 
 -- Change from dynamic due to a ¿performance? issue

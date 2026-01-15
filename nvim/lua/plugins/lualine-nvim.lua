@@ -52,17 +52,13 @@ return {
                     'branch',
                     'diff',
                     {
-                        function()
-                            return #vim.tbl_keys(vim.lsp.get_clients())
-                        end,
+                        function() return #vim.tbl_keys(vim.lsp.get_clients()) end,
                         icon = '',
                     },
                     {
                         'diagnostics',
                         sources = { 'nvim_diagnostic' },
-                        cond = function()
-                            return vim.diagnostic.is_enabled({ bufnr = 0 })
-                        end,
+                        cond = function() return vim.diagnostic.is_enabled({ bufnr = 0 }) end,
                     },
                 },
                 lualine_c = {
@@ -92,12 +88,8 @@ return {
                 lualine_y = {
                     -- Spelling
                     {
-                        function()
-                            return '󰓆'
-                        end,
-                        cond = function()
-                            return vim.wo.spell
-                        end,
+                        function() return '󰓆' end,
+                        cond = function() return vim.wo.spell end,
                     },
                     -- Is formatting disabled?
                     {

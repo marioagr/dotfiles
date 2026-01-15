@@ -56,12 +56,8 @@ return {
             -- Actions
 
             -- Visual mode
-            map('v', '<leader>hs', function()
-                gs.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
-            end, { desc = '[s]tage hunk' })
-            map('v', '<leader>hr', function()
-                gs.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
-            end, { desc = '[r]eset hunk' })
+            map('v', '<leader>hs', function() gs.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, { desc = '[s]tage hunk' })
+            map('v', '<leader>hr', function() gs.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, { desc = '[r]eset hunk' })
 
             -- Normal mode
             map('n', '<leader>h_', gs.refresh, { desc = 'gitsigns refresh' })
@@ -70,13 +66,9 @@ return {
             map('n', '<leader>hp', gs.preview_hunk, { desc = '[p]review hunk' })
             map('n', '<leader>hS', gs.stage_buffer, { desc = '[S]tage buffer' })
             map('n', '<leader>hR', gs.reset_buffer, { desc = '[R]eset buffer' })
-            map('n', '<leader>hb', function()
-                gs.blame_line({ full = false })
-            end, { desc = '[b]lame line' })
+            map('n', '<leader>hb', function() gs.blame_line({ full = false }) end, { desc = '[b]lame line' })
             map('n', '<leader>hd', gs.diffthis, { desc = '[d]iff against index' })
-            map('n', '<leader>hD', function()
-                gs.diffthis('~')
-            end, { desc = '[D]iff against last commit' })
+            map('n', '<leader>hD', function() gs.diffthis('~') end, { desc = '[D]iff against last commit' })
 
             -- Toggles
             -- TODO: Toggle line and word along with colorizer

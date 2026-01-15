@@ -102,9 +102,7 @@ return {
     keys = {
         {
             '<leader>ff',
-            function()
-                require('conform').format(custom_opts_for_format())
-            end,
+            function() require('conform').format(custom_opts_for_format()) end,
             mode = { 'n', 'v' },
             desc = '[f]ormat',
         },
@@ -131,7 +129,5 @@ return {
             desc = 'Global [F]ormatter',
         },
     },
-    init = function()
-        vim.o.formatexpr = "v:lua.require('conform').formatexpr()"
-    end,
+    init = function() vim.o.formatexpr = "v:lua.require('conform').formatexpr()" end,
 }

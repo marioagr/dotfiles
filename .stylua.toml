@@ -1,4 +1,5 @@
 column_width = 180
 indent_type = 'Spaces'
 quote_style = 'AutoPreferSingle'
+collapse_simple_statement = 'FunctionOnly'
 

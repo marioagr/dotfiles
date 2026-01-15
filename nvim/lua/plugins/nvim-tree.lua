@@ -40,9 +40,7 @@ return {
 
         -- Automatically open file upon creation
         local api = require('nvim-tree.api')
-        api.events.subscribe(api.events.Event.FileCreated, function(file)
-            vim.cmd('edit ' .. file.fname)
-        end)
+        api.events.subscribe(api.events.Event.FileCreated, function(file) vim.cmd('edit ' .. file.fname) end)
 
         local my_opts = {
             --[[
@@ -89,9 +87,7 @@ return {
                 },
             },
             select_prompts = true,
-            sort_by = function(nodes)
-                table.sort(nodes, sort_by_natural)
-            end,
+            sort_by = function(nodes) table.sort(nodes, sort_by_natural) end,
             view = {
                 side = 'right',
                 preserve_window_proportions = true,

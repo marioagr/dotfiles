@@ -18,60 +18,44 @@ return {
         keys = {
             {
                 '<F1>',
-                function()
-                    require('dapui').eval(nil, { enter = true })
-                end,
+                function() require('dapui').eval(nil, { enter = true }) end,
                 desc = 'Debug: Evaluate',
                 mode = { 'n', 'v' },
             },
             {
                 '<F5>',
-                function()
-                    require('dap').continue()
-                end,
+                function() require('dap').continue() end,
                 desc = 'Debug: Start/Continue',
             },
             {
                 '<F8>',
-                function()
-                    require('dap').toggle_breakpoint()
-                end,
+                function() require('dap').toggle_breakpoint() end,
                 desc = 'Debug: [t]oggle [b]reakpoint',
             },
             {
                 '<F20>', -- Shift+F8
-                function()
-                    require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))
-                end,
+                function() require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')) end,
                 desc = 'Debug: Set Breakpoint',
             },
             {
                 '<F10>',
-                function()
-                    require('dap').step_over()
-                end,
+                function() require('dap').step_over() end,
                 desc = 'Debug: Step Over',
             },
             {
                 '<F11>',
-                function()
-                    require('dap').step_into()
-                end,
+                function() require('dap').step_into() end,
                 desc = 'Debug: Step Into',
             },
             {
                 '<F23>',
-                function()
-                    require('dap').step_out()
-                end,
+                function() require('dap').step_out() end,
                 desc = 'Debug: Step Out',
             },
             -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
             {
                 '<F12>',
-                function()
-                    require('dapui').toggle()
-                end,
+                function() require('dapui').toggle() end,
                 desc = 'Debug: See last session result.',
             },
         },

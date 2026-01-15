@@ -96,9 +96,7 @@ return {
 
                 -- __setKeymap('<leader>Wr', vim.lsp.buf.remove_workspace_folder, { buffer = buf, desc = '[w]orkspace [r]emove Folder' })
 
-                __setKeymap('<leader>WL', function()
-                    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-                end, { buffer = buf, desc = '[W]orkspace [l]ist Folders' })
+                __setKeymap('<leader>WL', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, { buffer = buf, desc = '[W]orkspace [l]ist Folders' })
 
                 -- The following two autocommands are used to highlight references of the
                 -- word under your cursor when your cursor rests there for a little while.
@@ -133,9 +131,11 @@ return {
                 -- code, if the language server you are using supports them
                 -- This may be unwanted, since they displace some of your code
                 if client and client:supports_method('textDocument/inlayHint', buf) then
-                    __setKeymap('<leader>th', function()
-                        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = buf }))
-                    end, { buffer = buf, desc = 'inlay [h]ints' })
+                    __setKeymap(
+                        '<leader>th',
+                        function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = buf })) end,
+                        { buffer = buf, desc = 'inlay [h]ints' }
+                    )
                 end
             end,
         })

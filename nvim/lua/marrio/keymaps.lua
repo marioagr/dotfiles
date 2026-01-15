@@ -8,9 +8,11 @@
 ---@param opts? table See: vim.api.nvim_set_keymap opts
 ---@param mode? string|string[] Mode "short-name"
 ---@see vim.api.nvim_set_keymap
+-- stylua: ignore start
 __setKeymap = function(keybind, rhs, opts, mode)
     vim.keymap.set(mode or 'n', keybind, rhs, opts or {})
 end
+-- stylua: ignore end
 
 -- Do nothing when space key is pressed
 __setKeymap('<Space>', '<NOP>', { silent = true }, { 'n', 'v' })
@@ -26,12 +28,8 @@ local function search_and_center(forward)
     end
     vim.cmd([[normal! zz]])
 end
-__setKeymap('n', function()
-    search_and_center(true)
-end, { desc = 'Search and center vertically' })
-__setKeymap('N', function()
-    search_and_center(false)
-end, { desc = 'Search and center vertically' })
+__setKeymap('n', function() search_and_center(true) end, { desc = 'Search and center vertically' })
+__setKeymap('N', function() search_and_center(false) end, { desc = 'Search and center vertically' })
 
 -- Save buffer
 __setKeymap('<leader>w', ':w<CR>', { desc = '[w]rite buffer' })
@@ -42,9 +40,7 @@ __setKeymap('j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true, desc
 
 -- Diagnostic keymaps
 __setKeymap('<leader>dl', vim.diagnostic.setloclist, { desc = 'Open [d]iagnostics [l]ist' })
-__setKeymap('<leader>td', function()
-    vim.diagnostic.enable(not vim.diagnostic.is_enabled(), { bufnr = 0 })
-end, { desc = '[t]oggle [d]iagnostics' })
+__setKeymap('<leader>td', function() vim.diagnostic.enable(not vim.diagnostic.is_enabled(), { bufnr = 0 }) end, { desc = '[t]oggle [d]iagnostics' })
 
 -- Re-select visual selection after indenting.
 __setKeymap('<', '<gv', { desc = 'De-indent without losing selection' }, 'v')
@@ -107,9 +103,7 @@ __setKeymap('<leader>t{}', function()
 end, { desc = 'Act as {} or []' })
 
 -- Toggle spelling
-__setKeymap('<leader>tS', function()
-    vim.cmd([[setlocal spell!]])
-end, { desc = '[S]pelling checking' })
+__setKeymap('<leader>tS', function() vim.cmd([[setlocal spell!]]) end, { desc = '[S]pelling checking' })
 
 -- Go to /.../file:line under cursor
 -- NOTE: This may end up as a black hole for this kind of gf/grd alternatives
