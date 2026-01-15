@@ -1,8 +1,13 @@
+## My configs
+
+### Neovim
+
+Started with a rare merge of [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim) & [Neovim as a PHP and JavaScript IDE](https://laracasts.com/series/neovim-as-a-php-ide).
+Due to the original kickstart.nvim being with no maintenance, have been using [kickstart-modular.nvim](https://github.com/oriori1703/kickstart-modular.nvim) as a source for changes or improvements that can be made to the files.
+
 ## Maybe useful in the future
 
 https://devblogs.microsoft.com/commandline/share-environment-vars-between-wsl-and-windows/#what-are-environment-variables
-
-## Neovim
 
 ### Possible plugins
 - hinell/lsp-timeout.nvim (Start/stop LSPs upon demand)
