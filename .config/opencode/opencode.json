@@ -27,7 +27,9 @@
         "session_export": "none",
         "session_share": "none",
         "session_unshare": "none",
-        "terminal_suspend": "none"
+        "terminal_suspend": "none",
+        "messages_first": "ctrl+home",
+        "messages_last": "ctrl+end",
     },
     "share": "disabled",
 }
