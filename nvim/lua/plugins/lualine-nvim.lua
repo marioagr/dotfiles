@@ -75,7 +75,7 @@ return {
                         'encoding',
                         show_bomb = true,
                         cond = function()
-                            if vim.opt.fileencoding:get() ~= 'utf-8' then
+                            if vim.bo.fileencoding ~= 'utf-8' then
                                 return true
                             end
                         end,
@@ -96,7 +96,7 @@ return {
                             return '󰓆'
                         end,
                         cond = function()
-                            return vim.opt_local.spell._value
+                            return vim.wo.spell
                         end,
                     },
                     -- Is formatting disabled?
