@@ -140,24 +140,29 @@ return {
             end,
         })
 
+        local signs = {
+            [vim.diagnostic.severity.ERROR] = '󰈸',
+            [vim.diagnostic.severity.WARN] = '',
+            [vim.diagnostic.severity.INFO] = '',
+            [vim.diagnostic.severity.HINT] = '',
+        }
+
         -- Sign configuration
         ---@see vim.diagnostic.Opts.Signs
         vim.diagnostic.config({
             severity_sort = true,
             float = { source = 'if_many' },
             signs = {
-                text = {
-                    [vim.diagnostic.severity.ERROR] = '󰅚 ',
-                    [vim.diagnostic.severity.WARN] = '󰀪 ',
-                    [vim.diagnostic.severity.INFO] = '󰋽 ',
-                    [vim.diagnostic.severity.HINT] = '󰌶 ',
-                },
-            } or {},
+                text = signs,
+            },
             virtual_text = {
                 source = 'if_many',
                 spacing = 2,
+                prefix = function(diagnostic) return signs[diagnostic.severity] end,
             },
-            -- virtual_lines = true,
+            virtual_lines = {
+                current_line = true,
+            },
         })
 
         -- LSP servers and clients are able to communicate to each other what features they support.
