@@ -91,6 +91,11 @@ return {
                         function() return '󰓆' end,
                         cond = function() return vim.wo.spell end,
                     },
+                    -- Text wrap
+                    {
+                        function() return '󰖶' end,
+                        cond = function() return vim.wo.wrap end,
+                    },
                     -- Is formatting disabled?
                     {
                         function()
