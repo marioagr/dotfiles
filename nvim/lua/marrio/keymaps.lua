@@ -34,6 +34,9 @@ __setKeymap('N', function() search_and_center(false) end, { desc = 'Search and c
 -- Save buffer
 __setKeymap('<leader>w', ':w<CR>', { desc = '[w]rite buffer' })
 
+-- Toggle wrap
+__setKeymap('<leader>tw', function() vim.cmd([[setlocal wrap!]]) end, { desc = '[t]oggle [w]rap' })
+
 -- When text is wrapped, move by terminal rows instead, not lines, unless a count is provided.
 __setKeymap('k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true, desc = 'Move up by rows, not lines, unless count is provided' })
 __setKeymap('j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true, desc = 'Move down by rows, not lines, unless count is provided' })
