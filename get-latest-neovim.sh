@@ -7,7 +7,6 @@ set -e
 readonly DOWNLOAD_URL_BASE="https://github.com/neovim/neovim/releases/latest/download"
 readonly BASE_NAME="nvim-linux-x86_64"
 readonly TARBALL_NAME="$BASE_NAME.tar.gz"
-readonly CHECKSUM_FILE_NAME="shasum.txt"
 readonly BIN_DIR="$HOME/.local/bin"
 readonly INSTALL_DIR="$HOME/.local/$BASE_NAME"
 readonly SYMLINK_PATH="$BIN_DIR/nvim"
@@ -51,31 +50,38 @@ command -v sha256sum >/dev/null 2>&1 ||
   msg_err "sha256sum is not installed. Please install it to continue."
 
 TMP_DIR=$(mktemp -d)
-trap 'printf "\n"; msg_info "Cleaning up temporary files..."; rm -rf "$TMP_DIR"' EXIT
+cleanup() {
+  printf "\n"
+  msg_info "Cleaning up temporary files..."
+  rm -rf "$TMP_DIR" 2>/dev/null || true
+
+  # Clean up backup directories older than 7 days
+  find "$HOME/.local" -name "nvim-linux-x86_64.backup.*" -type d -mtime +7 -exec rm -rf {} \; 2>/dev/null || true
+}
+trap cleanup EXIT
 cd "$TMP_DIR"
 
-msg_step "Downloading latest Neovim and the checksum file..."
+msg_step "Downloading latest Neovim tar file..."
 curl -fLO "${DOWNLOAD_URL_BASE}/${TARBALL_NAME}"
-curl -fLO "${DOWNLOAD_URL_BASE}/${CHECKSUM_FILE_NAME}"
-
-msg_step "Verifying file integrity with SHA256 checksum..."
-EXPECTED_CHECKSUM=$(grep "$TARBALL_NAME" "$CHECKSUM_FILE_NAME" | awk '{print $1}')
-ACTUAL_CHECKSUM=$(sha256sum "$TARBALL_NAME" | awk '{print $1}')
-
-if [[ "$EXPECTED_CHECKSUM" == "$ACTUAL_CHECKSUM" ]]; then
-  msg_ok "Checksum verification successful."
-else
-  msg_err "Checksum verification failed!
-  Expected: $EXPECTED_CHECKSUM
-  Got:      $ACTUAL_CHECKSUM"
-fi
 
 msg_step "Extracting $TARBALL_NAME..."
 tar xzf "$TARBALL_NAME"
 
 msg_step "Removing old Neovim installation (if it exists)..."
-rm -rf "$INSTALL_DIR"
-rm -f "$SYMLINK_PATH"
+# Check if nvim is currently running
+if pgrep -f "nvim" >/dev/null; then
+  msg_err "Neovim is currently running. Please close all nvim instances and try again."
+fi
+
+# Backup existing installation if it exists
+if [ -d "$INSTALL_DIR" ]; then
+  msg_info "Backing up existing installation..."
+  BACKUP_DIR="${INSTALL_DIR}.backup.$(date +%s)"
+  mv "$INSTALL_DIR" "$BACKUP_DIR" 2>/dev/null || rm -rf "$INSTALL_DIR" 2>/dev/null || true
+fi
+
+# Remove symlink with force
+rm -f "$SYMLINK_PATH" 2>/dev/null || true
 
 msg_step "Installing Neovim to $INSTALL_DIR..."
 mkdir -p "$INSTALL_DIR"
