@@ -50,7 +50,7 @@ return {
                 },
                 lualine_b = {
                     'branch',
-                    'diff',
+                    -- 'diff',
                     {
                         function() return #vim.tbl_keys(vim.lsp.get_clients()) end,
                         icon = '',
