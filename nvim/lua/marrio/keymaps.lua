@@ -38,8 +38,8 @@ __setKeymap('<leader>w', ':w<CR>', { desc = '[w]rite buffer' })
 __setKeymap('<leader>tw', function() vim.cmd([[setlocal wrap!]]) end, { desc = '[t]oggle [w]rap' })
 
 -- When text is wrapped, move by terminal rows instead, not lines, unless a count is provided.
-__setKeymap('k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true, desc = 'Move up by rows, not lines, unless count is provided' })
-__setKeymap('j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true, desc = 'Move down by rows, not lines, unless count is provided' })
+__setKeymap('<C-Up>', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true, desc = 'Move up by rows, not lines, unless count is provided' })
+__setKeymap('<C-Down>', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true, desc = 'Move down by rows, not lines, unless count is provided' })
 
 -- Diagnostic keymaps
 __setKeymap('<leader>dl', vim.diagnostic.setloclist, { desc = 'Open [d]iagnostics [l]ist' })
@@ -106,7 +106,7 @@ __setKeymap('<leader>t{}', function()
 end, { desc = 'Act as {} or []' })
 
 -- Toggle spelling
-__setKeymap('<leader>tS', function() vim.cmd([[setlocal spell!]]) end, { desc = '[S]pelling checking' })
+__setKeymap('<leader>ts', function() vim.cmd([[setlocal spell!]]) end, { desc = '[S]pelling checking' })
 
 -- Go to /.../file:line under cursor
 -- NOTE: This may end up as a black hole for this kind of gf/grd alternatives
