@@ -84,7 +84,7 @@ wezterm.on('update-status', function(window, pane)
 
     if active_kt then
         table.insert(status_text, { Foreground = { AnsiColor = 'Navy' } })
-        table.insert(status_text, { Text = 'Mode: ' .. active_kt .. ' « ' })
+        table.insert(status_text, { Text = 'Mode: ' .. active_kt .. ' | ' })
     end
 
     if window:leader_is_active() then
@@ -94,7 +94,7 @@ wezterm.on('update-status', function(window, pane)
         end
         table.insert(status_text, { Foreground = { AnsiColor = 'Green' } })
         table.insert(status_text, { Text = 'LEADER' })
-        table.insert(status_text, { Text = ' « ' })
+        table.insert(status_text, { Text = ' | ' })
     end
 
     local workspaces = mux.get_workspace_names()
