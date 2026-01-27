@@ -6,13 +6,12 @@
 -- Add patterns for fts and set them to their corresponding language
 vim.filetype.add({
     filename = {
-        ['docker-compose.yml'] = 'yaml.docker-compose',
-        ['docker-compose.yaml'] = 'yaml.docker-compose',
         ['composer.lock'] = 'json',
     },
     pattern = {
         ['%.env.*'] = 'sh',
         ['.*%.tinker'] = 'php',
+        ['docker-compose.*%.y[a]*ml'] = 'yaml.docker-compose',
         ['compose%..*%.y[a]*ml'] = 'yaml.docker-compose',
         -- ['.*%.antlers%.html'] = 'antlers',
     },
