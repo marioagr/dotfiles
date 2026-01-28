@@ -1,10 +1,6 @@
-local laravel_nvim_dev_dir = vim.fn.expand('~/devProjects/laravel-nvim/')
-local dir_exists = vim.fn.isdirectory(laravel_nvim_dev_dir)
-
 -- Ease some things with Laravel projects
 return {
     'adalessa/laravel.nvim',
-    dir = dir_exists and laravel_nvim_dev_dir or nil,
     dependencies = {
         'MunifTanjim/nui.nvim',
         'nvim-lua/plenary.nvim',
@@ -26,6 +22,7 @@ return {
         { '<leader>lm', function() Laravel.pickers.make() end,                  desc = 'Available content to [m]ake' },
         { "<leader>lp", function() Laravel.commands.run("command_center") end,  desc = "Laravel: Open Command Center" },
         { "<leader>lt", function() Laravel.commands.run('tinker:open') end,     desc = "Laravel: Open Tinker Playground" },
+        { "<leader>lu", function() Laravel.commands.run("hub") end,            desc = "Laravel Artisan hub" },
         { '<leader>lr', function() Laravel.pickers.routes() end,                desc = 'Show current [r]outes of the project' },
         { '<leader>lR', function() Laravel.pickers.resources() end,             desc = 'Go to a [R]esource of the project' },
         { "<leader>l.", function() Laravel.commands.run("actions") end,         desc = "Laravel: Open Actions Picker" },
