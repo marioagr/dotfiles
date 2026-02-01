@@ -8,6 +8,7 @@ return {
         'kevinhwang91/promise-async',
     },
     cmd = { 'Laravel' },
+    commit = '8da07660d1d4a82bfc4dd230713f6a316fac9012',
     keys = {
         -- stylua: ignore start
         { '<leader>la', function() Laravel.pickers.artisan() end,               desc = 'Open Artisan menu' },
@@ -22,7 +23,7 @@ return {
         { '<leader>lm', function() Laravel.pickers.make() end,                  desc = 'Available content to [m]ake' },
         { "<leader>lp", function() Laravel.commands.run("command_center") end,  desc = "Laravel: Open Command Center" },
         { "<leader>lt", function() Laravel.commands.run('tinker:open') end,     desc = "Laravel: Open Tinker Playground" },
-        { "<leader>lu", function() Laravel.commands.run("hub") end,            desc = "Laravel Artisan hub" },
+        -- { "<leader>lu", function() Laravel.commands.run("hub") end,             desc = "Laravel Artisan hub" },
         { '<leader>lr', function() Laravel.pickers.routes() end,                desc = 'Show current [r]outes of the project' },
         { '<leader>lR', function() Laravel.pickers.resources() end,             desc = 'Go to a [R]esource of the project' },
         { "<leader>l.", function() Laravel.commands.run("actions") end,         desc = "Laravel: Open Actions Picker" },
@@ -49,6 +50,7 @@ return {
     opts = {
         lsp_server = 'intelephense',
         extensions = {
+            -- artisan_hub = { enable = false },
             composer_info = { enable = false },
             model_info = { enable = false },
         },
