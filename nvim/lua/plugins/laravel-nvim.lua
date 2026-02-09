@@ -46,7 +46,7 @@ return {
             noremap = true,
         },
     },
-    event = { 'VeryLazy' },
+    event = { 'BufEnter compose.json' },
     opts = {
         lsp_server = 'intelephense',
         extensions = {
