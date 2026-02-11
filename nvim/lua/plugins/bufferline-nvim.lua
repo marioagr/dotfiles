@@ -9,10 +9,6 @@ return {
         ---@type bufferline.UserConfig
         local my_opts = {
             options = {
-                modified_icon = '●',
-                left_trunc_marker = '󰁎',
-                right_trunc_marker = '󰁕',
-                show_buffer_close_icons = false,
                 custom_areas = {
                     left = function()
                         return {
@@ -39,7 +35,9 @@ return {
                         require('bufferline.groups').builtin.pinned:with({ icon = '󰐃' }),
                     },
                 },
+                left_trunc_marker = '󰁎',
                 max_name_length = 15,
+                modified_icon = '●',
                 offsets = {
                     {
                         filetype = 'NvimTree',
@@ -48,6 +46,8 @@ return {
                         text_align = 'left',
                     },
                 },
+                right_trunc_marker = '󰁕',
+                show_buffer_close_icons = false,
             },
         }
 
