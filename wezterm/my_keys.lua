@@ -3,7 +3,7 @@ local act = wezterm.action
 local mux = wezterm.mux
 local M = {}
 
-local leader_key = { key = 'Home', mods = 'ALT', timeout_milliseconds = 1000 }
+local leader_key = { key = '|', mods = 'ALT', timeout_milliseconds = 1000 }
 local keys = {
     -- Send the Alt+Space combination to the terminal when pressing twice the combination
     -- { key = 'Space', mods = 'LEADER|ALT', action = wezterm.action.SendKey({ key = 'Space', mods = 'ALT' }) },
