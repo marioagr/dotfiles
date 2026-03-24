@@ -23,15 +23,5 @@
     "experimental": {
         "disable_paste_summary": true
     },
-    "keybinds": {
-        "session_export": "none",
-        "session_share": "none",
-        "session_unshare": "none",
-        "terminal_suspend": "none",
-        "messages_first": "ctrl+home",
-        "messages_last": "ctrl+end",
-        "messages_next": "alt+right",
-        "messages_previous": "alt+left",
-    },
     "share": "disabled",
 }
