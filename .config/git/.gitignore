@@ -8,3 +8,6 @@ nvim_commands.sh
 /node_modules
 /vendor
 
+# Signing files
+*.keystore
+
