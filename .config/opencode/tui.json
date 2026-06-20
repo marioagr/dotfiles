@@ -2,6 +2,11 @@
     "$schema": "https://opencode.ai/tui.json",
     "keybinds": {
         "input_submit": "alt+return",
-        "input_newline": "return,shift+return,ctrl+return,ctrl+j"
+        "input_newline": "return,shift+return,ctrl+return,ctrl+j",
+        "messages_first": "ctrl+home",
+        "messages_last": "ctrl+end"
+    },
+    "scroll_acceleration": {
+        "enabled": true
     }
 }

@@ -19,7 +19,8 @@
     },
     "autoshare": false,
     "autoupdate": false,
-    "default_agent": "advisor",
+    "default_agent": "plan",
+    "formatter": true,
     "experimental": {
         "disable_paste_summary": true
     },
