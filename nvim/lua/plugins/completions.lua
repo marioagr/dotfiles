@@ -11,10 +11,10 @@ return {
             build = 'make install_jsregexp',
         },
         'rafamadriz/friendly-snippets',
-        {
-            'xzbdmw/colorful-menu.nvim',
-            opts = {},
-        },
+        -- {
+        --     'xzbdmw/colorful-menu.nvim',
+        --     opts = {},
+        -- },
         -- Add VSCode-like pictograms to Neovim built-in lsp
         'onsails/lspkind.nvim',
         'folke/lazydev.nvim',
@@ -96,10 +96,10 @@ return {
                                     return hl
                                 end,
                             },
-                            label = {
-                                text = function(ctx) return require('colorful-menu').blink_components_text(ctx) end,
-                                highlight = function(ctx) return require('colorful-menu').blink_components_highlight(ctx) end,
-                            },
+                            -- label = {
+                            --     text = function(ctx) return require('colorful-menu').blink_components_text(ctx) end,
+                            --     highlight = function(ctx) return require('colorful-menu').blink_components_highlight(ctx) end,
+                            -- },
                         },
                         -- Use treesitter to highlight the label text for the given list of sources
                         treesitter = { 'lsp' },

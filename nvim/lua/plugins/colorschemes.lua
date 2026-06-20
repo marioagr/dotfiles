@@ -35,10 +35,10 @@ return {
             vim.cmd.colorscheme('tokyonight')
 
             -- As suggested in https://github.com/xzbdmw/colorful-menu.nvim?tab=readme-ov-file#screen
-            vim.api.nvim_set_hl(0, 'BlinkCmpLabelMatch', {})
-            vim.api.nvim_set_hl(0, 'BlinkCmpLabelMatch', {
-                bold = true,
-            })
+            -- vim.api.nvim_set_hl(0, 'BlinkCmpLabelMatch', {})
+            -- vim.api.nvim_set_hl(0, 'BlinkCmpLabelMatch', {
+            --     bold = true,
+            -- })
 
             -- You can configure highlights by doing something like
             -- vim.cmd.hi 'Comment gui=none'
