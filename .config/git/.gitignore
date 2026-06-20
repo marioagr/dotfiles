@@ -11,3 +11,5 @@ nvim_commands.sh
 # Signing files
 *.keystore
 
+# laravel-nvim
+*.tinker
