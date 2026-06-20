@@ -1,6 +1,11 @@
 -- Navigate Blade views
 return {
-    'RicardoRamirezR/blade-nav.nvim',
+    'ricardoramirezr/blade-nav.nvim',
     ft = { 'blade', 'php' },
-    opts = {},
+    opts = {
+        -- laravel_components_paths = {
+        --     'app/View/Components/',
+        --     'resources/views/common',
+        -- },
+    },
 }

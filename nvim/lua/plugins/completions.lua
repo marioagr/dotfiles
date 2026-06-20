@@ -147,9 +147,8 @@ return {
                 },
             },
             sources = {
-                default = { 'lsp', 'buffer', 'snippets', 'laravel' },
+                default = { 'lsp', 'blade-nav', 'buffer', 'snippets', 'laravel' },
                 per_filetype = {
-                    blade = { inherit_defaults = true, 'blade-nav' },
                     sql = { 'dadbod', 'buffer' },
                     lua = { 'lazydev', inherit_defaults = true },
                 },
@@ -164,7 +163,8 @@ return {
                         score_offset = 100,
                     },
                     ['blade-nav'] = {
-                        module = 'blade-nav.blink',
+                        name = 'blade-nav',
+                        module = 'blade-nav.integrations.blink',
                         opts = {
                             close_tag_on_complete = false,
                         },
