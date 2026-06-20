@@ -33,7 +33,7 @@ return {
                 desc = 'Debug: [t]oggle [b]reakpoint',
             },
             {
-                '<F20>', -- Shift+F8
+                '<F20>', -- Shift + F8
                 function() require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')) end,
                 desc = 'Debug: Set Breakpoint',
             },
@@ -48,7 +48,7 @@ return {
                 desc = 'Debug: Step Into',
             },
             {
-                '<F23>',
+                '<F23>', -- Shift + F11
                 function() require('dap').step_out() end,
                 desc = 'Debug: Step Out',
             },
