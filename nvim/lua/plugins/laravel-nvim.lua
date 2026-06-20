@@ -74,6 +74,10 @@ return {
                     cmd = { 'migrate:fresh', '--seed' },
                     desc = "Re-creates the db and seed's it",
                 },
+                ['db:migrate:step'] = {
+                    cmd = { 'migrate', '--step' },
+                    desc = 'Runs missing migrations step by step',
+                },
                 ['optimize:clear'] = {
                     cmd = { 'optimize:clear' },
                     desc = 'Clear cache and other things',
