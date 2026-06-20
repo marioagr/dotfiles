@@ -11,8 +11,8 @@ vim.filetype.add({
     pattern = {
         ['%.env.*'] = 'sh',
         ['.*%.tinker'] = 'php',
-        ['docker-compose.*%.y[a]*ml'] = 'yaml.docker-compose',
-        ['compose%..*%.y[a]*ml'] = 'yaml.docker-compose',
+        ['docker-compose.*%.ya?ml'] = 'yaml.docker-compose',
+        ['compose.*%.ya?ml'] = 'yaml.docker-compose',
         -- ['.*%.antlers%.html'] = 'antlers',
     },
 })

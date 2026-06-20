@@ -201,7 +201,12 @@ return {
                     'html',
                 }),
             },
-            docker_compose_language_service = {},
+            docker_compose_language_service = {
+                root_markers = {
+                    'compose.prod.yaml',
+                    'compose.prod.yml',
+                },
+            },
             emmet_language_server = {
                 filetypes = vim.list_extend(require('lspconfig.configs.emmet_language_server').default_config.filetypes, {
                     -- 'antlers',
