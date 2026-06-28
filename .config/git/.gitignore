@@ -1,5 +1,8 @@
 # Global ignore config
 
+# General files
+my.notes
+
 # My Neovim files
 Session.vim
 nvim_commands.sh
