@@ -193,10 +193,10 @@ return {
             --
             -- But for many setups, the LSP (`ts_ls`) will work just fine
 
-            -- antlersls = {},
+            antlersls = {},
             cssls = {
                 filetypes = vim.list_extend(require('lspconfig.configs.cssls').default_config.filetypes, {
-                    -- 'antlers',
+                    'antlers',
                     'blade',
                     'html',
                 }),
@@ -209,13 +209,13 @@ return {
             },
             emmet_language_server = {
                 filetypes = vim.list_extend(require('lspconfig.configs.emmet_language_server').default_config.filetypes, {
-                    -- 'antlers',
+                    'antlers',
                     'blade',
                 }),
             },
             html = {
                 filetypes = vim.list_extend(require('lspconfig.configs.html').default_config.filetypes, {
-                    -- 'antlers',
+                    'antlers',
                     'hbs',
                     'php',
                     'twig',
@@ -253,16 +253,16 @@ return {
                 },
             },
             tailwindcss = {
-                -- filetypes = {
-                --     'antlers',
-                -- },
+                filetypes = {
+                    'antlers',
+                },
                 settings = {
                     tailwindCSS = {
                         classAttributes = vim.list_extend(require('lspconfig.configs.tailwindcss').default_config.settings.tailwindCSS.classAttributes, { 'class:input' }),
                         emmetCompletions = true,
-                        -- includeLanguages = {
-                        --     antlers = 'html',
-                        -- },
+                        includeLanguages = {
+                            antlers = 'html',
+                        },
                     },
                 },
             },

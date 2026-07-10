@@ -13,11 +13,12 @@ vim.filetype.add({
         ['.*%.tinker'] = 'php',
         ['docker-compose.*%.ya?ml'] = 'yaml.docker-compose',
         ['compose.*%.ya?ml'] = 'yaml.docker-compose',
-        -- ['.*%.antlers%.html'] = 'antlers',
+        ['.*%.antlers%.html'] = 'antlers',
     },
 })
+
 -- Use the HTML treesitter for antlers
--- vim.treesitter.language.register('html', 'antlers')
+vim.treesitter.language.register('html', 'antlers')
 
 --[[
 --  For example, when using Zellij, "undercurl" seems to have problems rendering so to fix the problem
