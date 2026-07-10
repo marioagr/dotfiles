@@ -20,10 +20,10 @@
     "autoshare": false,
     "autoupdate": false,
     "default_agent": "plan",
-    "formatter": true,
     "experimental": {
         "disable_paste_summary": true
     },
+    "formatter": true,
     "lsp": true,
     "share": "disabled",
 }
