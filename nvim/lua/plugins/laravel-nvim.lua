@@ -70,6 +70,14 @@ return {
                     cmd = { 'blueprint:build', '-m' },
                     desc = 'Use draft.yml to generate files (overwrites migrations)',
                 },
+                ['boost:install'] = {
+                    cmd = { 'boost:install', '--guidelines', '--mcp', '--skills' },
+                    desc = "Re-creates the db and seed's it",
+                },
+                ['boost:update'] = {
+                    cmd = { 'boost:update', '--discover' },
+                    desc = "Re-creates the db and seed's it",
+                },
                 ['db:fresh'] = {
                     cmd = { 'migrate:fresh', '--seed' },
                     desc = "Re-creates the db and seed's it",
@@ -88,15 +96,19 @@ return {
                     cmd = { 'dump-autoload' },
                     desc = 'Dumps the composer autoload',
                 },
-                install = {
+                ['composer:install'] = {
                     cmd = { 'install' },
                     desc = 'Run composer install',
                 },
-                update = {
+                ['composer:update'] = {
                     cmd = { 'update' },
                     desc = 'Run composer update',
                 },
-                ['ide-helper'] = {
+                ['composer:update:withAllDependencies'] = {
+                    cmd = { 'update', '--with-all-dependencies' },
+                    desc = 'Run composer update',
+                },
+                ['composer:ide-helper'] = {
                     cmd = { 'ide-helper' },
                     desc = 'Runs ide-helper commands defined in composer.json',
                 },
@@ -112,15 +124,15 @@ return {
                 },
             },
             sail = {
-                start = {
+                ['sail:start:dettached'] = {
                     cmd = { 'up', '-d' },
                     desc = 'Start Sail dettached',
                 },
-                stop = {
+                ['sail:stop'] = {
                     cmd = { 'stop' },
                     desc = 'Stop Sail',
                 },
-                build_no_cache = {
+                ['sail:build:--no-cache'] = {
                     cmd = { 'build', '--no-cache' },
                     desc = 'Build Sail with no cache',
                 },
