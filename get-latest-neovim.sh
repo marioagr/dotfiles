@@ -96,6 +96,12 @@ else
   ln -s "$INSTALL_DIR/bin/nvim" "$SYMLINK_PATH"
 fi
 
+# Remove backup directory after successful installation
+if [ -n "${BACKUP_DIR:-}" ] && [ -d "$BACKUP_DIR" ]; then
+  msg_step "Removing backup directory $BACKUP_DIR..."
+  rm -rf "$BACKUP_DIR"
+fi
+
 printf "\n"
 msg_ok "Neovim has been successfully updated!"
 msg_info "Make sure '$BIN_DIR' is in your shell's PATH."
