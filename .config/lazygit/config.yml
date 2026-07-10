@@ -5,13 +5,10 @@ gui:
   nerdFontsVersion: '3'
   showDivergenceFromBaseBranch: 'arrowAndNumber'
   sidePanelWidth: 0.25
-
 git:
-  paging:
-    pager: 'delta'
-
+  pagers:
+    - pager: 'delta'
 confirmOnQuit: true
-
 customCommands:
   - key: 'u'
     context: 'commits'
