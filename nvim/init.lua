@@ -1,3 +1,6 @@
+-- Enable faster startup by caching compiled Lua modules
+vim.loader.enable()
+
 -- Set leader key.
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '

@@ -6,7 +6,7 @@ return {
         -- Better Around/Inside textobjects
         -- Examples:
         --  - va)  - [V]isually select [A]round [)]parenthen
-        --  - yinq - [Y]ank [I]nside [N]ext [']quote
+        --  - yiiq - [Y]ank [I]nside [I]+1 [']quote
         --  - ci'  - [C]hange [I]nside [']quote
         require('mini.ai').setup({
             n_lines = 500,

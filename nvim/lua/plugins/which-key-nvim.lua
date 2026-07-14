@@ -12,6 +12,7 @@ return {
             { '<leader>d', group = '[d]adbod-ui', mode = { 'n' } },
             { '<leader>e', group = 'file [e]xplorer', mode = { 'n' } },
             { '<leader>g', group = '[g]it', mode = { 'n' } },
+            { 'gr', group = 'LSP Actions', mode = { 'n' } },
             { '<leader>gs', group = '[g]it [s]igns' },
             { '<leader>h', group = 'Git [h]unk', mode = { 'n', 'v' } },
             { '<leader>l', group = '[l]aravel' },

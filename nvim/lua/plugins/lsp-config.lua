@@ -150,8 +150,20 @@ return {
         -- Sign configuration
         ---@see vim.diagnostic.Opts.Signs
         vim.diagnostic.config({
+            update_in_insert = false,
+            -- Auto open the float, to jump easily with `[d` and `]d`
+            jump = {
+                on_jump = function(_, bufnr)
+                    vim.diagnostic.open_float({
+                        bufnr = bufnr,
+                        scope = 'cursor',
+                        focus = false,
+                    })
+                end,
+            },
             severity_sort = true,
             float = { source = 'if_many' },
+            underline = { severity = { min = vim.diagnostic.severity.WARN } },
             signs = {
                 text = signs,
             },
