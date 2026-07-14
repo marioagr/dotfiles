@@ -69,6 +69,8 @@ return {
 
         __setKeymap('<leader>Wr', function() sessions.read() end, { desc = '[W]orkspace [r]ead a Vim session' })
 
+        __setKeymap('<leader>WR', function() sessions.restart() end, { desc = '[W]orkspace [R]estart' })
+
         __setKeymap(
             '<leader>Wd',
             function()
