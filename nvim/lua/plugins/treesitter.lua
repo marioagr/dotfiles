@@ -10,75 +10,73 @@ return {
         -- 'folke/ts-comments.nvim'
     },
     build = ':TSUpdate',
-    config = function(_)
-        ---@module 'nvim-treesitter.configs'
-        ---@type TSConfig
-        ---@diagnostic disable-next-line: missing-fields
-        local opts = {
-            ensure_installed = {
-                'blade',
-                'css',
-                'diff',
-                'git_config',
-                'git_rebase',
-                'gitattributes',
-                'gitcommit',
-                'gitignore',
-                'html',
-                'javascript',
-                'jsdoc',
-                'json',
-                'jsonc',
-                'lua',
-                'luadoc',
-                'markdown',
-                'markdown_inline',
-                'php',
-                'php_only',
-                'phpdoc',
-                'query',
-                'regex',
-                'toml',
-                'tsx',
-                'typescript',
-                'xml',
-                'yaml',
-            },
-            auto_install = true,
-            -- Install languages synchronously (only applied to `ensure_installed`)
-            sync_install = false,
-            -- List of parsers to ignore installing
-            ignore_install = {},
-            -- You can specify additional treesitter modules here: -- For example: -- playground = {--enable = true,-- },
-            modules = {},
-            highlight = {
-                enable = true,
-                -- Disable in files greater than 2.5 MB
-                disable = function(lang, buf)
-                    local max_filesize = 2.5 * 1024 * 1024 -- M * K * B
-                    local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
-                    if ok and stats and stats.size > max_filesize then
-                        return true
-                    end
-                end,
-                -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-                --  If you are experiencing weird indenting issues, add the language to
-                --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-                additional_vim_regex_highlighting = { 'ruby' },
-            },
-            indent = { enable = true, disable = { 'ruby' } },
-            incremental_selection = {
-                enable = true,
-                keymaps = {
-                    init_selection = '<C-space>',
-                    node_incremental = '<C-space>',
-                    scope_incremental = '<C-s>',
-                    node_decremental = '<BS>',
-                },
-            },
+    main = 'nvim-treesitter',
+    init = function()
+        local ensure_installed = {
+            'blade',
+            'css',
+            'diff',
+            'git_config',
+            'git_rebase',
+            'gitattributes',
+            'gitcommit',
+            'gitignore',
+            'html',
+            'javascript',
+            'jsdoc',
+            'json',
+            'jsonc',
+            'lua',
+            'luadoc',
+            'markdown',
+            'markdown_inline',
+            'php',
+            'php_only',
+            'phpdoc',
+            'query',
+            'regex',
+            'toml',
+            'tsx',
+            'typescript',
+            'xml',
+            'yaml',
         }
 
-        require('nvim-treesitter.configs').setup(opts)
-        -- require('ts_context_commentstring').setup()
+        local alreadyInstalled = require('nvim-treesitter.config').get_installed()
+        local parsersToInstall = vim.iter(ensure_installed):filter(function(parser) return not vim.tbl_contains(alreadyInstalled, parser) end):totable()
+        require('nvim-treesitter').install(parsersToInstall)
+
+        vim.api.nvim_create_autocmd('FileType', {
+            callback = function()
+                -- Enable treesitter highlighting and disable regex syntax
+                pcall(vim.treesitter.start)
+                -- Enable treesitter-based indentation
+                vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+            end,
+        })
     end,
+    -- NOTE: To make the incremental selection Mini.ai was also configured
+    keys = {
+        {
+            '<C-space>',
+            'vin',
+            mode = 'n',
+            desc = 'Start incremental selection',
+            remap = true,
+        },
+        {
+            '<C-space>',
+            'an',
+            mode = 'x',
+            desc = 'Expand incremental selection',
+            remap = true,
+        },
+        {
+            '<BS>',
+            'in',
+            mode = 'x',
+            desc = 'Shrink incremental selection',
+            remap = true,
+        },
+    },
 }
