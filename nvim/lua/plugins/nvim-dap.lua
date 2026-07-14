@@ -30,7 +30,7 @@ return {
             {
                 '<F8>',
                 function() require('dap').toggle_breakpoint() end,
-                desc = 'Debug: [t]oggle [b]reakpoint',
+                desc = 'Debug: toggle [b]reakpoint',
             },
             {
                 '<F20>', -- Shift + F8

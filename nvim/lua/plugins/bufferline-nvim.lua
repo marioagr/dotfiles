@@ -87,7 +87,7 @@ return {
         {
             '<leader>tb',
             function() vim.cmd('BufferLineTogglePin') end,
-            desc = '[t]oggle pin [b]uffer',
+            desc = 'pin [b]uffer',
         },
     },
 }

@@ -35,7 +35,7 @@ __setKeymap('N', function() search_and_center(false) end, { desc = 'Search and c
 __setKeymap('<leader>w', ':w<CR>', { desc = '[w]rite buffer' })
 
 -- Toggle wrap
-__setKeymap('<leader>tw', function() vim.cmd([[setlocal wrap!]]) end, { desc = '[t]oggle [w]rap' })
+__setKeymap('<leader>tw', function() vim.cmd([[setlocal wrap!]]) end, { desc = '[w]rap' })
 
 -- When text is wrapped, move by terminal rows instead, not lines, unless a count is provided.
 __setKeymap('<C-Up>', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true, desc = 'Move up by rows, not lines, unless count is provided' })
@@ -43,7 +43,7 @@ __setKeymap('<C-Down>', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tru
 
 -- Diagnostic keymaps
 __setKeymap('<leader>dl', vim.diagnostic.setloclist, { desc = 'Open [d]iagnostics [l]ist' })
-__setKeymap('<leader>td', function() vim.diagnostic.enable(not vim.diagnostic.is_enabled(), { bufnr = 0 }) end, { desc = '[t]oggle [d]iagnostics' })
+__setKeymap('<leader>td', function() vim.diagnostic.enable(not vim.diagnostic.is_enabled(), { bufnr = 0 }) end, { desc = '[d]iagnostics' })
 
 -- Re-select visual selection after indenting.
 __setKeymap('<', '<gv', { desc = 'De-indent without losing selection' }, 'v')
