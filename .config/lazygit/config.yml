@@ -26,3 +26,13 @@ customCommands:
     loadingText: 'Restoring file...'
     after:
       checkForConflicts: true
+  - key: '<ctrl-alt-p>'
+    context: 'commits'
+    description: 'Push up to selected commit'
+    prompts:
+      - type: 'confirm'
+        title: 'Partial push on "{{.CheckedOutBranch.UpstreamRemote}}/{{.CheckedOutBranch.UpstreamBranch}}"'
+        body: "This will push changes in {{.CheckedOutBranch.Name}} up to commit \n\n{{.SelectedCommit.Hash}}\n\nAre you sure about that?"
+    command: 'sh -c ''remote="{{.CheckedOutBranch.UpstreamRemote}}"; branch="{{.CheckedOutBranch.UpstreamBranch}}"; if [ -z "$remote" ] || [ -z "$branch" ]; then echo "Error: current branch has no upstream configured" >&2; exit 1; fi; git push "$remote" "{{.SelectedCommit.Hash}}:refs/heads/$branch"'''
+    loadingText: 'Pushing...'
+    output: 'log'
