@@ -22,7 +22,18 @@ return {
         { '<leader>ll', ':sp storage/logs/laravel.log<CR>',                     desc = 'Open [l]ogs' },
         { '<leader>lm', function() Laravel.pickers.make() end,                  desc = 'Available content to [m]ake' },
         { "<leader>lp", function() Laravel.commands.run("command_center") end,  desc = "Laravel: Open Command Center" },
-        { "<leader>lt", function() Laravel.commands.run('tinker:open') end,     desc = "Laravel: Open Tinker Playground" },
+        {
+            "<leader>lt",
+            function()
+                local tinker_files = vim.fn.glob(vim.fn.getcwd() .. "/*.tinker", false, true)
+                if #tinker_files > 1 then
+                    Laravel.commands.run("tinker:select")
+                else
+                    Laravel.commands.run("tinker:open")
+                end
+            end,
+            desc = "Laravel: Open Tinker Playground",
+        },
         { '<leader>lr', function() Laravel.pickers.routes() end,                desc = 'Show current [r]outes of the project' },
         { '<leader>lR', function() Laravel.pickers.resources() end,             desc = 'Go to a [R]esource of the project' },
         { "<leader>l.", function() Laravel.commands.run("actions") end,         desc = "Laravel: Open Actions Picker" },
