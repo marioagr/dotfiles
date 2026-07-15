@@ -7,11 +7,12 @@ local leader_key = { key = '|', mods = 'ALT', timeout_milliseconds = 1000 }
 local keys = {
     -- Send the Alt+Space combination to the terminal when pressing twice the combination
     -- { key = 'Space', mods = 'LEADER|ALT', action = wezterm.action.SendKey({ key = 'Space', mods = 'ALT' }) },
-    {
-        key = 'Space',
-        mods = 'ALT',
-        action = wezterm.action_callback(function(window, pane) window:toast_notification('wezterm', 'The shortcut has changed. But something else not.', nil, 1000) end),
-    },
+
+    -- {
+    --     key = 'Space',
+    --     mods = 'ALT',
+    --     action = wezterm.action_callback(function(window, pane) window:toast_notification('wezterm', 'The shortcut has changed. But something else not.', nil, 1000) end),
+    -- },
 
     -- Font related
     { key = '+', mods = 'CTRL|ALT', action = act.IncreaseFontSize },
