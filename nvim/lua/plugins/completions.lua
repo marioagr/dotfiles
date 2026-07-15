@@ -147,7 +147,7 @@ return {
                 },
             },
             sources = {
-                default = { 'lsp', 'blade-nav', 'buffer', 'snippets', 'laravel' },
+                default = { 'lsp', 'blade-nav', 'buffer', 'snippets' },
                 per_filetype = {
                     sql = { 'dadbod', 'buffer' },
                     lua = { 'lazydev', inherit_defaults = true },
@@ -173,7 +173,7 @@ return {
                     laravel = {
                         name = 'laravel',
                         module = 'blink.compat.source',
-                        score_offset = 95, -- show at a higher priority than lsp
+                        score_offset = 95, -- show above lsp
                     },
                 },
             },

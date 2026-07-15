@@ -233,7 +233,11 @@ return {
                     'twig',
                 }),
             },
-            intelephense = {},
+            intelephense = {
+                files = {
+                    maxSize = 2000000,
+                },
+            },
             jsonls = {
                 settings = {
                     json = {
