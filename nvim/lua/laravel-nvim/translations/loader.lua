@@ -6,6 +6,7 @@ local Error = require('laravel.utils.error')
 ---@field watcher laravel.core.watcher
 ---@field loaded boolean
 ---@field items table
+---@field meta table
 local TranslationsLoader = {}
 TranslationsLoader.__index = TranslationsLoader
 
@@ -15,14 +16,15 @@ function TranslationsLoader:new(code, path, watcher)
         path = path,
         watcher = watcher,
         items = {},
+        meta = {},
         loaded = false,
     }, self)
 end
 
----@return table, laravel.error
+---@return table, table, laravel.error
 function TranslationsLoader:load()
     if self.loaded then
-        return self.items
+        return self.items, self.meta
     end
 
     local _load = function()
@@ -32,23 +34,25 @@ function TranslationsLoader:load()
         if err or not translations then
             self.loaded = false
             self.items = {}
-            return {}, Error:new('Failed to load translations'):wrap(err)
+            self.meta = {}
+            return nil, nil, Error:new('Failed to load translations'):wrap(err)
         end
 
         self.loaded = true
-        self.items = translations or {}
+        self.items = translations.items or {}
+        self.meta = translations.meta or {}
 
-        return self.items
+        return self.items, self.meta
     end
 
     local base_path, err = self.path:get('base')
     if err then
-        return {}, Error:new('Failed to get base path'):wrap(err)
+        return nil, nil, Error:new('Failed to get base path'):wrap(err)
     end
 
     local lang_path = self.path:handle(base_path .. '/lang')
 
-    self.watcher.register({ { lang_path, recursive = true } }, '.*%.php$', _load)
+    self.watcher.register({ { lang_path, recursive = true } }, '.*%.(php|json)$', _load)
 
     return _load()
 end

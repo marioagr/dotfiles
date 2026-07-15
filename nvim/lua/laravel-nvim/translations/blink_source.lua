@@ -36,7 +36,7 @@ function source:get_completions(ctx, callback)
         local completion = require('laravel-nvim.translations.completion')
 
         if completion.shouldComplete(text) then
-            return completion.complete(app('laravel.loaders.translations_loader'), {}, callback)
+            return completion.complete(app('laravel.loaders.translations_loader'), self.opts, callback)
         end
 
         callback({ items = {} })

@@ -174,6 +174,9 @@ return {
                         name = 'laravel-translations',
                         module = 'laravel-nvim.translations.blink_source',
                         score_offset = 95,
+                        opts = {
+                            show_all_locales = false,
+                        },
                     },
                     laravel = {
                         name = 'laravel',
