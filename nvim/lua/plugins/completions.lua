@@ -147,7 +147,7 @@ return {
                 },
             },
             sources = {
-                default = { 'lsp', 'blade-nav', 'buffer', 'snippets' },
+                default = { 'lsp', 'blade-nav', 'laravel-translations', 'buffer', 'snippets' },
                 per_filetype = {
                     sql = { 'dadbod', 'buffer' },
                     lua = { 'lazydev', inherit_defaults = true },
@@ -168,7 +168,12 @@ return {
                         opts = {
                             close_tag_on_complete = false,
                         },
-                        score_offset = 100,
+                        score_offset = 95,
+                    },
+                    ['laravel-translations'] = {
+                        name = 'laravel-translations',
+                        module = 'laravel-nvim.translations.blink_source',
+                        score_offset = 95,
                     },
                     laravel = {
                         name = 'laravel',
