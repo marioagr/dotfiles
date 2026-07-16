@@ -268,6 +268,7 @@ return {
                     },
                 },
             },
+            -- phpantom_lsp = {},
             tailwindcss = {
                 filetypes = {
                     'antlers',
