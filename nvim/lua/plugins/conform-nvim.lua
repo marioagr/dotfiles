@@ -101,10 +101,10 @@ return {
     end,
     keys = {
         {
-            '<leader>ff',
+            '<leader>F',
             function() require('conform').format(custom_opts_for_format()) end,
             mode = { 'n', 'v' },
-            desc = '[f]ormat',
+            desc = '[F]ormat file/selection',
         },
         {
             '<leader>tf',
