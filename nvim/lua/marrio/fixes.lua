@@ -14,6 +14,7 @@ vim.filetype.add({
         ['docker-compose.*%.ya?ml'] = 'yaml.docker-compose',
         ['compose.*%.ya?ml'] = 'yaml.docker-compose',
         ['.*%.antlers%.html'] = 'antlers',
+        ['.*%.neon%.dist'] = 'yaml',
     },
 })
 
