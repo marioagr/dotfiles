@@ -97,11 +97,11 @@ return {
                 },
                 ['boost:install'] = {
                     cmd = { 'boost:install', '--guidelines', '--mcp', '--skills' },
-                    desc = "Re-creates the db and seed's it",
+                    desc = 'Install Laravel Boost with guidelines, MCP and skills',
                 },
                 ['boost:update'] = {
                     cmd = { 'boost:update', '--discover' },
-                    desc = "Re-creates the db and seed's it",
+                    desc = 'Update Laravel Boost using discovery',
                 },
                 ['db:fresh --seed'] = {
                     cmd = { 'migrate:fresh', '--seed' },
@@ -131,7 +131,7 @@ return {
                 },
                 ['composer:update:withAllDependencies'] = {
                     cmd = { 'update', '--with-all-dependencies' },
-                    desc = 'Run composer update',
+                    desc = 'Run composer update with all dependencies',
                 },
                 ['composer:ide-helper'] = {
                     cmd = { 'ide-helper' },
