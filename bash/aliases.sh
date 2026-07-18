@@ -2,6 +2,7 @@ alias cat='batcat'
 
 alias artisan='php artisan'
 alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'
+alias phpstan='vendor/bin/sail'
 
 alias sund='sail up -d && sail npm run dev'
 alias srnd='sail restart && sail npm run dev'

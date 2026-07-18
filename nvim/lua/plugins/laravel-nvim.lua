@@ -162,6 +162,16 @@ return {
                     desc = 'Build Sail with no cache',
                 },
             },
+            ['./vendor/bin/phpstan'] = {
+                analyse = {
+                    cmd = { 'analyse' },
+                    desc = 'Run PHPStan',
+                },
+                ['analyse:with-baseline'] = {
+                    cmd = { 'analyse', '--generate-baseline' },
+                    desc = 'Run PHPStan and generate baseline',
+                },
+            },
         },
     },
 }
