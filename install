@@ -32,6 +32,7 @@ ln -s $DOTFILES/.config/git $HOME/.config/git
 ###########
 unlink $HOME/.config/lazygit
 ln -s $DOTFILES/.config/lazygit $HOME/.config/lazygit
+cp $DOTFILES/.config/lazygit/config.yml $WIN_HOME/AppData/Local/lazygit/config.yml
 
 ############
 # OpenCode #
@@ -48,7 +49,13 @@ cp $DOTFILES/.config/opencode/* $WIN_HOME/.config/opencode
 rm -f $MY_WIN_HOME/.config/wezterm/wezterm.lua $WIN_HOME/.config/wezterm/my_keys.lua
 cp -r $DOTFILES/wezterm/ $WIN_HOME/.config/
 
-cp $DOTFILES/.config/git/.gitignore $WIN_HOME/.gitignore
+mkdir -p $WIN_HOME/.config/git
+cp $DOTFILES/.config/git/.gitignore $WIN_HOME/.config/git/.gitignore
+sed '/^\[credential\]/,/^\[/ { /^\[/!d; /^\[credential\]/d }' \
+  $DOTFILES/.config/git/config > $WIN_HOME/.config/git/config
+
+# PowerShell
+cp $DOTFILES/microWindows/profile.ps1 /mnt/z/Mario/Documents/PowerShell/Microsoft.PowerShell_profile.ps1
 
 # rm -rf $HOME/.config/phpactor
 # ln -s $DOTFILES/phpactor $HOME/.config/phpactor
