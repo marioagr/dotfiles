@@ -17,6 +17,10 @@ return {
         git = {
             status_text_color = true,
         },
+        keymaps = {
+            preview_scroll_up = { '<C-u>', '<PageUp>' },
+            preview_scroll_down = { '<C-d>', '<PageDown>' },
+        },
     },
     lazy = false, -- the plugin lazy-initialises itself
     keys = {
