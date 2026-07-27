@@ -160,8 +160,10 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
         title = '  ' .. title
     elseif string.match(title, '[lazy]*git') then
         title = '󰊢  ' .. title
-    elseif string.match(title, 'c[ommand]*li[ne]*') or string.match(title, 'opencode') then
+    elseif string.match(title, 'c[ommand]*li[ne]*') then
         title = '  ' .. title
+    elseif string.match(title, 'opencode') then
+        title = '󰫼  ' .. title
     elseif string.match(title, 'docker[-compose]*') or title:find('sail') then
         title = '  ' .. title
     elseif string.match(title, '[wW]indows') or string.match(title, 'p[o]*w[er]*sh[ell]*') then
