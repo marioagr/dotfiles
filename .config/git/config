@@ -52,7 +52,7 @@
     fsckObjects = true
 
 [credential]
-    helper = /mnt/d/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe #WSL
+    helper = "/mnt/d/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe" #WSL
 
 [user]
     name = Mario Guillen
