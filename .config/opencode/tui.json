@@ -4,7 +4,11 @@
         "input_submit": "alt+return",
         "input_newline": "return,shift+return,ctrl+return,ctrl+j",
         "messages_first": "ctrl+home",
-        "messages_last": "ctrl+end"
+        "messages_last": "ctrl+end",
+        "messages_next": "alt+right",
+        "messages_previous": "alt+left",
+        "input_word_forward": "alt+f,ctrl+right",
+        "input_word_backward": "alt+b,ctrl+left",
     },
     "scroll_acceleration": {
         "enabled": true
