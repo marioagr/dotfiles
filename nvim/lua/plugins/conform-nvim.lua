@@ -67,27 +67,6 @@ return {
                     args = { 'format', '$FILENAME' },
                     stdin = false,
                 },
-                ['blade-formatter'] = {
-                    append_args = {
-                        '--sort-tailwindcss-classes',
-                        '--sort-html-attributes="custom"', --Needed for ↓
-                        string.format(
-                            '--custom-html-attributes-order="%s"',
-                            table.concat({
-                                'id',
-                                'name',
-                                'type',
-                                'class',
-                                ':.+',
-                                'x-.+',
-                                'wire:.+',
-                                'data-.+',
-                            }, ',')
-                        ),
-                        '--no-multiple-empty-lines',
-                        '--component-prefix="x-,livewire:,flux:"',
-                    },
-                },
                 mdslw = {
                     env = {
                         MDSLW_MAX_WIDTH = 0,
