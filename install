@@ -37,6 +37,9 @@ cp $DOTFILES/.config/lazygit/config.yml $WIN_HOME/AppData/Local/lazygit/config.y
 ############
 # OpenCode #
 ############
+mkdir -p $HOME/.config/opencode/skills
+unlink $HOME/.config/opencode/skills/commit-msg
+ln -s $DOTFILES/.config/opencode/skills/commit-msg $HOME/.config/opencode/skills/commit-msg
 unlink $HOME/.config/opencode/opencode.json
 unlink $HOME/.config/opencode/tui.json
 unlink $HOME/.config/opencode/plugins/env-protection.js
