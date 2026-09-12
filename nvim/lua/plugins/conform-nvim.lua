@@ -48,7 +48,7 @@ return {
             -- HACK: Also add the formatter used in the ensure_installed variable at the lsp-config.lua file.
             formatters_by_ft = {
                 antlers = { 'antlersformat' },
-                blade = { 'blade-formatter' },
+                -- blade = { 'blade-formatter' },
                 -- Conform can also run multiple formatters sequentially
                 -- You can use 'stop_after_first' to run the first available formatter from the list
                 css = { 'prettier', stop_after_first = true },

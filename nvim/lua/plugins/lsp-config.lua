@@ -336,7 +336,7 @@ return {
         local mason_extras = {
             'prettier',
             'tailwindcss',
-            'blade-formatter',
+            -- 'blade-formatter',
             'stylua',
             'mdslw',
             'pint',
