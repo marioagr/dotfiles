@@ -46,6 +46,8 @@ unlink $HOME/.config/opencode/plugins/env-protection.js
 ln -s $DOTFILES/.config/opencode/opencode.json $HOME/.config/opencode/opencode.json
 ln -s $DOTFILES/.config/opencode/tui.json $HOME/.config/opencode/tui.json
 ln -s $DOTFILES/.config/opencode/plugins/env-protection.js $HOME/.config/opencode/plugins/env-protection.js
+mkdir -p $WIN_HOME/.config/opencode
+rm -rf $WIN_HOME/.config/opencode/plugins
 cp -r $DOTFILES/.config/opencode/* $WIN_HOME/.config/opencode
 
 ###########
