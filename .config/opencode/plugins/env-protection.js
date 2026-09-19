@@ -41,20 +41,27 @@ const RE_TEMPLATE_COPY = new RegExp(
   "gi"
 );
 
-export const EnvProtection = async ({
-  project,
-  client,
-  $,
-  directory,
-  worktree,
-}) => {
-  return {
-    "tool.execute.before": async (input, output) => {
-      if (input.tool === "read" && RE_READ_PATH.test(output.args.filePath)) {
+// Local plugins cannot resolve the "@opencode/plugin" package from the config
+// directory, so export the plugin definition object directly.
+// Equivalent to Plugin.define({ id, setup }) from that package.
+export default {
+  id: "env-protection",
+  async setup(ctx) {
+    await ctx.tool.hook("execute.before", (event) => {
+      const input = event.input ?? {};
+
+      if (
+        event.tool === "read" &&
+        typeof input.path === "string" &&
+        RE_READ_PATH.test(input.path)
+      ) {
         throw new Error("Do not read .env files");
       }
-      if (input.tool === "bash" && output.args?.command) {
-        const cmd = output.args.command
+      if (
+        event.tool === "shell" &&
+        typeof input.command === "string"
+      ) {
+        const cmd = input.command
           .replace(/['"`]+/g, "")
           .replace(RE_TEMPLATE_COPY, "");
         if (RE_READ.test(cmd)) {
@@ -63,6 +70,6 @@ export const EnvProtection = async ({
           );
         }
       }
-    },
-  };
+    });
+  },
 };
