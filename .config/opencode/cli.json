@@ -9,7 +9,11 @@
         "session.message.next": "alt+right",
         "session.message.previous": "alt+left",
         "input.word.forward": "alt+f,ctrl+right",
-        "input.word.backward": "alt+b,ctrl+left"
+        "input.word.backward": "alt+b,ctrl+left",
+        "prompt.skills": "ctrl+s"
+    },
+    "attention": {
+        "notifications": true
     },
     "prompt": {
         "paste": "full"
