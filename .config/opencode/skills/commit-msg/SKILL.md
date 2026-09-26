@@ -11,8 +11,8 @@ When the user asks you to commit changes (e.g., "commit this", "make a commit", 
 
 Use the conversation history first, then the git changes:
 
-1. **Conversation history** — the current session's conversation is the best source of intent: what the user asked for, requirements, decisions, trade-offs, and problems solved. Use only what is relevant to the changes being committed; do not dump the whole conversation.
-2. **Git changes** — inspect `git status` and `git diff` (or `git diff --staged`).
+1. **Conversation history** - the current session's conversation is the best source of intent: what the user asked for, requirements, decisions, trade-offs, and problems solved. Use only what is relevant to the changes being committed; do not dump the whole conversation.
+2. **Git changes** - inspect `git status` and `git diff` (or `git diff --staged`).
 
 If the conversation history is unavailable or contains nothing relevant (e.g., a fresh session, changes made elsewhere), fall back to the git changes alone. Never invent intent that is not supported by either source.
 
@@ -20,7 +20,7 @@ If the conversation history is unavailable or contains nothing relevant (e.g., a
 
 - Use the Conventional Commits format: `type: summary` (e.g., `feat:`, `fix:`, `chore:`, `docs:`, `refactor:`, `perf:`, `test:`, `style:`, `build:`, `ci:`).
 - Write it in English, imperative mood, lowercase after the colon.
-- Aim for **69 characters** total; it is a preference, not a hard limit — exceed it only when needed to keep the summary clear.
+- Aim for **69 characters** total; it is a preference, not a hard limit - exceed it only when needed to keep the summary clear.
 - Do not end the subject with a period.
 
 ## 3. Decide on a description
