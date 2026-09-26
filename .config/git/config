@@ -31,6 +31,8 @@
     tabs = 4
     true-color = always
     wrap-max-lines = unlimited
+    side-by-side = true
+    max-line-distance = 0.9
 
 [merge]
     conflictstyle = zdiff3

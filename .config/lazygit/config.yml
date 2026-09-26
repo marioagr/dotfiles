@@ -6,8 +6,8 @@ gui:
   showDivergenceFromBaseBranch: 'arrowAndNumber'
   sidePanelWidth: 0.25
 git:
-  pagers:
-    - pager: 'delta'
+  diffRenderers:
+    - command: 'delta'
 confirmOnQuit: true
 customCommands:
   - key: 'u'
