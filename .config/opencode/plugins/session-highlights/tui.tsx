@@ -2,7 +2,10 @@
 // a status prefix ([PENDING], [TODO], [FIXME], [WIP], ...).
 //
 // Surfaces:
-//   - Counter in the prompt footer (prompt.footer.status); click opens the panel
+//   - Counter in the prompt footer (prompt.footer.status) inside a session;
+//     click opens the panel
+//   - Counter in the home footer bar (home.footer.status) on the home screen,
+//     centered between the MCP status and the version; click opens the list
 //   - Full-screen panel via /pending (session.panel)
 //   - Session list on <leader>p (listKey option): opens the native select dialog
 //     with pending sessions highlighted in color. The native <leader>l list is
@@ -170,15 +173,12 @@ async function openSessionList(context: Context, config: Settings) {
   if (sessionID) openSession(context, sessionID)
 }
 
-function Counter(props: { context: Context }) {
+function Counter(props: { context: Context; onClick: () => void }) {
   const config = resolveSettings(props.context)
   const total = createMemo(() => pendingSessions(props.context, config).length)
   return (
     <Show when={total() > 0}>
-      <text
-        fg={config.color}
-        onMouseUp={() => props.context.ui.panel.open(PANEL)}
-      >
+      <text fg={config.color} onMouseUp={props.onClick}>
         {`${total()} pending`}
       </text>
     </Show>
@@ -357,7 +357,28 @@ export default Plugin.define({
 
     context.ui.slot({
       append: "prompt.footer.status",
-      render: () => <Counter context={context} />,
+      render: () => (
+        <Show when={context.ui.router.current().type !== "home"}>
+          <Counter
+            context={context}
+            onClick={() => context.ui.panel.open(PANEL)}
+          />
+        </Show>
+      ),
+    })
+
+    context.ui.slot({
+      append: "home.footer.status",
+      render: () => (
+        <Show when={context.ui.router.current().type === "home"}>
+          <box flexGrow={1000} flexShrink={0} flexDirection="row" justifyContent="center">
+            <Counter
+              context={context}
+              onClick={() => context.keymap.dispatch("session-highlights.list")}
+            />
+          </box>
+        </Show>
+      ),
     })
 
     context.ui.slot({
