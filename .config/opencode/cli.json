@@ -28,6 +28,14 @@
     "plugins": [
         "./plugins/exit-guard",
         {
+            "package": "./plugins/session-delete-guard",
+            "options": {
+                "includeWaiting": true,
+                "includeQueued": false,
+                "sound": true
+            }
+        },
+        {
             "package": "./plugins/session-highlights",
             "options": {
                 "prefixes": [
