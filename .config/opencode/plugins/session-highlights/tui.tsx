@@ -1,15 +1,18 @@
 // Session highlights — highlights in orange the sessions whose title starts with
-// a status prefix ([PENDIENTE], [TODO], [PENDING], [FIXME], [WIP], ...).
+// a status prefix ([PENDING], [TODO], [FIXME], [WIP], ...).
 //
 // Surfaces:
 //   - Counter in the prompt footer (prompt.footer.status); click opens the panel
 //   - Full-screen panel via /pending (session.panel)
+//   - Session list on <leader>p (listKey option): opens the native select dialog
+//     with pending sessions highlighted in color. The native <leader>l list is
+//     left untouched.
 //
 // The native tab strip cannot be recolored from a plugin (TUI API limitation);
 // the reorderTabs option (disabled by default) keeps pending sessions at the
 // front of the tab strip as an alternative.
 import { Plugin } from "@opencode/plugin/tui"
-import type { Context, PanelInput } from "@opencode/plugin/tui/context"
+import type { Context, DialogSelectOption, PanelInput } from "@opencode/plugin/tui/context"
 import type { SessionInfo } from "@opencode/client"
 import type { ScrollBoxRenderable } from "@opentui/core"
 import { createEffect, createMemo, createSignal, For, Show } from "solid-js"
@@ -18,12 +21,13 @@ const PANEL = "session-highlights.board"
 const BOLD = 1
 
 const DEFAULTS = {
-  prefixes: ["PENDIENTE", "PENDING", "TODO", "FIXME", "WIP", "EN PROGRESO"],
+  prefixes: ["PENDING", "TODO", "FIXME", "WIP"],
   color: "#f53003",
   caseSensitive: false,
   maxItems: 8,
   projectOnly: true,
   reorderTabs: false,
+  listKey: "<leader>p",
 }
 
 type Settings = {
@@ -33,6 +37,7 @@ type Settings = {
   maxItems: number
   projectOnly: boolean
   reorderTabs: boolean
+  listKey: string | false
 }
 
 function resolveSettings(context: Context): Settings {
@@ -54,6 +59,12 @@ function resolveSettings(context: Context): Settings {
       typeof options.projectOnly === "boolean" ? options.projectOnly : DEFAULTS.projectOnly,
     reorderTabs:
       typeof options.reorderTabs === "boolean" ? options.reorderTabs : DEFAULTS.reorderTabs,
+    listKey:
+      options.listKey === false
+        ? false
+        : typeof options.listKey === "string" && options.listKey
+          ? options.listKey
+          : DEFAULTS.listKey,
   }
 }
 
@@ -61,7 +72,7 @@ function escapeRe(value: string) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
 }
 
-// Matches "[PENDIENTE] ...", "(TODO) ...", "PENDIENTE: ...", "WIP ..." or even
+// Matches "[PENDING] ...", "(TODO) ...", "WIP: ...", "FIXME ..." or even
 // with emojis in front ("🚧 [TODO] ..."). The \b avoids false positives like
 // "TODOLIST".
 const matcherCache = new WeakMap<Settings, RegExp>()
@@ -118,6 +129,45 @@ function sessionLabel(session: SessionInfo) {
 function openSession(context: Context, sessionID: string) {
   if (context.ui.tabs.enabled() && context.ui.tabs.focus(sessionID)) return
   context.ui.router.navigate({ type: "session", sessionID })
+}
+
+function sessionCategory(updated: number) {
+  const day = new Date(updated).toDateString()
+  return day === new Date().toDateString() ? "Today" : day
+}
+
+// The native select dialog forwards every extra option field it receives
+// (options.map((option) => ({ ...option }))), so titleView reaches the row
+// renderer even though DialogSelectOption does not declare it.
+type SessionListOption = DialogSelectOption<string> & { titleView?: unknown }
+
+function sessionListOptions(context: Context, config: Settings): SessionListOption[] {
+  return orderedSessions(context, config).map((session) => {
+    const label = sessionLabel(session)
+    const pending = isPending(config, session.title)
+    return {
+      title: label,
+      value: session.id,
+      category: pending ? "Pending" : sessionCategory(session.time.updated),
+      ...(pending ? { titleView: <span style={{ fg: config.color }}>{label}</span> } : {}),
+    }
+  })
+}
+
+async function openSessionList(context: Context, config: Settings) {
+  const selection = context.ui.dialog.select<string>({
+    title: "Sessions",
+    get options() {
+      return sessionListOptions(context, config)
+    },
+    get current() {
+      const route = context.ui.router.current()
+      return route.type === "session" ? route.sessionID : undefined
+    },
+  })
+  context.ui.dialog.set({ size: "large" })
+  const sessionID = await selection
+  if (sessionID) openSession(context, sessionID)
 }
 
 function Counter(props: { context: Context }) {
@@ -263,15 +313,37 @@ function Commands(props: { context: Context }) {
       {
         id: "session-highlights.board",
         title: "Pending sessions",
-        description: "Shows sessions whose title starts with [PENDIENTE], [TODO], ...",
+        description: "Shows sessions whose title starts with [PENDING], [TODO], ...",
         group: "Sessions",
         palette: true,
-        slash: { name: "pending", aliases: ["pendientes"] },
+        slash: { name: "pending" },
         enabled: () => context.ui.router.current().type === "session",
         run: () => {
           context.ui.dialog.clear()
           context.ui.panel.open(PANEL)
         },
+      },
+    ],
+  }))
+  return null
+}
+
+function SessionList(props: { context: Context }) {
+  const context = props.context
+  const config = resolveSettings(context)
+  const listKey = config.listKey
+  if (listKey === false) return null
+  context.keymap.layer(() => ({
+    mode: "global",
+    commands: [
+      {
+        id: "session-highlights.list",
+        title: "Sessions (pending highlighted)",
+        description: "Session list with pending-prefixed sessions highlighted in color",
+        group: "Sessions",
+        bind: listKey,
+        palette: true,
+        run: () => openSessionList(context, config),
       },
     ],
   }))
@@ -307,6 +379,11 @@ export default Plugin.define({
     context.ui.slot({
       append: "app",
       render: () => <Commands context={context} />,
+    })
+
+    context.ui.slot({
+      append: "app",
+      render: () => <SessionList context={context} />,
     })
   },
 })

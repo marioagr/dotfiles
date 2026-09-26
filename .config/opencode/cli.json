@@ -42,7 +42,8 @@
                 "caseSensitive": false,
                 "maxItems": 8,
                 "projectOnly": true,
-                "reorderTabs": false
+                "reorderTabs": false,
+                "listKey": "<leader>p"
             }
         }
     ]
