@@ -4,7 +4,9 @@
 // Rules:
 //   - Pending question (form) or permission in the visible session -> blocks with
 //     a notice. Esc remains the deliberate way to dismiss/reject.
-//   - Any running session or one waiting for an answer -> blocks exit.
+//   - Any running session or one waiting for an answer -> blocks exit. By
+//     default only sessions of this instance's directory count (projectOnly);
+//     set projectOnly=false to count every session on the server.
 //   - Textarea with text (prompt, form answer, rejection reason) -> falls through:
 //     Ctrl+C clears and Ctrl+D deletes as usual.
 //   - modal/menu/composer/autocomplete modes and the diff viewer -> falls through;
@@ -24,6 +26,26 @@ const PRIORITY = 2
 // Avoids spamming toast/sound when the key is mashed.
 let lastNotify = 0
 
+const DEFAULTS = {
+  projectOnly: true,
+}
+
+type Settings = {
+  projectOnly: boolean
+}
+
+// Mirrors session-highlights: with projectOnly (default) only sessions of the
+// instance's directory can block, so one TUI does not hold another project's
+// work against you. Set projectOnly=false to consider every session on the
+// server, like the native session list with "all projects" enabled.
+function resolveSettings(context: Context): Settings {
+  const options = (context.options ?? {}) as Partial<Settings>
+  return {
+    projectOnly:
+      typeof options.projectOnly === "boolean" ? options.projectOnly : DEFAULTS.projectOnly,
+  }
+}
+
 type Work = {
   running: SessionInfo[]
   waiting: SessionInfo[]
@@ -39,12 +61,16 @@ function currentSessionID(context: Context) {
 }
 
 // Walks every session (including children/subagents) and separates the running
-// ones from those waiting for an answer (permission or form).
-function collectWork(context: Context): Work {
+// ones from those waiting for an answer (permission or form). Out-of-scope
+// sessions are skipped when projectOnly is enabled; without a known directory
+// nothing is filtered, so the guard never under-blocks by accident.
+function collectWork(context: Context, config: Settings): Work {
+  const directory = context.location?.directory
   const running: SessionInfo[] = []
   const waiting: SessionInfo[] = []
   for (const session of context.data.session.list() ?? []) {
     if (session.time.archived) continue
+    if (config.projectOnly && directory && session.location?.directory !== directory) continue
     if (context.data.session.status(session.id) === "running") {
       running.push(session)
       continue
@@ -114,6 +140,7 @@ function notify(context: Context, message: string, sessionID?: string) {
 
 function Guard(props: { context: Context }) {
   const context = props.context
+  const config = resolveSettings(context)
   context.keymap.layer(() => ({
     mode: "global",
     priority: PRIORITY,
@@ -153,7 +180,7 @@ function Guard(props: { context: Context }) {
             return
           }
 
-          const work = collectWork(context)
+          const work = collectWork(context, config)
           if (work.running.length === 0 && work.waiting.length === 0) return false
           notify(
             context,

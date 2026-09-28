@@ -26,7 +26,12 @@
         "thinking": "show"
     },
     "plugins": [
-        "./plugins/exit-guard",
+        {
+            "package": "./plugins/exit-guard",
+            "options": {
+                "projectOnly": true
+            }
+        },
         {
             "package": "./plugins/session-delete-guard",
             "options": {
