@@ -1,5 +1,8 @@
-// Session highlights — highlights in orange the sessions whose title starts with
-// a status prefix ([PENDING], [TODO], [FIXME], [WIP], ...).
+// Session highlights — highlights in orange the sessions whose title has a status
+// prefix at the start ([PENDING], [TODO], [FIXME], [WIP], ...) or inside square
+// brackets, parentheses or braces anywhere ("Implementar X (PENDIENTE)"). Extra
+// prefixes can be declared with the "prefixes" option; they are merged with the
+// defaults.
 //
 // Surfaces:
 //   - Counter in the prompt footer (prompt.footer.status) inside a session;
@@ -45,10 +48,14 @@ type Settings = {
 
 function resolveSettings(context: Context): Settings {
   const options = (context.options ?? {}) as Partial<Settings>
-  const prefixes =
-    Array.isArray(options.prefixes) && options.prefixes.length > 0
-      ? options.prefixes
-      : DEFAULTS.prefixes
+  // The configured prefixes add to the defaults instead of replacing them, so
+  // PENDING/TODO/FIXME/WIP never have to be declared again in cli.json.
+  const extras = Array.isArray(options.prefixes) ? options.prefixes : []
+  const prefixes = [
+    ...new Set(
+      [...DEFAULTS.prefixes, ...extras].map((prefix) => prefix.trim()).filter(Boolean),
+    ),
+  ]
   return {
     prefixes,
     color: typeof options.color === "string" && options.color ? options.color : DEFAULTS.color,
@@ -75,9 +82,10 @@ function escapeRe(value: string) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
 }
 
-// Matches "[PENDING] ...", "(TODO) ...", "WIP: ...", "FIXME ..." or even
-// with emojis in front ("🚧 [TODO] ..."). The \b avoids false positives like
-// "TODOLIST".
+// Matches a keyword at the start of the title ("[PENDING] ...", "(TODO) ...",
+// "WIP: ...", "FIXME ...", even with emojis in front "🚧 [TODO] ...") or between
+// brackets/parentheses anywhere ("Implementar X (PENDIENTE)"). The \b avoids
+// false positives like "TODOLIST".
 const matcherCache = new WeakMap<Settings, RegExp>()
 
 function matcher(config: Settings) {
@@ -88,7 +96,7 @@ function matcher(config: Settings) {
     .filter(Boolean)
     .join("|")
   const regex = new RegExp(
-    `^[^A-Za-z0-9]*[\\[({]?\\s*(?:${alternation})\\b`,
+    `(?:^|[\\[({])[^A-Za-z0-9]*(?:${alternation})\\b`,
     config.caseSensitive ? "" : "i",
   )
   matcherCache.set(config, regex)
@@ -248,7 +256,7 @@ function Board(props: { context: Context; panel: PanelInput }) {
       </box>
       <Show
         when={list().length > 0}
-        fallback={<text fg={context.theme.text.muted}>No sessions with a pending prefix.</text>}
+        fallback={<text fg={context.theme.text.muted}>No sessions with a pending marker.</text>}
       >
         <scrollbox
           ref={(element: ScrollBoxRenderable) => (scroll = element)}
@@ -313,7 +321,7 @@ function Commands(props: { context: Context }) {
       {
         id: "session-highlights.board",
         title: "Pending sessions",
-        description: "Shows sessions whose title starts with [PENDING], [TODO], ...",
+        description: "Shows sessions marked with [PENDING], (TODO), ... in the title",
         group: "Sessions",
         palette: true,
         slash: { name: "pending" },

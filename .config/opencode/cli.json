@@ -45,10 +45,6 @@
             "options": {
                 "prefixes": [
                     "PENDIENTE",
-                    "PENDING",
-                    "TODO",
-                    "FIXME",
-                    "WIP",
                     "EN PROGRESO"
                 ],
                 "color": "#f53003",
